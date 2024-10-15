@@ -28,7 +28,7 @@ export const meta = () => [
   { charset: "utf-8" },
   { title: "Mi aplicación Remix" },
   { name: "viewport", content: "width=device-width,initial-scale=1" },
-  { name: "theme-color", content: "#0D1C16" }, // El color que quieres para la barra en móviles
+  { name: "theme-color", content: "#000000" }, // El color que quieres para la barra en móviles
 ];
 
 // Componente Layout que envuelve el contenido principal de la aplicación
