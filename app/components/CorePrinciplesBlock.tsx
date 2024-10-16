@@ -7,26 +7,26 @@ export default function Component() {
   const principles = [
     {
       icon: <FiGrid className="text-4xl text-white mb-4" />,
-      title: "Simplicity and standards",
-      description: "We strive for the simplest solutions, adhering to standards and reusing existing solutions when practical.",
+      title: "App-Entwicklung",
+      description: "Entwicklung von leistungsstarken und effizienten mobilen Anwendungen.",
       colors: ["#1a0b2e", "#3b0764", "#5b21b6", "#7e22ce"],
     },
     {
       icon: <FiRefreshCw className="text-4xl text-white mb-4" />,
-      title: "Continuous improvement",
-      description: "We believe in iterative and self-improving processes to deliver the best possible outcome at the given time.",
+      title: "KI-Lösungen",
+      description: "Integration fortschrittlicher KI-Lösungen zur Automatisierung und Erweiterung.",
       colors: ["#0f172a", "#1e3a8a", "#2563eb", "#3b82f6"],
     },
     {
       icon: <FiUsers className="text-4xl text-white mb-4" />,
-      title: "Customer focused",
-      description: "We are customer-focused, meaning we strive to anticipate and innovate according to our customers' needs.",
+      title: "Webentwicklung",
+      description: "CMS-freie Lösungen für optimale Leistung und individuelles Design zu bieten.",
       colors: ["#14532d", "#047857", "#10b981", "#34d399"],
     },
     {
       icon: <FiStar className="text-4xl text-white mb-4" />,
       title: "Innovation",
-      description: "We embrace innovation as a way to create new opportunities and better solutions for our customers.",
+      description: "Wir begrüßen Innovation als einen Weg, neue Chancen und bessere Lösungen für unsere Kunden zu schaffen.",
       colors: ["#7c2d12", "#c2410c", "#ea580c", "#fb923c"],
     },
   ]
@@ -34,8 +34,8 @@ export default function Component() {
   return (
     <section className="w-full py-24 transparent text-white overflow-hidden">
       <div className="text-center mb-16">
-        <h2 className="text-6xl font-bold">Our Core Principles</h2> {/* Aumenta el tamaño del título */}
-        <p className="text-3xl mt-6 text-blue-100">Guiding Our Approach to Innovation and Collaboration</p> {/* Aumenta el tamaño del subtítulo */}
+        <h2 className="text-6xl font-bold">Was wir machen</h2> 
+  
       </div>
 
       <div className="flex flex-wrap justify-center gap-8 px-4">
