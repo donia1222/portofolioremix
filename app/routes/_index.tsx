@@ -1,4 +1,3 @@
-// app/routes/index.tsx
 import { Link } from "@remix-run/react";
 import Header from "~/components/Header";
 import DeliverBlock from "~/components/DeliverBlock";
@@ -12,7 +11,6 @@ import { useEffect, useState, useRef } from "react";
 import TechnologyCarousel from "~/components/TechnologyCarousel"; 
 import AOS from "aos";
 import type { LinksFunction } from "@remix-run/node";
-import Chat from "~/components/Chat"; // Importar el componente Chat
 
 // Función links para incluir CSS de AOS
 export const links: LinksFunction = () => {
@@ -128,7 +126,7 @@ export default function Index() {
 
       {/* Encabezado y contenido */}
       <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
-        <Header />
+      <Header />
         <div className="w-full max-w-[80%]">
         </div>
       </nav>
@@ -159,9 +157,10 @@ export default function Index() {
         <CorePrinciplesBlock />
       </div>
 
-      <div id="corazonesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         <Corazones />
       </div>
+
 
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />
@@ -182,9 +181,6 @@ export default function Index() {
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />
       </div>
-
-      {/* Botón y Chat del Chatbot */}
-      <Chat />
     </div>
   );
 }
