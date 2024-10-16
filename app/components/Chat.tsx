@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai"; // Importamos el ícono para limpiar
 import { FaRocket } from "react-icons/fa";
 import './SpaceChat.css';  // Importamos el archivo CSS
 
@@ -19,7 +19,16 @@ export default function SpaceChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null); // Referencia para el autoscroll
+  const [isLoading, setIsLoading] = useState(false); // Estado de carga
+  const [showClearIcon, setShowClearIcon] = useState(false); // Estado para mostrar el ícono de limpiar
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const initialQuestions = [
+    "Erstellen Sie Websites?",
+    "Bieten Sie Dienstleistungen zur Entwicklung mobiler Anwendungen an?",
+    "Wie funktioniert die künstliche Intelligenz in Ihren Lösungen?",
+    "Wie viel kostet es, eine maßgeschneiderte Website zu erstellen?"
+  ];
 
   useEffect(() => {
     const storedMessages = localStorage.getItem("chatMessages");
@@ -31,22 +40,21 @@ export default function SpaceChat() {
 
   useEffect(() => {
     localStorage.setItem("chatMessages", JSON.stringify(messages));
-    scrollToBottom(); // Llama a la función de scroll cada vez que los mensajes cambien
+    scrollToBottom();
   }, [messages]);
 
-  // Función para hacer scroll hacia el final del chat
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newMessages: Message[] = [...messages, { role: "user", content: input }];
+  const sendMessage = async (messageContent: string) => {
+    setIsLoading(true);  // Activa el estado de carga
+    const newMessages: Message[] = [...messages, { role: "user", content: messageContent }];
     const lastMessages = newMessages.slice(-10);
     const messagesToSend: Message[] = [
       {
         role: "system",
+
         content: `Hallo! Willkommen bei Lweb.ch, wo wir maßgeschneiderte Lösungen für die Erstellung von Websites, Online-Shops, mobilen Anwendungen und vieles mehr anbieten. Hier sind einige Themen, zu denen ich dir detaillierte Informationen geben kann:
    
         1. **Erstellung von maßgeschneiderten Websites**: Bei Lweb.ch erstellen wir maßgeschneiderte Websites, die du vollständig personalisieren kannst, ohne Programmierkenntnisse zu benötigen. Schon ab 290 CHF kannst du eine Website mit einem benutzerfreundlichen Admin-Panel erhalten, in dem du Bilder, Texte, Farben und vieles mehr anpassen kannst. Wir geben dir die Werkzeuge an die Hand, um sicherzustellen, dass deine Website deiner Vision entspricht und du sie selbstständig verwalten kannst, ohne von Entwicklern abhängig zu sein.
@@ -95,9 +103,23 @@ export default function SpaceChat() {
       ];
       setMessages(updatedMessages);
       setInput("");
+      setShowClearIcon(true); // Mostrar el ícono de limpiar cuando el bot responde
     } else {
       console.error(data.error);
     }
+
+    setIsLoading(false);  // Desactiva el estado de carga
+  };
+
+  // Función para limpiar el chat
+  const clearChat = () => {
+    setMessages([]);
+    setShowClearIcon(false); // Ocultar el ícono de limpiar al limpiar el chat
+    localStorage.removeItem("chatMessages"); // Limpiar localStorage
+  };
+
+  const handleQuestionClick = (question: string) => {
+    sendMessage(question);
   };
 
   return (
@@ -125,7 +147,19 @@ export default function SpaceChat() {
 
           <div className="p-4 flex-1 overflow-y-auto space-y-4 bg-[url('/placeholder.svg?height=500&width=500')] bg-cover">
             {messages.length === 0 ? (
-              <p className="text-gray-400 text-center">Willkommen bei lweb.ch! Wie können wir Ihnen helfen?</p>
+              <div className="space-y-2">
+                <p className="text-gray-400 text-center">Willkommen bei lweb.ch! Wie können wir Ihnen helfen?</p>
+                {initialQuestions.map((question, index) => (
+                  <button
+                    key={index}
+                    className="block w-full text-left bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-all"
+                    onClick={() => handleQuestionClick(question)}
+                    disabled={isLoading} // Deshabilitar botones si está cargando
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
             ) : (
               messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -142,7 +176,7 @@ export default function SpaceChat() {
             <div ref={messagesEndRef} />
           </div>
 
-          <form onSubmit={sendMessage} className="flex border-t border-indigo-800">
+          <form onSubmit={(e) => { e.preventDefault(); sendMessage(input); }} className="flex items-center border-t border-indigo-800">
             <input
               type="text"
               name="message"
@@ -151,9 +185,27 @@ export default function SpaceChat() {
               className="flex-1 px-4 py-2 bg-gray-800 text-white border-none outline-none placeholder-gray-500"
               placeholder="Ihre Nachricht hier ..."
               required
+              disabled={isLoading} // Deshabilitar el input mientras está cargando
             />
-            <button type="submit" className="px-6 py-2 bg-indigo-600 text-white hover:bg-indigo-700 transition-all flex items-center">
-              <FaRocket className="mr-2" /> Senden
+            {/* Ícono de limpiar el chat */}
+            {showClearIcon && (
+              <button
+                onClick={clearChat}
+                className="text-white hover:bg-red-600 p-2 rounded-full transition-all mr-2"
+              >
+                <AiOutlineDelete className="h-6 w-6" />
+              </button>
+            )}
+            <button type="submit" className="px-6 py-2 bg-indigo-600 text-white hover:bg-indigo-700 transition-all flex items-center" disabled={isLoading}>
+              {isLoading ? (
+                <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+              ) : (
+                <FaRocket className="mr-2" />
+              )}
+              {isLoading ? "Denken..." : "Senden"}
             </button>
           </form>
         </div>
