@@ -1,0 +1,1 @@
+import{d as r,f as o}from"/build/_shared/chunk-VG7UYV5E.js";var e=r(o(),1);function a(){return(0,e.jsxs)("div",{className:"container",children:[(0,e.jsx)("h1",{className:"header",children:"Sobre M\xED"}),(0,e.jsx)("p",{children:"\xA1Hola! Soy [Tu Nombre], un desarrollador web que disfruta construir cosas incre\xEDbles en la web."})]})}export{a as default};

@@ -64,11 +64,11 @@ export default function DeliverBlock() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
           {/* Texto a la izquierda */}
           <div className="md:w-1/2 text-center md:text-left mb-6 md:mb-0">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl p-8">
-              We help <span className="text-pink-400">you</span> deliver.
+            <h2 className="text-4xl md:text-6xl font-bold text-white  max-w-4xl p-8">
+            Modernität in <span className="text-pink-400">jedem Pixel</span> 
             </h2>
             <p className="text-xl text-blue-200 max-w-2xl mx-auto md:mx-0 p-8">
-              With a focus on simplicity, efficiency, and quality, we strive to help teams of any size deliver their products and steal the spotlight on the market. No matter the size, we are here for YOU.
+            Wir fusionieren modernes Design mit fesselnden Animationen, um Websites zu kreieren, die in jedem Detail herausstechen. Jedes Pixel wird sorgfältig ausgearbeitet, um Interaktivität und Ästhetik zu bieten und Ihren Nutzern ein unvergessliches Navigationserlebnis zu ermöglichen.
             </p>
           </div>
 
@@ -78,7 +78,7 @@ export default function DeliverBlock() {
               src="/660.png" // Asegúrate de que la ruta sea correcta
               alt="Descripción de la imagen"
               className="w-96 h-96 rounded-full object-cover transition-opacity duration-500 mx-auto md:mx-0"
-              style={{ opacity: imageOpacity }} // Controlar la opacidad de la imagen
+             
             />
           </div>
         </div>

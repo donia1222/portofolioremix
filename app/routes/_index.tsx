@@ -4,6 +4,7 @@ import DeliverBlock from "~/components/DeliverBlock";
 import CorePrinciplesBlock from "~/components/CorePrinciplesBlock";
 import OpenSourceBlock from "~/components/OpenSourceBlock"; 
 import CommunityBlock from "~/components/CommunityBlock"; 
+import Corazones from "~/components/Corazones"; 
 import ContactModule from "~/components/ContactModule"; 
 import PublishedAppsBlock from "~/components/published-apps-block"; 
 import { useEffect, useState, useRef } from "react";
@@ -37,6 +38,7 @@ interface Star {
 export default function Index() {
   const [stars, setStars] = useState<Star[]>([]);
   const backgroundRef = useRef<HTMLDivElement>(null);
+  const [gradientStyle, setGradientStyle] = useState({});
 
   useEffect(() => {
     // Inicializar AOS
@@ -44,6 +46,24 @@ export default function Index() {
       duration: 1000, // Duración de la animación en ms
       once: true,      // Si la animación solo debe ocurrir una vez
     });
+
+    // Animación de gradiente
+    const gradientAnimation = () => {
+      let step = 0;
+      const colors = ['#7e7e7e', '#f3f3f3', '#7e7e7e']; // Colores del gradiente
+      setInterval(() => {
+        step = (step + 1) % 360;
+        setGradientStyle({
+          backgroundImage: `linear-gradient(${step}deg, ${colors.join(", ")})`,
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          transition: "background-image 1s ease-in-out",
+        });
+      }, 100); // Ajusta la velocidad de la animación
+    };
+
+    gradientAnimation();
 
     // Inicializar estrellas con más cantidad y tamaños variados
     const initialStars = Array.from({ length: 300 }, (_, i) => ({
@@ -115,15 +135,16 @@ export default function Index() {
         <h2
           className="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl mx-auto"
           data-aos="fade-up"
+          style={gradientStyle} // Aplicar estilo de gradiente animado
         >
-          Shaping the Future of Developer Experience 🪐
+          MODERNIZE YOUR DECISIONS
         </h2>
         <p
           className="text-xl text-blue-200 max-w-2xl mx-auto p-4"
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          Join us in creating the next generation of development tools and platforms.
+          Moderne Webseiten, KI-Lösungen, App-Entwicklung, Custom Plugins und mehr.
         </p>
       </main>
 
@@ -135,6 +156,11 @@ export default function Index() {
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         <CorePrinciplesBlock />
       </div>
+
+      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+        <Corazones />
+      </div>
+
 
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />

@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 import { useState, useEffect } from "react";
-import { FiGrid, FiRefreshCw, FiUsers, FiMail, FiMenu, FiX, FiCode } from "react-icons/fi";
+import { Repeat, Code, AppWindow, Users, Mail, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   const controlHeaderVisibility = () => {
-    if (isMenuOpen) return; // Si el menú está abierto, no ocultes el header
+    if (isMenuOpen) return;
 
     const currentScrollPosition = window.pageYOffset;
 
@@ -51,7 +51,7 @@ export default function Header() {
       }`}
     >
       <div className="w-full md:max-w-[100%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-90">
-        {/* Nombre "Roberto Salvador" con scroll hacia arriba al hacer clic */}
+        {/* Nombre "LWEB Schweiz" con scroll hacia arriba al hacer clic */}
         <div className="flex items-center cursor-pointer" onClick={scrollToTop}>
           <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
           <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold">
@@ -59,6 +59,7 @@ export default function Header() {
           </span>
         </div>
 
+        {/* Botón del menú móvil */}
         <div className="md:hidden">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -67,54 +68,48 @@ export default function Header() {
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? (
-              <FiX className="h-8 w-8 text-white transition-transform duration-300" />
+              <X className="h-8 w-8 text-white transition-transform duration-300" />
             ) : (
-              <FiMenu className="h-8 w-8 text-white transition-transform duration-300" />
+              <Menu className="h-8 w-8 text-white transition-transform duration-300" />
             )}
           </button>
         </div>
 
+        {/* Menú en pantallas grandes */}
         <nav className="hidden md:flex space-x-6">
-
           <button
             onClick={() => handleScroll("corePrinciplesBlock")}
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200"
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
-            <FiRefreshCw className="h-5 w-5" />
-            <span>Core Principles</span>
+            <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
+            <span>Was wir machen</span>
           </button>
           <button
             onClick={() => handleScroll("openSourceBlock")}
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200"
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
-            <FiCode className="h-5 w-5" />
-            <span>Open Source</span>
+            <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
+            <span>Webentwicklung</span>
           </button>
-
           <button
-          onClick={() => handleScroll("publishedAppsBlock")}
-          className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200"
-        >
-       <FiCode className="h-5 w-5" />
-          <span>Apps</span>
-        </button>
-
+            onClick={() => handleScroll("publishedAppsBlock")}
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+          >
+            <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
+            <span>App-Entwicklung</span>
+          </button>
           <button
             onClick={() => handleScroll("communityBlock")}
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200"
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
-
-<FiUsers className="h-5 w-5" />
-            <span>Community</span>
+            <Users className="h-5 w-5 group-hover:skew-y-12 transition-transform duration-300" />
+            <span>KI-Lösungen</span>
           </button>
-
-
           <button
             onClick={() => handleScroll("contactModule")}
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200"
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
-            
-            <FiMail className="h-5 w-5" />
+            <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
             <span>Contact</span>
           </button>
         </nav>
@@ -122,52 +117,44 @@ export default function Header() {
 
       {/* Menú Móvil */}
       <div
-        className={`absolute top px left 0 right 0 bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-6 mt-4 ml-40 z-90 transition-all duration-300 ${
+        className={`absolute top px left 0 right 0 bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-6 mt-4 z-90 transition-all duration-300 ${
           isMenuOpen ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
         <button
-          onClick={() => handleScroll("deliverBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 hover:bg-[#4b0082] rounded-lg transition-colors duration-200"
-        >
-          <FiGrid className="h-5 w-5" />
-          <span>Deliver</span>
-        </button>
-        <button
           onClick={() => handleScroll("corePrinciplesBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 hover:bg-[#4b0082] rounded-lg transition-colors duration-200"
+          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
-          <FiRefreshCw className="h-5 w-5" />
-          <span>Core Principles</span>
+          <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
+          <span>Was wir machen</span>
         </button>
         <button
           onClick={() => handleScroll("openSourceBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 hover:bg-[#4b0082] rounded-lg transition-colors duration-200"
+          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
-          <FiCode className="h-5 w-5" />
-          <span>Open Source</span>
+          <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
+          <span>Webentwicklung</span>
         </button>
         <button
           onClick={() => handleScroll("publishedAppsBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 hover:bg-[#4b0082] rounded-lg transition-colors duration-200"
+          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
-       <FiCode className="h-5 w-5" />
-          <span>Apps</span>
+          <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
+          <span>App-Entwicklung</span>
         </button>
         <button
           onClick={() => handleScroll("communityBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 hover:bg-[#4b0082] rounded-lg transition-colors duration-200"
+          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
-
-          <FiUsers className="h-5 w-5" />
-          <span>Community</span>
+          <Users className="h-5 w-5 group-hover:skew-y-12 transition-transform duration-300" />
+          <span>KI-Lösungen</span>
         </button>
         <button
           onClick={() => handleScroll("contactModule")}
-          className="w-full text-left py-2 flex items-center space-x-2 hover:bg-[#4b0082] rounded-lg transition-colors duration-200"
+          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
-          <FiMail className="h-5 w-5" />
-          <span>Contact</span>
+          <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+          <span>Kontakt</span>
         </button>
       </div>
     </header>

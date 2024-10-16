@@ -13,30 +13,30 @@ interface App {
 const apps: App[] = [
   {
     id: 1,
-    name: "Cosmic Code Editor",
+    name: "Voice Shopping",
     description: "A sleek, space-themed code editor for the modern developer.",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "https://lweb.ch/images/2024/07/30/app-icon-1024x10241x-copia1.png",
     link: "https://example.com/cosmic-code-editor"
   },
   {
     id: 2,
-    name: "Nebula Task Manager",
+    name: "GastroStamps",
     description: "Organize your tasks with the efficiency of a well-planned space mission.",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "https://lweb.ch/images/2024/07/30/app-icon-1024x10241x-copia13.png",
     link: "https://example.com/nebula-task-manager"
   },
   {
     id: 3,
-    name: "Starship CI/CD",
+    name: "Dog-Mentor",
     description: "Continuous integration and deployment at light speed.",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "https://lweb.ch/images/2024/07/30/app-icon-1024x10241x-copia121.png",
     link: "https://example.com/starship-cicd"
   },
   {
     id: 4,
-    name: "Galaxy Git",
+    name: "FoodScan AI",
     description: "Version control that's out of this world.",
-    image: "/placeholder.svg?height=200&width=200",
+    image: "https://lweb.ch/images/2024/08/11/app-icon-1024x10241x-copia11-1.png",
     link: "https://example.com/galaxy-git"
   }
 ]
@@ -53,14 +53,14 @@ export default function PublishedAppsBlock() {
   }
 
   return (
-    <div className="w-full py-16 bg-gradient-to-r from-blue-900 to-purple-900 text-white overflow-hidden">
+    <div className="w-full py-16  text-white overflow-hidden  bg-gray-800 ">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold mb-8 text-center">Explore Our Published Apps</h2>
+        <h2 className="text-4xl font-bold  text-center text-blue-400 mb-20">Explore Our Published Apps</h2>
         <div className="relative">
           <div className="flex items-center justify-center">
             <button
               onClick={prevApp}
-              className="absolute left-0 z-10 p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors duration-300"
+              className="absolute left-0 z-10 p-2 bg-blue-400 rounded-full hover:bg-blue-600 transition-colors duration-300"
               aria-label="Previous app"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -94,7 +94,7 @@ export default function PublishedAppsBlock() {
             </motion.div>
             <button
               onClick={nextApp}
-              className="absolute right-0 z-10 p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors duration-300"
+              className="absolute right-0 z-10 p-2 bg-blue-400 rounded-full hover:bg-blue-600 transition-colors duration-300"
               aria-label="Next app"
             >
               <ChevronRight className="w-6 h-6" />
