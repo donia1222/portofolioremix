@@ -35,7 +35,7 @@ export default function Component() {
     <section className="w-full py-24 transparent text-white overflow-hidden">
       <div className="text-center mb-16">
         <h2 className="text-6xl font-bold">Was wir machen</h2> {/* Aumenta el tamaño del título */}
-  
+        <p className="text-3xl mt-6 text-blue-100">Leitlinien unseres Ansatzes für Innovation und Zusammenarbeit</p> {/* Aumenta el tamaño del subtítulo */}
       </div>
 
       <div className="flex flex-wrap justify-center gap-8 px-4">
