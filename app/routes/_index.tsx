@@ -188,15 +188,9 @@ export default function Index() {
       </div>
 
 
-<button
-  onClick={() => setIsChatOpen(!isChatOpen)}
-  className="fixed bottom-4 right-4 bg-blue-500 text-white p-4 rounded-full shadow-lg z-30 hover:bg-blue-600 transition-colors"
-  aria-label="Abrir chat"
->
-  AI-Chat
-</button>
-
-      {isChatOpen && <Chat />}
+      <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <Chat />
+      </div>
     </div>
   );
 }

@@ -79,7 +79,7 @@ export default function SpaceChat() {
     <div className="fixed bottom-4 right-4 w-96 md:w-[28rem] h-[500px] bg-gray-900 shadow-2xl rounded-lg flex flex-col overflow-hidden transition-all z-50 border border-indigo-500">
       <div className="bg-indigo-900 text-white p-4 flex justify-between items-center">
         <h2 className="text-lg font-semibold flex items-center">
-          <FaRocket className="mr-2" /> Space Chat
+          <FaRocket className="mr-2" /> Lweb Chat
         </h2>
         <button
           onClick={() => setIsOpen(false)}
@@ -91,7 +91,7 @@ export default function SpaceChat() {
 
       <div className="p-4 flex-1 overflow-y-auto space-y-4 bg-[url('/placeholder.svg?height=500&width=500')] bg-cover">
         {messages.length === 0 ? (
-          <p className="text-gray-400 text-center">No hay mensajes en el espacio todavía.</p>
+          <p className="text-gray-400 text-center">Willkommen im Lweb-Chat. Wie kann ich Ihnen heute helfen?</p>
         ) : (
           messages.map((msg, index) => (
             <div
