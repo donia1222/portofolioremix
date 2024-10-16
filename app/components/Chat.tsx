@@ -84,7 +84,7 @@ export default function Chat() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 w-96 md:w-[28rem] h-[500px] bg-white shadow-2xl rounded-lg flex flex-col overflow-hidden transition-all">
+    <div className="fixed bottom-4 right-4 w-96 md:w-[28rem] h-[500px] bg-white shadow-2xl rounded-lg flex flex-col overflow-hidden transition-all z-50">
       {/* Header del chat */}
       <div className="bg-blue-500 text-white p-4 flex justify-between items-center">
         <h2 className="text-lg font-semibold">Chat</h2>

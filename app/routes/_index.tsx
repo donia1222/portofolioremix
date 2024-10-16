@@ -11,6 +11,8 @@ import { useEffect, useState, useRef } from "react";
 import TechnologyCarousel from "~/components/TechnologyCarousel"; 
 import AOS from "aos";
 import type { LinksFunction } from "@remix-run/node";
+import { FiMessageSquare } from "react-icons/fi"; // Importar el ícono de chat
+import Chat from "~/components/Chat"; // Importar el componente Chat
 
 // Función links para incluir CSS de AOS
 export const links: LinksFunction = () => {
@@ -39,6 +41,9 @@ export default function Index() {
   const [stars, setStars] = useState<Star[]>([]);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const [gradientStyle, setGradientStyle] = useState({});
+  
+  // Estado para controlar la visibilidad del chat
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     // Inicializar AOS
@@ -126,7 +131,7 @@ export default function Index() {
 
       {/* Encabezado y contenido */}
       <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
-      <Header />
+        <Header />
         <div className="w-full max-w-[80%]">
         </div>
       </nav>
@@ -181,6 +186,18 @@ export default function Index() {
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />
       </div>
+
+      {/* Ícono para abrir el chat */}
+      <button
+        onClick={() => setIsChatOpen(!isChatOpen)}
+        className="fixed bottom-4 right-4 bg-blue-500 text-white p-4 rounded-full shadow-lg z-30 hover:bg-blue-600 transition-colors"
+        aria-label="Abrir chat"
+      >
+        <FiMessageSquare size={24} />
+      </button>
+
+      {/* Componente de Chat */}
+      {isChatOpen && <Chat />}
     </div>
   );
 }
