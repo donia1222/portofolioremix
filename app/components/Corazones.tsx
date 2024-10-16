@@ -46,7 +46,7 @@ export default function AntennaWithWaves() {
       </div>
 
 {/* Título y descripción */}
-<h2 className="text-3xl font-bold text-blue-400 mt-10" data-aos="fade-up">
+<h2 className="text-3xl font-bold text-blue-400  text-center mt-10" data-aos="fade-up ">
   Wir stellen sicher, dass jedes Detail perfekt abgestimmt ist.
 </h2>
 <p
