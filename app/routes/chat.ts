@@ -40,7 +40,7 @@ export const action: ActionFunction = async ({ request }) => {
     console.log("Configuración de OpenAI creada.");
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       messages: messages,
     });
     
