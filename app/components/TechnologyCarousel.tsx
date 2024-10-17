@@ -8,7 +8,7 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 const technologies = [
   {
     name: 'Next.js',
-    icon: '/icons/dotnet.svg',
+    icon: '/icons/nextdotjs.svg',
   },
   {
     name: 'Astro',
@@ -17,10 +17,7 @@ const technologies = [
   {
     name: 'Remix',
     icon: '/icons/remix.svg',
-  },
-  {
-    name: 'Node.js',
-    icon: '/icons/nodedotjs.svg',
+
   },
   {
     name: 'React Native',
@@ -34,6 +31,12 @@ const technologies = [
     name: 'Openai',
     icon: '/icons/openai.svg',
   },
+
+  {
+    name: 'Github',
+    icon: '/icons/github.svg',
+  },
+
 ];
 
 export default function TechnologyCarousel() {
@@ -49,7 +52,7 @@ export default function TechnologyCarousel() {
   }
 
   return (
-    <div className="w-full py-12 bg-gray-900 pb-0 pt-60">
+    <div className="w-full py-12 bg-gray-900 pb-20 pt-40">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={10}

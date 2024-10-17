@@ -1,9 +1,10 @@
 'use client'
 
 import { useState, useEffect, useRef } from "react";
-import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai"; // Importamos el ícono para limpiar
+import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai"; 
 import { FaRocket } from "react-icons/fa";
-import './SpaceChat.css';  // Importamos el archivo CSS
+import { FaPaperPlane } from "react-icons/fa";
+import './SpaceChat.css';  
 
 type Message = {
   role: "system" | "user" | "assistant";
@@ -19,15 +20,23 @@ export default function SpaceChat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Estado de carga
-  const [showClearIcon, setShowClearIcon] = useState(false); // Estado para mostrar el ícono de limpiar
+  const [isLoading, setIsLoading] = useState(false);
+  const [showClearIcon, setShowClearIcon] = useState(false); 
+  const [availableQuestions, setAvailableQuestions] = useState<string[]>([]); 
+  const [visibleQuestions, setVisibleQuestions] = useState<string[]>([]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const initialQuestions = [
+  const allQuestions = [
     "Erstellen Sie Websites?",
     "Bieten Sie Dienstleistungen zur Entwicklung mobiler Anwendungen an?",
     "Wie funktioniert die künstliche Intelligenz in Ihren Lösungen?",
-    "Wie viel kostet es, eine maßgeschneiderte Website zu erstellen?"
+    "Wie viel kostet es, eine maßgeschneiderte Website zu erstellen?",
+    "Welche Technologien verwenden Sie zur Entwicklung von Websites?",
+    "Können Sie SEO-optimierte Websites erstellen?",
+    "Wie funktioniert die Wartung von Websites nach der Erstellung?",
+    "Bieten Sie Integrationen für E-Commerce-Lösungen an?",
+    "Können Sie mobile Apps für iOS und Android entwickeln?",
+    "Welche Support-Optionen bieten Sie nach der Entwicklung an?"
   ];
 
   useEffect(() => {
@@ -36,6 +45,7 @@ export default function SpaceChat() {
       const parsedMessages = JSON.parse(storedMessages) as Message[];
       setMessages(parsedMessages);
     }
+    initializeQuestions();
   }, []);
 
   useEffect(() => {
@@ -43,18 +53,24 @@ export default function SpaceChat() {
     scrollToBottom();
   }, [messages]);
 
+  const initializeQuestions = () => {
+    const initialVisibleQuestions = allQuestions.slice(0, 3);
+    const remainingQuestions = allQuestions.slice(3);
+    setVisibleQuestions(initialVisibleQuestions);
+    setAvailableQuestions(remainingQuestions);
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const sendMessage = async (messageContent: string) => {
-    setIsLoading(true);  // Activa el estado de carga
+    setIsLoading(true);  
     const newMessages: Message[] = [...messages, { role: "user", content: messageContent }];
     const lastMessages = newMessages.slice(-10);
     const messagesToSend: Message[] = [
       {
         role: "system",
-
         content: `Hallo! Willkommen bei Lweb.ch, wo wir maßgeschneiderte Lösungen für die Erstellung von Websites, Online-Shops, mobilen Anwendungen und vieles mehr anbieten. Hier sind einige Themen, zu denen ich dir detaillierte Informationen geben kann:
    
         1. **Erstellung von maßgeschneiderten Websites**: Bei Lweb.ch erstellen wir maßgeschneiderte Websites, die du vollständig personalisieren kannst, ohne Programmierkenntnisse zu benötigen. Schon ab 290 CHF kannst du eine Website mit einem benutzerfreundlichen Admin-Panel erhalten, in dem du Bilder, Texte, Farben und vieles mehr anpassen kannst. Wir geben dir die Werkzeuge an die Hand, um sicherzustellen, dass deine Website deiner Vision entspricht und du sie selbstständig verwalten kannst, ohne von Entwicklern abhängig zu sein.
@@ -76,6 +92,7 @@ export default function SpaceChat() {
         9. **Über den Gründer, Roberto Salvador**: Roberto Salvador hat seit 2019 fünf Anwendungen veröffentlicht und mehr als 25 Webseiten entwickelt. Er ist spezialisiert auf moderne Technologien wie React Native, Astro, Next.js, Remix, JavaScript, TypeScript, CSS und Tailwind. Zudem kann er Projekte auf Plattformen wie Vercel und GCP (Google Cloud Platform) effizient deployen. Täglich widmet er 4 bis 5 Stunden dem autodidaktischen Lernen und der Praxis, während er seit 2010 erfolgreich ein anderes Geschäft führt.
 
         Zusätzlich bieten wir kostenlose Testversionen an, damit du die Qualität unserer Arbeit bewerten kannst, bevor du dich verpflichtest. Wenn du ein Projekt im Kopf hast oder einfach nur deine Optionen erkunden möchtest, helfe ich dir gerne weiter und zeige dir, wie wir zusammenarbeiten können, um deine Ideen zu verwirklichen.
+        **kurze und prägnante Antworten**
         
     
     **Kontakt**:
@@ -103,23 +120,34 @@ export default function SpaceChat() {
       ];
       setMessages(updatedMessages);
       setInput("");
-      setShowClearIcon(true); // Mostrar el ícono de limpiar cuando el bot responde
+      setShowClearIcon(true); 
     } else {
       console.error(data.error);
     }
 
-    setIsLoading(false);  // Desactiva el estado de carga
+    setIsLoading(false);
+  };
+
+  // Función para manejar clic en una pregunta y reemplazarla
+  const handleQuestionClick = (question: string) => {
+    sendMessage(question);
+    
+    // Actualizar preguntas visibles
+    const newVisibleQuestions = visibleQuestions.filter(q => q !== question); // Elimina la pregunta seleccionada
+    if (availableQuestions.length > 0) {
+      // Añadir una nueva pregunta si hay disponibles
+      const [nextQuestion, ...remainingQuestions] = availableQuestions;
+      newVisibleQuestions.push(nextQuestion);
+      setAvailableQuestions(remainingQuestions); // Actualiza el set de preguntas disponibles
+    }
+    setVisibleQuestions(newVisibleQuestions);
   };
 
   // Función para limpiar el chat
   const clearChat = () => {
     setMessages([]);
-    setShowClearIcon(false); // Ocultar el ícono de limpiar al limpiar el chat
-    localStorage.removeItem("chatMessages"); // Limpiar localStorage
-  };
-
-  const handleQuestionClick = (question: string) => {
-    sendMessage(question);
+    setShowClearIcon(false); 
+    localStorage.removeItem("chatMessages");
   };
 
   return (
@@ -132,29 +160,30 @@ export default function SpaceChat() {
           <FaRocket className="h-6 w-6" />
         </button>
       ) : (
-        <div className="fixed bottom-4 right-4 w-96 md:w-[28rem] h-[500px] bg-gray-900 shadow-2xl rounded-lg flex flex-col overflow-hidden transition-all z-50 border border-indigo-500">
-          <div className="bg-indigo-900 text-white p-4 flex justify-between items-center">
-            <h2 className="text-lg font-semibold flex items-center">
-              <FaRocket className="mr-2" /> Lweb KI-Chat
-            </h2>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:bg-indigo-800 p-1 rounded-full transition-all"
-            >
-              <AiOutlineClose className="h-6 w-6" />
-            </button>
-          </div>
-
+        <div className={`fixed bottom-4 right-0 ${isOpen ? 'w-full h-[80vh] md:w-[28rem] left-auto' : 'w-96 md:w-[28rem] h-[500px]'} bg-gray-900 shadow-2xl rounded-lg flex flex-col overflow-hidden transition-all z-50 border border-indigo-500 transform ${isOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-500`}>
+        <div className="bg-indigo-900 text-white p-4 flex justify-between items-center">
+          <h2 className="text-lg font-semibold flex items-center">
+            <FaRocket className="mr-2" /> Lweb KI-Chat
+          </h2>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-white hover:bg-indigo-800 p-1 rounded-full transition-all"
+          >
+            <AiOutlineClose className="h-6 w-6" />
+          </button>
+        </div>
+      
           <div className="p-4 flex-1 overflow-y-auto space-y-4 bg-[url('/placeholder.svg?height=500&width=500')] bg-cover">
             {messages.length === 0 ? (
               <div className="space-y-2">
-                <p className="text-gray-400 text-center">Willkommen bei lweb.ch! Wie können wir Ihnen helfen?</p>
-                {initialQuestions.map((question, index) => (
+                <p className="text-gray-400 text-center mb-10">Willkommen bei lweb.ch! Wählen Sie eine Frage oder stellen Sie Ihre eigene.</p>
+
+                {visibleQuestions.map((question, index) => (
                   <button
                     key={index}
-                    className="block w-full text-left bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-all"
+                   className="block w-full text-left bg-transparent text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text px-4 py-2 rounded-full  hover:from-purple-600 hover:via-pink-600 hover:to-red-600 transition-all"
                     onClick={() => handleQuestionClick(question)}
-                    disabled={isLoading} // Deshabilitar botones si está cargando
+                    disabled={isLoading}
                   >
                     {question}
                   </button>
@@ -163,12 +192,19 @@ export default function SpaceChat() {
             ) : (
               messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[80%] px-4 py-2 rounded-lg ${msg.role === "user" ? "bg-indigo-600 text-white" : msg.role === "assistant" ? "bg-gray-700 text-gray-200" : "bg-green-700 text-gray-200"}`}>
-                    {msg.role === "assistant" ? (
-                      <div dangerouslySetInnerHTML={{ __html: msg.content }} />
-                    ) : (
-                      <span>{msg.content}</span>
-                    )}
+                  <div className="flex flex-col max-w-[75%]">
+                    {/* Mostrar "Bot" o "User" */}
+                    <p className={`text-xs mb-1 ${msg.role === "user" ? "text-indigo-300" : "text-gray-400"} opacity-75`}>
+                      {msg.role === "user" ? "User" : "Bot"}
+                    </p>
+                    {/* Contenedor del mensaje */}
+                    <div className={`px-4 py-2 rounded-lg break-words ${msg.role === "user" ? "bg-indigo-600 text-white" : msg.role === "assistant" ? "bg-gray-700 text-gray-200" : "bg-green-700 text-gray-200"}`}>
+                      {msg.role === "assistant" ? (
+                        <div dangerouslySetInnerHTML={{ __html: msg.content }} />
+                      ) : (
+                        <span>{msg.content}</span>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))
@@ -177,17 +213,22 @@ export default function SpaceChat() {
           </div>
 
           <form onSubmit={(e) => { e.preventDefault(); sendMessage(input); }} className="flex items-center border-t border-indigo-800">
-            <input
-              type="text"
+            <textarea
               name="message"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="flex-1 px-4 py-2 bg-gray-800 text-white border-none outline-none placeholder-gray-500"
+              onChange={(e) => {
+                setInput(e.target.value);
+                const target = e.target as HTMLTextAreaElement;
+                target.style.height = 'auto';
+                target.style.height = `${target.scrollHeight}px`;
+                scrollToBottom();
+              }}
+              className="flex-1 px-4 py-2 bg-gray-800 text-white border-none outline-none placeholder-gray-500 resize-none overflow-hidden"
               placeholder="Ihre Nachricht hier ..."
               required
-              disabled={isLoading} // Deshabilitar el input mientras está cargando
+              disabled={isLoading}
+              rows={1}
             />
-            {/* Ícono de limpiar el chat */}
             {showClearIcon && (
               <button
                 onClick={clearChat}
@@ -196,18 +237,20 @@ export default function SpaceChat() {
                 <AiOutlineDelete className="h-6 w-6" />
               </button>
             )}
-            <button type="submit" className="px-6 py-2 bg-indigo-600 text-white hover:bg-indigo-700 transition-all flex items-center" disabled={isLoading}>
-              {isLoading ? (
-                <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                </svg>
-              ) : (
-                <FaRocket className="mr-2" />
-              )}
-              {isLoading ? "Denken..." : "Senden"}
-            </button>
+ <button type="submit" className="px-4 mr-5 py-2 text-indigo-200 transition-all flex items-center justify-center rounded-[20px]" disabled={isLoading}>
+   {isLoading ? (
+      <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
+   ) : (
+      <FaPaperPlane className="h-5 w-5" />
+   )}
+   {isLoading ? "Denken..." : ""}
+</button>
+
           </form>
+
         </div>
       )}
     </>

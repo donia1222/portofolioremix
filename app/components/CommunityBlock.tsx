@@ -2,7 +2,7 @@ import { FiMessageCircle, FiGithub, FiPlayCircle } from "react-icons/fi"; // Imp
 
 const CommunityBlock = () => {
   return (
-    <section className="w-full py-24 bg-gray-900 text-white pt-60"> {/* Eliminamos cualquier padding top */}
+    <section className="w-full py-24 bg-gray-900 text-white pt-20"> {/* Eliminamos cualquier padding top */}
       <div className="flex flex-col md:flex-row justify-between items-center mx-auto px-4 md:px-12 lg:px-24 w-full max-w-[1440px]">
         
         {/* Texto a la izquierda */}
