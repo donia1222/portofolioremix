@@ -23,7 +23,7 @@ const animateNumbers = (element: HTMLDivElement, start: number, end: number, dur
 export default function OpenSourceBlock() {
   const [typedText, setTypedText] = useState(""); // Estado para el texto tipeado
   const [typingIndex, setTypingIndex] = useState(0); // Estado para el índice actual
-  const fullText = "Open Source"; // Texto completo que se va a escribir
+  const fullText = "Webseiten"; // Texto completo que se va a escribir
   const numbersRef = useRef<HTMLDivElement>(null);
 
   // Efecto de escritura del texto
@@ -62,42 +62,37 @@ export default function OpenSourceBlock() {
   }, []);
 
   return (
-    <section className="w-full text-center z-5 mt-24 mb-0 bg-gray-900 py-16 pb-60 ">
-      <h2 className="text-4xl md:text-6xl font-bold text-white max-w-4xl mx-auto mt-40 mb-20">
-        Empowering Developers: <br />
-        Innovating with <span className="text-pink-400">{typedText}</span> 
-      </h2>
-      <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-12 p-8">
-        Embracing our roots, we actively champion open-source principles, creating, maintaining, and contributing to software while providing valuable educational resources.
-      </p>
+<section className="w-full text-center z-5 mt-24 mb-0 bg-gray-900 py-16 pb-60 ">
+  <h2 className="text-4xl md:text-6xl font-bold text-white max-w-4xl mx-auto mt-40 mb-20">
+    Moderne, ansprechende <br />
+    und einzigartige <span className="text-pink-400">{typedText}</span>
+  </h2>
+  <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-12 p-8">
+    Wir arbeiten mit den neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
+  </p>
 
-      <p className="text-xl font-semibold text-white mb-12">
-        Don’t just take our word for it, let the numbers speak for themselves
-      </p>
+  <p className="text-xl  text-white mb-12">
+    Bisher haben wir zahlreiche Webseiten und Apps mit den folgenden Technologien erstellt:
+  </p>
 
-      {/* Box with the numbers */}
-      <div className="flex justify-center" ref={numbersRef}>
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-left">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="95">0</p> {/* Agregar margen a la derecha */}
-            <a href="#" className="text-blue-200 hover:text-white ml-4"> {/* Margen a la izquierda para el enlace */}
-            Published Website <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="6">0</p> {/* Margen a la derecha */}
-            <a href="#" className="text-blue-200 hover:text-white ml-4"> {/* Margen a la izquierda para el enlace */}
-            Published Apps<span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <div className="flex items-center justify-between">
-            <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="15 ">0</p> {/* Margen a la derecha */}
-            <a href="#" className="text-blue-200 hover:text-white ml-4"> {/* Margen a la izquierda para el enlace */}
-              Plugins <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
+  {/* Box with the numbers */}
+  <div className="flex justify-center" ref={numbersRef}>
+    <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-left">
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="25">0</p>
+        <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
       </div>
-    </section>
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="6">0</p>
+        <p className="text-blue-200 ml-4">Webseiten mit Astro</p>
+      </div>
+      <div className="flex items-center justify-between">
+        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="5">0</p>
+        <p className="text-blue-200 ml-4">Apps mit React Native</p>
+      </div>
+    </div>
+  </div>
+</section>
+
   );
 }

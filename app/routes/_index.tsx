@@ -144,7 +144,7 @@ export default function Index() {
         >
           MODERNIZE YOUR DECISIONS
         </h2>
-        <Link to="/blog">Ir al blog</Link>
+
         <p
           className="text-xl text-blue-200 max-w-2xl mx-auto p-4"
           data-aos="fade-up"
@@ -152,7 +152,11 @@ export default function Index() {
         >
           Moderne Webseiten, KI-Lösungen, App-Entwicklung, Custom Plugins und mehr.
         </p>
+        
       </main>
+
+
+
 
       {/* Secciones con animaciones */}
       <div id="deliverBlock" className="w-full relative" data-aos="fade-up">

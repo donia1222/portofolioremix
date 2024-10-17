@@ -1,4 +1,5 @@
-import { FiMessageCircle, FiGithub, FiPlayCircle } from "react-icons/fi"; // Importamos los iconos
+import { FiGlobe, FiCpu, FiMonitor, FiShoppingCart } from "react-icons/fi"; // Importamos los nuevos iconos
+import { Link } from "@remix-run/react"; // Importar Link de Remix para la navegación
 
 const CommunityBlock = () => {
   return (
@@ -6,42 +7,64 @@ const CommunityBlock = () => {
       <div className="flex flex-col md:flex-row justify-between items-center mx-auto px-4 md:px-12 lg:px-24 w-full max-w-[1440px]">
         
         {/* Texto a la izquierda */}
-        <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
-          <h2 className="text-5xl font-bold">Join the Forge Community</h2>
+        <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0 mr-10">
+          <h2 className="text-5xl font-bold">Aktuelle Neuigkeiten</h2> {/* Título en alemán */}
           <p className="text-xl mt-6 text-gray-400">
-            Join a dynamic global network of developers and innovators shaping the frontier of the internet, forging connections and bringing groundbreaking ideas to life.
+            Bleiben Sie auf dem Laufenden mit den neuesten Updates und Entwicklungen unseres Unternehmens.
           </p>
         </div>
 
         {/* Enlaces con iconos a la derecha */}
         <div className="md:w-1/2 space-y-6">
           <div className="flex items-center space-x-4">
-            <FiMessageCircle className="text-4xl text-blue-400" /> {/* Icono de preguntas técnicas */}
+            <FiGlobe className="text-4xl text-blue-400" /> {/* Ícono de sitio web */}
             <div>
-              <a href="#" className="text-xl text-blue-200 hover:text-white flex items-center">
-                Have technical questions? <span aria-hidden="true" className="ml-2">↗</span>
-              </a>
-              <p className="text-gray-400">Ask a developer in our Discord Community server.</p>
+              <Link
+                to="/blog#low-cost-homepage-ab-290-chf"
+                className="text-xl text-blue-200 hover:text-white flex items-center"
+              >
+                Low-Cost Homepage <span aria-hidden="true" className="ml-2">↗</span>
+              </Link>
+              <p className="text-gray-400">Erfahren Sie, wie Sie Ihre eigene Website für nur 290 CHF erstellen können.</p>
             </div>
           </div>
 
           <div className="flex items-center space-x-4">
-            <FiGithub className="text-4xl text-blue-400" /> {/* Icono de ayuda extra */}
+            <FiCpu className="text-4xl text-blue-400" /> {/* Ícono de CPU/tecnología para ChatGPT */}
             <div>
-              <a href="#" className="text-xl text-blue-200 hover:text-white flex items-center">
-                Looking for some extra help? <span aria-hidden="true" className="ml-2">↗</span>
-              </a>
-              <p className="text-gray-400">Search through our GitHub repositories.</p>
+              <Link
+                to="/blog#warum-nutze-ich-chatgpt-zur-erstellung-von-webseiten-und-apps"
+                className="text-xl text-blue-200 hover:text-white flex items-center"
+              >
+                Warum nutze ich ChatGPT ? <span aria-hidden="true" className="ml-2">↗</span>
+              </Link>
+              <p className="text-gray-400">Erfahren Sie, warum ChatGPT für die moderne Entwicklung unerlässlich ist.</p>
             </div>
           </div>
 
           <div className="flex items-center space-x-4">
-            <FiPlayCircle className="text-4xl text-blue-400" /> {/* Icono de materiales */}
+            <FiMonitor className="text-4xl text-blue-400" /> {/* Ícono de pantalla para web design */}
             <div>
-              <a href="#" className="text-xl text-blue-200 hover:text-white flex items-center">
-                Looking for materials? <span aria-hidden="true" className="ml-2">↗</span>
-              </a>
-              <p className="text-gray-400">Watch our YouTube tutorials.</p>
+              <Link
+                to="/blog#animierte-und-dynamische-webseiten-im-jahr-2025"
+                className="text-xl text-blue-200 hover:text-white flex items-center"
+              >
+                Dynamische Webseiten <span aria-hidden="true" className="ml-2">↗</span>
+              </Link>
+              <p className="text-gray-400">Entdecken Sie die Zukunft von dynamischen und animierten Webseiten.</p>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <FiShoppingCart className="text-4xl text-blue-400" /> {/* Ícono de carrito de compras */}
+            <div>
+              <Link
+                to="/blog#online-shop-ab-1450-chf"
+                className="text-xl text-blue-200 hover:text-white flex items-center"
+              >
+                Online Shop <span aria-hidden="true" className="ml-2">↗</span>
+              </Link>
+              <p className="text-gray-400">Starten Sie Ihren eigenen Online-Shop ab nur 1450 CHF.</p>
             </div>
           </div>
         </div>

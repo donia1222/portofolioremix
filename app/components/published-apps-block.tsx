@@ -14,30 +14,30 @@ const apps: App[] = [
   {
     id: 1,
     name: "Voice Shopping",
-    description: "A sleek, space-themed code editor for the modern developer.",
+    description: "Create Shopping List by Voice.",
     image: "https://lweb.ch/images/2024/07/30/app-icon-1024x10241x-copia1.png",
-    link: "https://example.com/cosmic-code-editor"
+    link: "https://speak-list.com"
   },
   {
     id: 2,
     name: "GastroStamps",
-    description: "Organize your tasks with the efficiency of a well-planned space mission.",
+    description: "Punkte sammeln beim Essen!",
     image: "https://lweb.ch/images/2024/07/30/app-icon-1024x10241x-copia13.png",
-    link: "https://example.com/nebula-task-manager"
+    link: "https://gastrostamps.ch"
   },
   {
     id: 3,
     name: "Dog-Mentor",
-    description: "Continuous integration and deployment at light speed.",
+    description: "Discover the world of your dog with our app",
     image: "https://lweb.ch/images/2024/07/30/app-icon-1024x10241x-copia121.png",
-    link: "https://example.com/starship-cicd"
+    link: "https://dog-mentor.com"
   },
   {
     id: 4,
     name: "FoodScan AI",
-    description: "Version control that's out of this world.",
+    description: "Transform Your Fridge into Recipes!",
     image: "https://lweb.ch/images/2024/08/11/app-icon-1024x10241x-copia11-1.png",
-    link: "https://example.com/galaxy-git"
+    link: "https://foodscan-ai.com"
   }
 ]
 
@@ -55,7 +55,7 @@ export default function PublishedAppsBlock() {
   return (
     <div className="w-full py-16  text-white overflow-hidden  bg-gray-800 ">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold  text-center text-blue-400 mb-20">Explore Our Published Apps</h2>
+        <h2 className="text-4xl font-bold  text-center text-blue-400 mb-20">Entdecken Sie unsere veröffentlichten Apps</h2>
         <div className="relative">
           <div className="flex items-center justify-center">
             <button
