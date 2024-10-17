@@ -13,6 +13,7 @@ import AOS from "aos";
 import type { LinksFunction } from "@remix-run/node";
 import { FiMessageSquare } from "react-icons/fi"; // Importar el ícono de chat
 import Chat from "~/components/Chat"; // Importar el componente Chat
+import CookieBanner from "~/components/CookieBanner"; 
 
 // Función links para incluir CSS de AOS
 export const links: LinksFunction = () => {
@@ -128,7 +129,7 @@ export default function Index() {
           />
         ))}
       </div>
-
+      <CookieBanner />
       {/* Encabezado y contenido */}
       <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
         <Header />
@@ -172,6 +173,11 @@ export default function Index() {
       </div>
 
 
+      <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
+        <CommunityBlock />
+      </div>
+
+
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />
       </div>
@@ -182,10 +188,6 @@ export default function Index() {
 
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
         <TechnologyCarousel />
-      </div>
-
-      <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
-        <CommunityBlock />
       </div>
 
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">

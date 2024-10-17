@@ -34,31 +34,6 @@ export const blogPosts: BlogPost[] = [
   },
   {
     id: "2",
-    title: "Warum nutze ich ChatGPT zur Erstellung von Webseiten und Apps?",
-    author: "Roberto Salvador",
-    date: "2024-10-18",
-    content: `
-      <p>ChatGPT hat sich aus mehreren Gründen zu einem unverzichtbaren Werkzeug in meinem Entwicklungsprozess für Webseiten und Apps entwickelt, die meine Arbeit optimieren und verbessern.</p>
-      <br>  </br>
-      <p><strong>Vorteile der Nutzung von ChatGPT:</strong></p>
-      <ul>
-        <li><strong>Unterstützung beim Codieren:</strong> ChatGPT hilft mir, Code effizienter zu schreiben und zu debuggen. Egal ob ich mit HTML, CSS, JavaScript oder anderen Programmiersprachen arbeite, ich kann es nutzen, um Code-Snippets zu generieren, Fehler schnell zu beheben und Lösungen für komplexe Probleme zu finden.</li>
-        <br>  </br>
-        <li><strong>Inhaltserstellung:</strong> Attraktive und effektive Texte für Webseiten und Apps zu erstellen, ist mit der Hilfe von ChatGPT einfacher. Von Produktbeschreibungen bis hin zu Blog-Inhalten bietet ChatGPT vielfältige und personalisierte Optionen, die zur gewünschten Stimme und zum Stil passen.</li>
-        <br>  </br>
-        <li><strong>Optimierung des Arbeitsablaufs:</strong> Mit ChatGPT kann ich repetitive Aufgaben automatisieren, wie das Erstellen von grundlegenden Code-Strukturen, Formularen oder sogar die Planung der Informationsarchitektur. Dadurch kann ich mich auf die kreativeren und komplexeren Teile der Entwicklung konzentrieren.</li>
-        <br>  </br>
-        <li><strong>Unterstützung in Echtzeit:</strong> Wenn ich auf technische oder konzeptionelle Herausforderungen stoße, agiert ChatGPT als Echtzeit-Assistent, der mir sofort Vorschläge und Ressourcen liefert. Dies verkürzt die Suchzeit erheblich und steigert die Produktivität.</li>
-        <br>  </br>
-        <li><strong>Innovation und Experimentation:</strong> ChatGPT ist auch ein hervorragendes Werkzeug, um neue Ideen zu erkunden. Ich kann es verwenden, um schnell Prototypen von Funktionen oder Merkmalen zu erstellen, was mir ermöglicht, Konzepte zu experimentieren und anzupassen, bevor sie im Endprojekt implementiert werden.</li>
-        <br>  </br>
-      </ul>
-      <p>Zusammenfassend verbessert ChatGPT meinen Entwicklungsprozess, indem es technischen Support, Kreativität bei der Inhaltserstellung und Effizienz bei der Ausführung von Aufgaben bietet. Es ist ein vielseitiges Werkzeug, das unverzichtbar geworden ist, um hochwertige Webseiten und Apps zu erstellen.</p>`,
-    imageUrl: "https://lweb.ch/images/chatear.png",
-    views: 20,
-  },
-  {
-    id: "3",
     title: "Animierte und dynamische Webseiten im Jahr 2025",
     author: "Roberto Salvador",
     date: "2025-01-01",
@@ -86,7 +61,7 @@ export const blogPosts: BlogPost[] = [
     views: 30,
   },
   {
-    id: "4",
+    id: "3",
     title: "Online Shop ab 1450 CHF",
     author: "Roberto Salvador",
     date: "2025-02-01",

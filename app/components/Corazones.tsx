@@ -50,7 +50,7 @@ export default function AntennaWithWaves() {
   Wir stellen sicher, dass jedes Detail perfekt abgestimmt ist.
 </h2>
 <p
-  className="text-base text-blue-300 mt-4 max-w-md text-center"
+  className="text-base p-10 text-blue-300 mt-4 max-w-md text-center"
   data-aos="fade-up"
   data-aos-delay="200"
 >

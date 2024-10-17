@@ -3,13 +3,13 @@ import { Link } from "@remix-run/react"; // Importar Link de Remix para la naveg
 
 const CommunityBlock = () => {
   return (
-    <section className="w-full py-24 bg-gray-900 text-white pt-20"> {/* Eliminamos cualquier padding top */}
+    <section className="w-full py-24 bg-gray-900 text-white  "> {/* Eliminamos cualquier padding top */}
       <div className="flex flex-col md:flex-row justify-between items-center mx-auto px-4 md:px-12 lg:px-24 w-full max-w-[1440px]">
         
         {/* Texto a la izquierda */}
         <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0 mr-10">
-          <h2 className="text-5xl font-bold">Aktuelle Neuigkeiten</h2> {/* Título en alemán */}
-          <p className="text-xl mt-6 text-gray-400">
+          <h2 className="text-5xl font-bold ml-9 ">Aktuelle Neuigkeiten</h2> {/* Título en alemán */}
+          <p className="text-xl mt-6 text-gray-400 ml-9">
             Bleiben Sie auf dem Laufenden mit den neuesten Updates und Entwicklungen unseres Unternehmens.
           </p>
         </div>
@@ -29,18 +29,7 @@ const CommunityBlock = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <FiCpu className="text-4xl text-blue-400" /> {/* Ícono de CPU/tecnología para ChatGPT */}
-            <div>
-              <Link
-                to="/blog#warum-nutze-ich-chatgpt-zur-erstellung-von-webseiten-und-apps"
-                className="text-xl text-blue-200 hover:text-white flex items-center"
-              >
-                Warum nutze ich ChatGPT ? <span aria-hidden="true" className="ml-2">↗</span>
-              </Link>
-              <p className="text-gray-400">Erfahren Sie, warum ChatGPT für die moderne Entwicklung unerlässlich ist.</p>
-            </div>
-          </div>
+  
 
           <div className="flex items-center space-x-4">
             <FiMonitor className="text-4xl text-blue-400" /> {/* Ícono de pantalla para web design */}

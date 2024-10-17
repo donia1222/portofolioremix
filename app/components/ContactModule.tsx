@@ -14,7 +14,7 @@ export default function ContactModule() {
   };
 
   return (
-    <section className="w-full py-24 bg-gray-900 text-white pb-40 pt-40">
+    <section className="w-full py-24 bg-gray-900 text-white pb-20 ">
       <div className="max-w-screen-md mx-auto px-4 md:px-12 lg:px-24 text-center">
         <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
           Get in Touch 👋
@@ -86,6 +86,33 @@ export default function ContactModule() {
           </div>
         </form>
       </div>
+
+      {/* Footer Section */}
+      <footer className="mt-16 bg-gray-800 py-8">
+        <div className="max-w-screen-md mx-auto px-4 md:px-12 lg:px-24 text-center text-white space-y-4">
+          <div>
+            <h3 className="text-2xl font-semibold">LWEB Schweiz</h3>
+            <p className="text-blue-200">Hier finden Sie unsere Kontaktinformationen.</p>
+          </div>
+          <div className="space-y-2">
+            <p>
+              <strong>Adresse: </strong>Bahnhofstrasse 9, 9475 Sevelen, Schweiz 🇨🇭
+            </p>
+            <p>
+              <strong>Telefon: </strong>
+              <a href="tel:+41817501911" className="text-blue-400 hover:text-blue-600">
+                081 750 1911
+              </a>
+            </p>
+            <p>
+              <strong>E-Mail: </strong>
+              <a href="mailto:info@lweb.ch" className="text-blue-400 hover:text-blue-600">
+                info@lweb.ch
+              </a>
+            </p>
+          </div>
+        </div>
+      </footer>
     </section>
   );
 }
