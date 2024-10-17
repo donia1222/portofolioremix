@@ -28,7 +28,7 @@ export default function CookieBanner() {
     <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 z-50 shadow-lg flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4 animate-slide-up">
       <div className="text-center md:text-left">
         <p className="text-lg font-semibold">
-          Diese Website verwendet Cookies.
+          Diese Website verwendet Cookies 🍪
         </p>
         <p className="text-sm text-gray-300">
           Wir verwenden Cookies, um sicherzustellen, dass Sie die beste Erfahrung auf unserer Website erhalten. Bitte akzeptieren Sie unsere Cookies, um fortzufahren.
