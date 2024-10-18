@@ -71,29 +71,8 @@ export default function OpenSourceBlock() {
     Wir arbeiten mit den neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
   </p>
 
-  <p className="text-xl  text-white mb-12 p-5">
-    Bisher haben wir zahlreiche Webseiten und Apps mit den folgenden Technologien erstellt:
-  </p>
 
-  {/* Box with the numbers */}
-  <div className="flex justify-center" ref={numbersRef}>
-    <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-left">
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="25">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
-      </div>
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="6">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Astro</p>
-      </div>
-      <div className="flex items-center justify-between">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="5">0</p>
-        <p className="text-blue-200 ml-4">Apps mit React Native</p>
-      </div>
-    </div>
-    
-  </div>
-  <div className="flex justify-center mt-20 " ref={numbersRef}>
+  <div className="flex justify-center mt-10 " ref={numbersRef}>
   <Link
                 to="/webs"
                 className="text-xl text-blue-200 hover:text-white flex items-center"
