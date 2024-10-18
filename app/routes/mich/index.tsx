@@ -1,7 +1,7 @@
 import { blogPosts } from "~/data/Apps"
 import { Link } from "@remix-run/react"
-import WebsiteBlock from "~/components/WebsiteBlock"; 
-import Websitecomponent from "~/components/websitecomponent"; 
+import Ubermich from "~/components/Ubermich"; 
+
 
 
 import { useState, useEffect } from "react";
@@ -26,6 +26,7 @@ export default function BlogIndex() {
 
       {/* Estrella fugaz */}
       <div className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full animate-shootingStar" />
+
       <Link
   to="/"
   className="fixed top-6 left-6 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
@@ -47,9 +48,7 @@ export default function BlogIndex() {
 
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         
-        <WebsiteBlock />
-
-        <Websitecomponent />
+        <Ubermich />
 
       </div>
 
@@ -60,15 +59,6 @@ export default function BlogIndex() {
       }`}
     >
      
-        <div className="w-full md:max-w-[30%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
-  {/* Nombre "Cosmic News" con scroll hacia arriba al hacer clic */}
-  <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
-    <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">Moderne</span>
-    <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold">Webentwicklung</span>
-  </div>
-
-      </div>
-
 
     </header>
       </div>

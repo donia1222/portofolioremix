@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Calendar, MapPin, Clock, Star, ShoppingBag, Menu, Activity, CreditCard, Wallet, PiggyBank, Dumbbell, Apple, Music, Code, Utensils, ShoppingCart } from 'lucide-react'
 
 interface Event {
@@ -75,6 +75,48 @@ const savingsGoals: SavingsGoal[] = [
 
 export default function EnhancedResponsiveAppSwitcher() {
   const [currentApp, setCurrentApp] = useState<'events' | 'restaurant' | 'store' | 'fitness' | 'savings'>('events')
+  const phoneContentRef = useRef<HTMLDivElement>(null)
+  const mainContentRef = useRef<HTMLDivElement>(null)
+  const [isPhoneScrolled, setIsPhoneScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (phoneContentRef.current && mainContentRef.current) {
+        const phoneContent = phoneContentRef.current
+        const phoneScrollTop = phoneContent.scrollTop
+        const phoneScrollHeight = phoneContent.scrollHeight
+        const phoneClientHeight = phoneContent.clientHeight
+
+        if (phoneScrollTop + phoneClientHeight >= phoneScrollHeight - 1) {
+          setIsPhoneScrolled(true)
+        } else {
+          setIsPhoneScrolled(false)
+        }
+      }
+    }
+
+    const phoneContent = phoneContentRef.current
+    if (phoneContent) {
+      phoneContent.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      if (phoneContent) {
+        phoneContent.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    const mainContent = mainContentRef.current
+    if (mainContent) {
+      if (isPhoneScrolled) {
+        mainContent.style.overflowY = 'auto'
+      } else {
+        mainContent.style.overflowY = 'hidden'
+      }
+    }
+  }, [isPhoneScrolled])
 
   const EventsApp = () => (
     <div className="h-full bg-gradient-to-b from-blue-50 to-purple-50 overflow-y-auto">
@@ -146,7 +188,7 @@ export default function EnhancedResponsiveAppSwitcher() {
       </div>
       <div className="p-4 grid grid-cols-2 gap-4">
         {products.map((product) => (
-          <div key={product.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col transform transition-all hover:scale-105">
+          <div  key={product.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col transform transition-all hover:scale-105">
             <img src={product.image} alt={product.name} className="h-40 w-full object-cover rounded-md mb-4" />
             <h2 className="text-lg font-semibold text-indigo-900 mb-2">{product.name}</h2>
             <div className="text-indigo-600 font-bold text-xl mt-auto mb-2">{product.price}</div>
@@ -244,11 +286,11 @@ export default function EnhancedResponsiveAppSwitcher() {
   }
 
   return (
-    <div className="mb-40">
-      <div className="max-w-7xl mx-auto bg-gradient-to-br from-purple-400 to-gray-300  rounded-3xl shadow-xl overflow-hidden">
+    <div className="mb-40" ref={mainContentRef}>
+      <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
         <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/3 p-6 lg:p-8 ">
-            <h2 className="text-3xl font-bold  text-gray-700 mt-20 text-center mb-10">App-Wechsler</h2>
+          <div className="lg:w-1/3 p-6 lg:p-8">
+            <h2 className="text-3xl font-bold text-white mt-20 text-center mb-10">Content-Management-Apps</h2>
             <div className="space-y-4">
               <button 
                 onClick={() => setCurrentApp('events')}
@@ -296,7 +338,6 @@ export default function EnhancedResponsiveAppSwitcher() {
                 Sparziele
               </button>
             </div>
-            
           </div>
           
           <div className="lg:w-2/3 p-6 lg:p-8">
@@ -304,12 +345,11 @@ export default function EnhancedResponsiveAppSwitcher() {
                  style={{ height: '600px', width: '100%', maxWidth: '320px', margin: '0 auto' }}>
               <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-7 bg-gray-900 rounded-b-3xl"></div>
               <div className="h-full w-full bg-white overflow-hidden rounded-[2.3rem]">
-                {renderApp()}
-                
+                <div ref={phoneContentRef} className="h-full overflow-y-auto">
+                  {renderApp()}
+                </div>
               </div>
-              
             </div>
-            
           </div>
         </div>
       </div>

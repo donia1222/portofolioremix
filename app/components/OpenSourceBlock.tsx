@@ -62,7 +62,7 @@ export default function OpenSourceBlock() {
   }, []);
 
   return (
-<section className="w-full text-center z-5  mb-0 bg-gray-900 py-16 pb-40  pt-20">
+<section className="w-full text-center z-5  mb-0 bg-gray-900 py-16   pt-20">
   <h2 className="text-4xl md:text-6xl font-bold text-white max-w-4xl mx-auto mb-20">
     Moderne, ansprechende <br />
     und einzigartige <span className="text-pink-400">{typedText}</span>
@@ -71,15 +71,6 @@ export default function OpenSourceBlock() {
     Wir arbeiten mit den neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
   </p>
 
-
-  <div className="flex justify-center mt-10 " ref={numbersRef}>
-  <Link
-                to="/webs"
-                className="text-xl text-blue-200 hover:text-white flex items-center"
-              >
-               Moderne Webentwicklung<span aria-hidden="true" className="ml-2">↗</span>
-              </Link>
-              </div>
 </section>
 
   );
