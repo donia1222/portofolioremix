@@ -1,6 +1,6 @@
 import { blogPosts } from "~/data/blogPosts"
 import { Link } from "@remix-run/react"
-import { Repeat, Code, AppWindow, Newspaper, Mail, Menu, X } from "lucide-react";
+
 import { useState, useEffect } from "react";
 export default function BlogIndex() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -46,22 +46,21 @@ export default function BlogIndex() {
         isHeaderVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-     
-        {/* Nombre "LWEB Schweiz" con scroll hacia arriba al hacer clic */}
-        <div className="w-full md:max-w-[30%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
-  {/* Nombre "Cosmic News" con scroll hacia arriba al hacer clic */}
+    
+
+
+
+    </header>
+        <div className="max-w-4xl mx-auto py-16 px-4">
+        <div className="w-full md:max-w-[80%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
+
   <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
     <span className="text-blue-300 text-lg sm:text-xl md:text-3xl font-bold">Cosmic</span>
     <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold">News</span>
   </div>
 
       </div>
-
-
-    </header>
-        <div className="max-w-4xl mx-auto py-16 px-4">
-
-          <h1 className="text-6xl font-bold text-center mb-16 mt-40 text-blue-100 drop-shadow-glow">
+          <h1 className="text-6xl font-bold text-center mb-16 mt-20 text-blue-100 drop-shadow-glow">
 
           </h1>
           <div className="space-y-16">

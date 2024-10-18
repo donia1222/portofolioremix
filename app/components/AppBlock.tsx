@@ -1,8 +1,7 @@
-import { useState,  useRef } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
 
-import { Link } from "@remix-run/react";
 interface App {
   id: number
   name: string
@@ -44,7 +43,7 @@ const apps: App[] = [
 
 export default function PublishedAppsBlock() {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const numbersRef = useRef<HTMLDivElement>(null);
+
   const nextApp = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % apps.length)
   }
@@ -54,9 +53,9 @@ export default function PublishedAppsBlock() {
   }
 
   return (
-    <div className="w-full py-16  text-white overflow-hidden  bg-gray-800 ">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold  text-center text-blue-400 mb-20">Entdecken Sie unsere veröffentlichten Apps</h2>
+    <div className="w-full py-16  text-white overflow-hidden mt-10">
+      <div className="container mx-auto px-4 bg-[#6d6d869b]  py-10 pb-20">
+        <h2 className="text-4xl font-bold  text-center text-blue-400 mb-10 ">Entdecken Sie unsere veröffentlichten Apps</h2>
         <div className="relative">
           <div className="flex items-center justify-center">
             <button
@@ -114,14 +113,6 @@ export default function PublishedAppsBlock() {
             />
           ))}
         </div>
-        <div className="flex justify-center mt-20 " ref={numbersRef}>
-  <Link
-                to="/apps"
-                className="text-xl text-blue-200 hover:text-white flex items-center"
-              >
-               App Entwicklung<span aria-hidden="true" className="ml-2">↗</span>
-              </Link>
-              </div>
       </div>
     </div>
   )

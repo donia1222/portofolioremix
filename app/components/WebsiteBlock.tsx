@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@remix-run/react";
-import { FiGlobe, FiCpu, FiMonitor, FiShoppingCart } from "react-icons/fi"; // Importamos los nuevos iconos
+
 // Función para la animación de los números
 const animateNumbers = (element: HTMLDivElement, start: number, end: number, duration: number) => {
   let startTime: number | null = null;
@@ -62,8 +62,10 @@ export default function OpenSourceBlock() {
   }, []);
 
   return (
-<section className="w-full text-center z-5  mb-0 bg-gray-900 py-16 pb-40  pt-20">
-  <h2 className="text-4xl md:text-6xl font-bold text-white max-w-4xl mx-auto mb-20">
+    
+<section className="w-full text-center mb-0 py-16 pb-40  pt-20 ">
+<div className="container mx-auto px-4 bg-[#7c7c8713]  py-10 pb-20  mt-10">
+  <h2 className="text-4xl md:text-6xl  font-bold text-white max-w-4xl mx-auto mb-20 mt-10 ">
     Moderne, ansprechende <br />
     und einzigartige <span className="text-pink-400">{typedText}</span>
   </h2>
@@ -91,16 +93,8 @@ export default function OpenSourceBlock() {
         <p className="text-blue-200 ml-4">Apps mit React Native</p>
       </div>
     </div>
-    
   </div>
-  <div className="flex justify-center mt-20 " ref={numbersRef}>
-  <Link
-                to="/webs"
-                className="text-xl text-blue-200 hover:text-white flex items-center"
-              >
-               Moderne Webentwicklung<span aria-hidden="true" className="ml-2">↗</span>
-              </Link>
-              </div>
+  </div>
 </section>
 
   );
