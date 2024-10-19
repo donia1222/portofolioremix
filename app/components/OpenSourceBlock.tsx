@@ -70,7 +70,14 @@ export default function OpenSourceBlock() {
   <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-12 p-8">
     Wir arbeiten mit den neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
   </p>
-
+  <div className="flex justify-center mt-10 " ref={numbersRef}>
+  <Link
+                to="/webs"
+                className="text-xl text-blue-200 hover:text-white flex items-center"
+              >
+               Website Entwicklung<span aria-hidden="true" className="ml-2">↗</span>
+              </Link>
+              </div>
 </section>
 
   );

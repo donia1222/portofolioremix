@@ -46,7 +46,7 @@ export default function BlogIndex() {
         
         <WebsiteBlock />
 
-        <Websitecomponent />
+
 
       </div>
 

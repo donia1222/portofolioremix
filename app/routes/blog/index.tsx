@@ -26,7 +26,7 @@ export default function BlogIndex() {
 
       <Link
         to="/"
-        className="fixed top-6 left-6 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
+        className="fixed top-4 left-4 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ export default function BlogIndex() {
 
     </header>
         <div className="max-w-4xl mx-auto py-16 px-4">
-        <div className="w-full md:max-w-[90%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
+        <div className="w-full md:max-w-[90%]  mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
 
   <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
     <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">Cosmic</span>
