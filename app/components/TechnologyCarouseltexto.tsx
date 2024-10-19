@@ -35,7 +35,7 @@ export default function AppBenefitsShowcase() {
             {benefits.map((benefit, index) => (
               <div 
                 key={index} 
-                className="bg-white rounded-2xl shadow-lg p-6 transform transition-all hover:scale-105"
+                className=" bg-gradient-to-r from-purple-200 to-indigo-200 rounded-2xl shadow-lg p-6 transform transition-all hover:scale-105"
               >
                 <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full mb-6 mx-auto">
                   <benefit.icon className="w-8 h-8 text-white" />

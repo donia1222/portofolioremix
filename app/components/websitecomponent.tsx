@@ -39,22 +39,8 @@ export default function WebDevBenefitsShowcase() {
       imageUrl: "/shrazan.png",
       title: "Sharazan",
       description: "Diese Seite ist für eine Musikgruppe aus Spanien"
-    },
-    {
-      imageUrl: "/cantina.png",
-      title: "Cantina Tex-Mex",
-      description: "Mit integriertem Reservierungssystem"
-    },
-    {
-      imageUrl: "/flink.png",
-      title: "Flink Sauber",
-      description: "Reinigungsunternehmen aus Liechtenstein."
-    },
-    {
-      imageUrl: "/shrazan.png",
-      title: "Sharazan",
-      description: "Diese Seite ist für eine Musikgruppe aus Spanien"
     }
+    
   ]
 
   return (
@@ -68,7 +54,7 @@ export default function WebDevBenefitsShowcase() {
             {benefits.map((benefit, index) => (
               <div 
                 key={index} 
-                className="bg-white rounded-2xl shadow-lg p-6 transform transition-all hover:scale-105"
+                className="bg-gradient-to-r from-purple-200 to-indigo-300 rounded-2xl shadow-lg p-6 transform transition-all hover:scale-105"
               >
                 <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full mb-6 mx-auto">
                   <benefit.icon className="w-8 h-8 text-white" />
@@ -82,7 +68,7 @@ export default function WebDevBenefitsShowcase() {
               </div>
             ))}
           </div>
-          <div className="mt-12 text-center text-white">
+          <div className="mt-12 text-center text-white ">
             <h3 className="text-3xl font-bold mb-6">Webentwicklung</h3>
             <p className="text-xl mb-6">
               Ich bin ein freiberuflicher Webentwickler, spezialisiert auf die Erstellung moderner und leistungsfähiger Websites mit den neuesten Technologien. Meine Lösungen sind responsiv, benutzerfreundlich und für Suchmaschinen optimiert.
@@ -99,14 +85,14 @@ export default function WebDevBenefitsShowcase() {
 
       {/* Neue Sektion: Projekte */}
       <div className="max-w-7xl mx-auto mt-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-400 text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-400 text-center mb-12 ">
         Beispiel einiger meiner bisherigen Arbeiten
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-2xl shadow-lg p-6 transition-all hover:scale-105"
+              className="bg-gradient-to-r from-purple-200 to-indigo-200  rounded-2xl shadow-lg p-6 transition-all hover:scale-105"
             >
               <img 
                 src={project.imageUrl} 
