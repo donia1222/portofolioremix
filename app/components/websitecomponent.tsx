@@ -24,6 +24,39 @@ export default function WebDevBenefitsShowcase() {
     }
   ]
 
+  const projects = [
+    {
+      imageUrl: "/cantina.png",
+      title: "Cantina Tex-Mex",
+      description: "Mit integriertem Reservierungssystem"
+    },
+    {
+      imageUrl: "/flink.png",
+      title: "Flink Sauber",
+      description: "Reinigungsunternehmen aus Liechtenstein."
+    },
+    {
+      imageUrl: "/shrazan.png",
+      title: "Sharazan",
+      description: "Diese Seite ist für eine Musikgruppe aus Spanien"
+    },
+    {
+      imageUrl: "/cantina.png",
+      title: "Cantina Tex-Mex",
+      description: "Mit integriertem Reservierungssystem"
+    },
+    {
+      imageUrl: "/flink.png",
+      title: "Flink Sauber",
+      description: "Reinigungsunternehmen aus Liechtenstein."
+    },
+    {
+      imageUrl: "/shrazan.png",
+      title: "Sharazan",
+      description: "Diese Seite ist für eine Musikgruppe aus Spanien"
+    }
+  ]
+
   return (
     <div className="mb-10 mt-40">
       <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
@@ -60,10 +93,34 @@ export default function WebDevBenefitsShowcase() {
             <p className="text-xl mb-8">
               Wenn Sie an einer Zusammenarbeit interessiert sind, kann ich Ihnen gerne Beispiele meiner bisherigen Projekte zeigen. Kontaktieren Sie mich für ein unverbindliches Gespräch, und lassen Sie uns gemeinsam Ihre Ideen in die digitale Realität umsetzen.
             </p>
-            <button className="bg-white text-purple-600 py-3 px-8 rounded-full text-lg font-semibold hover:bg-purple-100 transition-colors">
-              Kontakt aufnehmen
-            </button>
           </div>
+        </div>
+      </div>
+
+      {/* Neue Sektion: Projekte */}
+      <div className="max-w-7xl mx-auto mt-20">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-400 text-center mb-12">
+        Beispiel einiger meiner bisherigen Arbeiten
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <div 
+              key={index} 
+              className="bg-white rounded-2xl shadow-lg p-6 transition-all hover:scale-105"
+            >
+              <img 
+                src={project.imageUrl} 
+                alt={project.title} 
+                className="w-full h-48 object-cover rounded-2xl mb-6"
+              />
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                {project.title}
+              </h3>
+              <p className="text-gray-600">
+                {project.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -115,12 +115,18 @@ export default function PublishedAppsBlock() {
           ))}
         </div>
         <div className="flex justify-center mt-20 " ref={numbersRef}>
-  <Link
-                to="/apps"
-                className="text-xl text-blue-200 hover:text-white flex items-center"
-              >
-               App Entwicklung<span aria-hidden="true" className="ml-2">↗</span>
-              </Link>
+        <Link
+          to="/apps"
+          className="relative inline-flex items-center text-xl group"
+        >
+          <span className="relative z-10 px-5 py-3 font-semibold transition-colors duration-200 ease-in-out bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent group-hover:from-orange-400 group-hover:to-red-500">
+            App Entwicklung
+            <span aria-hidden="true" className="ml-2">↗</span>
+          </span>
+          <span className="absolute inset-0 w-full h-full transition duration-200 ease-in-out bg-gradient-to-r from-blue-400 to-green-400 rounded-lg blur opacity-30 group-hover:opacity-100 group-hover:from-orange-400 group-hover:to-red-500"></span>
+          <span className="absolute inset-0 w-full h-full transition duration-200 ease-in-out bg-gradient-to-r from-blue-400 to-green-400 rounded-lg opacity-0 group-hover:opacity-30"></span>
+          <span className="absolute inset-0 w-full h-full border-2 border-white border-opacity-10 rounded-lg"></span>
+        </Link>
               </div>
       </div>
     </div>

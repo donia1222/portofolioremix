@@ -9,6 +9,8 @@ export default function BlogIndex() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
+
+  
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
