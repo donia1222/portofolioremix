@@ -14,7 +14,7 @@ import type { LinksFunction } from "@remix-run/node";
 import { FiMessageSquare } from "react-icons/fi"; // Importar el ícono de chat
 import Chat from "~/components/Chat"; // Importar el componente Chat
 import CookieBanner from "~/components/CookieBanner"; 
-import TechnologyCarousemisapps from "~/components/TechnologyCarousemisapps"; 
+
 
 // Función links para incluir CSS de AOS
 export const links: LinksFunction = () => {
@@ -184,7 +184,7 @@ export default function Index() {
       </div>
 
       <div id="publishedAppsBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="600">
-        <TechnologyCarousemisapps />
+        <PublishedAppsBlock/>
       </div>
 
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">

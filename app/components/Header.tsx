@@ -53,7 +53,7 @@ export default function Header() {
       <div className="w-full md:max-w-[80%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-90">
         {/* Nombre "LWEB Schweiz" con scroll hacia arriba al hacer clic */}
         <div className="flex items-center cursor-pointer" onClick={scrollToTop}>
-          <span className="text-blue-400 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
+          <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
           <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold">
             Schweiz
           </span>
@@ -77,93 +77,80 @@ export default function Header() {
 
         {/* Menú en pantallas grandes */}
         <nav className="hidden md:flex space-x-6">
-          {/* Enlace a una ruta */}
-          <Link
-            to="/mich"
+          <button
+            onClick={() => handleScroll("corePrinciplesBlock")}
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
-            <span>Über mich</span>
-          </Link>
-
-          {/* Enlace a otra ruta */}
-          <Link
-            to="/blog"
+            <span>Was wir machen</span>
+          </button>
+          <button
+            onClick={() => handleScroll("communityBlock")}
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <Newspaper className="h-5 w-5 group-hover:skew-y-12 transition-transform duration-300" />
             <span>Aktuelle</span>
-          </Link>
-
-          {/* Enlace a otra ruta */}
-          <Link
-            to="/webs"
+          </button>
+          <button
+            onClick={() => handleScroll("openSourceBlock")}
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
             <span>Webentwicklung</span>
-          </Link>
-
-          {/* Enlace a otra ruta */}
-          <Link
-            to="/apps"
+          </button>
+          <button
+            onClick={() => handleScroll("publishedAppsBlock")}
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
             <span>App-Entwicklung</span>
-          </Link>
-
-          {/* Enlace de desplazamiento (scroll) en lugar de ruta */}
+          </button>
+    
           <button
             onClick={() => handleScroll("contactModule")}
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
-            <span>Kontakt</span>
+            <span>Contact</span>
           </button>
         </nav>
       </div>
 
       {/* Menú Móvil */}
       <div
-        className={`absolute top-0 right-0  bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-6 mt-20 z-90 transition-all duration-300 ${
-          isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
-        }`}
-      >
-        {/* Enlaces del menú móvil */}
-        <Link
-          to="/mich"
+  className={`absolute top-0 right-0 bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-6 mt-20 z-90 transition-all duration-300 ${
+    isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
+  }`}
+>
+
+        <button
+          onClick={() => handleScroll("corePrinciplesBlock")}
           className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
           <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
-          <span>Über mich</span>
-        </Link>
-
-        <Link
-          to="/blog"
+          <span>Was wir machen</span>
+        </button>
+        <button
+          onClick={() => handleScroll("communityBlock")}
           className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
           <Newspaper className="h-5 w-5 group-hover:skew-y-12 transition-transform duration-300" />
           <span>Aktuelle</span>
-        </Link>
-
-        <Link
-          to="/webs"
+        </button>
+        <button
+          onClick={() => handleScroll("openSourceBlock")}
           className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
           <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
           <span>Webentwicklung</span>
-        </Link>
-
-        <Link
-          to="/apps"
+        </button>
+        <button
+          onClick={() => handleScroll("publishedAppsBlock")}
           className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
           <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
           <span>App-Entwicklung</span>
-        </Link>
-
-        {/* Enlace de desplazamiento (scroll) en lugar de ruta */}
+        </button>
         <button
           onClick={() => handleScroll("contactModule")}
           className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
