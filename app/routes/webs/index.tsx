@@ -44,6 +44,7 @@ export default function BlogIndex() {
 
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         
+        <Websitecomponent />
         <WebsiteBlock />
 
 

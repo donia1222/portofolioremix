@@ -30,6 +30,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
+        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
       </head>
       <body>
         {children}
