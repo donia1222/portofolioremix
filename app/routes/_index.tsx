@@ -45,7 +45,13 @@ export default function Index() {
   const [gradientStyle, setGradientStyle] = useState({});
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("");
-
+  const chips = [
+    "Moderne Webseiten",
+    "KI-Lösungen",
+    "App-Entwicklung",
+    "Custom Plugins",
+    "und mehr"
+  ]
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -175,13 +181,20 @@ export default function Index() {
           MODERNIZE YOUR DECISIONS
         </h2>
 
-        <p
-          className="text-xl text-blue-200 max-w-2xl mx-auto p-4"
+        <div
+          className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto p-4"
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          Moderne Webseiten, KI-Lösungen, App-Entwicklung, Custom Plugins und mehr.
-        </p>
+          {chips.map((chip, index) => (
+            <span
+              key={index}
+              className="px-3 py-1 bg-gray-700 text-white rounded-full text-sm font-semibold"
+            >
+              {chip}
+            </span>
+          ))}
+        </div>
       </main>
 
       <div id="deliverBlock" className="w-full relative" data-aos="fade-up">

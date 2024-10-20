@@ -92,6 +92,10 @@ export default function OpenSourceBlock() {
         <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="3">0</p>
         <p className="text-blue-200 ml-4">Webseiten mit Remix</p>
       </div>
+      <div className="flex items-center justify-between">
+        <p className="text-4xl font-bold text-blue-400 number mr-4 mt-5" data-value="2">0</p>
+        <p className="text-blue-200 ml-4 mt-5"> Webseiten mit raw code</p>
+      </div>
     </div>
   </div>
   </div>

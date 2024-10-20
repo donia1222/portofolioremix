@@ -57,7 +57,7 @@ export default function AboutMePage() {
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="space-y-24">
         <section id="about" className={`transition-opacity duration-500 ${activeSection === 'about' ? 'opacity-100' : 'opacity-50'}`}>
-  <h2 className="text-3xl font-bold mb-6 flex items-center mt-20">
+  <h2 className="text-3xl font-bold mb-6 flex items-center mt-20 ml-16">
     <Star className="w-8 h-8 mr-2 text-yellow-400" />
     Über mich
   </h2>
@@ -67,7 +67,7 @@ export default function AboutMePage() {
     <img 
       src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
       alt="Avatar de Roberto Salvador"
-      className="w-32 h-32 rounded-full object-cover border-4 border-yellow-400"
+      className="w-64 h-38 rounded-lg object-cover"
     />
   </div>
 
