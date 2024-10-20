@@ -119,6 +119,11 @@ export default function Header() {
   className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
 >
   <span>Über mich</span>
+  <img 
+      src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
+      alt="Avatar de Roberto Salvador"
+      className="w-10 h-10 rounded-full ml-2  border-2 border-gray-700"
+    />
 </Link>
 
 
@@ -169,11 +174,18 @@ export default function Header() {
           <span>Kontakt</span>
         </button>
 
-        <Link
+<Link
   to="/roberto"
-  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+  className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-2"
 >
   <span>Über mich</span>
+
+    <img 
+      src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
+      alt="Avatar de Roberto Salvador"
+      className="w-10 h-10 rounded-full ml-2 border-2 border-gray-700"
+    />
+
 </Link>
 
 
