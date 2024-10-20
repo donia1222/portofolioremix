@@ -89,30 +89,42 @@ export default function ContactModule() {
 
       {/* Footer Section */}
       <footer className="mt-16 bg-gray-800 py-8">
-        <div className="max-w-screen-md mx-auto px-4 md:px-12 lg:px-24 text-center text-white space-y-4">
-          <div>
-            <h3 className="text-2xl font-semibold">LWEB Schweiz</h3>
-            <p className="text-blue-200">Hier finden Sie unsere Kontaktinformationen.</p>
-          </div>
-          <div className="space-y-2">
-            <p>
-              <strong>Adresse: </strong>Bahnhofstrasse 9, 9475 Sevelen, Schweiz 🇨🇭
-            </p>
-            <p>
-              <strong>Telefon: </strong>
-              <a href="tel:+41817501911" className="text-blue-400 hover:text-blue-600">
-                081 750 1911
-              </a>
-            </p>
-            <p>
-              <strong>E-Mail: </strong>
-              <a href="mailto:info@lweb.ch" className="text-blue-400 hover:text-blue-600">
-                info@lweb.ch
-              </a>
-            </p>
-          </div>
-        </div>
-      </footer>
+  <div className="max-w-screen-md mx-auto px-4 md:px-12 lg:px-24 text-center text-white space-y-4">
+    <div>
+      <h3 className="text-2xl font-semibold">LWEB Schweiz</h3>
+      <p className="text-blue-200">Hier finden Sie unsere Kontaktinformationen.</p>
+    </div>
+    <div className="space-y-2">
+      <p>
+        <strong>Adresse: </strong>Bahnhofstrasse 9, 9475 Sevelen, Schweiz 🇨🇭
+      </p>
+      <p>
+        <strong>Telefon: </strong>
+        <a href="tel:+41817501911" className="text-blue-400 hover:text-blue-600">
+          081 750 1911
+        </a>
+      </p>
+      <p>
+        <strong>E-Mail: </strong>
+        <a href="mailto:info@lweb.ch" className="text-blue-400 hover:text-blue-600">
+          info@lweb.ch
+        </a>
+      </p>
+    </div>
+    {/* Sección adicional para mencionar Remix */}
+    <div className="mt-8">
+      <p className="text-sm text-blue-200">Diese Webseite wurde mit <span className="font-semibold">Remix</span> erstellt.</p>
+      <a href="https://remix.run" target="_blank" rel="noopener noreferrer">
+        <img
+          src="remix-letter-glowing.svg" 
+          alt="Remix Logo"
+          className="mx-auto mt-2 w-16 h-16"
+        />
+      </a>
+    </div>
+  </div>
+</footer>
+
     </section>
   );
 }

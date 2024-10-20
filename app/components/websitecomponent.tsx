@@ -1,6 +1,7 @@
 import { Globe, Code, Search, ShieldCheck, Home, User } from 'lucide-react'
 
 export default function WebDevBenefitsShowcase() {
+  
   const benefits = [
     {
       icon: Globe,
@@ -48,7 +49,7 @@ export default function WebDevBenefitsShowcase() {
       <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
         <div className="p-8 md:p-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
-            Stärken Sie Ihr Unternehmen mit einer professionellen Webpräsenz
+            Stärken Sie Ihr Unternehmen mit einer professionellen  <span className="text-blue-400  mt-10 ">Webpräsenz</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {benefits.map((benefit, index) => (
@@ -85,14 +86,14 @@ export default function WebDevBenefitsShowcase() {
 
       {/* Neue Sektion: Projekte */}
       <div className="max-w-7xl mx-auto mt-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-400 text-center mb-12 ">
+        <h2 className="text-4xl md:text-5xl font-bold text-blue-400 text-center mb-12 p-10 ">
         Beispiel einiger meiner bisherigen Arbeiten
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-10">
           {projects.map((project, index) => (
             <div 
               key={index} 
-              className="bg-gradient-to-r from-purple-200 to-indigo-200  rounded-2xl shadow-lg p-6 transition-all hover:scale-105"
+              className="bg-gradient-to-r from-purple-200 to-indigo-300 rounded-2xl shadow-lg p-6 transition-all hover:scale-105"
             >
               <img 
                 src={project.imageUrl} 

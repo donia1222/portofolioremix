@@ -11,12 +11,10 @@ import { useEffect, useState, useRef } from "react";
 import TechnologyCarousel from "~/components/TechnologyCarousel"; 
 import AOS from "aos";
 import type { LinksFunction } from "@remix-run/node";
-import { FiMessageSquare } from "react-icons/fi"; // Importar el ícono de chat
-import Chat from "~/components/Chat"; // Importar el componente Chat
+import { FiMessageSquare } from "react-icons/fi";
+import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 
-
-// Función links para incluir CSS de AOS
 export const links: LinksFunction = () => {
   return [
     {
@@ -26,7 +24,6 @@ export const links: LinksFunction = () => {
       crossOrigin: "anonymous",
       referrerPolicy: "no-referrer",
     },
-    // Añade aquí otros estilos si es necesario
   ];
 };
 
@@ -39,25 +36,24 @@ interface Star {
   opacity: number;
 }
 
+const backgroundImages = ["/logo2.jpg", "/space.jpg", "/spavce3.jpg"];
+
 export default function Index() {
   const [stars, setStars] = useState<Star[]>([]);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const [gradientStyle, setGradientStyle] = useState({});
-  
-  // Estado para controlar la visibilidad del chat
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [backgroundImage, setBackgroundImage] = useState("");
 
   useEffect(() => {
-    // Inicializar AOS
     AOS.init({
-      duration: 1000, // Duración de la animación en ms
-      once: true,      // Si la animación solo debe ocurrir una vez
+      duration: 1000,
+      once: true,
     });
 
-    // Animación de gradiente
     const gradientAnimation = () => {
       let step = 0;
-      const colors = ['#7e7e7e', '#f3f3f3', '#7e7e7e']; // Colores del gradiente
+      const colors = ['#7e7e7e', '#f3f3f3', '#7e7e7e'];
       setInterval(() => {
         step = (step + 1) % 360;
         setGradientStyle({
@@ -67,30 +63,28 @@ export default function Index() {
           color: "transparent",
           transition: "background-image 1s ease-in-out",
         });
-      }, 100); // Ajusta la velocidad de la animación
+      }, 100);
     };
 
     gradientAnimation();
 
-    // Inicializar estrellas con más cantidad y tamaños variados
     const initialStars = Array.from({ length: 300 }, (_, i) => ({
       id: i,
-      x: Math.random() * 100,             // Posición X en porcentaje
-      y: Math.random() * 100,             // Posición Y en porcentaje
-      size: Math.random() * 4 + 1,        // Tamaño entre 1px y 5px
-      speed: Math.random() * 0.05 + 0.01, // Velocidad de movimiento
-      opacity: Math.random() * 0.5 + 0.5, // Opacidad entre 0.5 y 1
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 1,
+      speed: Math.random() * 0.05 + 0.01,
+      opacity: Math.random() * 0.5 + 0.5,
     }));
     setStars(initialStars);
 
-    // Animar estrellas usando requestAnimationFrame para mejor rendimiento
     let animationFrameId: number;
 
     const animateStars = () => {
       setStars((prevStars) =>
         prevStars.map((star) => ({
           ...star,
-          x: (star.x + star.speed) % 100, // Mover hacia la derecha y reiniciar al llegar al 100%
+          x: (star.x + star.speed) % 100,
         }))
       );
       animationFrameId = requestAnimationFrame(animateStars);
@@ -98,23 +92,37 @@ export default function Index() {
 
     animateStars();
 
-    return () => cancelAnimationFrame(animationFrameId);
+    // Función para seleccionar una nueva imagen de fondo
+    const selectNewBackground = () => {
+      const lastImage = localStorage.getItem('lastBackgroundImage');
+      let newImage;
+      do {
+        newImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
+      } while (newImage === lastImage);
+      
+      localStorage.setItem('lastBackgroundImage', newImage);
+      return `${newImage}?t=${new Date().getTime()}`;
+    };
+
+    // Establecer una nueva imagen de fondo
+    setBackgroundImage(selectNewBackground());
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-blue-900 to-purple-900 relative overflow-auto">
-      {/* Fondo con imagen fija */}
       <div ref={backgroundRef} className="fixed inset-0 z-0">
         <img
-          src="/logo2.jpg" // Asegúrate de que la imagen esté en public/logo2.jpg
+          src={backgroundImage}
           alt="Fondo"
           className="w-full h-full object-cover"
         />
-        {/* Superposición oscura opcional */}
         <div className="absolute inset-0 bg-black opacity-50"></div>
       </div>
 
-      {/* Estrellas */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         {stars.map((star) => (
           <div
@@ -131,7 +139,6 @@ export default function Index() {
         ))}
       </div>
       <CookieBanner />
-      {/* Encabezado y contenido */}
       <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
         <Header />
         <div className="w-full max-w-[80%]">
@@ -142,7 +149,7 @@ export default function Index() {
         <h2
           className="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl mx-auto"
           data-aos="fade-up"
-          style={gradientStyle} // Aplicar estilo de gradiente animado
+          style={gradientStyle}
         >
           MODERNIZE YOUR DECISIONS
         </h2>
@@ -154,13 +161,8 @@ export default function Index() {
         >
           Moderne Webseiten, KI-Lösungen, App-Entwicklung, Custom Plugins und mehr.
         </p>
-        
       </main>
 
-
-
-
-      {/* Secciones con animaciones */}
       <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
         <DeliverBlock />
       </div>
@@ -173,11 +175,9 @@ export default function Index() {
         <Corazones />
       </div>
 
-
       <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
         <CommunityBlock />
       </div>
-
 
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />
@@ -194,8 +194,6 @@ export default function Index() {
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />
       </div>
-
-
 
       <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <Chat />

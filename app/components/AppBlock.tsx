@@ -65,7 +65,7 @@ export default function PublishedAppsBlock() {
 
 
         <div className="container mx-auto px-4 bg-gradient-to-br bg-[#73738a59] py-10 mt-10 backdrop-blur-md rounded-3xl   ">
-        <h2 className="text-4xl font-bold  text-center  text-white mb-10 ">Entdecken Sie unsere veröffentlichten Apps</h2>
+        <h2 className="text-4xl font-bold  text-center  text-white mb-10 ">Entdecken Sie unsere <span className="text-pink-400  mt-10 ">veröffentlichten Apps</span></h2>  
         <div className="relative">
           <div className="flex items-center justify-center">
             <button
