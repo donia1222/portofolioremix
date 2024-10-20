@@ -90,7 +90,7 @@ export default function BlogIndex() {
             isHeaderVisible ? "translate-y-0" : "-translate-y-full"
           }`}
         >
-          <div className="w-full md:max-w-[30%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
+          <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
             {/* Nombre "Moderne Webentwicklung" con scroll hacia arriba al hacer clic */}
             <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
               <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">Moderne</span>

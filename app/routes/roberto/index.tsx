@@ -1,7 +1,8 @@
 import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
-import AppBlock from "~/components/AppBlock"; 
-
+import WebsiteBlock from "~/components/WebsiteBlock"; 
+import Websitecomponent from "~/components/webs/websitecomponentcantina"; 
+import ImageRevealTextScroll from "~/components/image-reveal-text-scroll"; 
 import { useState, useEffect } from "react";
 
 export default function BlogIndex() {
@@ -29,7 +30,7 @@ export default function BlogIndex() {
   // Loader más moderno y relacionado con temática espacial
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black via-purple-900 to-indigo-900 relative">
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black via-blue-900 to-indigo-900 relative">
         {/* Estrellas animadas como fondo */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="star-field"></div>
@@ -42,7 +43,7 @@ export default function BlogIndex() {
 
           {/* Texto animado */}
           <div className="text-white text-xl font-semibold animate-pulse">
-         
+
           </div>
         </div>
       </div>
@@ -53,7 +54,7 @@ export default function BlogIndex() {
     <div className="min-h-screen relative">
       {/* Fondo con animación de zoom */}
       <div 
-        className="fixed inset-0 bg-[url('/5532919.jpg')] bg-cover bg-center transform transition-transform duration-[10000ms] ease-in-out animate-zoom"
+        className="fixed inset-0 bg-[url('/black-prism-concept-ai-generated.jpg')] bg-cover bg-center transform transition-transform duration-[10000ms] ease-in-out animate-zoom"
         style={{ backgroundAttachment: 'fixed' }}
       />
       <div className="fixed inset-0 bg-black bg-opacity-50" />
@@ -77,24 +78,25 @@ export default function BlogIndex() {
       </Link>
 
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
-        <AppBlock />
+        <Websitecomponent />
       </div>
-
       <div className="relative">
         <header
           className={`w-full py-4 px-4 fixed top-0 left-0 z-90 transition-transform duration-300 ${
             isHeaderVisible ? "translate-y-0" : "-translate-y-full"
           }`}
         >
-          <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d8617] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
-            {/* Nombre "App Entwicklung" con scroll hacia arriba al hacer clic */}
+          <div className="w-full md:max-w-[30%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
+            {/* Nombre "Moderne Webentwicklung" con scroll hacia arriba al hacer clic */}
             <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
-              <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">App</span>
-              <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold">Entwicklung</span>
+              <span className="text-blue-300 text-lg sm:text-xl md:text-3xl font-bold">Roberto </span>
+              <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold">Salvador</span>
             </div>
           </div>
         </header>
+
       </div>
     </div>
+    
   );
 }

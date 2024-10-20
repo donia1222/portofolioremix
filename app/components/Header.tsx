@@ -113,6 +113,16 @@ export default function Header() {
             <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
             <span>Contact</span>
           </button>
+
+          <Link
+  to="/roberto"
+  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+>
+  <span>Über mich</span>
+</Link>
+
+
+
         </nav>
       </div>
 
@@ -158,6 +168,15 @@ export default function Header() {
           <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
           <span>Kontakt</span>
         </button>
+
+        <Link
+  to="/roberto"
+  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+>
+  <span>Über mich</span>
+</Link>
+
+
       </div>
     </header>
   );

@@ -176,9 +176,7 @@ export default function SpaceChat() {
           <div className="p-4 flex-1 overflow-y-auto space-y-4 bg-[url('/placeholder.svg?height=500&width=500')] bg-cover">
             {messages.length === 0 ? (
     <div className="space-y-2">
-    <p className="text-gray-300 bg-clip-text text-center mb-10 transition-all text-xl">
-      Willkommen bei lweb.ch! Wählen Sie eine Frage oder stellen Sie Ihre eigene.
-    </p>
+
   
     {visibleQuestions.map((question, index) => (
       <button
