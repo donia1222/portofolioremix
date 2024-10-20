@@ -27,7 +27,7 @@ export default function AboutMePage() {
           <div className="absolute inset-0 bg-[url('/black-prism-concept-ai-generated.jpg')] bg-cover bg-center opacity-80"></div>
         </div>
         <div className="relative z-10">
-          <h1 className="text-3xl sm:text-4xl md:text-4xl font-bold mb-80"></h1>
+          <h1 className="text-3xl sm:text-4xl md:text-4xl font-bold mb-40"></h1>
           <p className="text-xl sm:text-2xl md:text-3xl text-blue-500"></p>
         </div>
       </header>
