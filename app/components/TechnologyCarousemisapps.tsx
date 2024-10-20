@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
-import { Download } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Download, ChevronRight, ChevronLeft, RotateCcw } from 'lucide-react'
 
 interface App {
   id: number
@@ -40,120 +41,118 @@ const apps: App[] = [
   }
 ]
 
-export default function PublishedAppsShowcase() {
-  const [currentAppIndex, setCurrentAppIndex] = useState(0)
-  const [isLastAppScrolled, setIsLastAppScrolled] = useState(false)
-  const phoneContentRef = useRef<HTMLDivElement>(null)
-  const mainContentRef = useRef<HTMLDivElement>(null)
+export default function ThreeDCubeAppShowcase() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isRotating, setIsRotating] = useState(false)
+  const [rotationDirection, setRotationDirection] = useState(1)
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (phoneContentRef.current && mainContentRef.current) {
-        const phoneContent = phoneContentRef.current
-        const phoneScrollTop = phoneContent.scrollTop
-        const phoneScrollHeight = phoneContent.scrollHeight
-        const phoneClientHeight = phoneContent.clientHeight
+    const timer = setInterval(() => {
+      nextApp()
+    }, 10000)
 
-        // Calculate which app should be displayed based on scroll position
-        const appIndex = Math.floor(phoneScrollTop / phoneClientHeight)
-        setCurrentAppIndex(Math.min(appIndex, apps.length - 1))
+    return () => clearInterval(timer)
+  }, [currentIndex])
 
-        // Check if we've scrolled past the last app
-        if (phoneScrollTop + phoneClientHeight >= phoneScrollHeight - 1) {
-          setIsLastAppScrolled(true)
-        } else {
-          setIsLastAppScrolled(false)
-        }
-      }
-    }
+  const nextApp = () => {
+    setRotationDirection(1)
+    setIsRotating(true)
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % apps.length)
+      setIsRotating(false)
+    }, 500)
+  }
 
-    const phoneContent = phoneContentRef.current
-    if (phoneContent) {
-      phoneContent.addEventListener('scroll', handleScroll)
-    }
-
-    return () => {
-      if (phoneContent) {
-        phoneContent.removeEventListener('scroll', handleScroll)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    const mainContent = mainContentRef.current
-    if (mainContent) {
-      if (isLastAppScrolled) {
-        mainContent.style.overflowY = 'auto'
-      } else {
-        mainContent.style.overflowY = 'hidden'
-      }
-    }
-  }, [isLastAppScrolled])
-
-  const AppDisplay = ({ app }: { app: App }) => (
-    <div className="h-full flex flex-col items-center justify-center p-4">
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-4 rounded-t-2xl w-full mb-4">
-        <h1 className="text-2xl font-bold text-center">{app.name}</h1>
-      </div>
-      <img src={app.image} alt={app.name} className="w-32 h-32 object-cover rounded-2xl shadow-lg mb-4" />
-      <p className="text-gray-700 text-center mb-6">{app.description}</p>
-      <a 
-        href={app.link} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-6 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-indigo-700 transition-colors flex items-center"
-      >
-        <Download className="w-5 h-5 mr-2" />
-        Download App
-      </a>
-    </div>
-  )
+  const prevApp = () => {
+    setRotationDirection(-1)
+    setIsRotating(true)
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex - 1 + apps.length) % apps.length)
+      setIsRotating(false)
+    }, 500)
+  }
 
   return (
-    <div className="mb-0"  ref={mainContentRef}>
-        <section className="w-full text-center z-5  mb-0 bg-gray-900 py-16  pt-20">
-      <div className="max-w-7xl mx-auto bg-gray-900  rounded-3xl  overflow-hidden">
-        <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/3 p-6 lg:p-8">
-            <h2 className="text-3xl font-bold text-white mt-20 text-center mb-10">My Published Apps</h2>
-            <div className="space-y-4">
-              {apps.map((app, index) => (
-                <button 
-                  key={app.id}
-                  onClick={() => {
-                    setCurrentAppIndex(index)
-                    if (phoneContentRef.current) {
-                      phoneContentRef.current.scrollTop = index * phoneContentRef.current.clientHeight
-                    }
-                  }}
-                  className={`w-full px-6 py-3 rounded-full shadow-md flex items-center justify-center transition-colors ${
-                    currentAppIndex === index ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white' : 'bg-white text-purple-600 hover:bg-purple-50'
-                  }`}
-                >
-                  {app.name}
-                </button>
-              ))}
-            </div>
-          </div>
-          
-          <div className="lg:w-2/3 p-6 lg:p-8">
-            <div className="relative border-[14px] border-gray-900 rounded-[3rem] overflow-hidden shadow-xl bg-gray-900 " 
-                 style={{ height: '600px', width: '100%', maxWidth: '320px', margin: '0 auto' }}>
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-7 bg-gray-900 rounded-b-3xl"></div>
-              <div className="h-full w-full bg-white overflow-hidden rounded-[2.3rem]">
-                <div ref={phoneContentRef} className="h-full overflow-y-auto snap-y snap-mandatory">
-                  {apps.map((app) => (
-                    <div key={app.id} className="h-full snap-start">
-                      <AppDisplay app={app} />
-                    </div>
-                  ))}
-                </div>
+    <div className="bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 py-20 px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center rounded-3xl ">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-12">
+        Discover Our Innovative   <span className="ml-2 text-[#ff69b4] text-4xl md:text-5xl font-extrabold  text-center mb-12">
+        Apps
+          </span>
+      </h2>
+      <div className="relative w-full max-w-md aspect-square perspective-1000">
+        <AnimatePresence>
+          <motion.div
+            key={currentIndex}
+            className="w-full h-full absolute"
+            initial={{ rotateY: rotationDirection * 90 }}
+            animate={{ rotateY: 0 }}
+            exit={{ rotateY: rotationDirection * -90 }}
+            transition={{ duration: 0.5 }}
+            style={{ transformStyle: 'preserve-3d' }}
+          >
+            <div className="absolute inset-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-xl p-8 flex flex-col justify-between transform-gpu">
+              <div>
+                <img 
+                  src={apps[currentIndex].image} 
+                  alt={apps[currentIndex].name} 
+                  className="w-32 h-32 mx-auto mb-6 rounded-2xl shadow-lg"
+                />
+                <h3 className="text-3xl font-bold text-white text-center mb-4">{apps[currentIndex].name}</h3>
+                <p className="text-xl text-indigo-200 text-center mb-8">{apps[currentIndex].description}</p>
               </div>
+              <a 
+                href={apps[currentIndex].link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="block w-full bg-white text-indigo-600 py-3 px-6 rounded-full text-center text-lg font-semibold hover:bg-indigo-100 transition-colors duration-300 flex items-center justify-center"
+              >
+                <Download className="w-6 h-6 mr-2" />
+                Download App
+                <ChevronRight className="w-6 h-6 ml-2" />
+              </a>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
-      </section>
+      <div className="mt-12 flex justify-center items-center space-x-6">
+        <button
+          onClick={prevApp}
+          disabled={isRotating}
+          className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 focus:outline-none transition-colors duration-300"
+          aria-label="Previous app"
+        >
+          <ChevronLeft className="w-8 h-8 text-white" />
+        </button>
+        <div className="flex items-center space-x-2">
+          {apps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setRotationDirection(index > currentIndex ? 1 : -1)
+                setIsRotating(true)
+                setTimeout(() => {
+                  setCurrentIndex(index)
+                  setIsRotating(false)
+                }, 500)
+              }}
+              disabled={isRotating}
+              className={`w-3 h-3 rounded-full focus:outline-none transition-colors duration-300 ${
+                index === currentIndex ? 'bg-white' : 'bg-white bg-opacity-30 hover:bg-opacity-50'
+              }`}
+              aria-label={`Go to app ${index + 1}`}
+            />
+          ))}
+        </div>
+        <button
+          onClick={nextApp}
+          disabled={isRotating}
+          className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-3 focus:outline-none transition-colors duration-300"
+          aria-label="Next app"
+        >
+          <ChevronRight className="w-8 h-8 text-white" />
+        </button>
+      </div>
+
     </div>
   )
 }

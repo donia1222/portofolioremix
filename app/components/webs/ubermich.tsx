@@ -71,7 +71,7 @@ export default function AboutMePage() {
     />
   </div>
 
-  <div className="bg-gray-900 bg-opacity-50 rounded-lg p-6 backdrop-filter backdrop-blur-sm">
+  <div className="bg-gray-900 bg-opacity-50 rounded-lg p-6 backdrop-filter backdrop-blur-sm ">
     <p className="mb-4">
       Hallo 👋, Ich bin Roberto Salvador. Seit 2019 begeistert mich die Entwicklung von Webseiten und mobilen Anwendungen. Täglich widme ich 4 bis 5 Stunden dem autodidaktischen Lernen und Üben.
     </p>

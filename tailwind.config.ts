@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
+  darkMode: 'class', // Habilita el modo oscuro basado en clases
   content: ["./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -16,13 +17,18 @@ export default {
           '"Noto Color Emoji"',
         ],
       },
-      // Modificamos el zoom para ser más veloz
+      colors: {
+        // Definimos colores específicos para modo oscuro y claro
+        lightBg: '#ffffff',
+        lightText: '#000000',
+        darkBg: '#1a202c', // gris oscuro para el modo oscuro
+        darkText: '#ffffff',
+      },
       keyframes: {
         zoom: {
           '0%': { transform: 'scale(1)' },
           '100%': { transform: 'scale(1.1)' },
         },
-        // Animación de la estrella fugaz ajustada para que solo ocurra una vez y desaparezca
         shootingStar: {
           '0%': { opacity: '0', transform: 'translateX(-10%) translateY(-20%)' },
           '20%': { opacity: '1', transform: 'translateX(0) translateY(0)' },
@@ -31,8 +37,8 @@ export default {
         },
       },
       animation: {
-        zoom: 'zoom 10s ease-in-out infinite alternate', // Cambiamos la duración del zoom a 10s
-        shootingStar: 'shootingStar 5s linear 0s forwards', // La estrella fugaz solo ocurre una vez
+        zoom: 'zoom 10s ease-in-out infinite alternate',
+        shootingStar: 'shootingStar 5s linear 0s forwards',
       },
     },
   },

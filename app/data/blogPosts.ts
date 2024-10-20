@@ -11,25 +11,23 @@ export type BlogPost = {
 export const blogPosts: BlogPost[] = [
   {
     id: "1",
-    title: "Low-Cost Homepage ab 290 CHF",
+    title: "Reservierungssystem",
     author: "Roberto Salvador",
     date: "2024-10-17",
     content: `
-      <p>Erstellen Sie Ihre eigene Website ohne Programmierkenntnisse ab nur 290 Franken. 
-      Mit unserem benutzerfreundlichen Admin-Panel können Sie Bilder, Texte, Farben und das gesamte Design Ihrer Website ganz einfach anpassen.</p>
+      <p>Reservierungssystem: HTML, CSS , JavaScript, PHP, MySQL. 
+      Ziel: Das Reservierungssystem ist darauf ausgelegt, Termine und Veranstaltungen effizient für verschiedene Geschäftsarten wie Restaurants, Schönheitssalons und Kliniken zu verwalten. Es bietet eine umfassende Lösung, die die Verwaltung von Reservierungen optimiert und das Benutzererlebnis verbessert.</p>
       <br>  </br>
-      <p><strong>Vorteile:</strong></p>
+      <p><strong>Verwendete Technologien:</strong></p>
       <ul>
-        <li>Domain und Server inklusive.</li>
-        <li>2 personalisierte E-Mail-Konten.</li>
-        <li>Volle Kontrolle über Design und Inhalte.</li>
-        <li>Einfache Bedienung, ohne technische Kenntnisse.</li>
+        <li>HTML, CSS und JavaScript: Für die Erstellung einer intuitiven und ansprechenden Benutzeroberfläche.</li>
+        <li>PHP: Für die Verwaltung der Serverlogik und die Integration mit der Datenbank.</li>
+        <li>MySQL: Für die Speicherung und Verwaltung von Reservierungsdaten und blockierten Daten.</li>
       </ul>
       <br>  </br>
-      <p>Möchten Sie testen, wie es funktioniert?</p>
-      <p><a href="https://lweb.ch/web.html" target="_blank" class="text-indigo-500 underline">Mehr Infos</a></p>
+    
     `,
-    imageUrl: "https://lweb.ch/images/Captgura%20dXe%20pantalla%202024-09-03%20a%20las%2023.00.26.png",
+    imageUrl: "reservas.png",
     views: 10,
   },
   {

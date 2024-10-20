@@ -23,9 +23,9 @@ const CommunityBlock = () => {
                 to="/blog#low-cost-homepage-ab-290-chf"
                 className="text-xl text-blue-200 hover:text-white flex items-center"
               >
-                Low-Cost Homepage <span aria-hidden="true" className="ml-2">↗</span>
+                Reservierungssystem <span aria-hidden="true" className="ml-2">↗</span>
               </Link>
-              <p className="text-gray-400">Erfahren Sie, wie Sie Ihre eigene Website für nur 290 CHF erstellen können.</p>
+              <p className="text-gray-400">Reservierungssystem: HTML, CSS , JavaScript, PHP, MySQL.</p>
             </div>
           </div>
 

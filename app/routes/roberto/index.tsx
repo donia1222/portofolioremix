@@ -1,7 +1,7 @@
 import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
 import WebsiteBlock from "~/components/WebsiteBlock"; 
-import Websitecomponent from "~/components/webs/websitecomponentcantina"; 
+import Websitecomponent from "~/components/webs/ubermich"; 
 import ImageRevealTextScroll from "~/components/image-reveal-text-scroll"; 
 import { useState, useEffect } from "react";
 
@@ -33,7 +33,7 @@ export default function BlogIndex() {
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black via-blue-900 to-indigo-900 relative">
         {/* Estrellas animadas como fondo */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="star-field"></div>
+
         </div>
 
         {/* Loader moderno */}
@@ -59,8 +59,6 @@ export default function BlogIndex() {
       />
       <div className="fixed inset-0 bg-black bg-opacity-50" />
 
-      {/* Estrella fugaz */}
-      <div className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full animate-shootingStar" />
       <Link
         to="/"
         className="fixed top-6 left-6 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
@@ -76,7 +74,6 @@ export default function BlogIndex() {
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
       </Link>
-
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         <Websitecomponent />
       </div>

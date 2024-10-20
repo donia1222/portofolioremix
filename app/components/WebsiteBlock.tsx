@@ -1,105 +1,190 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "@remix-run/react";
+import { useState, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { ChevronDown, X, ExternalLink, Info } from 'lucide-react'
 
-// Función para la animación de los números
-const animateNumbers = (element: HTMLDivElement, start: number, end: number, duration: number) => {
-  let startTime: number | null = null;
+interface Website {
+  id: number;
+  title: string;
+  description: string;
+  fullDescription: string;
+  mainImage: string;
+  additionalImages: string[];
+  link: string;
+  color: string;
+}
 
-  const step = (timestamp: number) => {
-    if (!startTime) startTime = timestamp;
-    const progress = timestamp - startTime;
-    const value = Math.min(Math.floor((progress / duration) * (end - start) + start), end);
+const websites: Website[] = [
+  {
+    id: 1,
+    title: "Cantina Tex-Mex",
+    description: "Authentisches texanisch-mexikanisches Restaurant",
+    fullDescription: "Ein lebendiges Restaurant mit authentischer texanisch-mexikanischer Küche. Die Website bietet ein benutzerfreundliches Reservierungssystem für schnelle und einfache Tischbuchungen, sowie eine interaktive Menükarte und virtuelle Touren durch das Restaurant.",
+    mainImage: "/cantina.png",
+    additionalImages: ["/bienve.png", "/reservas.png", "/prosa.png", "/aptur.png"],
+    link: "https://cantinatexmex.ch",
+    color: "#FF6B6B"
+  },
+  {
+    id: 2,
+    title: "Flink Sauber",
+    description: "Professionelles Reinigungsunternehmen in Liechtenstein",
+    fullDescription: "Ein professionelles Reinigungsunternehmen mit Sitz in Liechtenstein. Die Website präsentiert Dienstleistungen klar und ermöglicht einfache Angebotsanfragen. Mit einem benutzerfreundlichen Buchungssystem und detaillierten Service-Beschreibungen bietet die Seite einen umfassenden Überblick über das Unternehmen.",
+    mainImage: "/flink.png",
+    additionalImages: ["/fl.png", "/flink.png", "/flimk3.png", "/dien.png"],
+    link: "https://flink-sauber.li",
+    color: "#4ECDC4"
+  },
+  {
+    id: 3,
+    title: "Sharazan",
+    description: "Dynamische Website für spanische Musikgruppe",
+    fullDescription: "Eine aufstrebende spanische Musikgruppe. Die Website bietet Fans Zugang zu Tourdaten, Musik-Streaming und Merchandise-Verkauf. Mit einer interaktiven Discographie, Fotogalerie und einem Blog hält die Seite Fans stets auf dem Laufenden über die neuesten Entwicklungen der Band.",
+    mainImage: "/shrazan.png",
+    additionalImages: ["/shar.png", "/mic.png", "/live.png","/bond.png"],
+    link: "https://es.sharazan.es",
+    color: "#F7B731"
+  },
+  {
+    id: 4,
+    title: "E-Online Shop",
+    description: "Umfassende E-Commerce-Lösung",
+    fullDescription: "EasyStore ist eine leistungsstarke E-Commerce-Plattform für den schnellen Aufbau professioneller Online-Shops mit umfangreichen Funktionen für Produktmanagement und Kundenservice. Die Plattform bietet responsive Designs, sichere Zahlungsgateways und fortschrittliche Analysetools für Geschäftsinhaber.",
+    mainImage: "/onlinesho.png",
+    additionalImages: ["/webim.png", "/neue.png", "/ptde.png", "/ende.png"],
+    link: "https://shop.lweb.ch",
+    color: "#45AAF2"
+  },
+  {
+    id: 5,
+    title: "Immobilie",
+    description: "Maßgeschneiderte Immobilien-Website",
+    fullDescription: "Eine maßgeschneiderte Website für ein Immobilienunternehmen mit intuitiver Immobiliensuche, detaillierten Objektbeschreibungen und Kontaktformular für Interessenten. Die Seite bietet auch virtuelle 3D-Touren, interaktive Karten und ein Client-Portal für registrierte Benutzer.",
+    mainImage: "/inmo.png",
+    additionalImages: ["/inmo.png", "/inmo3.png", "/apart.png", "/apart2.png"],
+    link: "https://inmo.lweb.ch",
+    color: "#A55EEA"
+  },
+  {
+    id: 6,
+    title: "El Español",
+    description: "Authentisches spanisches Restaurant in der Schweiz",
+    fullDescription: "El Español ist ein authentisches spanisches Restaurant in der Schweiz. Die Website präsentiert das Menü, die Atmosphäre und ermöglicht Online-Reservierungen. Mit einer virtuellen Tour durch das Restaurant, Rezepten zum Nachkochen und einem Blog über spanische Kultur bietet die Seite ein umfassendes spanisches Erlebnis.",
+    mainImage: "/espa.png",
+    additionalImages: ["/espa.png", "/ivan.png", "/elespano.png", "/vino.png"],
+    link: "https://elespanol.ch/de/",
+    color: "#FC5C65"
+  }
+]
 
-    element.innerText = value.toString();
+export default function FloatingIslandsWebsiteShowcase() {
+  const [selectedWebsite, setSelectedWebsite] = useState<Website | null>(null)
+  const [hoveredWebsite, setHoveredWebsite] = useState<number | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-    if (progress < duration) {
-      window.requestAnimationFrame(step);
-    }
-  };
-
-  window.requestAnimationFrame(step);
-};
-
-export default function OpenSourceBlock() {
-  const [typedText, setTypedText] = useState(""); // Estado para el texto tipeado
-  const [typingIndex, setTypingIndex] = useState(0); // Estado para el índice actual
-  const fullText = "Webseiten"; // Texto completo que se va a escribir
-  const numbersRef = useRef<HTMLDivElement>(null);
-
-  // Efecto de escritura del texto
-  useEffect(() => {
-    const typingInterval = setInterval(() => {
-      if (typingIndex < fullText.length) {
-        setTypedText((prev) => prev + fullText[typingIndex]);
-        setTypingIndex((prevIndex) => prevIndex + 1);
-      } else {
-        clearInterval(typingInterval); // Detener cuando se completa la escritura
-      }
-    }, 150); // Velocidad de escritura: 150ms por letra
-
-    return () => clearInterval(typingInterval); // Limpiar el intervalo al desmontar
-  }, [typingIndex]);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const elements = numbersRef.current?.querySelectorAll(".number");
-          if (elements) {
-            elements.forEach((el) => {
-              const endValue = parseInt(el.getAttribute("data-value") || "0", 10);
-              animateNumbers(el as HTMLDivElement, 0, endValue, 2000); // Duración de 2 segundos
-            });
-          }
-          observer.disconnect(); // Desconectar el observer después de la animación
-        }
-      });
-    }, { rootMargin: '0px 0px -200px 0px' });
-
-    if (numbersRef.current) {
-      observer.observe(numbersRef.current);
-    }
-  }, []);
+  const Island = ({ website }: { website: Website }) => {
+    return (
+      <div className="w-full mb-16">
+        <motion.div
+          className="bg-gradient-to-r from-purple-100 to-indigo-200 rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-300 ease-in-out h-full"
+          whileHover={{ scale: 1.05 }}
+          onHoverStart={() => setHoveredWebsite(website.id)}
+          onHoverEnd={() => setHoveredWebsite(null)}
+        >
+          <div className="relative">
+            <img
+              src={website.mainImage}
+              alt={website.title}
+              className="w-full h-48 object-cover"
+            />
+          </div>
+          <div className="p-6">
+            <h3 className="text-xl font-bold mb-2" style={{ color: website.color }}>{website.title}</h3>
+            <p className="text-gray-600 mb-4 text-sm">{website.description}</p>
+            <button
+              onClick={() => setSelectedWebsite(website)}
+              className="flex items-center text-white font-bold py-2 px-4 rounded-full transition duration-300 text-sm"
+              style={{ backgroundColor: website.color }}
+            >
+              Mehr erfahren
+              <Info className="ml-2 w-4 h-4" />
+            </button>
+          </div>
+        </motion.div>
+        {hoveredWebsite === website.id && (
+          <motion.div
+            className="absolute -bottom-8 left-1/2 transform -translate-x-1/2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+          >
+            <ChevronDown className="w-8 h-8 text-white animate-bounce" />
+          </motion.div>
+        )}
+      </div>
+    )
+  }
 
   return (
-    
-<section className="w-full text-center mb-0 py-16 pb-40  ">
-<div className="container mx-auto px-4 py-10 pb-20  ">
-  <h2 className="text-4xl md:text-6xl  font-bold text-white max-w-4xl mx-auto mb-5 ">
-    Moderne, ansprechende <br />
-    und einzigartige <span className="text-pink-400">{typedText}</span>
-  </h2>
-  <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-12 p-8">
-    Wir arbeiten mit den neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
-  </p>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-300 py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div ref={containerRef} className="max-w-7xl mx-auto relative 0">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-20">
+        Beispiel einiger meiner bisherigen <span className="ml-2 text-[#ff69b4] text-4xl md:text-5xl font-extrabold  text-center mb-12">
+          Webprojekte
+          </span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {websites.map((website) => (
+            <Island key={website.id} website={website} />
+          ))}
+        </div>
+      </div>
 
-  <p className="text-xl  text-white mb-12 p-5">
-    Bisher haben wir zahlreiche Webseiten mit den folgenden Technologien erstellt:
-  </p>
-
-  {/* Box with the numbers */}
-  <div className="flex justify-center" ref={numbersRef}>
-    <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-left">
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="21">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
-      </div>
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="6">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Astro</p>
-      </div>
-      <div className="flex items-center justify-between">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="3">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Remix</p>
-      </div>
-      <div className="flex items-center justify-between">
-        <p className="text-4xl font-bold text-blue-400 number mr-4 mt-5" data-value="2">0</p>
-        <p className="text-blue-200 ml-4 mt-5"> Webseiten mit raw code</p>
-      </div>
+      {selectedWebsite && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50"
+        >
+          <motion.div
+            initial={{ scale: 0.9, y: 50 }}
+            animate={{ scale: 1, y: 0 }}
+            exit={{ scale: 0.9, y: 50 }}
+            className="bg-gradient-to-r from-purple-100 to-indigo-200  rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-3xl font-bold" style={{ color: selectedWebsite.color }}>{selectedWebsite.title}</h2>
+              <button
+                onClick={() => setSelectedWebsite(null)}
+                className="text-gray-500 hover:text-gray-700 transition duration-200"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <p className="text-gray-600 mb-6">{selectedWebsite.fullDescription}</p>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              {selectedWebsite.additionalImages.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`${selectedWebsite.title} detail ${index + 1}`}
+                  className="w-full h-48 object-cover rounded-lg shadow-md"
+                />
+              ))}
+            </div>
+            <a
+              href={selectedWebsite.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-white font-bold py-2 px-4 rounded-full transition duration-300"
+              style={{ backgroundColor: selectedWebsite.color }}
+            >
+              Website besuchen
+              <ExternalLink className="ml-2 w-4 h-4" />
+            </a>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
-  </div>
-  </div>
-</section>
-
-  );
+  )
 }

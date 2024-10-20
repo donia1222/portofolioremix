@@ -122,7 +122,7 @@ export default function Header() {
   <img 
       src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
       alt="Avatar de Roberto Salvador"
-      className="w-10 h-10 rounded-full ml-2  border-2 border-gray-700"
+      className="w-14 h-14 rounded-full ml-2  border-2 border-gray-700"
     />
 </Link>
 
@@ -183,7 +183,7 @@ export default function Header() {
     <img 
       src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
       alt="Avatar de Roberto Salvador"
-      className="w-10 h-10 rounded-full ml-2 border-2 border-gray-700"
+      className="w-14 h-14 rounded-full ml-2 border-2 border-gray-600"
     />
 
 </Link>

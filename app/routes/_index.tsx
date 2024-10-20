@@ -45,6 +45,8 @@ export default function Index() {
   const [gradientStyle, setGradientStyle] = useState({});
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("");
+
+  
   const chips = [
     "Moderne Webseiten",
     "KI-Lösungen",
@@ -232,6 +234,8 @@ export default function Index() {
       <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <Chat />
       </div>
+
+      
     </div>
   );
 }
