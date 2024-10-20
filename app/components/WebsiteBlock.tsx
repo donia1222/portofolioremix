@@ -64,8 +64,8 @@ export default function OpenSourceBlock() {
   return (
     
 <section className="w-full text-center mb-0 py-16 pb-40  ">
-<div className="container mx-auto px-4 py-10 pb-20  mt-10">
-  <h2 className="text-4xl md:text-6xl  font-bold text-white max-w-4xl mx-auto mb-20 mt-10 ">
+<div className="container mx-auto px-4 py-10 pb-20  ">
+  <h2 className="text-4xl md:text-6xl  font-bold text-white max-w-4xl mx-auto mb-20 ">
     Moderne, ansprechende <br />
     und einzigartige <span className="text-pink-400">{typedText}</span>
   </h2>

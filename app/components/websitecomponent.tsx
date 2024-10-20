@@ -64,7 +64,7 @@ export default function WebDevBenefitsShowcase() {
   ]
 
   return (
-    <div className="mb-10 mt-40">
+    <div className=" mt-40">
       <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
         <div className="p-8 md:p-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
@@ -105,7 +105,7 @@ export default function WebDevBenefitsShowcase() {
 
       {/* Neue Sektion: Projekte */}
       <div className="max-w-7xl mx-auto mt-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-blue-400 text-center mb-12 p-10 ">
+        <h2 className="text-4xl md:text-5xl font-bold text-blue-400 text-center 2 p-10  ">
         Beispiel einiger meiner bisherigen Arbeiten
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-10">

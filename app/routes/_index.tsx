@@ -39,6 +39,7 @@ interface Star {
 const backgroundImages = ["/logo2.jpg", "/space.jpg"];
 
 export default function Index() {
+  const [isLoading, setIsLoading] = useState(true);
   const [stars, setStars] = useState<Star[]>([]);
   const backgroundRef = useRef<HTMLDivElement>(null);
   const [gradientStyle, setGradientStyle] = useState({});
@@ -107,10 +108,30 @@ export default function Index() {
     // Establecer una nueva imagen de fondo
     setBackgroundImage(selectNewBackground());
 
+    // Simular tiempo de carga
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
     return () => {
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(timer);
     };
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black via-blue-900 to-indigo-900 relative">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="star-field"></div>
+        </div>
+        <div className="relative z-10 flex flex-col items-center space-y-4">
+          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin"></div>
+          <div className="text-white text-xl font-semibold animate-pulse"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-blue-900 to-purple-900 relative overflow-auto">
