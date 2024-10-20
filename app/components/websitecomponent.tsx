@@ -22,14 +22,15 @@ export default function WebDevBenefitsShowcase() {
       icon: ShieldCheck,
       title: "Sicherheit & Performance",
       description: "Gewährleisten Sie höchste Sicherheitsstandards und optimale Ladezeiten für Ihre Webpräsenz."
-    }
+    },
+    
   ]
 
   const projects = [
     {
       imageUrl: "/cantina.png",
       title: "Cantina Tex-Mex",
-      description: "Mit integriertem Reservierungssystem"
+      description: "Mit integriertem Reservierungssystem."
     },
     {
       imageUrl: "/flink.png",
@@ -39,8 +40,26 @@ export default function WebDevBenefitsShowcase() {
     {
       imageUrl: "/shrazan.png",
       title: "Sharazan",
-      description: "Diese Seite ist für eine Musikgruppe aus Spanien"
+      description: "Diese Seite ist für eine Musikgruppe aus Spanien."
+      
+    },
+    {
+      imageUrl: "/onlinesho.png",
+      title: "Online Shop",
+      description: "EasyStore von JoomShaper ist eine umfassende E-Commerce-Lösung."
+    },
+    {
+      imageUrl: "/inmo.png",
+      title: "Immobilie",
+      description: "Personalisierte Webgestaltung für Immobilienunternehmen."
+    },
+    {
+      imageUrl: "/espa.png",
+      title: "El Español",
+      description: "Sabor a España"
+      
     }
+    
     
   ]
 

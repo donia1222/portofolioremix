@@ -2,7 +2,7 @@ import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
 import WebsiteBlock from "~/components/WebsiteBlock"; 
 import Websitecomponent from "~/components/websitecomponent"; 
-
+import ImageRevealTextScroll from "~/components/image-reveal-text-scroll"; 
 import { useState, useEffect } from "react";
 
 export default function BlogIndex() {
@@ -79,7 +79,9 @@ export default function BlogIndex() {
 
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         <Websitecomponent />
+
         <WebsiteBlock />
+  
       </div>
 
       <div className="relative">
@@ -96,6 +98,7 @@ export default function BlogIndex() {
             </div>
           </div>
         </header>
+
       </div>
     </div>
   );

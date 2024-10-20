@@ -36,7 +36,7 @@ interface Star {
   opacity: number;
 }
 
-const backgroundImages = ["/logo2.jpg", "/space.jpg", "/spavce3.jpg"];
+const backgroundImages = ["/logo2.jpg", "/space.jpg"];
 
 export default function Index() {
   const [stars, setStars] = useState<Star[]>([]);
