@@ -56,7 +56,7 @@ export default function WebDevBenefitsShowcase() {
     {
       imageUrl: "/espa.png",
       title: "El Español",
-      description: "Sabor a España"
+      description: "Sabor a España en Suiza."
       
     }
     

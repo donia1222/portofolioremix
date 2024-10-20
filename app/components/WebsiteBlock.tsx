@@ -63,7 +63,7 @@ export default function OpenSourceBlock() {
 
   return (
     
-<section className="w-full text-center mb-0 py-16 pb-40  pt-20 ">
+<section className="w-full text-center mb-0 py-16 pb-40  ">
 <div className="container mx-auto px-4 py-10 pb-20  mt-10">
   <h2 className="text-4xl md:text-6xl  font-bold text-white max-w-4xl mx-auto mb-20 mt-10 ">
     Moderne, ansprechende <br />
@@ -74,14 +74,14 @@ export default function OpenSourceBlock() {
   </p>
 
   <p className="text-xl  text-white mb-12 p-5">
-    Bisher haben wir zahlreiche Webseiten und Apps mit den folgenden Technologien erstellt:
+    Bisher haben wir zahlreiche Webseiten mit den folgenden Technologien erstellt:
   </p>
 
   {/* Box with the numbers */}
   <div className="flex justify-center" ref={numbersRef}>
     <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-left">
       <div className="flex items-center justify-between mb-4">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="25">0</p>
+        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="21">0</p>
         <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
       </div>
       <div className="flex items-center justify-between mb-4">
@@ -89,8 +89,8 @@ export default function OpenSourceBlock() {
         <p className="text-blue-200 ml-4">Webseiten mit Astro</p>
       </div>
       <div className="flex items-center justify-between">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="5">0</p>
-        <p className="text-blue-200 ml-4">Apps mit React Native</p>
+        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="3">0</p>
+        <p className="text-blue-200 ml-4">Webseiten mit Remix</p>
       </div>
     </div>
   </div>
