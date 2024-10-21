@@ -59,7 +59,7 @@ export default function DeliverBlock() {
     return (
       <section 
         ref={sectionRef} 
-        className={`text-center z-10 mt-56 mb-24 transition-transform duration-500 ${animateUp ? '-translate-y-full' : 'translate-y-0'}`}
+        className={`text-center z-10 mt-28 mb-24 transition-transform duration-500 ${animateUp ? '-translate-y-full' : 'translate-y-0'}`}
       >
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
           {/* Texto a la izquierda */}

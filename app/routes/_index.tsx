@@ -36,7 +36,7 @@ interface Star {
   opacity: number;
 }
 
-const backgroundImages = ["/logo2.jpg", "/space.jpg"];
+const backgroundImages = ["/logo2.jpg", "/space.jpg", "/space-background-with-sta.jpg"];
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
@@ -191,7 +191,7 @@ export default function Index() {
           {chips.map((chip, index) => (
             <span
               key={index}
-              className="px-3 py-1 bg-gray-700 text-white rounded-full text-sm font-semibold"
+              className="px-3 py-1 bg-blue-300 rounded-full text-sm font-semibold"
             >
               {chip}
             </span>

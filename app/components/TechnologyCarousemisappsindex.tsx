@@ -100,21 +100,12 @@ export default function ThreeDCubeAppShowcase() {
                 <h3 className="text-3xl font-bold text-white text-center mb-4">{apps[currentIndex].name}</h3>
                 <p className="text-xl text-indigo-200 text-center mb-8">{apps[currentIndex].description}</p>
               </div>
-              <a 
-                href={apps[currentIndex].link} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="block w-full bg-white text-indigo-600 py-3  mt-20 px-6 rounded-full text-center text-lg  font-semibold hover:bg-indigo-100 transition-colors duration-300 flex items-center justify-center"
-              >
-                <Download className="w-6 h-6 mr-2" />
-                Download App
-                <ChevronRight className="w-6 h-6 ml-2" />
-              </a>
+         
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
-      <div className=" flex justify-center items-center space-x-6 mt-28">
+      <div className=" flex justify-center items-center space-x-6 mt-10">
         <button
           onClick={prevApp}
           disabled={isRotating}
