@@ -90,7 +90,7 @@ export default function ThreeDCubeAppShowcase() {
             transition={{ duration: 0.5 }}
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <div className="absolute inset-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-xl p-8 flex flex-col justify-between transform-gpu">
+            <div className="absolute inset-0 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-3xl shadow-xl p-24 flex flex-col justify-between transform-gpu">
               <div>
                 <img 
                   src={apps[currentIndex].image} 

@@ -73,7 +73,8 @@ const websites: Website[] = [
     additionalImages: ["/espa.png", "/ivan.png", "/elespano.png", "/vino.png"],
     link: "https://elespanol.ch/de/",
     color: "#FC5C65"
-  }
+  },
+  
 ]
 
 export default function FloatingIslandsWebsiteShowcase() {
@@ -162,26 +163,18 @@ export default function FloatingIslandsWebsiteShowcase() {
               </button>
             </div>
             <p className="text-gray-600 mb-6">{selectedWebsite.fullDescription}</p>
-            <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 gap-8 mb-6">
               {selectedWebsite.additionalImages.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`${selectedWebsite.title} detail ${index + 1}`}
-                  className="w-full h-48 object-cover rounded-lg shadow-md"
-                />
+           <img
+           key={index}
+           src={img}
+           alt={`${selectedWebsite.title} detail ${index + 1}`}
+           className="w-full h-64 object-cover rounded-lg shadow-md"
+         />
+         
               ))}
             </div>
-            <a
-              href={selectedWebsite.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-white font-bold py-2 px-4 rounded-full transition duration-300"
-              style={{ backgroundColor: selectedWebsite.color }}
-            >
-              Website besuchen
-              <ExternalLink className="ml-2 w-4 h-4" />
-            </a>
+
           </motion.div>
         </motion.div>
       )}
