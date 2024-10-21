@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Rocket, Smartphone, Globe, Bot, Star, X } from 'lucide-react'
 
 const menuItems = [
-
   { id: 'mobile', title: 'Mobile Apps', icon: Smartphone, color: 'bg-gradient-to-r from-blue-500 to-teal-500' },
   { id: 'web', title: 'Webentwicklung', icon: Globe, color: 'bg-gradient-to-r from-green-500 to-emerald-500' },
   { id: 'chatgpt', title: 'ChatGPT', icon: Bot, color: 'bg-gradient-to-r from-yellow-500 to-orange-500' },
@@ -20,23 +19,29 @@ export default function AboutMePage() {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white overflow-hidden relative">
-      <div className="absolute inset-0 bg-[url('/space-background-with-sta.jpg')] bg-cover bg-center opacity-30"></div>
+      <motion.div 
+        className="absolute inset-0 bg-[url('/space-background-with-sta.jpg')] bg-cover bg-center opacity-30"
+        initial={{ scale: 1 }}
+        animate={{ scale: 1.2 }}
+        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+      ></motion.div>
       
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center"> {/* Update 1: Adjusted container size */}
         <motion.div
-          className="relative w-[400px] h-[400px]"
+          className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         >
           {menuItems.map((item, index) => {
+            const radius = window.innerWidth < 640 ? 120 : 180
             const angle = (index / menuItems.length) * 2 * Math.PI
-            const x = 200 + 180 * Math.cos(angle) - 60
-            const y = 200 + 180 * Math.sin(angle) - 60
+            const x = 150 + radius * Math.cos(angle) - 45;  {/* Update 2: Adjusted icon position calculation */}
+            const y = 150 + radius * Math.sin(angle) - 45;  {/* Update 2: Adjusted icon position calculation */}
 
             return (
               <motion.div
                 key={item.id}
-                className={`absolute cursor-pointer ${item.color} rounded-full shadow-lg w-[120px] h-[120px] flex items-center justify-center`}
+                className={`absolute cursor-pointer ${item.color} rounded-full shadow-lg w-[90px] h-[90px] sm:w-[120px] sm:h-[120px] flex items-center justify-center`}
                 style={{ left: x, top: y }}
                 whileHover={{ scale: 1.1 }}
                 onClick={() => handleItemClick(item.id)}
@@ -46,8 +51,8 @@ export default function AboutMePage() {
                   animate={{ rotate: -360 }}
                   transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                 >
-                  <item.icon className={`w-10 h-10 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
-                  <span className="text-xs mt-2 text-white font-semibold text-center px-1">{item.title}</span>
+                  <item.icon className={`w-6 h-6 sm:w-10 sm:h-10 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
+                  <span className="text-[10px] sm:text-xs mt-1 sm:mt-2 text-white font-semibold text-center px-1">{item.title}</span>
                 </motion.div>
               </motion.div>
             )
@@ -150,7 +155,7 @@ export default function AboutMePage() {
                   </h2>
                   <ul className="space-y-4">
                     <li>
-                      <strong className="text-red-300">Maßgeschneiderte Lösungen:</strong> Ich lege großen Wert darauf, die Bedürfnisse Ihres Unternehmens zu verstehen, um ma��geschneiderte Lösungen zu bieten, die Ihr Wachstum fördern.
+                      <strong className="text-red-300">Maßgeschneiderte Lösungen:</strong> Ich lege großen Wert darauf, die Bedürfnisse Ihres Unternehmens zu verstehen, um maßgeschneiderte Lösungen zu bieten, die Ihr Wachstum fördern.
                     </li>
                     <li>
                       <strong className="text-red-300">Kontinuierlicher Support:</strong> Ich biete kontinuierliche Unterstützung und Wartung, um sicherzustellen, dass Ihre App oder Website jederzeit einwandfrei funktioniert.
