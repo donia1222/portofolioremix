@@ -286,7 +286,7 @@ export default function EnhancedResponsiveAppSwitcher() {
   }
 
   return (
-    <div className="mb-40" ref={mainContentRef}>
+    <div className="mb-20" ref={mainContentRef}>
       <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
         <div className="flex flex-col lg:flex-row">
           <div className="lg:w-1/3 p-6 lg:p-8">

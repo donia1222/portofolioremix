@@ -62,13 +62,13 @@ export default function WebDevBenefitsShowcase() {
           </div>
           <div className="mt-12 text-center text-white">
             <h3 className="text-3xl font-bold mb-6 text-blue-400">Webentwicklung</h3>
-            <p className="text-xl mb-6">
+            <p className="text-l mb-6">
               Ich bin ein freiberuflicher Webentwickler, spezialisiert auf die Erstellung moderner und leistungsfähiger Websites mit den neuesten Technologien. Meine Lösungen sind responsiv, benutzerfreundlich und für Suchmaschinen optimiert.
             </p>
-            <p className="text-xl mb-6">
+            <p className="text-l mb-6">
               Ob Sie eine einfache Unternehmenswebsite, einen komplexen Online-Shop oder eine maßgeschneiderte Webanwendung benötigen - ich kann Ihnen helfen, Ihre Online-Präsenz auf das nächste Level zu heben. Ich biete auch Wartung und Support nach der Fertigstellung an, um sicherzustellen, dass Ihre Website stets optimal funktioniert.
             </p>
-            <p className="text-xl mb-8">
+            <p className="text-l mb-8">
               Wenn Sie an einer Zusammenarbeit interessiert sind, kann ich Ihnen gerne Beispiele meiner bisherigen Projekte zeigen. Kontaktieren Sie mich für ein unverbindliches Gespräch, und lassen Sie uns gemeinsam Ihre Ideen in die digitale Realität umsetzen.
             </p>
           </div>

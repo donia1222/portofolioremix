@@ -25,7 +25,7 @@ export default function AppBenefitsShowcase() {
   ]
 
   return (
-    <div className="mb-40">
+    <div className="mb-20">
       <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
         <div className="p-8 md:p-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
@@ -51,13 +51,14 @@ export default function AppBenefitsShowcase() {
           </div>
           <div className="mt-12 text-center text-white">
             <h3 className="text-3xl font-bold mb-6">Entwicklung</h3>
-            <p className="text-xl mb-6">
+            <p className="text-x
+          l mb-6">
               Ich bin ein freiberuflicher Entwickler, spezialisiert auf die Erstellung mobiler Anwendungen mit React Native. Dank dieser Technologie sind meine Anwendungen sowohl mit iOS als auch mit Android kompatibel und funktionieren einwandfrei. Ich kann vollständige Anwendungen entwickeln und in den jeweiligen App-Stores veröffentlichen.
             </p>
-            <p className="text-xl mb-6">
+            <p className="text-l mb-6">
               Außerdem biete ich meine Dienstleistungen auch externen Unternehmen an. Wenn Sie interessiert sind, kann ich Ihnen unverbindlich ein Beispiel eines Projekts zusenden, das Ihren Vorstellungen entspricht. Ich werde Ihnen eine kostenlose Testversion einer Anwendung zur Verfügung stellen, damit Sie die Qualität meiner Arbeit beurteilen können.
             </p>
-            <p className="text-xl mb-8">
+            <p className="text-l mb-8">
               Wenn Sie ein Webentwicklungsunternehmen sind, das nach einer Zusammenarbeit in mobilen Projekten sucht, würde ich mich freuen, mit Ihnen zusammenzuarbeiten. Kontaktieren Sie mich für weitere Details und erfahren Sie, wie ich Ihnen helfen kann, Ihre Idee auf die nächste Stufe zu bringen.
             </p>
   
