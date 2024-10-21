@@ -88,6 +88,13 @@ export default function BlogIndex() {
             <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
               <span className="text-blue-300 text-lg sm:text-xl md:text-3xl font-bold">Roberto </span>
               <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold">Salvador</span>
+              
+    <img 
+      src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
+      alt="Avatar de Roberto Salvador"
+      className="w-14 h-14 rounded-full ml-2 "
+    />
+
             </div>
           </div>
         </header>
