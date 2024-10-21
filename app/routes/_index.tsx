@@ -6,7 +6,7 @@ import OpenSourceBlock from "~/components/OpenSourceBlock";
 import CommunityBlock from "~/components/CommunityBlock"; 
 import Corazones from "~/components/Corazones"; 
 import ContactModule from "~/components/ContactModule"; 
-import PublishedAppsBlock from "~/components/published-apps-block"; 
+import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
 import { useEffect, useState, useRef } from "react";
 import TechnologyCarousel from "~/components/TechnologyCarousel"; 
 import AOS from "aos";
@@ -220,7 +220,7 @@ export default function Index() {
       </div>
 
       <div id="publishedAppsBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="600">
-        <PublishedAppsBlock/>
+        <TechnologyCarousemisappsindex/>
       </div>
 
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">

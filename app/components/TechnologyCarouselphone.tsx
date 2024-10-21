@@ -119,8 +119,8 @@ export default function EnhancedResponsiveAppSwitcher() {
   }, [isPhoneScrolled])
 
   const EventsApp = () => (
-    <div className="h-full bg-gradient-to-b from-blue-50 to-purple-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 shadow-md ">
+    <div className="h-full bg-gradient-to-b from-blue-50 to-purple-50 overflow-y-auto ">
+      <div className="sticky top-0 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 shadow-md z-10">
         <h1 className="text-2xl font-bold">Kommende Veranstaltungen</h1>
       </div>
       <div className="p-4 space-y-6">
@@ -156,7 +156,7 @@ export default function EnhancedResponsiveAppSwitcher() {
 
   const RestaurantApp = () => (
     <div className="h-full bg-gradient-to-b from-amber-50 to-orange-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white p-4 shadow-md ">
+      <div className="sticky top-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white p-4 shadow-md z-10 ">
         <h1 className="text-2xl font-bold">Gourmet-Genüsse</h1>
       </div>
       <div className="p-4 space-y-4">
@@ -183,7 +183,7 @@ export default function EnhancedResponsiveAppSwitcher() {
 
   const StoreApp = () => (
     <div className="h-full bg-gradient-to-b from-indigo-50 to-blue-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-4 shadow-md">
+      <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-4 shadow-md z-10">
         <h1 className="text-2xl font-bold">TechShop</h1>
       </div>
       <div className="p-4 grid grid-cols-2 gap-4">
@@ -203,7 +203,7 @@ export default function EnhancedResponsiveAppSwitcher() {
 
   const FitnessApp = () => (
     <div className="h-full bg-gradient-to-b from-green-50 to-teal-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-green-500 to-teal-500 text-white p-4 shadow-md ">
+      <div className="sticky top-0 bg-gradient-to-r from-green-500 to-teal-500 text-white p-4 shadow-md z-10 ">
         <h1 className="text-2xl font-bold">Fitness-Tracker</h1>
       </div>
       <div className="p-4 space-y-4">
@@ -236,7 +236,7 @@ export default function EnhancedResponsiveAppSwitcher() {
 
   const SavingsApp = () => (
     <div className="h-full bg-gradient-to-b from-purple-50 to-pink-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 shadow-md ">
+      <div className="sticky top-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 shadow-md z-10 ">
         <h1 className="text-2xl font-bold">Sparziele-Tracker</h1>
       </div>
       <div className="p-4 space-y-4">
@@ -287,7 +287,7 @@ export default function EnhancedResponsiveAppSwitcher() {
 
   return (
     <div className="mb-20" ref={mainContentRef}>
-      <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
+      <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden ">
         <div className="flex flex-col lg:flex-row">
           <div className="lg:w-1/3 p-6 lg:p-8">
             <h2 className="text-3xl font-bold text-white mt-20 text-center mb-10">Content-Management-Apps</h2>

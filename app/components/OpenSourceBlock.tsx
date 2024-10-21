@@ -73,7 +73,7 @@ export default function OpenSourceBlock() {
   <div className="flex justify-center mt-10 " ref={numbersRef}>
   <Link
           to="/webs"
-          className="relative inline-flex items-center text-xl group"
+          className="relative inline-flex items-center text-xl group mb-10"
         >
           <span className="relative z-10 px-5 py-3 font-semibold transition-colors duration-200 ease-in-out bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent group-hover:from-blue-400 group-hover:to-teal-400">
             Website Entwicklung
