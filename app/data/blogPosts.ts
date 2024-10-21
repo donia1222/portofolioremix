@@ -11,7 +11,7 @@ export type BlogPost = {
 export const blogPosts: BlogPost[] = [
   {
     id: "1",
-    title: "Reservierungssystem",
+    title: "Reservierung",
     author: "Roberto Salvador",
     date: "2024-10-17",
     content: `
