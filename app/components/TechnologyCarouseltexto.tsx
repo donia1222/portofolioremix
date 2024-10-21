@@ -29,7 +29,7 @@ export default function AppBenefitsShowcase() {
       <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
         <div className="p-8 md:p-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
-            Stärken Sie Ihr Unternehmen mit einer <span className="text-purple-400  mt-10 ">maßgeschneiderten App</span>
+            Stärken Sie Ihr Unternehmen mit einer <span className="text-purple-400  mt-10 ">App</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {benefits.map((benefit, index) => (

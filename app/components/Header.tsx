@@ -91,20 +91,27 @@ export default function Header() {
             <Newspaper className="h-5 w-5 group-hover:skew-y-12 transition-transform duration-300" />
             <span>Aktuelle</span>
           </button>
-          <button
-            onClick={() => handleScroll("openSourceBlock")}
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
-          >
+
+
+              <Link
+  to="/webs"
+  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+>
             <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
             <span>Webentwicklung</span>
-          </button>
-          <button
-            onClick={() => handleScroll("publishedAppsBlock")}
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
-          >
+            </Link>
+
+
+   
+          <Link
+  to="/apps"
+  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+>
             <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
             <span>App-Entwicklung</span>
-          </button>
+            </Link>
+
+          
     
           <button
             onClick={() => handleScroll("contactModule")}
@@ -147,28 +154,34 @@ export default function Header() {
         </button>
         <button
           onClick={() => handleScroll("communityBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
+          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group "
         >
           <Newspaper className="h-5 w-5 group-hover:skew-y-12 transition-transform duration-300" />
           <span>Aktuelle</span>
         </button>
-        <button
-          onClick={() => handleScroll("openSourceBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
-        >
+
+
+                  <Link
+  to="/webs"
+  className=" flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-2"
+>
           <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
           <span>Webentwicklung</span>
-        </button>
-        <button
-          onClick={() => handleScroll("publishedAppsBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
-        >
-          <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
-          <span>App-Entwicklung</span>
-        </button>
+          </Link>
+
+
+          <Link
+  to="/apps"
+  className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-5 "
+>
+          <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300 mr-2 " />
+          <span> App-Entwicklung</span>
+       </Link>
+
+
         <button
           onClick={() => handleScroll("contactModule")}
-          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
+          className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group mt-5"
         >
           <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
           <span>Kontakt</span>
