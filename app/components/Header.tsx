@@ -50,7 +50,7 @@ export default function Header() {
         isHeaderVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="w-full md:max-w-[80%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-90">
+      <div className="w-full md:max-w-[90%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-90">
         {/* Nombre "LWEB Schweiz" con scroll hacia arriba al hacer clic */}
         <div className="flex items-center cursor-pointer" onClick={scrollToTop}>
           <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
@@ -129,7 +129,7 @@ export default function Header() {
   <img 
       src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
       alt="Avatar de Roberto Salvador"
-      className="w-14 h-14 rounded-full ml-2  border-2 border-gray-700"
+      className="w-12 h-12 rounded-full ml-2  border-2 border-gray-700"
     />
 </Link>
 

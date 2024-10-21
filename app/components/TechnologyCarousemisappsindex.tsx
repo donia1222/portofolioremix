@@ -97,8 +97,8 @@ export default function ThreeDCubeAppShowcase() {
                   alt={apps[currentIndex].name} 
                   className="w-32 h-32 mx-auto mb-6 rounded-2xl shadow-lg"
                 />
-                <h3 className="text-3xl font-bold text-white text-center mb-4">{apps[currentIndex].name}</h3>
-                <p className="text-xl text-indigo-200 text-center mb-8">{apps[currentIndex].description}</p>
+                <h3 className="text-3xl font-bold text-white text-center mb-20">{apps[currentIndex].name}</h3>
+            
               </div>
          
             </div>

@@ -39,6 +39,7 @@ export default {
       animation: {
         zoom: 'zoom 10s ease-in-out infinite alternate',
         shootingStar: 'shootingStar 5s linear 0s forwards',
+        
       },
     },
   },

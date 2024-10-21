@@ -37,13 +37,13 @@ export default function CookieBanner() {
       <div className="flex space-x-4">
         <button
           onClick={handleAccept}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition"
         >
           Akzeptieren
         </button>
         <button
           onClick={handleReject}
-          className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition"
+          className="px-4 py-2 bg-pink-500 text-white rounded-md hover:bg-red-700 transition"
         >
           Ablehnen
         </button>

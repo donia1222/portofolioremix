@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Rocket, Smartphone, Globe, Bot, Star, X } from 'lucide-react'
 
 const menuItems = [
-  { id: 'mobile', title: 'Mobile Apps', icon: Smartphone, color: 'bg-gradient-to-r from-blue-500 to-teal-500' },
-  { id: 'web', title: 'Webentwicklung', icon: Globe, color: 'bg-gradient-to-r from-green-500 to-emerald-500' },
-  { id: 'chatgpt', title: 'ChatGPT', icon: Bot, color: 'bg-gradient-to-r from-yellow-500 to-orange-500' },
-  { id: 'why', title: 'Warum mich wählen', icon: Rocket, color: 'bg-gradient-to-r from-red-500 to-pink-500' },
-  { id: 'about', title: 'Über mich', icon: Star, color: 'bg-gradient-to-r from-purple-500 to-pink-500' },
+  { id: 'mobile', title: 'Mobile Apps', icon: Smartphone, color: 'bg-[#73738a59] ' },
+  { id: 'web', title: 'Webentwicklung', icon: Globe, color: 'bg-[#73738a59] ' },
+  { id: 'chatgpt', title: 'ChatGPT', icon: Bot, color: 'bg-[#73738a59] ' },
+  { id: 'why', title: 'Warum mich wählen', icon: Rocket, color: 'bg-[#73738a59] ' },
+  { id: 'about', title: 'Über mich', icon: Star, color: 'bg-[#73738a59]' },
 ]
 
 export default function AboutMePage() {
@@ -20,28 +20,28 @@ export default function AboutMePage() {
   return (
     <div className="min-h-screen bg-gray-900 text-white overflow-hidden relative">
       <motion.div 
-        className="absolute inset-0 bg-[url('/space-background-with-sta.jpg')] bg-cover bg-center opacity-30"
+        className="absolute inset-0 bg-[url('/black-prism-concept-ai-generated.jpg')] bg-cover bg-center opacity-30"
         initial={{ scale: 1 }}
         animate={{ scale: 1.2 }}
         transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
       ></motion.div>
       
-      <div className="absolute inset-0 flex items-center justify-center"> {/* Update 1: Adjusted container size */}
+      <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
           className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         >
           {menuItems.map((item, index) => {
-            const radius = window.innerWidth < 640 ? 120 : 180
+            const radius = window.innerWidth < 640 ? 120 : 200
             const angle = (index / menuItems.length) * 2 * Math.PI
-            const x = 150 + radius * Math.cos(angle) - 45;  {/* Update 2: Adjusted icon position calculation */}
-            const y = 150 + radius * Math.sin(angle) - 45;  {/* Update 2: Adjusted icon position calculation */}
+            const x = (window.innerWidth < 640 ? 150 : 200) + radius * Math.cos(angle) - (window.innerWidth < 640 ? 45 : 70)
+            const y = (window.innerWidth < 640 ? 150 : 200) + radius * Math.sin(angle) - (window.innerWidth < 640 ? 45 : 70)
 
             return (
               <motion.div
                 key={item.id}
-                className={`absolute cursor-pointer ${item.color} rounded-full shadow-lg w-[90px] h-[90px] sm:w-[120px] sm:h-[120px] flex items-center justify-center`}
+                className={`absolute cursor-pointer ${item.color} rounded-full shadow-lg w-[90px] h-[90px] sm:w-[140px] sm:h-[140px] flex items-center justify-center`}
                 style={{ left: x, top: y }}
                 whileHover={{ scale: 1.1 }}
                 onClick={() => handleItemClick(item.id)}
@@ -51,8 +51,8 @@ export default function AboutMePage() {
                   animate={{ rotate: -360 }}
                   transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                 >
-                  <item.icon className={`w-6 h-6 sm:w-10 sm:h-10 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
-                  <span className="text-[10px] sm:text-xs mt-1 sm:mt-2 text-white font-semibold text-center px-1">{item.title}</span>
+                  <item.icon className={`w-6 h-6 sm:w-12 sm:h-12 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
+                  <span className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-white font-semibold text-center px-1">{item.title}</span>
                 </motion.div>
               </motion.div>
             )
@@ -82,7 +82,7 @@ export default function AboutMePage() {
               {activeSection === 'about' && (
                 <div>
                   <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <Star className="w-8 h-8 mr-2 text-yellow-400" />
+                    <Star className="w-10 h-10 mr-2 text-yellow-400" />
                     Über mich
                   </h2>
                   <img 
@@ -101,7 +101,7 @@ export default function AboutMePage() {
               {activeSection === 'mobile' && (
                 <div>
                   <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <Smartphone className="w-8 h-8 mr-2 text-blue-400" />
+                    <Smartphone className="w-20 h-20 mr-2 text-blue-400" />
                     Entwicklung von mobilen Anwendungen
                   </h2>
                   <ul className="space-y-4">
@@ -120,7 +120,7 @@ export default function AboutMePage() {
               {activeSection === 'web' && (
                 <div>
                   <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <Globe className="w-8 h-8 mr-2 text-green-400" />
+                    <Globe className="w-20 h-20 mr-2 text-green-400" />
                     Webentwicklung Werdenberg und Liechtenstein
                   </h2>
                   <ul className="space-y-4">
@@ -139,7 +139,7 @@ export default function AboutMePage() {
               {activeSection === 'chatgpt' && (
                 <div>
                   <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <Bot className="w-8 h-8 mr-2 text-pink-400" />
+                    <Bot className="w-20 h-20 mr-2 text-pink-400" />
                     ChatGPT mein Co-Pilot ✨
                   </h2>
                   <p>
@@ -150,7 +150,7 @@ export default function AboutMePage() {
               {activeSection === 'why' && (
                 <div>
                   <h2 className="text-3xl font-bold mb-4 flex items-center">
-                    <Rocket className="w-8 h-8 mr-2 text-red-400" />
+                    <Rocket className="w-20 h-20 mr-2 text-red-400" />
                     Warum sollten Sie genau mich wählen
                   </h2>
                   <ul className="space-y-4">

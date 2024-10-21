@@ -4,6 +4,7 @@ import WebsiteBlock from "~/components/WebsiteBlock";
 import Websitecomponent from "~/components/webs/ubermich"; 
 import ImageRevealTextScroll from "~/components/image-reveal-text-scroll"; 
 import { useState, useEffect } from "react";
+import Corazones from "~/components/Corazonesdos"; 
 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
@@ -76,6 +77,11 @@ export default function BlogIndex() {
       </Link>
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         <Websitecomponent />
+
+        <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+        <Corazones />
+      </div>
+      
       </div>
       <div className="relative">
         <header
