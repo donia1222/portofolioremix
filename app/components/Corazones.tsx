@@ -47,14 +47,14 @@ export default function AntennaWithWaves() {
 
 {/* Título y descripción */}
 <h2 className="text-3xl font-bold text-blue-400  text-center mt-10" data-aos="fade-up ">
-  Wir stellen sicher, dass jedes Detail perfekt abgestimmt ist.
+Jedes Detail perfekt abgestimmt ist
 </h2>
 <p
   className="text-base p-10 text-blue-300 mt-4 max-w-md text-center"
   data-aos="fade-up"
   data-aos-delay="200"
 >
-  Sobald wir Ihr Web- oder App-Projekt entwickelt haben, lassen wir es nicht einfach so stehen; mit unserer stets aufgerichteten „Antenne“ sorgen wir dafür, dass alles so funktioniert, wie es soll.
+Sobald ich Ihr Web- oder App-Projekt entwickelt habe, lasse ich es nicht einfach so stehen; mit meiner stets aufgerichteten 'Antenne' sorge ich dafür, dass alles so funktioniert, wie es soll.
 </p>
 
     </div>

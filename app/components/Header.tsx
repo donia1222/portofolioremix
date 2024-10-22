@@ -82,7 +82,7 @@ export default function Header() {
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
-            <span>Was wir machen</span>
+            <span>Was ich mache</span>
           </button>
           <button
             onClick={() => handleScroll("communityBlock")}
@@ -150,7 +150,7 @@ export default function Header() {
           className="w-full text-left py-2 flex items-center space-x-2 text-lg hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
         >
           <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
-          <span>Was wir machen</span>
+          <span>Was ich mache</span>
         </button>
         <button
           onClick={() => handleScroll("communityBlock")}

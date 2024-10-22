@@ -26,7 +26,7 @@ export default function Component() {
     {
       icon: <FiStar className="text-4xl text-white mb-4" />,
       title: "Innovation",
-      description: "Wir begrüßen Innovation als einen Weg, neue Chancen und bessere Lösungen für unsere Kunden zu schaffen.",
+      description: "Innovation als einen Weg, neue Chancen und bessere Lösungen für unsere Kunden zu schaffen.",
       colors: ["#7c2d12", "#c2410c", "#ea580c", "#fb923c"],
     },
   ]
@@ -34,7 +34,7 @@ export default function Component() {
   return (
     <section className="w-full py-24 transparent text-white overflow-hidden">
       <div className="text-center mb-16">
-        <h2 className="text-6xl font-bold">Was wir machen</h2> 
+        <h2 className="text-6xl font-bold">Was ich mache</h2> 
   
       </div>
 
