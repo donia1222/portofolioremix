@@ -26,8 +26,7 @@ export default {
       },
       keyframes: {
         zoom: {
-          '0%': { transform: 'scale(1)' },
-          '100%': { transform: 'scale(1.1)' },
+
         },
         shootingStar: {
           '0%': { opacity: '0', transform: 'translateX(-10%) translateY(-20%)' },
