@@ -29,7 +29,7 @@ export default function BlogIndex() {
   // Loader más moderno y relacionado con temática espacial
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black via-purple-900 to-indigo-900 relative">
+      <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
         {/* Estrellas animadas como fondo */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="star-field"></div>
@@ -38,7 +38,7 @@ export default function BlogIndex() {
         {/* Loader moderno */}
         <div className="relative z-10 flex flex-col items-center space-y-4">
           {/* Loader animado estilo "planeta giratorio" */}
-          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin"></div>
+          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin mt-96"></div>
 
           {/* Texto animado */}
           <div className="text-white text-xl font-semibold animate-pulse">
@@ -52,10 +52,7 @@ export default function BlogIndex() {
   return (
     <div className="min-h-screen relative">
       {/* Fondo con animación de zoom */}
-      <div 
-        className="fixed inset-0 bg-[url('/5532919.jpg')] bg-cover bg-center transform transition-transform duration-[10000ms] ease-in-out animate-zoom"
-        style={{ backgroundAttachment: 'fixed' }}
-      />
+      <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
       <div className="fixed inset-0 bg-black bg-opacity-50" />
 
       {/* Estrella fugaz */}
@@ -95,6 +92,7 @@ export default function BlogIndex() {
           </div>
         </header>
       </div>
+    </div>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 export default {
@@ -26,7 +27,8 @@ export default {
       },
       keyframes: {
         zoom: {
-
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.1)' },
         },
         shootingStar: {
           '0%': { opacity: '0', transform: 'translateX(-10%) translateY(-20%)' },
@@ -34,11 +36,27 @@ export default {
           '80%': { opacity: '1', transform: 'translateX(100vw) translateY(100vh)' },
           '100%': { opacity: '0', transform: 'translateX(110%) translateY(120%)' },
         },
+        // Añadimos keyframes para el gradiente animado
+        gradientAnimation: {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        },
       },
       animation: {
         zoom: 'zoom 10s ease-in-out infinite alternate',
         shootingStar: 'shootingStar 5s linear 0s forwards',
-        
+        // Añadimos la animación para el gradiente
+        gradientAnimation: 'gradientAnimation 15s ease infinite',
+        // Añadimos animación para el texto con gradiente
+        gradientTextAnimation: 'gradientAnimation 10s ease infinite',
+      },
+      backgroundImage: {
+        // Definimos el gradiente lineal que usaremos para la animación
+        'animated-gradient': 'linear-gradient(-45deg, #1e3c72, #254988, #482071, #0b463f)',
+      },
+      backgroundSize: {
+        '400%': '400%',
       },
     },
   },

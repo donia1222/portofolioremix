@@ -1,3 +1,4 @@
+// Importaciones existentes
 import { Link } from "@remix-run/react";
 import Header from "~/components/Header";
 import DeliverBlock from "~/components/DeliverBlock";
@@ -6,14 +7,14 @@ import OpenSourceBlock from "~/components/OpenSourceBlock";
 import CommunityBlock from "~/components/CommunityBlock"; 
 import Corazones from "~/components/Corazones"; 
 import ContactModule from "~/components/ContactModule"; 
-import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
-import { useEffect, useState, useRef } from "react";
 import TechnologyCarousel from "~/components/TechnologyCarousel"; 
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import type { LinksFunction } from "@remix-run/node";
 import { FiMessageSquare } from "react-icons/fi";
 import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
+import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
 
 export const links: LinksFunction = () => {
   return [
@@ -36,16 +37,9 @@ interface Star {
   opacity: number;
 }
 
-const backgroundImages = ["/logo2.jpg", "/space.jpg", "/space-background-with-sta.jpg"];
-
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [stars, setStars] = useState<Star[]>([]);
-  const backgroundRef = useRef<HTMLDivElement>(null);
-  const [gradientStyle, setGradientStyle] = useState({});
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState("");
-
   
   const chips = [
     "Moderne Webseiten",
@@ -54,29 +48,14 @@ export default function Index() {
     "Custom Plugins",
     "und mehr"
   ]
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
     });
 
-    const gradientAnimation = () => {
-      let step = 0;
-      const colors = ['#7e7e7e', '#f3f3f3', '#7e7e7e'];
-      setInterval(() => {
-        step = (step + 1) % 360;
-        setGradientStyle({
-          backgroundImage: `linear-gradient(${step}deg, ${colors.join(", ")})`,
-          backgroundClip: "text",
-          WebkitBackgroundClip: "text",
-          color: "transparent",
-          transition: "background-image 1s ease-in-out",
-        });
-      }, 100);
-    };
-
-    gradientAnimation();
-
+    // Inicializar estrellas
     const initialStars = Array.from({ length: 300 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
@@ -101,21 +80,6 @@ export default function Index() {
 
     animateStars();
 
-    // Función para seleccionar una nueva imagen de fondo
-    const selectNewBackground = () => {
-      const lastImage = localStorage.getItem('lastBackgroundImage');
-      let newImage;
-      do {
-        newImage = backgroundImages[Math.floor(Math.random() * backgroundImages.length)];
-      } while (newImage === lastImage);
-      
-      localStorage.setItem('lastBackgroundImage', newImage);
-      return `${newImage}?t=${new Date().getTime()}`;
-    };
-
-    // Establecer una nueva imagen de fondo
-    setBackgroundImage(selectNewBackground());
-
     // Simular tiempo de carga
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -128,30 +92,23 @@ export default function Index() {
   }, []);
 
   if (isLoading) {
+
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black via-blue-900 to-indigo-900 relative">
+        <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
         <div className="absolute inset-0 overflow-hidden">
           <div className="star-field"></div>
         </div>
         <div className="relative z-10 flex flex-col items-center space-y-4">
-          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin"></div>
-          <div className="text-white text-xl font-semibold animate-pulse"></div>
+          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin mt-96"></div>
+      
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-blue-900 to-purple-900 relative overflow-auto">
-      <div ref={backgroundRef} className="fixed inset-0 z-0">
-        <img
-          src={backgroundImage}
-          alt="Fondo"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-      </div>
-
+    <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
+      {/* Estrellas */}
       <div className="absolute inset-0 z-10 pointer-events-none">
         {stars.map((star) => (
           <div
@@ -167,18 +124,23 @@ export default function Index() {
           />
         ))}
       </div>
+      
+      {/* Banner de Cookies */}
       <CookieBanner />
+
+      {/* Navegación */}
       <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
         <Header />
         <div className="w-full max-w-[80%]">
+          {/* Puedes agregar elementos adicionales aquí */}
         </div>
       </nav>
 
+      {/* Contenido Principal */}
       <main className="text-center mt-56 relative">
-        <h2
-          className="text-4xl md:text-6xl font-bold text-white mb-6 max-w-4xl mx-auto"
+      <h2
+          className="text-4xl md:text-6xl font-bold text-gray-300 mb-6 max-w-4xl mx-auto"
           data-aos="fade-up"
-          style={gradientStyle}
         >
           MODERNIZE YOUR DECISIONS
         </h2>
@@ -199,6 +161,7 @@ export default function Index() {
         </div>
       </main>
 
+      {/* Bloques de Contenido con Animaciones AOS */}
       <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
         <DeliverBlock />
       </div>
@@ -207,7 +170,7 @@ export default function Index() {
         <CorePrinciplesBlock />
       </div>
 
-      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+      <div id="corazonesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         <Corazones />
       </div>
 
@@ -219,9 +182,11 @@ export default function Index() {
         <OpenSourceBlock />
       </div>
 
+ 
       <div id="publishedAppsBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="600">
         <TechnologyCarousemisappsindex/>
       </div>
+
 
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
         <TechnologyCarousel />
@@ -234,8 +199,6 @@ export default function Index() {
       <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <Chat />
       </div>
-
-      
     </div>
   );
 }
