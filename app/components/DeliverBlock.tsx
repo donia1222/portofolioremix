@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react";
 
 const images = [
   "/660.png",
-  "/660copia.png",
   "/660copia2.png",
   "/660copia2copia.png",
   // Añade más imágenes según sea necesario
