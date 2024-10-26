@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@remix-run/react";
 
-// Función para la animación de los números
 const animateNumbers = (element: HTMLDivElement, start: number, end: number, duration: number) => {
   let startTime: number | null = null;
 
@@ -21,23 +20,29 @@ const animateNumbers = (element: HTMLDivElement, start: number, end: number, dur
 };
 
 export default function OpenSourceBlock() {
-  const [typedText, setTypedText] = useState(""); // Estado para el texto tipeado
-  const [typingIndex, setTypingIndex] = useState(0); // Estado para el índice actual
-  const fullText = "Webseiten"; // Texto completo que se va a escribir
+  const [typedText, setTypedText] = useState("");
+  const [typingIndex, setTypingIndex] = useState(0);
+  const fullText = "Webseiten";
   const numbersRef = useRef<HTMLDivElement>(null);
+  const cloudTexts = [
+    { text: "Responsive", color: "text-blue-500" },
+    { text: "Schnell", color: "text-green-500" },
+    { text: "Modern", color: "text-purple-500" },
+    { text: "Animiert", color: "text-pink-500" }
+  ];
+  const [currentCloudText, setCurrentCloudText] = useState(0);
 
-  // Efecto de escritura del texto
   useEffect(() => {
     const typingInterval = setInterval(() => {
       if (typingIndex < fullText.length) {
         setTypedText((prev) => prev + fullText[typingIndex]);
         setTypingIndex((prevIndex) => prevIndex + 1);
       } else {
-        clearInterval(typingInterval); // Detener cuando se completa la escritura
+        clearInterval(typingInterval);
       }
-    }, 150); // Velocidad de escritura: 150ms por letra
+    }, 150);
 
-    return () => clearInterval(typingInterval); // Limpiar el intervalo al desmontar
+    return () => clearInterval(typingInterval);
   }, [typingIndex]);
 
   useEffect(() => {
@@ -48,10 +53,10 @@ export default function OpenSourceBlock() {
           if (elements) {
             elements.forEach((el) => {
               const endValue = parseInt(el.getAttribute("data-value") || "0", 10);
-              animateNumbers(el as HTMLDivElement, 0, endValue, 2000); // Duración de 2 segundos
+              animateNumbers(el as HTMLDivElement, 0, endValue, 2000);
             });
           }
-          observer.disconnect(); // Desconectar el observer después de la animación
+          observer.disconnect();
         }
       });
     }, { rootMargin: '0px 0px -200px 0px' });
@@ -61,38 +66,52 @@ export default function OpenSourceBlock() {
     }
   }, []);
 
+  useEffect(() => {
+    const cloudInterval = setInterval(() => {
+      setCurrentCloudText((prev) => (prev + 1) % cloudTexts.length);
+    }, 2000);
+
+    return () => clearInterval(cloudInterval);
+  }, []);
+
   return (
-    
-<section className="w-full text-center mb-0 py-16   ">
-<div className="container mx-auto px-4 py-10 pb-20  ">
-  <h2 className="text-4xl md:text-6xl  font-bold text-white max-w-4xl mx-auto mb-5 ">
-    Moderne, ansprechende <br />
-    und einzigartige <span className="text-pink-400">{typedText}</span>
-  </h2>
-  <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-12 p-8">
-   Neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
-  </p>
+    <section className="w-full text-center mb-0 py-16 relative overflow-hidden">
+      <div className="absolute inset-0  opacity-50"></div>
+      <div className="container mx-auto px-4 py-10 pb-20 relative z-10">
+        <h2 className="text-4xl md:text-6xl font-bold text-white max-w-4xl mx-auto mb-5 animate-fade-in-up">
+          Moderne, ansprechende <br />
+          und einzigartige <span className="text-pink-400 animate-pulse">{typedText}</span>
+        </h2>
+        <p className="text-lg text-blue-200 max-w-2xl mx-auto mb-12 p-8 animate-fade-in">
+          Neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. 
+          Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
+        </p>
 
+        <div className="cloud-container mb-12 relative">
+          <div className="cloud w-64 h-32  bg-opacity-80 rounded-full mx-auto flex items-center justify-center relative overflow-hidden">
+            <div className={`cloud-text text-5xl font-bold ${cloudTexts[currentCloudText].color} animate-float`}>
+              {cloudTexts[currentCloudText].text}
+            </div>
+          </div>
+        </div>
 
-  {/* Box with the numbers */}
-  <div className="flex justify-center" ref={numbersRef}>
-    <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-left">
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="21">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
+        <div className="flex justify-center" ref={numbersRef}>
+          <div className="bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl text-left transform transition-all duration-500 hover:scale-105">
+            <div className="flex items-center justify-between mb-4 animate-slide-in-left">
+              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="21">0</p>
+              <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
+            </div>
+            <div className="flex items-center justify-between mb-4 animate-slide-in-left" style={{animationDelay: '0.2s'}}>
+              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="6">0</p>
+              <p className="text-blue-200 ml-4">Webseiten mit Astro</p>
+            </div>
+            <div className="flex items-center justify-between animate-slide-in-left" style={{animationDelay: '0.4s'}}>
+              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="3">0</p>
+              <p className="text-blue-200 ml-4">Webseiten mit Remix</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex items-center justify-between mb-4">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="6">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Astro</p>
-      </div>
-      <div className="flex items-center justify-between">
-        <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="3">0</p>
-        <p className="text-blue-200 ml-4">Webseiten mit Remix</p>
-      </div>
-    </div>
-  </div>
-  </div>
-</section>
-
+    </section>
   );
 }

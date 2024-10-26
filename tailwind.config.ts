@@ -1,8 +1,7 @@
-// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: 'class', // Habilita el modo oscuro basado en clases
+  darkMode: 'class',
   content: ["./app/**/{**,.client,.server}/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -19,10 +18,9 @@ export default {
         ],
       },
       colors: {
-        // Definimos colores específicos para modo oscuro y claro
         lightBg: '#ffffff',
         lightText: '#000000',
-        darkBg: '#1a202c', // gris oscuro para el modo oscuro
+        darkBg: '#1a202c',
         darkText: '#ffffff',
       },
       keyframes: {
@@ -36,23 +34,41 @@ export default {
           '80%': { opacity: '1', transform: 'translateX(100vw) translateY(100vh)' },
           '100%': { opacity: '0', transform: 'translateX(110%) translateY(120%)' },
         },
-        // Añadimos keyframes para el gradiente animado
         gradientAnimation: {
           '0%': { 'background-position': '0% 50%' },
           '50%': { 'background-position': '100% 50%' },
           '100%': { 'background-position': '0% 50%' },
         },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        floatText: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '25%': { opacity: '1', transform: 'translateY(0)' },
+          '75%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(-20px)' },
+        },
       },
       animation: {
         zoom: 'zoom 10s ease-in-out infinite alternate',
         shootingStar: 'shootingStar 5s linear 0s forwards',
-        // Añadimos la animación para el gradiente
         gradientAnimation: 'gradientAnimation 15s ease infinite',
-        // Añadimos animación para el texto con gradiente
         gradientTextAnimation: 'gradientAnimation 10s ease infinite',
+        'fade-in-up': 'fadeInUp 1s ease-out',
+        'fade-in': 'fadeIn 1s ease-out',
+        'slide-in-left': 'slideInLeft 1s ease-out',
+        'float-text': 'floatText 3s ease-in-out infinite',
       },
       backgroundImage: {
-        // Definimos el gradiente lineal que usaremos para la animación
         'animated-gradient': 'linear-gradient(-45deg, #1e3c72, #254988, #562f7e, #0b463f)',
       },
       backgroundSize: {
