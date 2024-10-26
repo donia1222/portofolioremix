@@ -55,7 +55,7 @@ export default function BlogIndex() {
     <div className="min-h-screen relative">
       {/* Fondo con animación de zoom */}
       <div 
-        className="fixed inset-0 bg-[url('/black-prism-concept-ai-generated.jpg')] bg-cover bg-center transform transition-transform duration-[10000ms] ease-in-out animate-zoom"
+        className="fixed inset-0 bg-[url('/programming-background-with-person-working-with-codes-computer.jpg')] bg-cover bg-center transform transition-transform duration-[10000ms] ease-in-out animate-zoom"
         style={{ backgroundAttachment: 'fixed' }}
       />
       <div className="fixed inset-0 bg-black bg-opacity-50" />
