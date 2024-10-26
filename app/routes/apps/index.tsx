@@ -21,7 +21,7 @@ export default function BlogIndex() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 10);  // 1 segundo de carga
+    }, 0);  // 1 segundo de carga
 
     return () => clearTimeout(timer);
   }, []);
