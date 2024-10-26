@@ -83,7 +83,7 @@ export default function Index() {
     // Simular tiempo de carga
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 100);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
