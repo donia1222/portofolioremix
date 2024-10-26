@@ -18,7 +18,7 @@ export default function AboutMePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white overflow-hidden relative">
+    <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
       <motion.div 
         className="absolute inset-0 bg-[url('/black-prism-concept-ai-generated.jpg')] bg-cover bg-center opacity-30"
         initial={{ scale: 1 }}

@@ -23,7 +23,7 @@ export default function BlogIndex() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 500);  // 1 segundo de carga
+    }, 100);  // 1 segundo de carga
 
     return () => clearTimeout(timer);
   }, []);
@@ -31,7 +31,7 @@ export default function BlogIndex() {
   // Loader más moderno y relacionado con temática espacial
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-black via-blue-900 to-indigo-900 relative">
+      <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
         {/* Estrellas animadas como fondo */}
         <div className="absolute inset-0 overflow-hidden">
 
@@ -40,7 +40,7 @@ export default function BlogIndex() {
         {/* Loader moderno */}
         <div className="relative z-10 flex flex-col items-center space-y-4">
           {/* Loader animado estilo "planeta giratorio" */}
-          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin"></div>
+          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin mt-96 d"></div>
 
           {/* Texto animado */}
           <div className="text-white text-xl font-semibold animate-pulse">

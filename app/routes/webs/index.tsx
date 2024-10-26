@@ -22,7 +22,7 @@ export default function BlogIndex() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 100);  // 1 segundo de carga
+    }, 10);  // 1 segundo de carga
 
     return () => clearTimeout(timer);
   }, []);

@@ -53,7 +53,7 @@ export default {
       },
       backgroundImage: {
         // Definimos el gradiente lineal que usaremos para la animación
-        'animated-gradient': 'linear-gradient(-45deg, #1e3c72, #254988, #482071, #0b463f)',
+        'animated-gradient': 'linear-gradient(-45deg, #1e3c72, #254988, #562f7e, #0b463f)',
       },
       backgroundSize: {
         '400%': '400%',
