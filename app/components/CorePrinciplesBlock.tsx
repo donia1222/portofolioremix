@@ -32,9 +32,13 @@ export default function Component() {
   ]
 
   return (
-    <section className="w-full py-24 transparent text-white overflow-hidden">
-      <div className="text-center mb-16">
-        <h2 className="text-6xl font-bold">Was ich mache</h2> 
+    <section className="w-fulltransparent text-white overflow-hidden">
+      <div className="text-center mb-16 mt-10">
+        <h2 className="text-6xl font-bold">Was <span className="ml-2 text-blue-500 text-6xl font-bold">
+        ich 
+          </span> mache</h2> 
+
+
   
       </div>
 
