@@ -136,15 +136,10 @@ export default function Index() {
             }}
           />
         ))}
-      <h2
-          className="text-4xl md:text-6xl font-bold text-gray-300 mb-6 max-w-4xl mx-auto mt-20" 
-          data-aos="fade-up"
-        >
-          MODERNIZE YOUR DECISIONS
-        </h2>
+
 
         <div
-          className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto p-4"
+          className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto p-4 mt-36"
           data-aos="fade-up"
           data-aos-delay="200"
         >
