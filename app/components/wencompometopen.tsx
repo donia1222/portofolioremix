@@ -82,18 +82,11 @@ export default function OpenSourceBlock() {
           Moderne, ansprechende <br />
           und einzigartige <span className="text-pink-400 animate-pulse">{typedText}</span>
         </h2>
-        <p className="text-lg text-blue-200 max-w-2xl mx-auto  p-8 animate-fade-in">
+        <p className="text-lg text-blue-200 max-w-2xl mx-auto  p-8 animate-fade-in mb-10">
           Neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. 
           Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
         </p>
 
-        <div className="cloud-container mb-12 relative">
-          <div className="cloud w-64 h-32  bg-opacity-80 rounded-full mx-auto flex items-center justify-center relative overflow-hidden">
-            <div className={`cloud-text text-5xl  ${cloudTexts[currentCloudText].color} animate-float`}>
-              {cloudTexts[currentCloudText].text}
-            </div>
-          </div>
-        </div>
 
         <div className="flex justify-center" ref={numbersRef}>
           <div className="bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl text-left transform transition-all duration-500 hover:scale-105">

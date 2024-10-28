@@ -4,7 +4,7 @@ import WebsiteBlock from "~/components/WebsiteBlock";
 import Websitecomponent from "~/components/websitecomponent"; 
 import Wencompometopen from "~/components/wencompometopen"; 
 import { useState, useEffect } from "react";
-
+import AnimatedGradientText from '~/components/AnimatedGradientText'; 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,12 +75,17 @@ export default function BlogIndex() {
       </Link>
 
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+             
+      <div className=" bg-cover bg-center flex flex-col items-center justify-start font-poppins rounded-lg mt-40 ">
+      <AnimatedGradientText texts={['Responsive', 'Schnell', 'Modern', 'Animiert']} className="text-white" />
+                  </div>
+      
         <Websitecomponent />
         <Wencompometopen />
         <WebsiteBlock />
+      
    </div>
-  
-        
+
   
       </div>
 

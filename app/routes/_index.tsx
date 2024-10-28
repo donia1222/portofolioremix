@@ -15,7 +15,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
-
+import AnimatedGradientText from '~/components/AnimatedGradientText'; 
 export const links: LinksFunction = () => {
   return [
     {

@@ -36,7 +36,7 @@ export default function WebDevBenefitsShowcase() {
   ]
 
   return (
-    <div className="mt-40">
+    <div className="mt-20">
       <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
         <div className="p-8 md:p-12">
           <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
