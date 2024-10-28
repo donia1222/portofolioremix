@@ -1,23 +1,21 @@
+// Importaciones existentes
 import { Link } from "@remix-run/react";
-import { useEffect, useState, lazy, Suspense, useRef } from "react";
-import { LinksFunction, MetaFunction } from "@remix-run/node";
-import { FiMessageSquare } from "react-icons/fi";
+import Header from "~/components/Header";
+import DeliverBlock from "~/components/DeliverBlock";
+import CorePrinciplesBlock from "~/components/CorePrinciplesBlock";
+import OpenSourceBlock from "~/components/OpenSourceBlock"; 
+import CommunityBlock from "~/components/CommunityBlock"; 
+import Corazones from "~/components/Corazones"; 
+import ContactModule from "~/components/ContactModule"; 
+import TechnologyCarousel from "~/components/TechnologyCarousel"; 
+import { useEffect, useState } from "react";
 import AOS from "aos";
-
-// Lazy load components
-const Header = lazy(() => import("~/components/Header"));
-const DeliverBlock = lazy(() => import("~/components/DeliverBlock"));
-const CorePrinciplesBlock = lazy(() => import("~/components/CorePrinciplesBlock"));
-const OpenSourceBlock = lazy(() => import("~/components/OpenSourceBlock"));
-const CommunityBlock = lazy(() => import("~/components/CommunityBlock"));
-const Corazones = lazy(() => import("~/components/Corazones"));
-const ContactModule = lazy(() => import("~/components/ContactModule"));
-const TechnologyCarousel = lazy(() => import("~/components/TechnologyCarousel"));
-const Chat = lazy(() => import("~/components/Chat"));
-const CookieBanner = lazy(() => import("~/components/CookieBanner"));
-const TechnologyCarousemisappsindex = lazy(() => import("~/components/TechnologyCarousemisappsindex"));
-const CloudTextBlock5 = lazy(() => import('~/components/CloudTextBlock5'));
-
+import type { LinksFunction } from "@remix-run/node";
+import { FiMessageSquare } from "react-icons/fi";
+import Chat from "~/components/Chat";
+import CookieBanner from "~/components/CookieBanner"; 
+import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
+import CloudTextBlock5 from '~/components/CloudTextBlock5'; 
 export const links: LinksFunction = () => {
   return [
     {
@@ -30,157 +28,92 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Your Landing Page Title" },
-    { name: "description", content: "A modern landing page showcasing our services and technologies" },
-  ];
-};
-
-const sections = [
-  { id: "deliverBlock", label: "Deliver" },
-  { id: "corePrinciplesBlock", label: "Core Principles" },
-  { id: "corazonesBlock", label: "Corazones" },
-  { id: "communityBlock", label: "Community" },
-  { id: "openSourceBlock", label: "Open Source" },
-  { id: "publishedAppsBlock", label: "Published Apps" },
-  { id: "technologyCarousel", label: "Technology" },
-  { id: "contactModule", label: "Contact" },
-  { id: "Chat", label: "Chat" },
-];
+interface Star {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  speed: number;
+  opacity: number;
+}
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState("");
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
+  const [stars, setStars] = useState<Star[]>([]);
+  
+  const chips = [
+    "Moderne Webseiten",
+    "KI-Lösungen",
+    "App-Entwicklung",
+    "Custom Plugins",
+    "und mehr"
+  ]
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-    setIsLoading(false);
+;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-10% 0px -90% 0px",
-      threshold: 0,
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section.id);
-      if (element) {
-        sectionRefs.current[section.id] = element;
-        observer.observe(element);
-      }
-    });
-
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const progress = scrollPosition / (documentHeight - windowHeight);
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      sections.forEach((section) => {
-        if (sectionRefs.current[section.id]) {
-          observer.unobserve(sectionRefs.current[section.id]!);
-        }
-      });
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  if (isLoading) {
-    return <div className="flex justify-center items-center h-screen">Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-      <Suspense fallback={<div>Loading...</div>}>
-        <CookieBanner />
 
-        {/* Subtle Timeline Bar */}
-        <div className="fixed left-0 top-0 h-full w-1 bg-green-300 z-50">
-          <div
-            className="absolute w-full bg-purple-500 transition-all duration-300"
-            style={{
-              top: 0,
-              height: `${scrollProgress * 100}%`,
-            }}
-          />
+      
+      {/* Banner de Cookies */}
+      <CookieBanner />
+
+      {/* Navegación */}
+      <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
+        <Header />
+        <div className="w-full max-w-[80%]">
+          {/* Puedes agregar elementos adicionales aquí */}
         </div>
+      </nav>
 
-        <nav className="absolute top-0 left-4 right-0 flex justify-center items-center p-8 z-20">
-          <Header />
-          <div className="w-full max-w-[80%]">
-            {/* Additional navigation elements can be added here */}
-          </div>
-        </nav>
+      {/* Contenido Principal */}
+      <main className="text-center relative p-10">
 
-        <main className="text-center relative p-10 ml-4">
-          <h1 className="sr-only">Welcome to Our Landing Page</h1>
-          <CloudTextBlock5 />
-        </main>
 
-        <section id="deliverBlock" className="w-full relative ml-4" data-aos="fade-up">
-          <DeliverBlock />
-        </section>
+    
+      </main>
+      <CloudTextBlock5 />
 
-        <section id="corePrinciplesBlock" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="200">
-          <CorePrinciplesBlock />
-        </section>
+      {/* Bloques de Contenido con Animaciones AOS */}
+      <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
+        <DeliverBlock />
+      </div>
 
-        <section id="corazonesBlock" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="200">
-          <Corazones />
-        </section>
+      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+        <CorePrinciplesBlock />
+      </div>
 
-        <section id="communityBlock" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="1000">
-          <CommunityBlock />
-        </section>
+      <div id="corazonesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+        <Corazones />
+      </div>
 
-        <section id="openSourceBlock" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="400">
-          <OpenSourceBlock />
-        </section>
+      <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
+        <CommunityBlock />
+      </div>
 
-        <section id="publishedAppsBlock" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="600">
-          <TechnologyCarousemisappsindex />
-        </section>
+      <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
+        <OpenSourceBlock />
+      </div>
 
-        <section id="technologyCarousel" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="800">
-          <TechnologyCarousel />
-        </section>
+ 
+      <div id="publishedAppsBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="600">
+        <TechnologyCarousemisappsindex/>
+      </div>
 
-        <section id="contactModule" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="1200">
-          <ContactModule />
-        </section>
 
-        <section id="Chat" className="w-full relative ml-4" data-aos="fade-up" data-aos-delay="1200">
-          <Chat />
-        </section>
-      </Suspense>
+      <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
+        <TechnologyCarousel />
+      </div>
+
+      <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <ContactModule />
+      </div>
+
+      <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <Chat />
+      </div>
+
     </div>
   );
 }
