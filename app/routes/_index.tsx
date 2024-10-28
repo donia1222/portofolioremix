@@ -108,22 +108,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-      {/* Estrellas */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className="absolute bg-white rounded-full transition-all duration-50 ease-linear"
-            style={{
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              top: `${star.y}%`,
-              left: `${star.x}%`,
-              opacity: star.opacity,
-            }}
-          />
-        ))}
-      </div>
+
       
       {/* Banner de Cookies */}
       <CookieBanner />
@@ -137,9 +122,22 @@ export default function Index() {
       </nav>
 
       {/* Contenido Principal */}
-      <main className="text-center mt-56 relative">
+      <main className="text-center relative p-28">
+      {stars.map((star) => (
+          <div
+            key={star.id}
+            className="absolute bg-white rounded-full transition-all duration-50 ease-linear"
+            style={{
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              top: `${star.y}%`,
+              left: `${star.x}%`,
+              opacity: star.opacity,
+            }}
+          />
+        ))}
       <h2
-          className="text-4xl md:text-6xl font-bold text-gray-300 mb-6 max-w-4xl mx-auto"
+          className="text-4xl md:text-6xl font-bold text-gray-300 mb-6 max-w-4xl mx-auto mt-20" 
           data-aos="fade-up"
         >
           MODERNIZE YOUR DECISIONS
@@ -160,6 +158,7 @@ export default function Index() {
           ))}
         </div>
       </main>
+
 
       {/* Bloques de Contenido con Animaciones AOS */}
       <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
@@ -199,6 +198,7 @@ export default function Index() {
       <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <Chat />
       </div>
+
     </div>
   );
 }

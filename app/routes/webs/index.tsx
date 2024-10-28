@@ -52,6 +52,7 @@ export default function BlogIndex() {
 
   return (
     <div className="min-h-screen relative">
+      
       {/* Fondo con animación de zoom */}
       <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
       <div className="fixed inset-0 bg-black bg-opacity-50" />
