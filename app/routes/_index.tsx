@@ -15,7 +15,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
-import AnimatedGradientText from '~/components/AnimatedGradientText'; 
+import CloudTextBlock from '~/components/CloudTextBlock'; 
 export const links: LinksFunction = () => {
   return [
     {
@@ -49,62 +49,8 @@ export default function Index() {
     "und mehr"
   ]
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
+;
 
-    // Inicializar estrellas
-    const initialStars = Array.from({ length: 300 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 4 + 1,
-      speed: Math.random() * 0.05 + 0.01,
-      opacity: Math.random() * 0.5 + 0.5,
-    }));
-    setStars(initialStars);
-
-    let animationFrameId: number;
-
-    const animateStars = () => {
-      setStars((prevStars) =>
-        prevStars.map((star) => ({
-          ...star,
-          x: (star.x + star.speed) % 100,
-        }))
-      );
-      animationFrameId = requestAnimationFrame(animateStars);
-    };
-
-    animateStars();
-
-    // Simular tiempo de carga
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 100);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      clearTimeout(timer);
-    };
-  }, []);
-
-  if (isLoading) {
-
-    return (
-        <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="star-field"></div>
-        </div>
-        <div className="relative z-10 flex flex-col items-center space-y-4">
-          <div className="w-16 h-16 rounded-full border-t-4 border-pink-500 border-solid animate-spin mt-96"></div>
-      
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
@@ -122,38 +68,12 @@ export default function Index() {
       </nav>
 
       {/* Contenido Principal */}
-      <main className="text-center relative p-28">
-      {stars.map((star) => (
-          <div
-            key={star.id}
-            className="absolute bg-white rounded-full transition-all duration-50 ease-linear"
-            style={{
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              top: `${star.y}%`,
-              left: `${star.x}%`,
-              opacity: star.opacity,
-            }}
-          />
-        ))}
+      <main className="text-center relative p-10">
 
 
-        <div
-          className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto p-4 mt-36"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          {chips.map((chip, index) => (
-            <span
-              key={index}
-              className="px-3 py-1 bg-blue-300 rounded-full text-sm font-semibold"
-            >
-              {chip}
-            </span>
-          ))}
-        </div>
+    
       </main>
-
+      <CloudTextBlock />
 
       {/* Bloques de Contenido con Animaciones AOS */}
       <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
