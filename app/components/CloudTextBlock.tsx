@@ -7,7 +7,6 @@ const texts = [
   'Moderne Webseiten',
   'KI-Lösungen',
   'App-Entwicklung',
-  'Mojitos',
   'Custom Plugins',
 ];
 
@@ -38,7 +37,7 @@ const CloudTextBlock: React.FC = () => {
   const radius = 40; // Radio en porcentaje
 
   return (
-    <div className="flex items-center justify-center py-16 mr-48">
+    <div className="flex items-center justify-center py-20 mr-48">
       {/* Contenedor principal */}
       <div className="relative w-96 h-96 md:w-[500px] md:h-[500px]">
         {/* Textos Animados */}
