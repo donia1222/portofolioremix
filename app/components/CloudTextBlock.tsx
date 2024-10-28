@@ -8,6 +8,7 @@ const texts = [
   'KI-Lösungen',
   'App-Entwicklung',
   'Custom Plugins',
+  'Custom Komponenten',
 ];
 
 const gradients = [

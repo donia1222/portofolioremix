@@ -77,34 +77,31 @@ export default function Header() {
 
         {/* Menú en pantallas grandes */}
         <nav className="hidden md:flex space-x-6">
-          <button
-            onClick={() => handleScroll("corePrinciplesBlock")}
+
+          <Link
+            to="/webs"
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
-            <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
-            <span>Was ich mache</span>
-          </button>
-
-              <Link
-  to="/webs"
-  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
->
             <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
             <span>Webentwicklung</span>
-            </Link>
+          </Link>
 
-
-   
           <Link
-  to="/apps"
-  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
->
+            to="/apps"
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+          >
             <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
             <span>App-Entwicklung</span>
-            </Link>
+          </Link>
 
-          
-    
+          <Link
+            to="/remix" // Nuevo enlace agregado
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+          >
+            <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
+            <span>Custom</span>
+          </Link>
+
           <button
             onClick={() => handleScroll("contactModule")}
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
@@ -114,79 +111,69 @@ export default function Header() {
           </button>
 
           <Link
-  to="/roberto"
-  className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
->
-  <span>Über mich</span>
-  <img 
-      src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
-      alt="Avatar de Roberto Salvador"
-      className="w-12 h-12 rounded-full ml-2  border-2 border-gray-700"
-    />
-</Link>
-
-
-
+            to="/roberto"
+            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+          >
+            <span>Über mich</span>
+            <img 
+              src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
+              alt="Avatar de Roberto Salvador"
+              className="w-12 h-12 rounded-full ml-2 border-2 border-gray-700"
+            />
+          </Link>
         </nav>
       </div>
 
       {/* Menú Móvil */}
       <div
-  className={`absolute top-0 right-0 bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-6 mt-20 z-90 transition-all duration-300 ${
-    isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
-  }`}
->
+        className={`absolute top-0 right-0 bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-6 mt-20 z-90 transition-all duration-300 ${
+          isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
+        }`}
+      >
 
-        <button
-          onClick={() => handleScroll("corePrinciplesBlock")}
-          className="w-full text-left py-2 flex items-center space-x-2 text-sl hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group"
+        <Link
+          to="/webs"
+          className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-2"
         >
-          <Repeat className="h-5 w-5 group-hover:rotate-180 transition-transform duration-300" />
-          <span>Was ich mache</span>
-        </button>
-
-
-                  <Link
-  to="/webs"
-  className=" flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-2"
->
           <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
           <span>Webentwicklung</span>
-          </Link>
+        </Link>
 
+        <Link
+          to="/apps"
+          className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-5"
+        >
+          <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300 mr-2" />
+          <span>App-Entwicklung</span>
+        </Link>
 
-          <Link
-  to="/apps"
-  className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-5 "
->
-          <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300 mr-2 " />
-          <span> App-Entwicklung</span>
-       </Link>
-
+        <Link
+          to="/remix" // Nuevo enlace agregado en el menú móvil
+          className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5 "
+        >
+          <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
+          <span>Custom</span>
+        </Link>
 
         <button
           onClick={() => handleScroll("contactModule")}
-          className="w-full text-left py-2 flex items-center space-x-2 text-sl  hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group mt-5"
+          className="w-full text-left py-2 flex items-center space-x-2 text-sl hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group mt-5"
         >
-          <Mail className="h-5 w-5  group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
+          <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
           <span>Kontakt</span>
         </button>
 
-<Link
-  to="/roberto"
-  className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-2"
->
-  <span>Über mich</span>
-
-    <img 
-      src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
-      alt="Avatar de Roberto Salvador"
-      className="w-14 h-14 rounded-full ml-2 border-2 border-gray-600"
-    />
-
-</Link>
-
-
+        <Link
+          to="/roberto"
+          className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-2"
+        >
+          <span>Über mich</span>
+          <img 
+            src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
+            alt="Avatar de Roberto Salvador"
+            className="w-14 h-14 rounded-full ml-2 border-2 border-gray-600"
+          />
+        </Link>
       </div>
     </header>
   );
