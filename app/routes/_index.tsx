@@ -15,7 +15,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
-import CloudTextBlock from '~/components/CloudTextBlock'; 
+import CloudTextBlock5 from '~/components/CloudTextBlock5'; 
 export const links: LinksFunction = () => {
   return [
     {
@@ -73,7 +73,7 @@ export default function Index() {
 
     
       </main>
-      <CloudTextBlock />
+      <CloudTextBlock5 />
 
       {/* Bloques de Contenido con Animaciones AOS */}
       <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
