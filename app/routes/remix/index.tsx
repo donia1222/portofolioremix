@@ -38,7 +38,7 @@ export default function Index() {
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">
           {/* Animación aplicada al <h1> */}
           <motion.h1
-            className="text-4xl font-bold text-gray-100 text-center"
+            className="text-3xl font-bold text-gray-100 "
             initial={{ opacity: 0, y: -50 }} // Estado inicial: transparente y desplazado hacia arriba
             animate={{ opacity: 1, y: 0 }}  // Animación: opacidad completa y posición original
             transition={{ duration: 1, ease: 'easeOut' }} // Duración y tipo de transición
@@ -46,7 +46,7 @@ export default function Index() {
             Animierte Textkomponenten für Remix
           </motion.h1>
      
-          <p className="text-lg text-gray-300 text-center mt-10">
+          <p className="text-lg text-gray-300  mt-10">
           Dies ist ein Beispiel dafür, was ich tun kann, beispielsweise für Remix. Außerdem kann ich Plugins und maßgeschneiderte Module für andere Frameworks, CMS oder reinen nativen Code entwickeln.
           </p>
         </div>
