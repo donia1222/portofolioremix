@@ -4,10 +4,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const texts = [
-  'Innovative Solutions',
-  'AI Development',
+  'Moderne Webseiten',
+  'KI-Lösungen',
+  'App-Entwicklung',
   'Custom Plugins',
-  'Modern Websites',
+  'Custom Komponenten',
 ];
 
 const gradients = [

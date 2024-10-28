@@ -53,7 +53,7 @@ export default function TypewriterGlitchText() {
   }, [currentTextIndex])
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
+    <div className="flex items-center justify-center p-40 ">
       <div className="relative text-4xl font-bold text-white">
         <AnimatePresence>
           {isGlitching ? (
