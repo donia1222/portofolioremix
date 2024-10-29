@@ -113,10 +113,10 @@ export default function ContactModule() {
     </div>
     {/* Sección adicional para mencionar Remix */}
     <div className="mt-8">
-      <p className="text-sm text-blue-200">Diese Webseite wurde mit <span className="font-semibold">Remix</span> erstellt.</p>
-      <a href="https://remix.run" target="_blank" rel="noopener noreferrer">
+      <p className="text-sl text-blue-200">Github<span className="font-semibold"></span></p>
+      <a href="https://github.com/donia1222" target="_blank" rel="noopener noreferrer">
         <img
-          src="remix-letter-glowing.svg" 
+          src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png" 
           alt="Remix Logo"
           className="mx-auto mt-2 w-16 h-16"
         />
