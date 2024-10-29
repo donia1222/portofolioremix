@@ -14,8 +14,8 @@ const components = [
     { name: '', Component: CloudTextBlock, code: `// Código de CloudTextBlock` },
     { name: '', Component: CloudTextBlock4, code: `// Código de CloudTextBlock4` },
     { name: '', Component: CloudTextBlock5, code: `// Código de CloudTextBlock5` },
-    { name: '', Component: CloudTextBlock6, code: `// Código de CloudTextBlock6` },
     { name: '', Component: CloudTextBlock3, code: `// Código de CloudTextBlock3` },
+    { name: '', Component: CloudTextBlock6, code: `// Código de CloudTextBlock6` },
     { name: '', Component: CloudTextBlock2, code: `// Código de CloudTextBlock2` },
 
 
@@ -63,15 +63,13 @@ export default function Index() {
             <div className="px-4 py-5 sm:px-6">
               <h2 className="text-xl leading-6 font-semibold text-gray-900">{name}</h2>
             </div>
-            <div className="border-t border-gray-200">
+  
               <div className="px-4 py-5 sm:p-6">
                 <Component />
               </div>
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                {/* Aquí podrías agregar un botón para ver el código, etc. */}
-              </div>
+      
             </div>
-          </div>
+
         ))}
       </main>
     </div>
