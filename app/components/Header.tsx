@@ -99,7 +99,7 @@ export default function Header() {
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
-            <span>Custom</span>
+            <span>Custom-Code</span>
           </Link>
 
           <button
@@ -152,7 +152,7 @@ export default function Header() {
           className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5 "
         >
           <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
-          <span>Custom</span>
+          <span>Custom-Code</span>
         </Link>
 
         <button
