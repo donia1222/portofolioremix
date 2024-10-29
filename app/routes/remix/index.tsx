@@ -7,13 +7,18 @@ import CloudTextBlock2 from '~/components/showcase/CloudTextBlock2';
 import CloudTextBlock3 from '~/components/showcase/CloudTextBlock3';
 import CloudTextBlock4 from '~/components/showcase/CloudTextBlock4';
 import CloudTextBlock5 from '~/components/showcase/CloudTextBlock5';
+import CloudTextBlock6 from '~/components/showcase/CloudTextBlock6';
+import CloudTextBlock7 from '~/components/showcase/CloudTextBlock7';
 
 const components = [
     { name: '', Component: CloudTextBlock, code: `// Código de CloudTextBlock` },
     { name: '', Component: CloudTextBlock4, code: `// Código de CloudTextBlock4` },
     { name: '', Component: CloudTextBlock5, code: `// Código de CloudTextBlock5` },
+    { name: '', Component: CloudTextBlock6, code: `// Código de CloudTextBlock6` },
     { name: '', Component: CloudTextBlock3, code: `// Código de CloudTextBlock3` },
     { name: '', Component: CloudTextBlock2, code: `// Código de CloudTextBlock2` },
+
+
 ];
 
 export default function Index() {
@@ -27,6 +32,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-500 via-pink-600 to-red-600 bg-animate-gradient relative">
+        
       <Link
         to="/"
         className="absolute top-4 left-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-300 z-10 flex items-center justify-center"

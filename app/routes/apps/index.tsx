@@ -30,11 +30,8 @@ export default function BlogIndex() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-        {/* Estrellas animadas como fondo */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="star-field"></div>
-        </div>
 
+    
         {/* Loader moderno */}
         <div className="relative z-10 flex flex-col items-center space-y-4">
           {/* Loader animado estilo "planeta giratorio" */}
@@ -55,8 +52,7 @@ export default function BlogIndex() {
       <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
       <div className="fixed inset-0 bg-black bg-opacity-50" />
 
-      {/* Estrella fugaz */}
-      <div className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full animate-shootingStar" />
+
       <Link
         to="/"
         className="fixed top-6 left-6 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
