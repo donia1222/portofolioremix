@@ -144,6 +144,11 @@ export default function TextCrossing() {
             fließenden, mehrschichtigen visuellen Effekt. Die Komponente nutzt Framer Motion für flüssige 
             Animationen und React Hooks für die Animationssteuerung.
           </p>
+          <div className="font-bold">
+          <p>
+            TypeScript & Tailwind CSS
+          </p>
+          </div>
         </div>
         <div className="mt-8">
           <button
