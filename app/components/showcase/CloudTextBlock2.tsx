@@ -225,7 +225,7 @@ export default function TypewriterGlitchText() {
 }`
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 ">
       <h1 className="text-3xl font-bold mb-6 text-pink-600">Textanimation mit Glitch-Effekt</h1>
       <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden mb-8">
         <TypewriterGlitchText />

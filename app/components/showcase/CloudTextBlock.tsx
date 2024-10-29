@@ -143,7 +143,7 @@ const CloudTextBlock: React.FC = () => {
 export default CloudTextBlock;`
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 ">
       <h1 className="text-3xl font-bold mb-6 text-pink-600">Cloud-Textanimation</h1>
       <CloudTextBlock />
       <div className="mt-6 text-center text-gray-600 max-w-2xl mx-auto">
