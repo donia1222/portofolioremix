@@ -31,7 +31,7 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-500 via-pink-600 to-red-600 bg-animate-gradient relative">
+    <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
         
       <Link
         to="/"
@@ -49,7 +49,9 @@ export default function Index() {
             animate={{ opacity: 1, y: 0 }}  // Animación: opacidad completa y posición original
             transition={{ duration: 1, ease: 'easeOut' }} // Duración y tipo de transición
           >
-            Animierte Textkomponenten für Remix
+            Animierte Textkomponenten für <span className="ml-2 text-[#ff69b4] text-4xl font-bold">
+            Remix 
+          </span>
           </motion.h1>
      
           <p className="text-lg text-gray-300  mt-10">
