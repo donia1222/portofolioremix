@@ -49,7 +49,7 @@ export default function Index() {
       >
         <ArrowLeft className="w-6 h-6 text-gray-800" />
       </Link>
-      <header className="p-10">
+      <header className="p-10 mt-10">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <motion.h1
             className="text-3xl font-bold text-gray-100"
