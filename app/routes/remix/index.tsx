@@ -62,6 +62,7 @@ export default function Index() {
           <p className="text-lg text-gray-300 mt-10">
             Dies ist ein Beispiel dafür, was ich tun kann, beispielsweise für Remix. Darüber hinaus kann ich benutzerdefinierte Plugins und Module für andere Frameworks, CMS oder nativen Code entwickeln.
           </p>
+          
         </div>
       </header>
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
