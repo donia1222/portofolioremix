@@ -15,7 +15,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
-import CloudTextBlock5 from '~/components/CloudTextBlock5'; 
+import CloudTextBlock5 from '~/components/CloudTextBlock'; 
 
 export const links: LinksFunction = () => {
   return [
