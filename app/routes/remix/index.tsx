@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from '@remix-run/react';
-import { ArrowLeft } from 'lucide-react';
-import { motion } from 'framer-motion'; // Importa motion
+import { ArrowLeft, ArrowUp } from 'lucide-react';
+import { motion } from 'framer-motion';
 import CloudTextBlock from '~/components/showcase/CloudTextBlock';
 import CloudTextBlock2 from '~/components/showcase/CloudTextBlock2';
 import CloudTextBlock3 from '~/components/showcase/CloudTextBlock3';
@@ -17,22 +17,31 @@ const components = [
     { name: '', Component: CloudTextBlock3, code: `// Código de CloudTextBlock3` },
     { name: '', Component: CloudTextBlock6, code: `// Código de CloudTextBlock6` },
     { name: '', Component: CloudTextBlock2, code: `// Código de CloudTextBlock2` },
-
-
+    { name: '', Component: CloudTextBlock7, code: `// Código de CloudTextBlock7` },
 ];
 
 export default function Index() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentCode, setCurrentCode] = useState('');
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
-  const openModal = (code: string) => {
-    setCurrentCode(code);
-    setModalOpen(true);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) { // Cambia 200 por la cantidad de desplazamiento que desees
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-        
       <Link
         to="/"
         className="absolute top-4 left-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-300 z-10 flex items-center justify-center"
@@ -41,21 +50,17 @@ export default function Index() {
         <ArrowLeft className="w-6 h-6 text-gray-800" />
       </Link>
       <header className="p-20">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">
-          {/* Animación aplicada al <h1> */}
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <motion.h1
-            className="text-3xl font-bold text-gray-100 "
-            initial={{ opacity: 0, y: -50 }} // Estado inicial: transparente y desplazado hacia arriba
-            animate={{ opacity: 1, y: 0 }}  // Animación: opacidad completa y posición original
-            transition={{ duration: 1, ease: 'easeOut' }} // Duración y tipo de transición
+            className="text-3xl font-bold text-gray-100"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
           >
-            Animierte Textkomponenten für<span className="ml-2 text-[#ff69b4] text-4xl font-bold">
-            Remix 
-          </span>
+            Animierte Textkomponenten für<span className="ml-2 text-[#ff69b4] text-4xl font-bold"> Remix </span>
           </motion.h1>
-     
-          <p className="text-lg text-gray-300  mt-10">
-          Dies ist ein Beispiel dafür, was ich tun kann, beispielsweise für Remix. Außerdem kann ich Plugins und maßgeschneiderte Module für andere Frameworks, CMS oder reinen nativen Code entwickeln.
+          <p className="text-lg text-gray-300 mt-10">
+            Dies ist ein Beispiel dafür, was ich tun kann, beispielsweise für Remix. Darüber hinaus kann ich benutzerdefinierte Plugins und Module für andere Frameworks, CMS oder nativen Code entwickeln.
           </p>
         </div>
       </header>
@@ -65,15 +70,23 @@ export default function Index() {
             <div className="px-4 py-5 sm:px-6">
               <h2 className="text-xl leading-6 font-semibold text-gray-900">{name}</h2>
             </div>
-  
-              <div className="px-4 py-5 sm:p-6">
-                <Component />
-              </div>
-      
+            <div className="px-4 py-5 sm:p-6">
+              <Component />
             </div>
-
+          </div>
         ))}
       </main>
+
+      {/* Botón de flecha hacia arriba con visibilidad condicionada */}
+      {showScrollButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-shadow duration-300"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6 text-gray-800" />
+        </button>
+      )}
     </div>
   );
 }
