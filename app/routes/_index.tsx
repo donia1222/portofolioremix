@@ -16,6 +16,7 @@ import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
 import CloudTextBlock5 from '~/components/CloudTextBlock5'; 
+
 export const links: LinksFunction = () => {
   return [
     {

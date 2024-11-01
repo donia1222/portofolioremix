@@ -1,271 +1,409 @@
-'use client'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Form } from '@remix-run/react'
+import { Check, Copy } from 'lucide-react'
 
-import React, { useEffect, useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
-
-const texts = [
-  'Moderne Webseiten',
-  'KI-Lösungen',
-  'App-Entwicklung',
-  'Custom Plugins',
-  'Custom Komponenten',
-]
-
-const gradients = [
-  'from-purple-400 via-pink-500 to-yellow-500',
-  'from-blue-400 via-indigo-500 to-teal-500',
-  'from-yellow-400 via-red-500 to-purple-500',
-  'from-green-400 via-blue-500 to-indigo-500',
-]
-
-const calculatePosition = (index: number, total: number, progress: number, isComplete: boolean) => {
-  if (isComplete) {
-    return { x: '0%', y: `${index * 120}%` }
-  }
-  const angle = ((2 * Math.PI) / total) * index + progress * 5
-  const radius = 40 + Math.sin(progress * 2) * 20
-  const x = 50 + radius * Math.cos(angle)
-  const y = 50 + radius * Math.sin(angle)
-  return { x: `${x}%`, y: `${y}%` }
-}
-
-function TextTornadoOnce() {
-  const [progress, setProgress] = useState(0.01)
-  const [animationComplete, setAnimationComplete] = useState(false)
-  const controls = useAnimation()
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout
-
-    const animateTornado = async () => {
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 2 * Math.PI) {
-            clearInterval(interval)
-            setAnimationComplete(true)
-            return 2 * Math.PI
-          }
-          return prev + 0.1
-        })
-      }, 25)
-
-      await controls.start({
-        opacity: [0, 1, 1],
-        scale: [0.5, 1.2, 1],
-        rotate: [0, 720],
-        transition: { duration: 2, ease: 'easeInOut' },
-      })
-
-      await controls.start((i) => ({
-        x: '0%',
-        y: `${i * 120}%`,
-        transition: { duration: 0.5, ease: 'easeInOut' },
-      }))
-    }
-
-    animateTornado()
-
-    return () => clearInterval(interval)
-  }, [controls])
-
-  return (
-    <div className="flex items-center justify-center p-40 mb-80">
-      <div className="relative w-full max-w-lg">
-        {texts.map((text, index) => {
-          const position = calculatePosition(index, texts.length, progress, animationComplete)
-          return (
-            <motion.div
-              key={index}
-              className={`absolute text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r bg-clip-text ${
-                gradients[index % gradients.length]
-              }`}
-              style={{
-                x: position.x,
-                y: position.y,
-              }}
-              animate={controls}
-              initial={{
-                opacity: 0,
-                scale: 0.5,
-                rotate: 0,
-              }}
-              custom={index}
-              transition={{
-                type: 'spring',
-                stiffness: 100,
-                damping: 20,
-              }}
-            >
-              {text}
-            </motion.div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-export default function Component() {
-  const [showCode, setShowCode] = useState(false)
-  const [copied, setCopied] = useState(false)
-
-  const toggleCode = () => setShowCode(!showCode)
-
-  const copyCode = () => {
-    navigator.clipboard.writeText(codeString)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
-  const codeString = `'use client'
-
-import React, { useEffect, useState } from 'react'
-import { motion, useAnimation } from 'framer-motion'
-
-const texts = [
-  'Moderne Webseiten',
-  'KI-Lösungen',
-  'App-Entwicklung',
-  'Custom Plugins',
-  'Custom Komponenten',
-]
-
-const gradients = [
-  'from-purple-400 via-pink-500 to-yellow-500',
-  'from-blue-400 via-indigo-500 to-teal-500',
-  'from-yellow-400 via-red-500 to-purple-500',
-  'from-green-400 via-blue-500 to-indigo-500',
-]
-
-const calculatePosition = (index: number, total: number, progress: number, isComplete: boolean) => {
-  if (isComplete) {
-    return { x: '0%', y: \`\${index * 120}%\` }
-  }
-  const angle = ((2 * Math.PI) / total) * index + progress * 5
-  const radius = 40 + Math.sin(progress * 2) * 20
-  const x = 50 + radius * Math.cos(angle)
-  const y = 50 + radius * Math.sin(angle)
-  return { x: \`\${x}%\`, y: \`\${y}%\` }
-}
-
-export default function TextTornadoOnce() {
-  const [progress, setProgress] = useState(0.01)
-  const [animationComplete, setAnimationComplete] = useState(false)
-  const controls = useAnimation()
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout
-
-    const animateTornado = async () => {
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 2 * Math.PI) {
-            clearInterval(interval)
-            setAnimationComplete(true)
-            return 2 * Math.PI
-          }
-          return prev + 0.1
-        })
-      }, 25)
-
-      await controls.start({
-        opacity: [0, 1, 1],
-        scale: [0.5, 1.2, 1],
-        rotate: [0, 720],
-        transition: { duration: 2, ease: 'easeInOut' },
-      })
-
-      await controls.start((i) => ({
-        x: '0%',
-        y: \`\${i * 120}%\`,
-        transition: { duration: 0.5, ease: 'easeInOut' },
-      }))
-    }
-
-    animateTornado()
-
-    return () => clearInterval(interval)
-  }, [controls])
-
-  return (
-    <div className="flex items-center justify-center p-40 mb-80 bg-gray-800">
-      <div className="relative w-full max-w-lg">
-        {texts.map((text, index) => {
-          const position = calculatePosition(index, texts.length, progress, animationComplete)
-          return (
-            <motion.div
-              key={index}
-              className={\`absolute text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r bg-clip-text \${
-                gradients[index % gradients.length]
-              }\`}
-              style={{
-                x: position.x,
-                y: position.y,
-              }}
-              animate={controls}
-              initial={{
-                opacity: 0,
-                scale: 0.5,
-                rotate: 0,
-              }}
-              custom={index}
-              transition={{
-                type: 'spring',
-                stiffness: 100,
-                damping: 20,
-              }}
-            >
-              {text}
-            </motion.div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}`
-
-  return (
-    <div className="">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Tornado-Textanimation mit Farbverlauf</h1>
-        <div className="rounded-lg shadow-lg overflow-hidden mb-8">
-          <TextTornadoOnce />
-        </div>
-        <div className="mt-6 text-center text-gray-600 max-w-2xl mx-auto">
-          <p>
-            Diese Komponente zeigt eine dynamische Textanimation, bei der verschiedene Texte mit Farbverläufen 
-            in einer Tornado-ähnlichen Bewegung animiert werden. Die Texte beginnen in einer kreisförmigen 
-            Anordnung, drehen sich wie ein Tornado und landen schließlich in einer vertikalen Reihe. 
-            Die Animation nutzt komplexe Berechnungen für die Positionierung und Framer Motion für 
-            flüssige Übergänge, was einen fesselnden visuellen Effekt erzeugt.
-          </p>
-        </div>
-        <div className="mt-8">
+const buttons = [
+  {
+    name: 'Gradient Pulse',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="gradient-pulse"
+          className="px-6 py-3 bg-gradient-to-r from-purple-400 to-pink-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out animate-pulse"
+        >
+          Gradient Pulse
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="gradient-pulse"
+    className="px-6 py-3 bg-gradient-to-r from-purple-400 to-pink-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out animate-pulse"
+  >
+    Gradient Pulse
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Neon Glow',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="neon-glow"
+          className="px-6 py-3 bg-black text-green-400 font-mono font-bold rounded-md border-2 border-green-400 hover:bg-green-400 hover:text-black transition duration-300 ease-in-out shadow-[0_0_10px_#4ade80]"
+        >
+          Neon Glow
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="neon-glow"
+    className="px-6 py-3 bg-black text-green-400 font-mono font-bold rounded-md border-2 border-green-400 hover:bg-green-400 hover:text-black transition duration-300 ease-in-out shadow-[0_0_10px_#4ade80]"
+  >
+    Neon Glow
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Neumorphic',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="neumorphic"
+          className="px-6 py-3 bg-gray-100 text-gray-800 font-semibold rounded-lg shadow-[5px_5px_10px_#b8b9be,_-5px_-5px_10px_#ffffff] hover:shadow-[inset_5px_5px_10px_#b8b9be,_inset_-5px_-5px_10px_#ffffff] transition duration-300 ease-in-out"
+        >
+          Neumorphic
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="neumorphic"
+    className="px-6 py-3 bg-gray-100 text-gray-800 font-semibold rounded-lg shadow-[5px_5px_10px_#b8b9be,_-5px_-5px_10px_#ffffff] hover:shadow-[inset_5px_5px_10px_#b8b9be,_inset_-5px_-5px_10px_#ffffff] transition duration-300 ease-in-out"
+  >
+    Neumorphic
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Glassmorphism',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <div className="p-8 bg-gradient-to-r from-purple-400 to-pink-600 rounded-xl">
           <button
-            onClick={toggleCode}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+            name="action"
+            value="glassmorphism"
+            className="px-6 py-3 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg text-white font-semibold rounded-xl border border-white border-opacity-20 hover:bg-opacity-30 transition duration-300 ease-in-out"
           >
-            {showCode ? 'Code ausblenden' : 'Code anzeigen'}
+            Glassmorphism
           </button>
-          {showCode && (
-            <div className="mt-4 border rounded-lg shadow-lg overflow-hidden">
-              <div className="bg-gray-100 p-4 relative">
-                <pre className="language-typescript overflow-x-auto">
-                  <code>{codeString}</code>
+        </div>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <div className="p-8 bg-gradient-to-r from-purple-400 to-pink-600 rounded-xl">
+    <button
+      type="submit"
+      name="action"
+      value="glassmorphism"
+      className="px-6 py-3 bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg text-white font-semibold rounded-xl border border-white border-opacity-20 hover:bg-opacity-30 transition duration-300 ease-in-out"
+    >
+      Glassmorphism
+    </button>
+  </div>
+</Form>`,
+  },
+  {
+    name: 'Cyberpunk',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="cyberpunk"
+          className="px-6 py-3 bg-yellow-400 text-black font-bold uppercase tracking-wider border-b-4 border-yellow-600 rounded-none hover:bg-yellow-300 active:border-yellow-600 transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+        >
+          Cyberpunk
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="cyberpunk"
+    className="px-6 py-3 bg-yellow-400 text-black font-bold uppercase tracking-wider border-b-4 border-yellow-600 rounded-none hover:bg-yellow-300 active:border-yellow-600 transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+  >
+    Cyberpunk
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Minimal Outline',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="minimal-outline"
+          className="px-6 py-3 bg-transparent text-blue-600 font-semibold border border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out"
+        >
+          Minimal Outline
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="minimal-outline"
+    className="px-6 py-3 bg-transparent text-blue-600 font-semibold border border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out"
+  >
+    Minimal Outline
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Retro Pixel',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="retro-pixel"
+          className="px-6 py-3 bg-green-500 text-white font-bold uppercase text-sm tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
+        >
+          Retro Pixel
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="retro-pixel"
+    className="px-6 py-3 bg-green-500 text-white font-bold uppercase text-sm tracking-wider border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all"
+  >
+    Retro Pixel
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Morphing',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="morphing"
+          className="group relative px-6 py-3 font-bold text-white rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600"
+        >
+          <span className="absolute right-0 flex items-center justify-start w-10 h-full text-white duration-300 transform translate-x-full group-hover:-translate-x-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+          <span className="transition-all duration-300 group-hover:pr-8">Morphing</span>
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="morphing"
+    className="group relative px-6 py-3 font-bold text-white rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 ease-in-out hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600"
+  >
+    <span className="absolute right-0 flex items-center justify-start w-10 h-full text-white duration-300 transform translate-x-full group-hover:-translate-x-0">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </span>
+    <span className="transition-all duration-300 group-hover:pr-8">Morphing</span>
+  </button>
+</Form>`,
+  },
+  {
+    name: '3D Button',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="3d-button"
+          className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg transform transition duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:shadow-md"
+        >
+          3D Button
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="3d-button"
+    className="px-6 py-3 bg-blue-500 text-white font-bold rounded-lg transform transition duration-200 ease-in-out hover:-translate-y-1 hover:shadow-lg active:translate-y-0 active:shadow-md"
+  >
+    3D Button
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Animated Border',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="animated-border"
+          className="relative px-6 py-3 font-bold text-black group"
+        >
+          <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-red-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+          <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+          <span className="relative">Animated Border</span>
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="animated-border"
+    className="relative px-6 py-3 font-bold text-black group"
+  >
+    <span className="absolute inset-0 w-full h-full transition duration-300 ease-out transform -translate-x-2 -translate-y-2 bg-red-300 group-hover:translate-x-0 group-hover:translate-y-0"></span>
+    <span className="absolute inset-0 w-full h-full border-4 border-black"></span>
+    <span className="relative">Animated Border</span>
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Neon Pulse',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="neon-pulse"
+          className="px-6 py-3 bg-black text-white font-semibold rounded-md relative overflow-hidden group"
+        >
+          <span className="relative z-10">Neon Pulse</span>
+          <span className="absolute inset-0 bg-pink-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"></span>
+          <span className="absolute inset-0 bg-blue-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300 ease-in-out delay-100"></span>
+          <span className="absolute inset-0 bg-purple-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300 ease-in-out delay-200"></span>
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="neon-pulse"
+    className="px-6 py-3 bg-black text-white font-semibold rounded-md relative overflow-hidden group"
+  >
+    <span className="relative z-10">Neon Pulse</span>
+    <span className="absolute inset-0 bg-pink-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"></span>
+    <span className="absolute inset-0 bg-blue-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300 ease-in-out delay-100"></span>
+    <span className="absolute inset-0 bg-purple-500 opacity-50 group-hover:opacity-100 transition-opacity duration-300 ease-in-out delay-200"></span>
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Liquid Fill',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="liquid-fill"
+          className="px-6 py-3 bg-transparent text-blue-600 font-semibold border-2 border-blue-600 rounded-md relative overflow-hidden group transition-colors duration-300 ease-in-out hover:text-white"
+        >
+          <span className="relative z-10">Liquid Fill</span>
+          <span className="absolute inset-0 bg-blue-600 transform -translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="liquid-fill"
+    className="px-6 py-3 bg-transparent text-blue-600 font-semibold border-2 border-blue-600 rounded-md relative overflow-hidden group transition-colors duration-300 ease-in-out hover:text-white"
+  >
+    <span className="relative z-10">Liquid Fill</span>
+    <span className="absolute inset-0 bg-blue-600 transform -translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0"></span>
+  </button>
+</Form>`,
+  },
+  {
+    name: 'Glitch Effect',
+    component: (
+      <Form method="post" onSubmit={(e) => e.preventDefault()}>
+        <button
+          type="submit"
+          name="action"
+          value="glitch-effect"
+          className="px-6 py-3 bg-black text-white font-bold relative overflow-hidden group"
+        >
+          <span className="relative z-10">Glitch Effect</span>
+          <span className="absolute top-0 left-0 w-full h-full bg-red-500 transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+          <span className="absolute top-0 left-0 w-full h-full bg-blue-500 transform translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+          <span className="absolute top-0 left-0 w-full h-full bg-green-500 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"></span>
+        </button>
+      </Form>
+    ),
+    code: `<Form method="post" onSubmit={(e) => e.preventDefault()}>
+  <button
+    type="submit"
+    name="action"
+    value="glitch-effect"
+    className="px-6 py-3 bg-black text-white font-bold relative overflow-hidden group"
+  >
+    <span className="relative z-10">Glitch Effect</span>
+    <span className="absolute top-0 left-0 w-full h-full bg-red-500 transform -translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+    <span className="absolute top-0 left-0 w-full h-full bg-blue-500 transform translate-x-full transition-transform duration-300 ease-in-out group-hover:translate-x-0"></span>
+    <span className="absolute top-0 left-0 w-full h-full bg-green-500 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-50"></span>
+  </button>
+</Form>`,
+  },
+]
+
+
+export default function ButtonShowcase() {
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
+
+  const copyCode = (code: string, index: number) => {
+    navigator.clipboard.writeText(code)
+    setCopiedIndex(index)
+    setTimeout(() => setCopiedIndex(null), 2000)
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4  sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">Modern Button Showcase</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {buttons.map((button, index) => (
+            <motion.div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+            >
+              <h2 className="text-xl font-semibold mb-4 text-gray-700">{button.name}</h2>
+              <div className="flex justify-center mb-4">
+                {button.component}
+              </div>
+              <div className="relative">
+                <pre className="bg-gray-100 p-4 rounded-md text-sm overflow-x-auto">
+                  <code className="text-gray-800">{button.code}</code>
                 </pre>
                 <button
-                  className="absolute top-2 right-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded"
-                  onClick={copyCode}
-                  aria-label="Code kopieren"
+                  onClick={() => copyCode(button.code, index)}
+                  className="absolute top-2 right-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
+                  aria-label="Copy code"
                 >
-                  Code kopieren
+                  {copiedIndex === index ? <Check size={18} /> : <Copy size={18} />}
                 </button>
               </div>
-            </div>
-          )}
-          {copied && (
-            <p className="text-green-500 mt-2">Code in die Zwischenablage kopiert!</p>
-          )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>
