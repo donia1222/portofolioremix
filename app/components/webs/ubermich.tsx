@@ -201,11 +201,11 @@ export default function AboutMePage() {
 
       {showScrollCircle && (
         <motion.div
-          className="fixed bottom-8 right-8 cursor-pointer bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg px-4 py-3 flex flex-row items-center justify-center overflow-hidden"
+          className="fixed bottom-8 right-8 cursor-pointer rounded-full shadow-lg px-4 py-3 flex flex-row items-center justify-center overflow-hidden"
           whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(0,0,0,0.3)' }}
           onClick={handleScrollDown}
         >
-          <span className="text-white font-semibold mr-2 z-10">Kontakt</span>
+          <span className="text-white  mr-2 z-10">Kontakt</span>
           <motion.div
             animate={{
               x: [0, 5, 0],
