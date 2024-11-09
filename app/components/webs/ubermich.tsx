@@ -1,20 +1,44 @@
-import React, { useState } from 'react'
+"use client"
+
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Rocket, Smartphone, Globe, Bot, Star, X } from 'lucide-react'
+import { Rocket, Smartphone, Globe, Bot, Star, X, ChevronDown } from 'lucide-react'
 
 const menuItems = [
   { id: 'mobile', title: 'Mobile Apps', icon: Smartphone, color: 'bg-[#73738a59] ' },
-  { id: 'web', title: 'Webentwicklung', icon: Globe, color: 'bg-[#73738a59] ' },
+  { id: 'web', title: 'Webseiten', icon: Globe, color: 'bg-[#73738a59] ' },
   { id: 'chatgpt', title: 'ChatGPT', icon: Bot, color: 'bg-[#73738a59] ' },
   { id: 'why', title: 'Warum mich wählen', icon: Rocket, color: 'bg-[#73738a59] ' },
-  { id: 'about', title: 'Über mich', icon: Star, color: 'bg-[#73738a59]' },
+  { id: 'about', title: 'Über mich', icon: '/yo2.png', color: 'bg-[#73738a59]' },
 ]
 
 export default function AboutMePage() {
   const [activeSection, setActiveSection] = useState<string | null>(null)
+  const [showScrollCircle, setShowScrollCircle] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        setShowScrollCircle(false)
+      } else {
+        setShowScrollCircle(true)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleItemClick = (id: string) => {
     setActiveSection(activeSection === id ? null : id)
+  }
+
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    })
+    // You might want to add logic here to open a contact form or section
   }
 
   return (
@@ -51,8 +75,12 @@ export default function AboutMePage() {
                   animate={{ rotate: -360 }}
                   transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                 >
-                  <item.icon className={`w-6 h-6 sm:w-12 sm:h-12 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
-                  <span className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-white font-semibold text-center px-1">{item.title}</span>
+                  {typeof item.icon === 'string' ? (
+                    <img src={item.icon} alt={item.title} className={`w-8 h-8 sm:w-16 sm:h-16 rounded-full object-cover ${activeSection === item.id ? 'animate-pulse' : ''}`} />
+                  ) : (
+                    <item.icon className={`w-6 h-6 sm:w-12 sm:h-12 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
+                  )}
+                  <span className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-white text-center px-1">{item.title}</span>
                 </motion.div>
               </motion.div>
             )
@@ -170,6 +198,39 @@ export default function AboutMePage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {showScrollCircle && (
+        <motion.div
+          className="fixed bottom-8 right-8 cursor-pointer bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg px-4 py-3 flex flex-row items-center justify-center overflow-hidden"
+          whileHover={{ scale: 1.1, boxShadow: '0 0 15px rgba(0,0,0,0.3)' }}
+          onClick={handleScrollDown}
+        >
+          <span className="text-white font-semibold mr-2 z-10">Kontakt</span>
+          <motion.div
+            animate={{
+              x: [0, 5, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <ChevronDown className="w-6 h-6 text-white z-10" />
+          </motion.div>
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0"
+            animate={{
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </motion.div>
+      )}
     </div>
   )
 }
