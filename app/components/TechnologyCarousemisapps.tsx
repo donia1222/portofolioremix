@@ -75,7 +75,7 @@ export default function ThreeDCubeAppShowcase() {
   return (
     <div className="bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 py-20 px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center rounded-3xl ">
       <h2 className="text-4xl md:text-5xl font-extrabold text-white text-center mb-12">
-        Discover Our Innovative   <span className="ml-2 text-[#ff69b4] text-4xl md:text-5xl font-extrabold  text-center mb-12">
+      Dies sind meine veröffentlichten <span className="ml-2 text-[#ff69b4] text-4xl md:text-5xl font-extrabold  text-center mb-12">
         Apps
           </span>
       </h2>
