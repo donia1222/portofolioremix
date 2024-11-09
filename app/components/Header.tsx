@@ -102,13 +102,7 @@ export default function Header() {
             <span>Custom-Code</span>
           </Link>
 
-          <button
-            onClick={() => handleScroll("contactModule")}
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
-          >
-            <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
-            <span>Contact</span>
-          </button>
+
 
           <Link
             to="/roberto"
@@ -155,13 +149,7 @@ export default function Header() {
           <span>Custom-Code</span>
         </Link>
 
-        <button
-          onClick={() => handleScroll("contactModule")}
-          className="w-full text-left py-2 flex items-center space-x-2 text-sl hover:bg-[#b3a7bc5f] rounded-lg transition-colors duration-200 group mt-5"
-        >
-          <Mail className="h-5 w-5 group-hover:scale-110 group-hover:rotate-12 transition-all duration-300" />
-          <span>Kontakt</span>
-        </button>
+
 
         <Link
           to="/roberto"
