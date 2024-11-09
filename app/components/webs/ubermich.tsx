@@ -12,7 +12,7 @@ const menuItems = [
   { id: 'about', title: 'Über mich', icon: '/yo2.png', color: 'bg-[#73738a59]' },
 ]
 
-export default function AboutMePage() {
+export default function Component() {
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const [showScrollCircle, setShowScrollCircle] = useState(true)
 
@@ -38,7 +38,6 @@ export default function AboutMePage() {
       top: document.body.scrollHeight,
       behavior: 'smooth'
     })
-    // You might want to add logic here to open a contact form or section
   }
 
   return (
@@ -52,20 +51,20 @@ export default function AboutMePage() {
       
       <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
-          className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px]"
+          className="relative w-[320px] h-[320px] sm:w-[400px] sm:h-[400px]"
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         >
           {menuItems.map((item, index) => {
-            const radius = window.innerWidth < 640 ? 120 : 200
+            const radius = window.innerWidth < 640 ? 130 : 200
             const angle = (index / menuItems.length) * 2 * Math.PI
-            const x = (window.innerWidth < 640 ? 150 : 200) + radius * Math.cos(angle) - (window.innerWidth < 640 ? 45 : 70)
-            const y = (window.innerWidth < 640 ? 150 : 200) + radius * Math.sin(angle) - (window.innerWidth < 640 ? 45 : 70)
+            const x = (window.innerWidth < 640 ? 160 : 200) + radius * Math.cos(angle) - (window.innerWidth < 640 ? 55 : 70)
+            const y = (window.innerWidth < 640 ? 160 : 200) + radius * Math.sin(angle) - (window.innerWidth < 640 ? 55 : 70)
 
             return (
               <motion.div
                 key={item.id}
-                className={`absolute cursor-pointer ${item.color} rounded-full shadow-lg w-[90px] h-[90px] sm:w-[140px] sm:h-[140px] flex items-center justify-center`}
+                className={`absolute cursor-pointer ${item.color} rounded-full shadow-lg w-[100px] h-[100px] sm:w-[140px] sm:h-[140px] flex items-center justify-center`}
                 style={{ left: x, top: y }}
                 whileHover={{ scale: 1.1 }}
                 onClick={() => handleItemClick(item.id)}
@@ -75,12 +74,14 @@ export default function AboutMePage() {
                   animate={{ rotate: -360 }}
                   transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
                 >
-                  {typeof item.icon === 'string' ? (
-                    <img src={item.icon} alt={item.title} className={`w-8 h-8 sm:w-16 sm:h-16 rounded-full object-cover ${activeSection === item.id ? 'animate-pulse' : ''}`} />
+                  {typeof item.icon === 'string' && item.id === 'about' ? (
+                    <img src={item.icon} alt={item.title} className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full object-cover ${activeSection === item.id ? 'animate-pulse' : ''}`} />
+                  ) : typeof item.icon === 'string' ? (
+                    <img src={item.icon} alt={item.title} className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover ${activeSection === item.id ? 'animate-pulse' : ''}`} />
                   ) : (
-                    <item.icon className={`w-6 h-6 sm:w-12 sm:h-12 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
+                    <item.icon className={`w-10 h-10 sm:w-12 sm:h-12 text-white ${activeSection === item.id ? 'animate-pulse' : ''}`} />
                   )}
-                  <span className="text-[10px] sm:text-sm mt-1 sm:mt-2 text-white text-center px-1">{item.title}</span>
+                  <span className="text-xs sm:text-sm mt-1 sm:mt-2 text-white text-center px-1">{item.title}</span>
                 </motion.div>
               </motion.div>
             )
@@ -188,10 +189,11 @@ export default function AboutMePage() {
                     <li>
                       <strong className="text-red-300">Kontinuierlicher Support:</strong> Ich biete kontinuierliche Unterstützung und Wartung, um sicherzustellen, dass Ihre App oder Website jederzeit einwandfrei funktioniert.
                     </li>
+                    <li>
+    <strong className="text-red-300">Kostenersparnis:</strong> Die Beauftragung eines Freelancers reduziert die Kosten für Ihre Webseite erheblich, da Sie Einsparungen bei Personalkosten erzielen.
+  </li>
                   </ul>
-                  <p className="mt-6 text-lg font-semibold text-red-300">
-                    Ich biete kostenlose Proben für Unternehmen oder Privatpersonen an, die an meinen Dienstleistungen interessiert sind. Wenn Ihnen die Arbeit gefällt, können wir ohne Verpflichtung fortfahren.
-                  </p>
+             
                 </div>
               )}
             </motion.div>
