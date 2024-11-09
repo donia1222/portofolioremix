@@ -21,7 +21,7 @@ export default function ContactModule() {
   <div className="max-w-screen-md mx-auto px-4 md:px-12 lg:px-24 text-center text-white space-y-4">
     <div>
       <h3 className="text-2xl font-semibold">LWEB Schweiz</h3>
-      <p className="text-blue-200">Hier finden Sie unsere Kontaktinformationen.</p>
+      <p className="text-blue-200">Kontaktinformationen</p>
     </div>
     <div className="space-y-2">
       <p>
