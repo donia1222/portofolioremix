@@ -16,7 +16,7 @@ const components = [
     { name: '', Component: CloudTextBlock5, code: `// Código de CloudTextBlock5` },
     { name: '', Component: CloudTextBlock3, code: `// Código de CloudTextBlock3` },
     { name: '', Component: CloudTextBlock6, code: `// Código de CloudTextBlock6` },
-    { name: '', Component: CloudTextBlock2, code: `// Código de CloudTextBlock2` },
+
     { name: '', Component: CloudTextBlock7, code: `// Código de CloudTextBlock7` },
 ];
 
