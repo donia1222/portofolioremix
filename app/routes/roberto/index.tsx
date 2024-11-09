@@ -5,7 +5,7 @@ import Websitecomponent from "~/components/webs/ubermich";
 import ImageRevealTextScroll from "~/components/image-reveal-text-scroll"; 
 import { useState, useEffect } from "react";
 import Corazones from "~/components/Corazonesdos"; 
-import ContactModule from "~/components/ContactModule"; 
+import ContactModule from "~/components/contactModuledos"; 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
   const [isMenuOpen, setIsMenuOpen] = useState(false);
