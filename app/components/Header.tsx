@@ -155,12 +155,13 @@ export default function Header() {
           to="/roberto"
           className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-2"
         >
-          <span>Über mich</span>
-          <img 
+               <img 
             src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
             alt="Avatar de Roberto Salvador"
-            className="w-12 h-12 rounded-full ml-2 border-1 border-gray-600"
+            className="w-12 h-12 rounded-full mr-2 border-1 border-gray-600"
           />
+          <span>Über mich</span>
+     
         </Link>
       </div>
     </header>
