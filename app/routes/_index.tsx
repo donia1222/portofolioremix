@@ -14,7 +14,7 @@ import type { LinksFunction } from "@remix-run/node";
 import { FiMessageSquare } from "react-icons/fi";
 import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
-import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
+import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisapps"; 
 import CloudTextBlock5 from '~/components/CloudTextBlock'; 
 
 export const links: LinksFunction = () => {
