@@ -116,7 +116,7 @@ export default function AboutMePage() {
                   <img 
                     src="/yo2.png"
                     alt="Avatar de Roberto Salvador"
-                    className="w-64 h-38 rounded-lg object-cover mb-4"
+                    className="w-48 h-48 rounded-full object-cover mb-4"
                   />
                   <p className="mb-4">
                     Hallo 👋, Ich bin Roberto Salvador. Seit 2019 begeistert mich die Entwicklung von Webseiten und mobilen Anwendungen. Täglich widme ich 4 bis 5 Stunden dem autodidaktischen Lernen und Üben.
