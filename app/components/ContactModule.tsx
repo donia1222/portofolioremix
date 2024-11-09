@@ -20,7 +20,7 @@ export default function ContactModule() {
           Get in Touch 👋
         </h2>
         <p className="text-lg text-blue-200 mb-12">
-          Haben Sie eine Frage oder möchten Sie zusammenarbeiten? Melden Sie sich gerne bei uns!
+          Haben Sie eine Frage oder möchten Sie zusammenarbeiten?
         </p>
 
         <form className="space-y-8" onSubmit={handleSubmit}>
