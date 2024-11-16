@@ -105,7 +105,7 @@ export default function FreelancerShowcase() {
           </div>
         </div>
 
-        <div className="mt-24 bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl max-w-2xl mx-auto ">
+        <div className="mt-24 bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl max-w-2xl mx-auto">
           <h3 className="text-2xl font-bold text-white mb-4">Mein neuestes Projekt</h3>
           <div className="relative w-full h-64 mb-4 flex justify-center items-center overflow-hidden">
             <img
@@ -118,7 +118,7 @@ export default function FreelancerShowcase() {
           <p className="text-gray-300 mb-4">
             Ich habe die Website von Cantina Tex-Mex komplett überarbeitet, um ein modernes und ansprechendes Design zu schaffen, das die Atmosphäre des Restaurants perfekt widerspiegelt.
           </p>
-          <div className="flex justify-center space-x-4 mb-6">
+          <div className="flex flex-col items-center space-y-2 mb-6">
             <div className="flex items-center text-blue-400">
               <Code className="mr-2" />
               <span>Frontend: React mit Remix</span>
@@ -132,7 +132,7 @@ export default function FreelancerShowcase() {
             href="https://www.cantinatexmex.ch"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-6 py-3 text-lg text-white rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+            className="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold text-white rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
