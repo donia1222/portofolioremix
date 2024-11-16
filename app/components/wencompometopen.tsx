@@ -1,5 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "@remix-run/react";
+"use client"
+
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { ExternalLink, Code, Server } from 'lucide-react';
 
 const animateNumbers = (element: HTMLDivElement, start: number, end: number, duration: number) => {
   let startTime: number | null = null;
@@ -19,7 +22,7 @@ const animateNumbers = (element: HTMLDivElement, start: number, end: number, dur
   window.requestAnimationFrame(step);
 };
 
-export default function OpenSourceBlock() {
+export default function FreelancerShowcase() {
   const [typedText, setTypedText] = useState("");
   const [typingIndex, setTypingIndex] = useState(0);
   const fullText = "Webseiten";
@@ -75,18 +78,15 @@ export default function OpenSourceBlock() {
   }, []);
 
   return (
-    <section className="w-full text-center mb-0 py-16 relative overflow-hidden">
-      <div className="absolute inset-0  opacity-50"></div>
+    <section className="w-full text-center mb-0 py-16 relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800">
       <div className="container mx-auto px-4 py-10 pb-20 relative z-10">
-        <h2 className="text-4xl md:text-6xl  text-white max-w-4xl mx-auto mb-5 animate-fade-in-up">
+        <h2 className="text-4xl md:text-6xl text-white max-w-4xl mx-auto mb-5 animate-fade-in-up">
           Moderne, ansprechende <br />
           und einzigartige <span className="text-pink-400 animate-pulse">{typedText}</span>
         </h2>
-        <p className="text-lg text-blue-200 max-w-2xl mx-auto  p-8 animate-fade-in mb-10">
-          Neuesten Technologien wie Joomla 5, bieten aber auch vollständig maßgeschneiderte Webseiten ohne CMS. 
-          Unsere Projekte basieren auf modernen Frameworks wie Astro, Next.js und Remix, um individuell angepasste Lösungen für unsere Kunden zu erstellen.
+        <p className="text-lg text-blue-200 max-w-2xl mx-auto p-8 animate-fade-in mb-10">
+          Als Freelancer biete ich maßgeschneiderte Webseiten mit den neuesten Technologien wie Joomla 5, Astro, Next.js und Remix. Meine individuellen Lösungen sind perfekt auf Ihre Bedürfnisse zugeschnitten.
         </p>
-
 
         <div className="flex justify-center" ref={numbersRef}>
           <div className="bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl text-left transform transition-all duration-500 hover:scale-105">
@@ -103,6 +103,42 @@ export default function OpenSourceBlock() {
               <p className="text-blue-200 ml-4">Webseiten mit Remix</p>
             </div>
           </div>
+        </div>
+
+        <div className="mt-16 bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl max-w-2xl mx-auto">
+          <h3 className="text-2xl font-bold text-white mb-4">Mein neuestes Projekt</h3>
+          <div className="relative w-full h-64 mb-4 flex justify-center items-center overflow-hidden">
+            <img
+              src="/tr.png"
+              alt="Cantina Tex-Mex Website"
+              className="rounded-lg object-cover w-full h-full"
+            />
+          </div>
+          <h4 className="text-xl font-semibold text-blue-400 mb-2">Renovierung der Cantina Tex-Mex Website</h4>
+          <p className="text-gray-300 mb-4">
+            Ich habe die Website von Cantina Tex-Mex komplett überarbeitet, um ein modernes und ansprechendes Design zu schaffen, das die Atmosphäre des Restaurants perfekt widerspiegelt.
+          </p>
+          <div className="flex justify-center space-x-4 mb-6">
+            <div className="flex items-center text-blue-400">
+              <Code className="mr-2" />
+              <span>Frontend: React mit Remix</span>
+            </div>
+            <div className="flex items-center text-blue-400">
+              <Server className="mr-2" />
+              <span>Backend: PHP</span>
+            </div>
+          </div>
+          <motion.a
+            href="https://www.cantinatexmex.ch"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-6 py-3 text-lg text-white rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Website besuchen
+            <ExternalLink className="ml-2 h-5 w-5" />
+          </motion.a>
         </div>
       </div>
     </section>
