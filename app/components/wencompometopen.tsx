@@ -105,7 +105,7 @@ export default function FreelancerShowcase() {
           </div>
         </div>
 
-        <div className="mt-16 bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl max-w-2xl mx-auto">
+        <div className="mt-24 bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl max-w-2xl mx-auto ">
           <h3 className="text-2xl font-bold text-white mb-4">Mein neuestes Projekt</h3>
           <div className="relative w-full h-64 mb-4 flex justify-center items-center overflow-hidden">
             <img
