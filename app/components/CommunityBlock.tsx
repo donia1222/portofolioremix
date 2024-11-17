@@ -25,9 +25,9 @@ const CommunityBlock = () => {
                 to="/blog#animierte-und-dynamische-webseiten-im-jahr-2025"
                 className="text-xl text-blue-200 hover:text-white flex items-center"
               >
-                Dynamische Webseiten <span aria-hidden="true" className="ml-2">↗</span>
+                Remix<span aria-hidden="true" className="ml-2">↗</span>
               </Link>
-              <p className="text-gray-400">Entdecken Sie die Zukunft von dynamischen und animierten Webseiten.</p>
+              <p className="text-gray-400">Wie man hochwertige und sichere Webseiten mit Remix erstellt.</p>
             </div>
           </div>
         </div>
