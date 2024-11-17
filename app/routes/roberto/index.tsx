@@ -1,6 +1,6 @@
 import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
-import WebsiteBlock from "~/components/WebsiteBlock"; 
+import WebsiteBlock from "~/components/webs/WebsiteBlock"; 
 import Websitecomponent from "~/components/webs/ubermich"; 
 import ImageRevealTextScroll from "~/components/image-reveal-text-scroll"; 
 import { useState, useEffect } from "react";
