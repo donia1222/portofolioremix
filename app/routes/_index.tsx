@@ -7,15 +7,15 @@ import OpenSourceBlock from "~/components/OpenSourceBlock";
 import CommunityBlock from "~/components/CommunityBlock"; 
 import Corazones from "~/components/Corazones"; 
 import ContactModule from "~/components/ContactModule"; 
-import TechnologyCarousel from "~/components/TechnologyCarousel"; 
+import TechnologyCarousel from "~/components/TechnologyCarousel/TechnologyCarousel"; 
 import { useEffect, useState } from "react";
 import AOS from "aos";
 import type { LinksFunction } from "@remix-run/node";
 import { FiMessageSquare } from "react-icons/fi";
 import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
-import TechnologyCarousemisappsindex from "~/components/TechnologyCarousemisappsindex"; 
-import CloudTextBlock5 from '~/components/CloudTextBlock'; 
+import TechnologyCarousemisappsindex from "~/components/TechnologyCarousel/TechnologyCarousemisappsindex"; 
+import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock'; 
 
 export const links: LinksFunction = () => {
   return [

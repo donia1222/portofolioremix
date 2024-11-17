@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
-import TechnologyCarouselphone from "~/components/TechnologyCarouselphone"; 
-import TechnologyCarousemisapps from "~/components/TechnologyCarousemisapps"; 
-import TechnologyCarouseltexto from "~/components/TechnologyCarouseltexto"; 
+import TechnologyCarouselphone from "~/components/TechnologyCarousel/TechnologyCarouselphone"; 
+import TechnologyCarousemisapps from "~/components/TechnologyCarousel/TechnologyCarousemisapps"; 
+import TechnologyCarouseltexto from "~/components/TechnologyCarousel/TechnologyCarouseltexto"; 
 interface App {
   id: number
   name: string

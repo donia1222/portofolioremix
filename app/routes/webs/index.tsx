@@ -1,8 +1,8 @@
 import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
-import WebsiteBlock from "~/components/WebsiteBlock"; 
-import Websitecomponent from "~/components/websitecomponent"; 
-import Wencompometopen from "~/components/wencompometopen"; 
+import WebsiteBlock from "~/components/webs/WebsiteBlock"; 
+import Websitecomponent from "~/components/webs/websitecomponent"; 
+import Wencompometopen from "~/components/webs/wencompometopen"; 
 import { useState, useEffect } from "react";
 import AnimatedGradientText from '~/components/AnimatedGradientText'; 
 export default function BlogIndex() {

@@ -1,40 +1,58 @@
-import { FiGlobe, FiCpu, FiMonitor, FiShoppingCart } from "react-icons/fi"; // Importamos los nuevos iconos
-import { Link } from "@remix-run/react"; // Importar Link de Remix para la navegación
+"use client"
 
-const CommunityBlock = () => {
+import { motion } from "framer-motion"
+import { ArrowRight, Newspaper } from 'lucide-react'
+import { Link } from "@remix-run/react"
+
+export default function Component() {
   return (
-    <section className="w-full py-24 bg-gray-900 text-white  "> {/* Eliminamos cualquier padding top */}
-      <div className="flex flex-col md:flex-row justify-between items-center mx-auto px-4 md:px-12 lg:px-24 w-full max-w-[1440px]">
-        
-        {/* Texto a la izquierda */}
-        <div className="md:w-1/2 text-center md:text-left  mr-10 mt-20 mb-20">
-          <h2 className="text-5xl font-bold ml-9 ">Aktuelle Neuigkeiten</h2> {/* Título en alemán */}
-          <p className="text-xl mt-6 text-gray-400 ml-9">
-            Bleiben Sie auf dem Laufenden mit den neuesten Updates und Entwicklungen unseres Unternehmens.
-          </p>
-        </div>
-
-        {/* Enlaces con iconos a la derecha */}
-        <div className="md:w-1/2 space-y-6">
-  
-
-          <div className="flex items-center space-x-4">
-            <FiMonitor className="text-4xl text-blue-400" /> {/* Ícono de pantalla para web design */}
-            <div>
-              <Link
-                to="/blog#animierte-und-dynamische-webseiten-im-jahr-2025"
-                className="text-xl text-blue-200 hover:text-white flex items-center"
-              >
-                Remix<span aria-hidden="true" className="ml-2">↗</span>
-              </Link>
-              <p className="text-gray-400">Wie man hochwertige und sichere Webseiten mit Remix erstellt.</p>
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900">
+      <div className="container px-4 md:px-6 mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]"
+        >
+          <div className="flex flex-col justify-center space-y-4">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none text-white">
+                Aktuelle Neuigkeiten
+              </h2>
+              <p className="max-w-[600px] text-gray-200 md:text-xm dark:text-gray-400">
+                Bleiben Sie auf dem Laufenden mit den neuesten Updates und Entwicklungen.
+              </p>
             </div>
           </div>
-        </div>
-
+          <div className="flex flex-col items-start space-y-4">
+            <Link
+              to="/blog#animierte-und-dynamische-webseiten-im-jahr-2025"
+              className="w-full"
+            >
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full p-6 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="bg-blue-500 p-3 rounded-full">
+                    <Newspaper className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex-1 space-y-1">
+                    <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
+                      Remix: Die Zukunft des Web-Designs
+                    </h3>
+                    <p className="text-sm text-gray-300">
+                      Wie man hochwertige und sichere Webseiten mit Remix erstellt.
+                    </p>
+                  </div>
+                  <ArrowRight className="h-5 w-5 text-blue-300 group-hover:translate-x-1 transition-transform duration-300" />
+                </div>
+              </motion.div>
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </section>
-  );
-};
-
-export default CommunityBlock;
+  )
+}
