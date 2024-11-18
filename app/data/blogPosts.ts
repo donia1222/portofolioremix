@@ -12,8 +12,8 @@ export const blogPosts: BlogPost[] = [
   {
     id: "3", // Aktualisierte ID, um Konflikte zu vermeiden
     title: "Wie man hochwertige und sichere Webseiten mit Remix erstellt",
-    author: "Dein Name",
-    date: "2024-11-17", // Aktualisiere das Datum entsprechend
+    author: "Roberto Salvador", 
+    date: "18-11-2024", // Aktualisiere das Datum entsprechend
     content: `
       <p><strong>1. Wie Webseiten mit Remix erstellt werden</strong></p>
       <p>Remix basiert auf einem ähnlichen Routing-System wie React Router. Du kannst Webseiten erstellen, indem du Routen in einem Ordner namens <code>routes</code> innerhalb deines Projekts definierst. Jede Datei im <code>routes</code>-Ordner wird zu einer Seite.</p>
@@ -33,6 +33,6 @@ export const blogPosts: BlogPost[] = [
       <p>Insgesamt bieten die mit Remix erstellten Anwendungen ein hohes Maß an Qualität und Sicherheit, insbesondere wenn die empfohlenen Best Practices befolgt werden.</p>
     `,
     imageUrl: "https://miro.medium.com/v2/resize:fit:1200/0*-UUguKTgBgUnqW_W.jpg", // Aktualisiere die Bild-URL entsprechend
-    views: 0, // Initialisiere die Ansichten mit 0 oder entsprechend
+    views: 0, 
   }
 ];
