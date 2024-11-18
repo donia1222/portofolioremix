@@ -10,10 +10,10 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
-    id: "3", // Aktualisierte ID, um Konflikte zu vermeiden
+    id: "3", // ID existente
     title: "Wie man hochwertige und sichere Webseiten mit Remix erstellt",
     author: "Roberto Salvador", 
-    date: "18-11-2024", // Aktualisiere das Datum entsprechend
+    date: "18-11-2024",
     content: `
       <p><strong>1. Wie Webseiten mit Remix erstellt werden</strong></p>
       <p>Remix basiert auf einem ähnlichen Routing-System wie React Router. Du kannst Webseiten erstellen, indem du Routen in einem Ordner namens <code>routes</code> innerhalb deines Projekts definierst. Jede Datei im <code>routes</code>-Ordner wird zu einer Seite.</p>
@@ -32,7 +32,25 @@ export const blogPosts: BlogPost[] = [
       <br>
       <p>Insgesamt bieten die mit Remix erstellten Anwendungen ein hohes Maß an Qualität und Sicherheit, insbesondere wenn die empfohlenen Best Practices befolgt werden.</p>
     `,
-    imageUrl: "https://miro.medium.com/v2/resize:fit:1200/0*-UUguKTgBgUnqW_W.jpg", // Aktualisiere die Bild-URL entsprechend
+    imageUrl: "https://miro.medium.com/v2/resize:fit:1200/0*-UUguKTgBgUnqW_W.jpg",
     views: 0, 
+  },
+  {
+    id: "4", // Nuevo ID único
+    title: "Wie man animierte und moderne Webseiten mit Remix erstellt",
+    author: "Dein Name",
+    date: "19-11-2024",
+    content: `
+      <p><strong>1. Einführung in animierte Webseiten</strong></p>
+      <p>Animierte Webseiten bieten eine dynamischere und interaktivere Benutzererfahrung. Mit Remix und modernen Animationsbibliotheken kannst du ansprechende und flüssige Interfaces erstellen.</p>
+      <p><strong>2. Werkzeuge und Bibliotheken für Animationen</strong></p>
+      <p>Es gibt mehrere Bibliotheken, die du mit Remix integrieren kannst, um Animationen hinzuzufügen, wie zum Beispiel Framer Motion, GSAP oder Anime.js. Diese Tools erleichtern die Erstellung von sanften Übergängen und beeindruckenden visuellen Effekten.</p>
+      <p><strong>3. Best Practices für Leistung und Zugänglichkeit</strong></p>
+      <p>Es ist wichtig, Animationen zu optimieren, um eine gute Leistung auf allen Geräten sicherzustellen. Zudem solltest du die Zugänglichkeit berücksichtigen, indem du Animationen optional machst oder Möglichkeiten zur Reduzierung von Bewegungen anbietest.</p>
+      <p>Zusammenfassend ermöglicht die Kombination von Remix mit modernen Animationsbibliotheken die Erstellung von Webseiten, die nicht nur visuell ansprechend, sondern auch leistungsfähig und zugänglich sind.</p>
+    `,
+    imageUrl: "/2836826.jpg", // Aktualisiere die Bild-URL entsprechend
+    views: 0,
   }
 ];
+

@@ -1,25 +1,25 @@
-import { useState, useEffect } from "react"
-import { Link } from "@remix-run/react"
-import { blogPosts } from "~/data/blogPosts"
+import { useState, useEffect } from "react";
+import { Link } from "@remix-run/react";
+import { blogPosts } from "~/data/blogPosts";
 
 export default function BlogIndex() {
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
-  const [lastScrollPosition, setLastScrollPosition] = useState(0)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollPosition = window.pageYOffset
-      setIsHeaderVisible(currentScrollPosition <= lastScrollPosition || currentScrollPosition < 50)
-      setLastScrollPosition(currentScrollPosition)
-    }
+      const currentScrollPosition = window.pageYOffset;
+      setIsHeaderVisible(currentScrollPosition <= lastScrollPosition || currentScrollPosition < 50);
+      setLastScrollPosition(currentScrollPosition);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [lastScrollPosition])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollPosition]);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" })
-  }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <div className="min-h-screen relative bg-gray-900 text-gray-100">
@@ -47,7 +47,7 @@ export default function BlogIndex() {
         }`}
       >
         <div className="max-w-7xl mx-auto">
-        <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
+          <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
             <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
               <span className="text-blue-400 text-2xl font-bold">Cosmic</span>
               <span className="ml-2 text-pink-400 text-2xl font-bold">News</span>
@@ -91,7 +91,6 @@ export default function BlogIndex() {
           ))}
         </div>
       </main>
-
     </div>
-  )
+  );
 }
