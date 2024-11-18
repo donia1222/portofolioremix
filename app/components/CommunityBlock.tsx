@@ -50,31 +50,7 @@ export default function Component() {
                 </div>
               </motion.div>
             </Link>
-            <Link
-              to="/blog#animierte-und-dynamische-webseiten-im-jahr-2025"
-              className="w-full"
-            >
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full p-6 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group mt-5"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="bg-blue-500 p-3 rounded-full">
-                    <Newspaper className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="flex-1 space-y-1">
-                    <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
-                    Das animierte Leben ist weitaus besser
-                    </h3>
-                    <p className="text-sm text-gray-300">
-                    Animierte und moderne Webseiten mit Remix erstellt.
-                    </p>
-                  </div>
-                  <ArrowRight className="h-5 w-5 text-blue-300 group-hover:translate-x-1 transition-transform duration-300" />
-                </div>
-              </motion.div>
-            </Link>
+
           </div>
         </motion.div>
       </div>
