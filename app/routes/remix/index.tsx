@@ -94,7 +94,7 @@ export default function Component() {
 
       <div className="text-center py-8">
         <Link
-          to="https://animated-text-components-for-remix.vercel.app/contact"
+          to="https://animated-text-components-for-remix.vercel.app"
           className="inline-block bg-[#ff69b4] text-white font-bold py-2 px-4 rounded-full hover:bg-opacity-80 transition-colors duration-300"
         >
          mehr...
