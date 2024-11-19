@@ -104,7 +104,7 @@ export default function ThreeDCubeAppShowcase() {
                 href={apps[currentIndex].link} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="block w-full bg-white text-indigo-600 py-3 px-6 rounded-full text-center text-lg  mt-10 font-semibold hover:bg-indigo-100 transition-colors duration-300 flex items-center justify-center"
+                className="w-full bg-white text-indigo-600 py-3 px-6 rounded-full text-center text-lg  mt-10 font-semibold hover:bg-indigo-100 transition-colors duration-300 flex items-center justify-center"
               >
                 <Download className="w-6 h-6 mr-2" />
                 Download App
