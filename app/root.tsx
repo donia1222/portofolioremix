@@ -7,7 +7,7 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import { SpeedInsights } from "@vercel/speed-insights/remix"
-
+import { Analytics } from "@vercel/analytics/remix"
 
 import "./tailwind.css";
 
@@ -46,6 +46,7 @@ export default function App() {
       <body>
         <Outlet />
         <SpeedInsights />
+        <Analytics />
         <ScrollRestoration />
         <Scripts />
       </body>
