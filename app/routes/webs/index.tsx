@@ -59,21 +59,7 @@ export default function BlogIndex() {
 
       {/* Estrella fugaz */}
       <div className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full animate-shootingStar" />
-      <Link
-        to="/"
-        className="fixed top-6 left-6 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </Link>
+ 
 
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
              
@@ -97,6 +83,21 @@ export default function BlogIndex() {
           }`}
         >
           <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
+          <Link
+        to="/"
+        className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </Link>
             {/* Nombre "Moderne Webentwicklung" con scroll hacia arriba al hacer clic */}
             <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
               <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">Moderne</span>
