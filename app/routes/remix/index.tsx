@@ -43,13 +43,30 @@ export default function Component() {
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-      <Link
+           <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10 mt-4">
+          <Link
         to="/"
-        className="absolute top-4 left-4 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow duration-300 z-10 flex items-center justify-center"
-        aria-label="Navigate to index"
+        className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
       >
-        <ArrowLeft className="w-6 h-6 text-gray-800" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
       </Link>
+            {/* Nombre "Moderne Webentwicklung" con scroll hacia arriba al hacer clic */}
+            <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
+              <span className="text-blue-300 text-lg sm:text-xl md:text-3xl font-bold">React </span>
+              <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold"> Custom-Code</span>
+              
+            </div>
+          </div>
+
       <header className="p-10 mt-10">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <motion.h1
@@ -93,6 +110,7 @@ export default function Component() {
       )}
 
       <div className="text-center py-8">
+
         <Link
           to="https://animated-text-components-for-remix.vercel.app"
           className="inline-block bg-[#ff69b4] text-white font-bold py-2 px-4 rounded-full hover:bg-opacity-80 transition-colors duration-300"
