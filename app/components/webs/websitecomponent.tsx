@@ -1,79 +1,118 @@
-import { useState } from 'react'
-import { Globe, Code, Search, ShieldCheck, X } from 'lucide-react'
+"use client"
 
-interface Project {
-  imageUrl: string;
-  title: string;
-  description: string;
-  modalDescription: string;
-  additionalImages: string[];
+import type React from "react"
+import { Globe, Code, Search, ShieldCheck, ArrowRight, Layout, Zap } from "lucide-react"
+import { motion } from "framer-motion"
+
+interface Benefit {
+  icon: React.ElementType
+  title: string
+  description: string
 }
 
-export default function WebDevBenefitsShowcase() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
-
-  const benefits = [
+export default function ModernWebDevShowcase() {
+  const benefits: Benefit[] = [
     {
       icon: Globe,
-      title: "Responsive Webdesign",
-      description: "Gestalten Sie Webseiten, die sich an jedes Gerät anpassen und eine konsistente Benutzererfahrung bieten."
+      title: "Responsives Design",
+      description: "Perfekt angepasst an jedes Gerät für optimale Benutzererfahrung.",
     },
     {
       icon: Code,
       title: "Moderne Technologien",
-      description: "Nutzen Sie die neuesten Webtechnologien für schnelle, effiziente und interaktive Websites."
+      description: "Nutzung neuester Webtechnologien für schnelle, effiziente Websites.",
     },
     {
       icon: Search,
       title: "SEO-Optimierung",
-      description: "Verbessern Sie die Sichtbarkeit Ihrer Website in Suchmaschinen und generieren Sie mehr organischen Traffic."
+      description: "Verbesserte Sichtbarkeit in Suchmaschinen für mehr organischen Traffic.",
     },
     {
       icon: ShieldCheck,
       title: "Sicherheit & Performance",
-      description: "Gewährleisten Sie höchste Sicherheitsstandards und optimale Ladezeiten für Ihre Webpräsenz."
+      description: "Höchste Sicherheitsstandards und optimale Ladezeiten garantiert.",
+    },
+    {
+      icon: Layout,
+      title: "Joomla CMS",
+      description: "Flexibles Content-Management mit Joomla für einfache Verwaltung.",
+    },
+    {
+      icon: Zap,
+      title: "Moderne Frameworks",
+      description: "Nutzung von Next.js oder Remix für leistungsstarke Webanwendungen.",
     },
   ]
 
+
+
   return (
-    <div className="mt-20">
-      <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden">
-        <div className="p-8 md:p-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
-            Stärken Sie Ihr Unternehmen mit einer professionellen <span className="text-blue-400 mt-10">Webpräsenz</span>
+    <div className="min-h-screen  text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl mt-20 font-extrabold mb-4">
+            Steigern Sie Ihr Geschäft mit einer
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+              {" "}
+              professionellen Webpräsenz
+            </span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {benefits.map((benefit, index) => (
-              <div 
-                key={index} 
-                className="bg-gradient-to-r from-blue-100 to-blue-400 rounded-2xl shadow-lg p-6 transform transition-all hover:scale-105"
-              >
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-full mb-6 mx-auto">
-                  <benefit.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-semibold text-gray-800 text-center mb-4">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600 text-center">
-                  {benefit.description}
-                </p>
+          <p className="text-xl max-w-3xl mx-auto text-gray-300">
+            Entfesseln Sie das volle Potenzial Ihrer Online-Präsenz mit modernsten Webentwicklungslösungen,
+            maßgeschneidert für Ihre Bedürfnisse.
+          </p>
+        </div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      
+          initial="hidden"
+          animate="visible"
+        >
+          {benefits.map((benefit, index) => (
+            <motion.div
+              key={index}
+              className="rounded-lg p-6 bg-gray-800 shadow-lg transform transition-all hover:scale-105"
+        
+            >
+              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500">
+                <benefit.icon className="w-8 h-8 text-white" />
               </div>
-            ))}
+              <h3 className="text-xl font-semibold text-center mb-4">{benefit.title}</h3>
+              <p className="text-center text-gray-300">{benefit.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        <div className="mt-16 text-center">
+          <h3 className="text-3xl font-bold mb-6">Professionelle Webentwicklung</h3>
+          <p className="text-lg mb-8 max-w-3xl mx-auto text-gray-300">
+            Als erfahrener Webentwickler biete ich maßgeschneiderte Lösungen, die Ihr Unternehmen online zum Strahlen
+            bringen. Von responsiven Websites bis hin zu komplexen Webanwendungen - ich bringe Ihre Ideen zum Leben.
+          </p>
+          <div className="space-y-8">
+            <div>
+              <h4 className="text-2xl font-semibold mb-4">Die Vorteile von Joomla</h4>
+              <p className="text-gray-300">
+                Joomla ist ein leistungsstarkes Content-Management-System, das Flexibilität und Benutzerfreundlichkeit
+                vereint. Es ermöglicht Ihnen, Ihre Website einfach zu verwalten und zu aktualisieren, ohne tiefgreifende
+                technische Kenntnisse zu benötigen. Mit einer Vielzahl von Erweiterungen und Themes können Sie Ihre
+                Website genau nach Ihren Vorstellungen gestalten.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-2xl font-semibold mb-4">Moderne Frameworks wie Next.js und Remix</h4>
+              <p className="text-gray-300">
+                Frameworks wie Next.js und Remix revolutionieren die Webentwicklung. Sie bieten hervorragende Leistung,
+                verbesserte SEO und eine großartige Entwicklererfahrung. Mit diesen Tools können wir hochperformante,
+                skalierbare und benutzerfreundliche Webanwendungen erstellen, die Ihr Unternehmen in die Zukunft führen.
+              </p>
+            </div>
           </div>
-          <div className="mt-12 text-center text-white">
-            <h3 className="text-3xl font-bold mb-6 text-blue-400">Webentwicklung</h3>
-            <p className="text-l mb-6">
-              Ich bin ein freiberuflicher Webentwickler, spezialisiert auf die Erstellung moderner und leistungsfähiger Websites mit den neuesten Technologien. Meine Lösungen sind responsiv, benutzerfreundlich und für Suchmaschinen optimiert.
-            </p>
-            <p className="text-l mb-6">
-              Ob Sie eine einfache Unternehmenswebsite, einen komplexen Online-Shop oder eine maßgeschneiderte Webanwendung benötigen - ich kann Ihnen helfen, Ihre Online-Präsenz auf das nächste Level zu heben. Ich biete auch Wartung und Support nach der Fertigstellung an, um sicherzustellen, dass Ihre Website stets optimal funktioniert.
-            </p>
-            <p className="text-l mb-8">
-              Wenn Sie an einer Zusammenarbeit interessiert sind, kann ich Ihnen gerne Beispiele meiner bisherigen Projekte zeigen. Kontaktieren Sie mich für ein unverbindliches Gespräch, und lassen Sie uns gemeinsam Ihre Ideen in die digitale Realität umsetzen.
-            </p>
-          </div>
+   
         </div>
       </div>
     </div>
   )
 }
+
