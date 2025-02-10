@@ -6,7 +6,7 @@ import { Link } from "@remix-run/react"
 
 export default function Component() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r ">
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-white bg-opacity-10 backdrop-blur-lg  bg-gradient-to-r mt-20 mb-20 ">
       <div className="container px-4 md:px-6 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ export default function Component() {
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none text-white">
                 Aktuelle Neuigkeiten
               </h2>
-              <p className="max-w-[600px] text-gray-200 md:text-xm dark:text-gray-400">
+              <p className="max-w-[600px] text-gray-400 md:text-xm dark:text-gray-400">
                 Bleiben Sie auf dem Laufenden mit den neuesten Updates und Entwicklungen.
               </p>
             </div>

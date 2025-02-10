@@ -52,7 +52,7 @@ export default function TechnologyCarousel() {
   }
 
   return (
-    <div className="w-full py-12 bg-gray-900 pb-20 pt-40">
+    <div className="w-full py-12 bg-gray-900 pb-20 pt-20">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={10}
