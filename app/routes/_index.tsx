@@ -85,23 +85,19 @@ export default function Index() {
         <CorePrinciplesBlock />
       </div>
 
-      <div id="corazonesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
-        <Corazones />
-      </div>
-
       <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
         <CommunityBlock />
       </div>
 
-      <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
-        <OpenSourceBlock />
-      </div>
-
+     
  
       <div id="publishedAppsBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="600">
         <TechnologyCarousemisappsindex/>
       </div>
 
+      <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
+        <OpenSourceBlock />
+      </div>
 
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
         <TechnologyCarousel />
