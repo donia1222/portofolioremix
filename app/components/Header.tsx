@@ -77,7 +77,6 @@ export default function Header() {
 
         {/* Menú en pantallas grandes */}
         <nav className="hidden md:flex space-x-6">
-
           <Link
             to="/webs"
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
@@ -94,22 +93,23 @@ export default function Header() {
             <span>App-Entwicklung</span>
           </Link>
 
-          <Link
-            to="/remix" // Nuevo enlace agregado
+          {/* Enlace EXTERNO => usamos <a> en lugar de <Link> */}
+          <a
+            href="https://animated-text-components-for-remix.vercel.app/button"
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
+            <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
             <span>Custom-Code</span>
-          </Link>
-
-
+          </a>
 
           <Link
             to="/roberto"
             className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
           >
             <span>Über mich</span>
-            <img 
+            <img
               src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
               alt="Avatar de Roberto Salvador"
               className="w-10 h-10 rounded-full ml-2 border-2 border-gray-700"
@@ -124,7 +124,6 @@ export default function Header() {
           isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
         }`}
       >
-
         <Link
           to="/webs"
           className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-2"
@@ -141,27 +140,25 @@ export default function Header() {
           <span>App-Entwicklung</span>
         </Link>
 
+        {/* Aquí también puedes usar <a> si quieres enlazar externamente */}
         <Link
-          to="/remix" // Nuevo enlace agregado en el menú móvil
-          className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5 "
+          to="/remix"
+          className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5"
         >
-          <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
+          <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
           <span>Custom-Code</span>
         </Link>
-
-
 
         <Link
           to="/roberto"
           className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-2"
         >
-               <img 
+          <img
             src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
             alt="Avatar de Roberto Salvador"
             className="w-12 h-12 rounded-full mr-2 border-1 border-gray-600"
           />
           <span>Über mich</span>
-     
         </Link>
       </div>
     </header>
