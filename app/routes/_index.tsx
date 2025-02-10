@@ -5,7 +5,7 @@ import DeliverBlock from "~/components/DeliverBlock";
 import CorePrinciplesBlock from "~/components/CorePrinciplesBlock";
 import OpenSourceBlock from "~/components/OpenSourceBlock"; 
 import CommunityBlock from "~/components/CommunityBlock"; 
-import Corazones from "~/components/Corazones"; 
+import Corazones from "~/components/Corazoneshome"; 
 import ContactModule from "~/components/ContactModule"; 
 import TechnologyCarousel from "~/components/TechnologyCarousel/TechnologyCarousel"; 
 import { useEffect, useState } from "react";
@@ -89,7 +89,7 @@ export default function Index() {
         <CommunityBlock />
       </div>
 
-     
+      <Corazones />
  
       <div id="publishedAppsBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="600">
         <TechnologyCarousemisappsindex/>

@@ -3,9 +3,10 @@
 import { useEffect, useState, useRef } from "react";
 
 const images = [
-  "/660.png",
-  "/660copia2.png",
-  "/660copia2copia.png",
+  "/tecj.png",
+  "/fitnes.png",
+  "/mic.png",
+  "/programming-background-with-person-working-with-codes-computer.jpg",
   // Añade más imágenes según sea necesario
 ];
 
@@ -49,13 +50,13 @@ export default function DeliverBlock() {
         </div>
 
         {/* Imagen a la derecha */}
-        <div className="md:w-1/2 text-center md:text-right md:ml-40 relative w-96 h-96">
+        <div className="md:w-1/2 text-center md:text-right md:ml-40 relative w-80 h-80">
           {images.map((src, index) => (
             <img
               key={index}
               src={src}
               alt={`Imagen ${index + 1}`}
-              className={`absolute top-0 left-0 w-full h-full rounded-full object-cover transition-opacity duration-1000 ${
+              className={`absolute top-0 left-0 w-full h-full rounded-xl object-cover transition-opacity duration-1000 ${
                 index === currentImageIndex ? "opacity-100" : "opacity-0"
               }`}
             />
