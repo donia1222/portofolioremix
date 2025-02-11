@@ -33,16 +33,8 @@ export default function Component() {
 
   return (
     <section className="w-fulltransparent text-white overflow-hidden ">
-      <div className="text-center mb-16 mt-40 ">
-        <h2 className="text-6xl font-bold">Was <span className="ml-2 text-blue-500 text-6xl font-bold">
-        ich 
-          </span> mache</h2> 
 
-
-  
-      </div>
-
-      <div className="flex flex-wrap justify-center gap-8 px-4 mb-20">
+      <div className="flex flex-wrap justify-center gap-8 px-4 mb-20 mt-10">
         {principles.map((principle, index) => (
           <motion.div
             key={index}
