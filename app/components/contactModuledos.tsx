@@ -60,7 +60,7 @@ export default function ContactModule() {
   }
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "+41817501911"
+    const phoneNumber = "+41560608645"
     const message = encodeURIComponent(
       "Hallo! Ich interessiere mich für Ihre Dienstleistungen im Bereich Webseiten und App-Entwicklung. Können wir darüber sprechen?",
     )
@@ -77,7 +77,9 @@ export default function ContactModule() {
     <section className="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4">Kontaktieren Sie LWEB Schweiz</h2>
+        <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-teal-100">
+            Kontaktieren Sie LWEB Schweiz
+          </h2>
           <p className="text-xl text-gray-400">Lassen Sie uns gemeinsam Ihre digitale Vision verwirklichen</p>
         </div>
 

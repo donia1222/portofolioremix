@@ -21,7 +21,7 @@ export default function AntennaWithWaves() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-80 mb-20 mt-40">
+    <div className="flex flex-col items-center justify-center h-80 mb-10 mt-40">
       {/* Corazón con ondas expansivas */}
       <div className="relative">
         {/* El corazón en el centro */}
