@@ -63,7 +63,7 @@ export default function ContactModule() {
   }
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "+41560608645"
+    const phoneNumber = "+41765608645"
     const message = encodeURIComponent(
       "Hallo! Ich interessiere mich für Ihre Dienstleistungen im Bereich Webseiten und App-Entwicklung. Können wir darüber sprechen?",
     )
