@@ -141,13 +141,16 @@ export default function Header() {
         </Link>
 
         {/* Aquí también puedes usar <a> si quieres enlazar externamente */}
-        <Link
-          to="/remix"
-          className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5"
-        >
-          <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-          <span>Custom-Code</span>
-        </Link>
+       <a
+            href="https://animated-text-components-for-remix.vercel.app/button"
+            className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+            <span>Custom-Code</span>
+          </a>
+
 
         <Link
           to="/roberto"
