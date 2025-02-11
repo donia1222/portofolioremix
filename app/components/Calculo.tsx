@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Check, Plus, Minus, AlertCircle } from "lucide-react"
+import { Link } from "@remix-run/react";
 
 const webElements = [
   { name: "Startseite", price: 350, description: "Eine attraktive Willkommensseite" },
@@ -38,7 +39,7 @@ export default function WebsiteBuilder() {
   const [totalPrice, setTotalPrice] = useState(0)
   const [storeProducts, setStoreProducts] = useState(12)
   const [storePrice, setStorePrice] = useState(600)
-
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const toggleElement = (element: string, price: number, isStore = false) => {
     setSelected((prev) => {
       const newSelected = prev.includes(element) ? prev.filter((e) => e !== element) : [...prev, element]
@@ -57,6 +58,11 @@ export default function WebsiteBuilder() {
     })
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+
   const adjustStoreProducts = (increment: number) => {
     const newStoreProducts = Math.max(11, storeProducts + increment)
     setStoreProducts(newStoreProducts)
@@ -69,8 +75,40 @@ export default function WebsiteBuilder() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black   p-4 sm:p-6 pt-10 sm:pt-20  overflow-auto" >
-      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 text-center">Wie viel kostet eine moderne Webseite?</h1>
+              <header
+        className={`w-full py-4 px-4 fixed top-0 left-0 z-10 transition-all duration-300 ${
+          isHeaderVisible ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
+          <Link
+        to="/"
+        className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </Link>
+            <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
+              <span className="text-blue-400 text-2xl font-bold">Preise</span>
+              <span className="ml-2 text-pink-400 text-2xl font-bold">berechnen</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">Wie viel kostet eine <span className="ml-2 text-pink-400 text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">moderne</span> Webseite?</h1>
       <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">Wählen Sie Ihre gewünschten Elemente</p>
+      <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-2 text-center">Domain und Datenbank für 1 Jahr inklusive</p>
+
       <div className="max-w-[1200px] mx-auto bg-gray-800 rounded-lg shadow-xl p-4 sm:p-8">
         <motion.div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4" layout transition={transitionProps}>
           {webElements.map((element) => {
@@ -152,7 +190,7 @@ export default function WebsiteBuilder() {
           })}
         </motion.div>
         <motion.div
-          className="mt-6 sm:mt-8 text-center text-2xl sm:text-3xl font-bold text-yellow-500"
+          className="mt-6 sm:mt-8 text-center text-2xl sm:text-3xl  text-pink-400"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={transitionProps}
@@ -161,8 +199,8 @@ export default function WebsiteBuilder() {
         </motion.div>
      
       </div>
-      <span className="text-xs mt-20 ml-4 text-gray-400">Domain und Datenbank für 1 Jahr inklusive.</span>
-      <span className="text-xs mt-20 ml-2 text-gray-400">🇨🇭Schweizer Hosting! Hostpoint.ch</span>
+
+      <span className="text-xs mt-20 ml-48 text-gray-400">🇨🇭Schweizer Hosting! Hostpoint.ch</span>
     </div>
   )
 }
