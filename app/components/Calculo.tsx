@@ -200,7 +200,7 @@ export default function WebsiteBuilder() {
      
       </div>
 
-      <span className="text-xs mt-20 ml-48 text-gray-400">🇨🇭Schweizer Hosting! Hostpoint.ch</span>
+      <span className="text-xs mt-20 ml-40 text-gray-400">🇨🇭Schweizer Hosting!</span>
     </div>
   )
 }
