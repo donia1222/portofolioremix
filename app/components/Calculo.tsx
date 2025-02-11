@@ -5,10 +5,10 @@ import { motion } from "framer-motion"
 import { Check, Plus, Minus, AlertCircle } from "lucide-react"
 
 const webElements = [
-  { name: "Startseite", price: 300, description: "Eine attraktive Willkommensseite" },
-  { name: "Fotogalerie", price: 250, description: "Zeigen Sie Ihre besten Bilder" },
-  { name: "Kontaktformular", price: 200, description: "Ermöglichen Sie Kunden, Sie zu kontaktieren" },
-  { name: "Blog", price: 400, description: "Teilen Sie Neuigkeiten und Artikel" },
+  { name: "Startseite", price: 350, description: "Eine attraktive Willkommensseite" },
+  { name: "Fotogalerie", price: 200, description: "Zeigen Sie Ihre besten Bilder" },
+  { name: "Kontaktformular", price: 150, description: "Ermöglichen Sie Kunden, Sie zu kontaktieren" },
+  { name: "Blog", price: 300, description: "Teilen Sie Neuigkeiten und Artikel" },
   {
     name: "Online-Shop",
     price: 600,
@@ -16,14 +16,14 @@ const webElements = [
     isStore: true,
   },
   { name: "Social Media", price: 100, description: "Verbinden Sie sich mit Ihren Followern" },
-  { name: "KI-Chat", price: 500, description: "Bieten Sie Echtzeit-Support" },
-  { name: "Testimonials", price: 200, description: "Zeigen Sie Kundenmeinungen" },
+  { name: "KI-Chat", price: 400, description: "Bieten Sie Echtzeit-Support" },
+  { name: "Testimonials", price: 100, description: "Zeigen Sie Kundenmeinungen" },
   { name: "Standortkarte", price: 100, description: "Helfen Sie Kunden, Sie zu finden" },
-  { name: "FAQ-Bereich", price: 180, description: "Beantworten Sie häufige Fragen" },
+  { name: "FAQ-Bereich", price: 100, description: "Beantworten Sie häufige Fragen" },
   { name: "Formular", price: 350, description: "Ermöglichen Sie Reservierungen" },
-  { name: "Video", price: 300, description: "Teilen Sie Unternehmensvideos" },
+  { name: "Video", price: 200, description: "Teilen Sie Unternehmensvideos" },
   { name: "Newsletter", price: 220, description: "Sammeln Sie E-Mails für Marketing" },
-  { name: "Visitenkarte", price: 380, description: "Visitenkarte herunterladen" },
+  { name: "Visitenkarte", price: 280, description: "Visitenkarte herunterladen" },
 ]
 
 const transitionProps = {
