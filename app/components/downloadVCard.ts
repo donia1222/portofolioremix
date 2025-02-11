@@ -4,7 +4,7 @@ const handleDownloadVCard = () => {
     console.log("Iniciando descarga de la tarjeta de visita...");
 
     // URL de la imagen local
-    const imageUrl = "https://www.lweb.ch/yo2.png";
+    const imageUrl = "https://www.lweb.ch/programming-background-with-person-working-with-codes-computer.jpg";
 
     fetch(imageUrl)
       .then((res) => {
