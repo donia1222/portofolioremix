@@ -196,8 +196,8 @@ export default function ContactModule() {
   title="Impressum"
   content={
     <>
-      <p><strong>Impressum:</strong></p>
-      <p>Bahnhofstrasse 9, 9475 Sevelen, Schweiz 🇨🇭</p>
+      <p><strong>Lweb Schweiz</strong></p>
+      <p>Bahnhofstrasse 9, 9475 Sevelen, Schweiz </p>
       <p><strong>Telefon:</strong> 081 750 1911</p>
       <p><strong>E-Mail:</strong> <a href="mailto:info@lweb.ch">info@lweb.ch</a></p>
     </>
