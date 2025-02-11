@@ -107,6 +107,8 @@ export default function WebsiteBuilder() {
 
       <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">Wie viel kostet eine <span className="ml-2 text-pink-400 text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">moderne</span> Webseite?</h1>
       <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">Wählen Sie Ihre gewünschten Elemente</p>
+      <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-2 text-center">Domain und Datenbank für 1 Jahr inklusive</p>
+
       <div className="max-w-[1200px] mx-auto bg-gray-800 rounded-lg shadow-xl p-4 sm:p-8">
         <motion.div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4" layout transition={transitionProps}>
           {webElements.map((element) => {
@@ -197,8 +199,8 @@ export default function WebsiteBuilder() {
         </motion.div>
      
       </div>
-      <span className="text-xs mt-20 ml-4 text-gray-400">Domain und Datenbank für 1 Jahr inklusive.</span>
-      <span className="text-xs mt-20 ml-2 text-gray-400">🇨🇭Schweizer Hosting! Hostpoint.ch</span>
+
+      <span className="text-xs mt-20 ml-48 text-gray-400">🇨🇭Schweizer Hosting! Hostpoint.ch</span>
     </div>
   )
 }
