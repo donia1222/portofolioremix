@@ -141,14 +141,14 @@ export default function ContactModule() {
                   className="w-full bg-green-600 hover:bg-green-700 text-white transition duration-300 ease-in-out transform hover:scale-105"
                   icon={<WhatsAppIcon />}
                 >
-                  WhatsApp Kontakt
+                  WhatsApp
                 </Button>
                 <Button
                   onClick={handleDownloadVCard}
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white transition duration-300 ease-in-out transform hover:scale-105"
                   icon={<DownloadIcon />}
                 >
-                  Visitenkarte herunterladen
+                  Visitenkarte
                 </Button>
                 <a
                   href="https://github.com/donia1222"
@@ -160,7 +160,7 @@ export default function ContactModule() {
                     className="w-full bg-gray-700 hover:bg-gray-600 text-white transition duration-300 ease-in-out transform hover:scale-105"
                     icon={<GithubIcon />}
                   >
-                    GitHub Profil
+                    GitHub
                   </Button>
                 </a>
 
