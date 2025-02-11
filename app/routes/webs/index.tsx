@@ -6,6 +6,10 @@ import Wencompometopen from "~/components/webs/wencompometopen";
 import { useState, useEffect } from "react";
 import AnimatedGradientText from '~/components/AnimatedGradientText'; 
 import Calculo from "~/components/Calculo"; 
+import { motion } from "framer-motion"
+import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
+
+
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -66,17 +70,45 @@ export default function BlogIndex() {
              
       <div className=" bg-cover bg-center flex flex-col items-center justify-start font-poppins rounded-lg mt-40 ">
       <AnimatedGradientText texts={['Responsive', 'Schnell', 'Modern', 'Animiert']} className="text-white" />
+      
                   </div>
       
         <Websitecomponent />
         
         
+   <div className=" bg-cover bg-center flex flex-col items-center justify-start font-poppins rounded-lg p-10 ">
+   <Link
+            to="/calculo"
+  className="w-full"
+>
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.98 }}
+    className="w-full p-6 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group"
+  >
+    <div className="flex items-center space-x-4">
+      <div className="bg-blue-500 p-3 rounded-full">
+        <Calculator className="h-6 w-6 text-white" />
+      </div>
+      <div className="flex-1 space-y-1">
+        <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
+          Wie viel kostet eine Webseite?
+        </h3>
+        <p className="text-gray-400  text-sm group-hover:text-blue-200 transition-colors duration-300">
+          Berechnen Sie selbst den Preis, den Ihre Webseite kosten könnte.
+        </p>
+      </div>
+      <ArrowRight className="h-5 w-5 text-blue-300 group-hover:translate-x-1 transition-transform duration-300" />
+    </div>
+  </motion.div>
+</Link>
+</div>
+      
         <Wencompometopen />
 
         <WebsiteBlock />
-        
-        <Calculo />
-      
+
+
    </div>
 
   
