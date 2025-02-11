@@ -16,12 +16,10 @@ export default function Component() {
         >
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none text-white">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl xl:text-5xl/none text-white text-center">
                 Aktuelle Neuigkeiten
               </h2>
-              <p className="max-w-[600px] text-gray-400 md:text-xm dark:text-gray-400">
-                Bleiben Sie auf dem Laufenden mit den neuesten Updates und Entwicklungen.
-              </p>
+      
             </div>
           </div>
           <div className="flex flex-col items-start space-y-4">
@@ -32,7 +30,7 @@ export default function Component() {
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full p-6 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group"
+                className="w-full p-6 bg-blue-900 bg backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group"
               >
                 <div className="flex items-center space-x-4">
                   <div className="bg-blue-500 p-3 rounded-full">
@@ -56,7 +54,7 @@ export default function Component() {
   <motion.div
     whileHover={{ scale: 1.03 }}
     whileTap={{ scale: 0.98 }}
-    className="w-full p-6 bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group"
+    className="w-full p-6 bg-blue-900  backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group"
   >
     <div className="flex items-center space-x-4">
       <div className="bg-blue-500 p-3 rounded-full">
@@ -66,9 +64,6 @@ export default function Component() {
         <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
           Wie viel kostet eine Webseite?
         </h3>
-        <p className="text-white text-sm group-hover:text-blue-200 transition-colors duration-300">
-          Berechnen Sie selbst den Preis, den Ihre Webseite kosten könnte.
-        </p>
       </div>
       <ArrowRight className="h-5 w-5 text-blue-300 group-hover:translate-x-1 transition-transform duration-300" />
     </div>
