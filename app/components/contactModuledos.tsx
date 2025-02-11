@@ -13,14 +13,14 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void; title: string; con
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white rounded-lg p-6 max-w-lg w-full max-h-[80vh] overflow-auto"> {/* Aquí hemos añadido max-h-[80vh] y overflow-auto */}
-
-        <div className="text-base text-gray-700">{content}</div>
-        <button
+      <button
           onClick={onClose}
-          className="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md"
+          className="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md mb-10"
         >
           Schließen
         </button>
+        <div className="text-base text-gray-700">{content}</div>
+  
       </div>
     </div>
   )
