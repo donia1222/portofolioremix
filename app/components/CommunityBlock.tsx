@@ -40,11 +40,9 @@ export default function Component() {
                   </div>
                   <div className="flex-1 space-y-1">
                     <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
-                      Remix: Die Zukunft des Web-Designs
+                    Vorteile der Beauftragung eines Freelancer
                     </h3>
-                    <p className="text-sm text-gray-300">
-                      Wie man hochwertige und sichere Webseiten mit Remix erstellt.
-                    </p>
+            
                   </div>
                   <ArrowRight className="h-5 w-5 text-blue-300 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>

@@ -63,7 +63,7 @@ export default function BlogIndex() {
       </header>
 
       <main className="relative pt-24 pb-16 px-4 max-w-5xl mx-auto mt-10">
-        <h1 className="text-6xl font-bold text-center mb-16 text-blue-100 drop-shadow-glow animate-pulse">
+        <h1 className="text-4xl font-bold text-center mb-16 text-blue-100 drop-shadow-glow animate-pulse">
           Latest Cosmic News
         </h1>
         <div className="space-y-24">
