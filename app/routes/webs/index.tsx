@@ -5,6 +5,7 @@ import Websitecomponent from "~/components/webs/websitecomponent";
 import Wencompometopen from "~/components/webs/wencompometopen"; 
 import { useState, useEffect } from "react";
 import AnimatedGradientText from '~/components/AnimatedGradientText'; 
+import Calculo from "~/components/Calculo"; 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -68,8 +69,11 @@ export default function BlogIndex() {
                   </div>
       
         <Websitecomponent />
+        
         <Wencompometopen />
+
         <WebsiteBlock />
+        <Calculo />
       
    </div>
 
