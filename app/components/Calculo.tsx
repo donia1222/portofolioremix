@@ -69,7 +69,7 @@ export default function WebsiteBuilder() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black   p-4 sm:p-6 pt-10 sm:pt-20  overflow-auto" >
-      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 text-center">Website-Kosten berechnen</h1>
+      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 text-center">Wie viel kostet eine moderne Webseite?</h1>
       <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">Wählen Sie Ihre gewünschten Elemente</p>
       <div className="max-w-[1200px] mx-auto bg-gray-800 rounded-lg shadow-xl p-4 sm:p-8">
         <motion.div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4" layout transition={transitionProps}>
@@ -161,7 +161,8 @@ export default function WebsiteBuilder() {
         </motion.div>
      
       </div>
-      <span className="text-xs mt-20 ml-2 text-gray-400">Domain und Datenbank für 1 Jahr inklusive.</span>
+      <span className="text-xs mt-20 ml-4 text-gray-400">Domain und Datenbank für 1 Jahr inklusive.</span>
+      <span className="text-xs mt-20 ml-2 text-gray-400">🇨🇭Schweizer Hosting! Hostpoint.ch</span>
     </div>
   )
 }
