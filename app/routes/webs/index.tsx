@@ -73,7 +73,8 @@ export default function BlogIndex() {
         
         <Wencompometopen />
 
-
+        <WebsiteBlock />
+        
         <Calculo />
       
    </div>
