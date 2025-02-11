@@ -117,7 +117,7 @@ export default function ContactModule() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-lg font-medium text-blue-300">Kontaktinformationen</h3>
-                  <p className="mt-2 text-base text-gray-300">Bahnhofstrasse 9, 9475 Sevelen, Schweiz 🇨🇭</p>
+                  <p className="mt-2 text-base text-gray-300">Bahnhofstrasse 9, 9475 Sevelen, Schweiz🇨🇭</p>
                 </div>
                 <div>
                   <p className="text-base text-gray-300">
