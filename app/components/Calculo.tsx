@@ -159,7 +159,9 @@ export default function WebsiteBuilder() {
         >
           Gesamtpreis: {totalPrice} CHF
         </motion.div>
+     
       </div>
+      <span className="text-xs mt-20 ml-2 text-gray-400">Domain und Datenbank für 1 Jahr inklusive.</span>
     </div>
   )
 }
