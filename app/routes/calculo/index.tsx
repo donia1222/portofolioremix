@@ -105,7 +105,7 @@ export default function WebsiteBuilder() {
         </div>
       </header>
 
-      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">Wie viel kostet eine moderne Webseite?</h1>
+      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">Wie viel kostet eine <span className="ml-2 text-pink-400 text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">moderne</span> Webseite?</h1>
       <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">Wählen Sie Ihre gewünschten Elemente</p>
       <div className="max-w-[1200px] mx-auto bg-gray-800 rounded-lg shadow-xl p-4 sm:p-8">
         <motion.div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4" layout transition={transitionProps}>
@@ -188,7 +188,7 @@ export default function WebsiteBuilder() {
           })}
         </motion.div>
         <motion.div
-          className="mt-6 sm:mt-8 text-center text-2xl sm:text-3xl font-bold text-yellow-500"
+          className="mt-6 sm:mt-8 text-center text-2xl sm:text-3xl  text-pink-400"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={transitionProps}
