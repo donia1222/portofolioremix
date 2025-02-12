@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Check, Plus, Minus, AlertCircle } from 'lucide-react'
+import { Check, Plus, Minus, AlertCircle } from "lucide-react"
 import { Link } from "@remix-run/react"
 
 const webElements = [
@@ -75,21 +75,23 @@ export default function WebsiteBuilder() {
   }
 
   const contactRoberto = () => {
-    const selectedElements = selected.map(name => {
-      const element = webElements.find(e => e.name === name)
-      if (element?.isStore) {
-        return `${name} (${storeProducts} Produkte)`
-      }
-      return name
-    }).join(', ')
-    
+    const selectedElements = selected
+      .map((name) => {
+        const element = webElements.find((e) => e.name === name)
+        if (element?.isStore) {
+          return `${name} (${storeProducts} Produkte)`
+        }
+        return name
+      })
+      .join(", ")
+
     const message = `Hallo Roberto, ich interessiere mich für eine Webseite mit folgenden Elementen: ${selectedElements}. Der Gesamtpreis beträgt ${totalPrice} CHF.`
     const encodedMessage = encodeURIComponent(message)
-    window.open(`https://wa.me/41765608645?text=${encodedMessage}`, '_blank')
+    window.open(`https://wa.me/41765608645?text=${encodedMessage}`, "_blank")
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black p-4 sm:p-6 pt-10 sm:pt-20 overflow-auto">
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black p-4 sm:p-6 pt-10 sm:pt-20 pb-24 sm:pb-6 overflow-auto">
       <header
         className={`w-full py-4 px-4 fixed top-0 left-0 z-10 transition-all duration-300 ${
           isHeaderVisible ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -132,7 +134,7 @@ export default function WebsiteBuilder() {
         Domain und Datenbank für 1 Jahr inklusive
       </p>
       <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">🇨🇭Schweizer Hosting!</p>
-      <div className="max-w-[1200px] mx-auto bg-gray-800 rounded-lg shadow-xl p-4 sm:p-8">
+      <div className="max-w-[1200px] mx-auto bg-gray-800 rounded-lg shadow-xl p-4 sm:p-8 mb-20 sm:mb-0">
         <motion.div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4" layout transition={transitionProps}>
           {webElements.map((element) => {
             const isSelected = selected.includes(element.name)
@@ -208,32 +210,36 @@ export default function WebsiteBuilder() {
             )
           })}
         </motion.div>
+        {/* Total price and contact button */}
         <motion.div
-          className="mt-6 sm:mt-8 text-center text-2xl sm:text-3xl  text-pink-400"
+          className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 sm:static sm:bg-transparent sm:p-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={transitionProps}
         >
-          Gesamtpreis: {totalPrice} CHF
-        </motion.div>
-        {totalPrice > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={transitionProps}
-            className="mt-6 text-center"
-          >
-            <button
-              onClick={contactRoberto}
-              className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
+          <div className="flex flex-col sm:flex-row justify-between  mt-10 items-center max-w-[1200px] mx-auto">
+            <motion.div
+              className="text-2xl sm:text-3xl text-pink-400 mb-4 sm:mb-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={transitionProps}
             >
-              Kontaktieren
-            </button>
-          </motion.div>
-        )}
+              Gesamtpreis: {totalPrice} CHF
+            </motion.div>
+            {totalPrice > 0 && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transitionProps}>
+                <button
+                  onClick={contactRoberto}
+                  className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
+                >
+                  Kontaktieren
+                </button>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
       </div>
-
-
     </div>
   )
 }
+
