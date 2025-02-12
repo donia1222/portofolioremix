@@ -130,7 +130,7 @@ export default function WebsiteBuilder() {
         Webseite?
       </h1>
 
-      <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-2 text-center">
+      <p className="text-gray-300 text-sm sm:text-xl mb-2 sm:mb-2 text-center">
         Domain und Datenbank für 1 Jahr inklusive
       </p>
       <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">🇨🇭Schweizer Hosting!</p>
