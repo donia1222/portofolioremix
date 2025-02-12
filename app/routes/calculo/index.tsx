@@ -210,23 +210,22 @@ export default function WebsiteBuilder() {
             )
           })}
         </motion.div>
-        {/* Total price and contact button */}
-        <motion.div
-          className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 sm:static sm:bg-transparent sm:p-0"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={transitionProps}
-        >
-          <div className="flex flex-col sm:flex-row justify-between  mt-10 items-center max-w-[1200px] mx-auto">
-            <motion.div
-              className="text-2xl sm:text-3xl text-pink-400 mb-4 sm:mb-0"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={transitionProps}
-            >
-              Gesamtpreis: {totalPrice} CHF
-            </motion.div>
-            {totalPrice > 0 && (
+        {selected.length > 0 && (
+          <motion.div
+            className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 sm:static sm:bg-transparent sm:p-0 sm:mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={transitionProps}
+          >
+            <div className="flex flex-col sm:flex-row justify-between items-center max-w-[1200px] mx-auto">
+              <motion.div
+                className="text-2xl sm:text-3xl text-pink-400 mb-4 sm:mb-0"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={transitionProps}
+              >
+                Gesamtpreis: {totalPrice} CHF
+              </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={transitionProps}>
                 <button
                   onClick={contactRoberto}
@@ -235,9 +234,9 @@ export default function WebsiteBuilder() {
                   Kontaktieren
                 </button>
               </motion.div>
-            )}
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   )
