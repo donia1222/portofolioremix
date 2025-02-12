@@ -5,7 +5,7 @@ import Websitecomponent from "~/components/webs/websitecomponent";
 import Wencompometopen from "~/components/webs/wencompometopen"; 
 import { useState, useEffect } from "react";
 import AnimatedGradientText from '~/components/AnimatedGradientText'; 
-import Calculo from "~/components/Calculo"; 
+
 import { motion } from "framer-motion"
 import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
 
