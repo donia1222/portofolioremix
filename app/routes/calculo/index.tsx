@@ -104,7 +104,7 @@ export default function WebsiteBuilder() {
               className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg" 
                 className="h-8 w-8"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -115,8 +115,8 @@ export default function WebsiteBuilder() {
               </svg>
             </Link>
             <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
-              <span className="text-blue-400 text-2xl font-bold">Preise</span>
-              <span className="ml-2 text-pink-400 text-2xl font-bold">berechnen</span>
+              <span className="text-blue-400 text-lg sm:text-xl md:text-3x font-bold">Preise</span>
+              <span className="ml-2 text-pink-400 text-lg sm:text-xl md:text-3x font-bold">berechnen</span>
             </div>
           </div>
         </div>
