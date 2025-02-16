@@ -88,10 +88,6 @@ export default function Component() {
       </header>
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
-      <div className="px-4 py-5 sm:p-6   sm:rounded-lg ">
-
-<PromptingIsAllYouNeed />
-</div>
         {components.map(({ name, Component, code }, index) => (
           <div
             key={index}

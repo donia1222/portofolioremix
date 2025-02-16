@@ -412,7 +412,7 @@ export function PromptingIsAllYouNeed() {
   return (
     <canvas
       ref={canvasRef}
-      className="top-0 left-0 w-full h-full mt-10 mb-10"
+      className="fixed top-0 left-0 w-full h-full"
       aria-label="Prompting Is All You Need: Fullscreen Pong game with pixel text"
     />
   )
