@@ -12,11 +12,11 @@ import CloudTextBlock5 from '~/components/showcase/CloudTextBlock5'
 import CloudTextBlock6 from '~/components/showcase/CloudTextBlock6'
 import CloudTextBlock7 from '~/components/showcase/CloudTextBlock7'
 
+import { PromptingIsAllYouNeed } from '~/components/PromptingIsAllYouNeed';
+
 const components = [
-  { name: '', Component: CloudTextBlock, code: `// Código de CloudTextBlock` },
+
   { name: '', Component: CloudTextBlock4, code: `// Código de CloudTextBlock4` },
-  { name: '', Component: CloudTextBlock5, code: `// Código de CloudTextBlock5` },
-  { name: '', Component: CloudTextBlock3, code: `// Código de CloudTextBlock3` },
   { name: '', Component: CloudTextBlock6, code: `// Código de CloudTextBlock6` },
   { name: '', Component: CloudTextBlock7, code: `// Código de CloudTextBlock7` },
 ]
@@ -44,6 +44,7 @@ export default function Component() {
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
            <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10 mt-4">
+            
           <Link
         to="/"
         className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
@@ -58,15 +59,17 @@ export default function Component() {
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
+     
       </Link>
             {/* Nombre "Moderne Webentwicklung" con scroll hacia arriba al hacer clic */}
-            <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
+            <div className="flex items-center justify-center cursor-pointer"  onClick={scrollToTop}>
               <span className="text-blue-300 text-lg sm:text-xl md:text-3xl font-bold">React </span>
               <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold"> Custom-Code</span>
               
             </div>
-          </div>
 
+          </div>
+ 
       <header className="p-10 mt-10">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <motion.h1
@@ -83,7 +86,12 @@ export default function Component() {
           </p>
         </div>
       </header>
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+
+      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
+      <div className="px-4 py-5 sm:p-6   sm:rounded-lg ">
+
+<PromptingIsAllYouNeed />
+</div>
         {components.map(({ name, Component, code }, index) => (
           <div
             key={index}
@@ -92,8 +100,10 @@ export default function Component() {
             <div className="px-4 py-5 sm:px-6">
               <h2 className="text-xl leading-6 font-semibold text-gray-900">{name}</h2>
             </div>
+       
             <div className="px-4 py-5 sm:p-6">
               <Component />
+         
             </div>
           </div>
         ))}
