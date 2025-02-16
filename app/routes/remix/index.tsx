@@ -12,7 +12,7 @@ import CloudTextBlock5 from '~/components/showcase/CloudTextBlock5'
 import CloudTextBlock6 from '~/components/showcase/CloudTextBlock6'
 import CloudTextBlock7 from '~/components/showcase/CloudTextBlock7'
 
-import { PromptingIsAllYouNeed } from '~/components/PromptingIsAllYouNeed';
+import Prompting from '~/components/PromptingIsAllYouNeed';
 
 const components = [
 
@@ -70,7 +70,8 @@ export default function Component() {
 
           </div>
  
-      <header className="p-10 mt-10">
+
+      <header className="p-10 mt-10 ">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <motion.h1
             className="text-3xl font-bold text-gray-100"
@@ -86,7 +87,7 @@ export default function Component() {
           </p>
         </div>
       </header>
-
+      <Prompting />
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
         {components.map(({ name, Component, code }, index) => (
           <div
@@ -119,11 +120,13 @@ export default function Component() {
 
         <Link
           to="https://animated-text-components-for-remix.vercel.app"
-          className="inline-block bg-[#ff69b4] text-white font-bold py-2 px-4 rounded-full hover:bg-opacity-80 transition-colors duration-300"
+          className="inline-block bg-[#ff69b4] text-white py-2 px-4 rounded-full hover:bg-opacity-80 transition-colors duration-300"
         >
-         mehr...
+         Weitere Beispiele ansehen
         </Link>
+
       </div>
+      <Prompting />
     </div>
   )
 }
