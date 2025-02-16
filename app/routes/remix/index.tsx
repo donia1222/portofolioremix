@@ -127,6 +127,7 @@ export default function Component() {
 
       </div>
       <Prompting />
+      
     </div>
   )
 }
