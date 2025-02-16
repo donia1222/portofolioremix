@@ -16,7 +16,7 @@ import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 import TechnologyCarousemisappsindex from "~/components/TechnologyCarousel/TechnologyCarousemisappsindex"; 
 import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock'; 
-
+import { PromptingIsAllYouNeed } from '~/components/PromptingIsAllYouNeed'; 
 
 export const links: LinksFunction = () => {
   return [
