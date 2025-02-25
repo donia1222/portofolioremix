@@ -48,7 +48,7 @@ export default function BlogIndex() {
           <div className="w-full md:max-w-[50%] mx-auto bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
             <Link
               to="/"
-              className="fixed left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
+              className="fixed left-2 z-20 ml-10 text-blue-100 hover:text-blue-100 transition-colors duration-300"
             >
               <FiArrowLeft className="h-8 w-8" />
             </Link>
