@@ -24,13 +24,13 @@ const newsItems: NewsItem[] = [
   },
   {
     icon: <Calculator className="h-8 w-8 text-green-400" />,
-    title: "Wie viel kostet eine Webseite?",
+    title: "Wie viel kostet eine moderne Webseite?",
     description: "Ein umfassender Leitfaden zur Budgetplanung für Ihre Webpräsenz.",
     link: "/calculo",
   },
   {
     icon: <Palette className="h-8 w-8 text-yellow-400" />,
-    title: "Kostengünstige, benutzerfreundliche Webseiten",
+    title: "Günstige, benutzerfreundliche Webseiten",
     description: "Erstellen Sie Ihre eigene Webseite ohne Programmierkenntnisse - für nur 800 CHF!",
     link: "/low-cost-website",
   },
@@ -109,14 +109,7 @@ export default function NewsSection() {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div className="p-3 bg-gray-700 rounded-full">{item.icon}</div>
-                      {index === 0 && item.readTime && (
-                        <div className="flex items-center text-gray-400">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span className="text-sm">
-                            <CountupTimer totalTime={item.readTime} />
-                          </span>
-                        </div>
-                      )}
+                
                     </div>
                     <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
                     <p className="text-gray-400 mb-4">{item.description}</p>

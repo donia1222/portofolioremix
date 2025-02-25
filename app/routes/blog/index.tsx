@@ -67,14 +67,7 @@ export default function BlogIndex() {
 
 
       <main className="relative pt-24 pb-16 px-4 max-w-5xl mx-auto mt-10">
-        <motion.h1 
-          className="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 text-center mb-16"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, type: "spring" }}
-        >
-          Latest Cosmic News
-        </motion.h1>
+
         <div className="space-y-24">
           {blogPosts.map((post, index) => (
             <motion.article
