@@ -1,6 +1,8 @@
 import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
 import AppBlock from "~/components/AppBlock"; 
+import Header from "~/components/Header";
+
 
 import { useState, useEffect } from "react";
 
@@ -60,34 +62,10 @@ export default function BlogIndex() {
       </div>
 
       <div className="relative">
-        <header
-          className={`w-full py-4 px-4 fixed top-0 left-0 z-90 transition-transform duration-300 ${
-            isHeaderVisible ? "translate-y-0" : "-translate-y-full"
-          }`}
-        >
-          <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d8617] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-50">
-          <Link
-        to="/"
-        className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </Link>
-            {/* Nombre "App Entwicklung" con scroll hacia arriba al hacer clic */}
-            <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
-              <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">App</span>
-              <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold">Entwicklung</span>
-            </div>
-          </div>
-        </header>
+      <div className="relative z-[9999]">
+  <Header />
+</div>
+
       </div>
     </div>
     </div>

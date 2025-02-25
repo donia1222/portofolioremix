@@ -56,6 +56,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-70" />
 
       
       {/* Banner de Cookies */}
@@ -64,9 +65,7 @@ export default function Index() {
       {/* Navegación */}
       <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
         <Header />
-        <div className="w-full max-w-[80%]">
-          {/* Puedes agregar elementos adicionales aquí */}
-        </div>
+
       </nav>
 
       {/* Contenido Principal */}

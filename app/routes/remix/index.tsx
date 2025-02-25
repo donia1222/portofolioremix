@@ -11,7 +11,7 @@ import CloudTextBlock4 from '~/components/showcase/CloudTextBlock4'
 import CloudTextBlock5 from '~/components/showcase/CloudTextBlock5'
 import CloudTextBlock6 from '~/components/showcase/CloudTextBlock6'
 import CloudTextBlock7 from '~/components/showcase/CloudTextBlock7'
-
+import Header from "~/components/Header";
 import Prompting from '~/components/PromptingIsAllYouNeed';
 
 const components = [
@@ -43,35 +43,9 @@ export default function Component() {
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-           <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10 mt-4">
-            
-          <Link
-        to="/"
-        className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-     
-      </Link>
-            {/* Nombre "Moderne Webentwicklung" con scroll hacia arriba al hacer clic */}
-            <div className="flex items-center justify-center cursor-pointer"  onClick={scrollToTop}>
-              <span className="text-blue-300 text-lg sm:text-xl md:text-3xl font-bold">React </span>
-              <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold"> Custom-Code</span>
-              
-            </div>
+         <Header />
 
-          </div>
- 
-
-      <header className="p-10 mt-10 ">
+      <header className="p-10 mt-40 ">
         <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <motion.h1
             className="text-3xl font-bold text-gray-100"

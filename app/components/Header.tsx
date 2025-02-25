@@ -1,19 +1,11 @@
-import { Link } from "@remix-run/react";
+import { NavLink } from "@remix-run/react";
 import { useState, useEffect } from "react";
-import { Repeat, Code, AppWindow, Newspaper, Mail, Menu, X } from "lucide-react";
+import { Code, AppWindow, Newspaper, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
-
-  const handleScroll = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
-  };
 
   const controlHeaderVisibility = () => {
     if (isMenuOpen) return;
@@ -37,13 +29,6 @@ export default function Header() {
     };
   }, [lastScrollPosition, isMenuOpen]);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <header
       className={`w-full py-4 px-4 fixed top-0 left-0 z-90 transition-transform duration-300 ${
@@ -51,13 +36,15 @@ export default function Header() {
       }`}
     >
       <div className="w-full md:max-w-[95%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-90">
-        {/* Nombre "LWEB Schweiz" con scroll hacia arriba al hacer clic */}
-        <div className="flex items-center cursor-pointer" onClick={scrollToTop}>
-          <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
+        {/* Nombre "LWEB Schweiz" que al hacer clic navega a "/" */}
+        <NavLink to="/" className="flex items-center">
+          <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">
+            LWEB
+          </span>
           <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold">
             Schweiz
           </span>
-        </div>
+        </NavLink>
 
         {/* Botón del menú móvil */}
         <div className="md:hidden">
@@ -77,44 +64,57 @@ export default function Header() {
 
         {/* Menú en pantallas grandes */}
         <nav className="hidden md:flex space-x-6">
-
-          <Link
+          <NavLink
             to="/webs"
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+            className={({ isActive }) =>
+              `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                isActive ? "border-b-2 border-[#40e0d0]" : ""
+              }`
+            }
           >
             <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
             <span>Webentwicklung</span>
-          </Link>
+          </NavLink>
 
-          <Link
+          <NavLink
             to="/apps"
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+            className={({ isActive }) =>
+              `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                isActive ? "border-b-2 border-[#40e0d0]" : ""
+              }`
+            }
           >
             <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
             <span>App-Entwicklung</span>
-          </Link>
+          </NavLink>
 
-          <Link
-            to="/remix" // Nuevo enlace agregado
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+          <NavLink
+            to="/remix"
+            className={({ isActive }) =>
+              `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                isActive ? "border-b-2 border-[#40e0d0]" : ""
+              }`
+            }
           >
-            <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
+            <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
             <span>Custom-Code</span>
-          </Link>
+          </NavLink>
 
-
-
-          <Link
+          <NavLink
             to="/roberto"
-            className="text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group"
+            className={({ isActive }) =>
+              `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                isActive ? "border-b-2 border-[#40e0d0]" : ""
+              }`
+            }
           >
             <span>Über mich</span>
-            <img 
-              src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
+            <img
+              src="/yo2.png"
               alt="Avatar de Roberto Salvador"
               className="w-10 h-10 rounded-full ml-2 border-2 border-gray-700"
             />
-          </Link>
+          </NavLink>
         </nav>
       </div>
 
@@ -124,45 +124,57 @@ export default function Header() {
           isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
         }`}
       >
-
-        <Link
+        <NavLink
           to="/webs"
-          className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-2"
+          className={({ isActive }) =>
+            `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-2 ${
+              isActive ? "border-b-2 border-[#40e0d0]" : ""
+            }`
+          }
         >
           <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
           <span>Webentwicklung</span>
-        </Link>
+        </NavLink>
 
-        <Link
+        <NavLink
           to="/apps"
-          className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-5"
+          className={({ isActive }) =>
+            `flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-5 ${
+              isActive ? "border-b-2 border-[#40e0d0]" : ""
+            }`
+          }
         >
           <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300 mr-2" />
           <span>App-Entwicklung</span>
-        </Link>
+        </NavLink>
 
-        <Link
-          to="/remix" // Nuevo enlace agregado en el menú móvil
-          className="flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5 "
+        <NavLink
+          to="/remix"
+          className={({ isActive }) =>
+            `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group mt-5 ${
+              isActive ? "border-b-2 border-[#40e0d0]" : ""
+            }`
+          }
         >
-          <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300 " />
+          <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
           <span>Custom-Code</span>
-        </Link>
+        </NavLink>
 
-
-
-        <Link
+        <NavLink
           to="/roberto"
-          className="flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-2"
+          className={({ isActive }) =>
+            `flex items-center space-xl-4 hover:text-[#40e0d0] transition-colors duration-200 group text-center mt-2 ${
+              isActive ? "border-b-2 border-[#40e0d0]" : ""
+            }`
+          }
         >
-               <img 
-            src="/yo2.png" // Reemplaza esta ruta con la ubicación de tu imagen
+          <img
+            src="/yo2.png"
             alt="Avatar de Roberto Salvador"
             className="w-12 h-12 rounded-full mr-2 border-1 border-gray-600"
           />
           <span>Über mich</span>
-     
-        </Link>
+        </NavLink>
       </div>
     </header>
   );
