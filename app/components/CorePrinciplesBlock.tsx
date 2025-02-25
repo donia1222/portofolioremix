@@ -18,7 +18,7 @@ const principles = [
   },
   {
     icon: <FiUsers className="text-3xl" />,
-    title: "Webentwicklung",
+    title: "Webseiten",
     description: "Optimale Leistung & Design.",
     gradient: "from-pink-500 to-purple-600",
   },
