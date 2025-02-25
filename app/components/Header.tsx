@@ -1,6 +1,6 @@
 import { NavLink } from "@remix-run/react";
 import { useState, useEffect } from "react";
-import { Home, Code, AppWindow, Newspaper, Menu, X } from "lucide-react";
+import { Code, AppWindow, Newspaper, Menu, X } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,18 +62,6 @@ export default function Header() {
           {/* Menú en pantallas grandes */}
           <nav className="hidden md:flex space-x-6">
             <NavLink
-              to="/"
-              className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
-                }`
-              }
-            >
-              <Home className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
-              <span>Home</span>
-            </NavLink>
-
-            <NavLink
               to="/webs"
               className={({ isActive }) =>
                 `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
@@ -131,26 +119,16 @@ export default function Header() {
       {/* Overlay del menú móvil */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="absolute top-6 left-1/2 transform -translate-x-1/2 text-white mt-80 focus:outline-none"
-            aria-label="Cerrar menú"
-          >
-            <X className="h-10 w-10" />
-          </button>
-          <nav className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
-            <NavLink
+                      <button
               onClick={() => setIsMenuOpen(false)}
-              to="/"
-              className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
-                }`
-              }
+              className="absolute top-6 left-1/2 transform -translate-x-1/2 text-white  mt-20 focus:outline-none"
+              aria-label="Cerrar menú"
             >
-              <Home className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
-              <span>Home</span>
-            </NavLink>
+              <X className="h-10 w-10" />
+            </button>
+          <nav className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
+            {/* Botón de cerrar posicionado sobre el menú */}
+
 
             <NavLink
               onClick={() => setIsMenuOpen(false)}
