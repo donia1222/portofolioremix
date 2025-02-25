@@ -30,7 +30,7 @@ const newsItems: NewsItem[] = [
   },
   {
     icon: <Palette className="h-8 w-8 text-yellow-400" />,
-    title: "Günstige, benutzerfreundliche Webseiten",
+    title: "Kostengünstige, benutzerfreundliche Webseiten",
     description: "Erstellen Sie Ihre eigene Webseite ohne Programmierkenntnisse - für nur 800 CHF!",
     link: "/low-cost-website",
   },
