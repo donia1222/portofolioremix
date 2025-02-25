@@ -30,7 +30,7 @@ const newsItems: NewsItem[] = [
   },
   {
     icon: <Palette className="h-8 w-8 text-yellow-400" />,
-    title: "Günstige, benutzerfreundliche Webseiten",
+    title: "Kostengünstige, benutzerfreundliche Webseiten",
     description: "Erstellen Sie Ihre eigene Webseite ohne Programmierkenntnisse - für nur 800 CHF!",
     link: "/low-cost-website",
   },
@@ -109,7 +109,7 @@ export default function NewsSection() {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <div className="p-3 bg-gray-700 rounded-full">{item.icon}</div>
-                
+                  
                     </div>
                     <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
                     <p className="text-gray-400 mb-4">{item.description}</p>
