@@ -3,93 +3,71 @@
 import { motion } from "framer-motion"
 import { FiGrid, FiRefreshCw, FiUsers, FiStar } from "react-icons/fi"
 
-export default function Component() {
-  const principles = [
-    {
-      icon: <FiGrid className="text-4xl text-white mb-4" />,
-      title: "App-Entwicklung",
-      description: "Entwicklung von leistungsstarken und effizienten mobilen Anwendungen.",
-      colors: ["#1a0b2e", "#3b0764", "#5b21b6", "#7e22ce"],
-    },
-    {
-      icon: <FiRefreshCw className="text-4xl text-white mb-4" />,
-      title: "KI-Lösungen",
-      description: "Integration fortschrittlicher KI-Lösungen zur Automatisierung und Erweiterung.",
-      colors: ["#0f172a", "#1e3a8a", "#2563eb", "#3b82f6"],
-    },
-    {
-      icon: <FiUsers className="text-4xl text-white mb-4" />,
-      title: "Webentwicklung",
-      description: "CMS-freie Lösungen für optimale Leistung und individuelles Design zu bieten.",
-      colors: ["#14532d", "#047857", "#10b981", "#34d399"],
-    },
-    {
-      icon: <FiStar className="text-4xl text-white mb-4" />,
-      title: "Innovation",
-      description: "Innovation als einen Weg, neue Chancen und bessere Lösungen für unsere Kunden zu schaffen.",
-      colors: ["#7c2d12", "#c2410c", "#ea580c", "#fb923c"],
-    },
-  ]
+const principles = [
+  {
+    icon: <FiGrid className="text-5xl" />,
+    title: "App-Entwicklung",
+    description: "Leistungsstarke und effiziente mobile Anwendungen.",
+    gradient: "from-blue-400 to-indigo-600",
+  },
+  {
+    icon: <FiRefreshCw className="text-5xl" />,
+    title: "KI-Lösungen",
+    description: "Fortschrittliche KI zur Automatisierung und Erweiterung.",
+    gradient: "from-green-400 to-teal-500",
+  },
+  {
+    icon: <FiUsers className="text-5xl" />,
+    title: "Webentwicklung",
+    description: "Lösungen für optimale Leistung und Design.",
+    gradient: "from-pink-500 to-purple-600",
+  },
+  {
+    icon: <FiStar className="text-5xl" />,
+    title: "Innovation",
+    description: "Neue Chancen und bessere Lösungen für unsere Kunden.",
+    gradient: "from-yellow-400 to-orange-500",
+  },
+]
 
+export default function ModernPrinciplesV2() {
   return (
-    <section className="w-fulltransparent text-white overflow-hidden ">
+    <section className="bg-gradient-to-br  py-20 px-4 sm:px-6 lg:px-8 mb-20">
+      <div className="max-w-7xl mx-auto">
 
-      <div className="flex flex-wrap justify-center gap-8 px-4 mb-20 mt-10">
-        {principles.map((principle, index) => (
-          <motion.div
-            key={index}
-            className="relative w-80 h-80"
-            initial={{ opacity: 0, scale: 0.5, rotate: -180 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}  // Animación al aparecer en el viewport
-            viewport={{ once: true, amount: 0.2 }}  // Se anima cuando el 20% del elemento es visible
-            transition={{ duration: 0.8, delay: index * 0.2, type: "spring" }}
-          >
-            <svg viewBox="0 0 250 250" className="w-full h-full">
-              <defs>
-                <radialGradient id={`gradient-${index}`} cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                  {principle.colors.map((color, i) => (
-                    <stop key={i} offset={`${(i / 3) * 100}%`} stopColor={color} />
-                  ))}
-                </radialGradient>
-              </defs>
-              <motion.circle
-                cx="125"
-                cy="125"
-                r="115"
-                fill={`url(#gradient-${index})`}
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 1.5, delay: index * 0.2 }}
-              />
-              {[...Array(7)].map((_, i) => (
-                <motion.path
-                  key={i}
-                  d={`M 25 ${40 + i * 30} Q 125 ${50 + i * 30} 225 ${40 + i * 30}`}
-                  fill="none"
-                  stroke={principle.colors[2]}
-                  strokeWidth="2"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 1.2, delay: index * 0.2 + 0.5 }}
-                />
-              ))}
-            </svg>
-            <motion.div 
-              className="absolute inset-0 flex flex-col items-center justify-center text-center p-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: index * 0.2 + 1 }}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {principles.map((principle, index) => (
+            <motion.div
+              key={index}
+              className={`bg-gradient-to-br ${principle.gradient} p-0.5 rounded-2xl overflow-hidden`}
+              initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              whileHover={{ scale: 1.05, rotate: 2 }}
             >
-              {principle.icon}
-              <h3 className="text-xl font-bold mb-4">{principle.title}</h3>
-              <p className="text-white text-base leading-tight">{principle.description}</p>
+              <div className="bg-gray-900 h-full rounded-2xl p-8 backdrop-blur-lg backdrop-filter">
+                <motion.div
+                  className="text-white mb-6 flex justify-center"
+                  whileHover={{ rotate: 360, scale: 1.2 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {principle.icon}
+                </motion.div>
+                <h3 className="text-2xl font-bold text-white text-center mb-4">{principle.title}</h3>
+                <p className="text-gray-300 text-center">{principle.description}</p>
+                <motion.div
+                  className="mt-6 h-1 bg-white rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "100%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                />
+              </div>
             </motion.div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )
 }
+

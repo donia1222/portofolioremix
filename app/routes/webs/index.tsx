@@ -5,7 +5,7 @@ import Websitecomponent from "~/components/webs/websitecomponent";
 import Wencompometopen from "~/components/webs/wencompometopen"; 
 import { useState, useEffect } from "react";
 import AnimatedGradientText from '~/components/AnimatedGradientText'; 
-
+import Header from "~/components/Header";
 import { motion } from "framer-motion"
 import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
 
@@ -36,6 +36,7 @@ export default function BlogIndex() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
+        
         {/* Estrellas animadas como fondo */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="star-field"></div>
@@ -72,7 +73,10 @@ export default function BlogIndex() {
       <AnimatedGradientText texts={['Responsive', 'Schnell', 'Modern', 'Animiert']} className="text-white" />
       
                   </div>
-      
+                  <div className="relative z-[9999]">
+  <Header />
+</div>
+
         <Websitecomponent />
         
         
@@ -89,34 +93,7 @@ export default function BlogIndex() {
       </div>
 
       <div className="relative">
-        <header
-          className={`w-full py-4 px-4 fixed top-0 left-0 z-90 transition-transform duration-300 ${
-            isHeaderVisible ? "translate-y-0" : "-translate-y-full"
-          }`}
-        >
-          <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
-          <Link
-        to="/"
-        className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-8 w-8"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-        </svg>
-      </Link>
-            {/* Nombre "Moderne Webentwicklung" con scroll hacia arriba al hacer clic */}
-            <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
-              <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">Moderne</span>
-              <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-3xl font-bold">Webentwicklung</span>
-            </div>
-          </div>
-        </header>
+
 
       </div>
     </div>

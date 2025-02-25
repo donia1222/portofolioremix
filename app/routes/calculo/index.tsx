@@ -24,7 +24,7 @@ const webElements = [
   { name: "Formular", price: 350, description: "Ermöglichen Sie Reservierungen" },
   { name: "Video", price: 200, description: "Teilen Sie Unternehmensvideos" },
   { name: "Newsletter", price: 220, description: "Sammeln Sie E-Mails für Marketing" },
-  { name: "Visitenkarte", price: 280, description: "Visitenkarte herunterladen" },
+  { name: "D-Visitenkarte", price: 280, description: "Digitale Visitenkarte herunterladen" },
 ]
 
 const transitionProps = {
@@ -101,7 +101,7 @@ export default function WebsiteBuilder() {
           <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
             <Link
               to="/"
-              className="fixed  left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
+              className="fixed left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg" 
@@ -115,16 +115,16 @@ export default function WebsiteBuilder() {
               </svg>
             </Link>
             <div className="flex items-center justify-center cursor-pointer" onClick={scrollToTop}>
-              <span className="text-blue-400 text-lg sm:text-xl md:text-3x font-bold">Preise</span>
-              <span className="ml-2 text-pink-400 text-lg sm:text-xl md:text-3x font-bold">berechnen</span>
+              <span className="text-blue-400 text-lg sm:text-xl md:text-3xl font-bold">Preise</span>
+              <span className="ml-2 text-pink-400 text-lg sm:text-xl md:text-3xl font-bold">berechnen</span>
             </div>
           </div>
         </div>
       </header>
 
-      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">
+      <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2 mt-20 sm:mb-4 text-center">
         Wie viel kostet eine{" "}
-        <span className="ml-2 text-pink-400 text-2xl sm:text-4xl font-bold mb-2  mt-20 sm:mb-4 text-center">
+        <span className="ml-2 text-pink-400 text-2xl sm:text-4xl font-bold">
           moderne
         </span>{" "}
         Webseite?
@@ -133,7 +133,7 @@ export default function WebsiteBuilder() {
       <p className="text-gray-300 text-sm sm:text-xl mb-2 sm:mb-2 text-center">
         Domain und Datenbank für 1 Jahr inklusive
       </p>
-      <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">🇨🇭Schweizer Hosting!</p>
+      <p className="text-gray-300 text-sm sm:text-xl mb-6 sm:mb-12 text-center">🇨🇭Schweizer Hosting:  hostpoint.ch</p>
       <div className="max-w-[1200px] mx-auto bg-gray-800 rounded-lg shadow-xl p-4 sm:p-8 mb-20 sm:mb-0">
         <motion.div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4" layout transition={transitionProps}>
           {webElements.map((element) => {
@@ -152,26 +152,26 @@ export default function WebsiteBuilder() {
                   backgroundColor: { duration: 0.1 },
                 }}
                 className={`
-                  p-3 rounded-lg text-sm cursor-pointer
-                  ${isSelected ? "border-2 border-blue-600 " : "border border-gray-700"}
+                  p-3 rounded-lg cursor-pointer
+                  ${isSelected ? "border-2 border-blue-600" : "border border-gray-700"}
                   ${element.isStore && !isSelected ? "relative overflow-hidden" : ""}
                 `}
                 onClick={() => toggleElement(element.name, displayPrice, element.isStore)}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <h3 className=" text-white">{element.name}</h3>
+                  <h3 className="text-white text-lg sm:text-xl font-bold">{element.name}</h3>
                   <div className="flex items-center">
                     <div
                       className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                        isSelected ? "bg-blue-600 " : "bg-gray-600"
+                        isSelected ? "bg-blue-600" : "bg-gray-600"
                       }`}
                     >
                       {isSelected && <Check className="w-3 h-3 text-gray-900" strokeWidth={3} />}
                     </div>
                   </div>
                 </div>
-                <p className="text-xs text-gray-400">{element.description}</p>
-                <span className="mr-2 font-medium text-blue-200 ">{displayPrice} CHF</span>
+                <p className="text-sm text-gray-300">{element.description}</p>
+                <span className="mr-2 font-medium text-blue-200 text-lg">{displayPrice} CHF</span>
                 {element.isStore && isSelected && (
                   <div className="mt-2 flex items-center justify-between">
                     <span className="text-xs text-gray-400">Produkte: {storeProducts}</span>
@@ -191,7 +191,7 @@ export default function WebsiteBuilder() {
                           e.stopPropagation()
                           adjustStoreProducts(1)
                         }}
-                        className="w-5 h-5 rounded-full  bg-blue-600 flex items-center justify-center text-gray-900"
+                        className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center text-gray-900"
                       >
                         <Plus className="w-3 h-3" />
                       </button>
@@ -241,4 +241,3 @@ export default function WebsiteBuilder() {
     </div>
   )
 }
-
