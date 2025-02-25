@@ -32,7 +32,7 @@ const principles = [
 
 export default function ModernPrinciplesV2() {
   return (
-    <section className="bg-gradient-to-br  py-20 px-4 sm:px-6 lg:px-8 mb-20">
+    <section className="bg-gradient-to-br x-4 sm:px-6 lg:px-8 mb-20">
       <div className="max-w-7xl mx-auto">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
