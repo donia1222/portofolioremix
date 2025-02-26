@@ -55,10 +55,10 @@ export default function PublishedAppsBlock() {
   }
 
   return (
-    <div className="w-full py-16  text-white overflow-hidden mt-10">
+    <div className="w-full py-16  text-white overflow-hidden ">
 
 
-      <div className="container mx-auto px-4 py-10 mt-10 ">
+      <div className="container mx-auto px-4 py-10  ">
         
       <TechnologyCarouseltexto />
 
