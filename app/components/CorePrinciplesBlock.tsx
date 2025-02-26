@@ -34,31 +34,21 @@ const principles = [
     description: "Wartbare Softwarelösungen.",
     gradient: "from-red-400 to-pink-600",
   },
-  {
-    icon: <FiLayers className="text-3xl" />,
-    title: "Skalierbarkeit",
-    description: "Wachstum unterstützende Systeme.",
-    gradient: "from-purple-400 to-indigo-600",
-  },
+
   {
     icon: <FiShield className="text-3xl" />,
     title: "Sicherheit",
     description: "Robuste Datenschutzmaßnahmen.",
     gradient: "from-cyan-400 to-blue-600",
   },
-  {
-    icon: <FiTrendingUp className="text-3xl" />,
-    title: "Optimierung",
-    description: "Kontinuierliche Verbesserung.",
-    gradient: "from-emerald-400 to-green-600",
-  },
+
 ]
 
 export default function ModernPrinciplesV3() {
   return (
-    <section className="bg-gradient-to-br from-gray-900 to-gray-800 px-4 sm:px-6 lg:px-8 py-12">
+    <section className=" px-4 sm:px-6 lg:px-8 py-12 mt-20 mb-20">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8">
           {principles.map((principle, index) => (
             <motion.div
               key={index}
@@ -68,7 +58,7 @@ export default function ModernPrinciplesV3() {
               transition={{ duration: 0.6, delay: index * 0.05 }}
               whileHover={{ scale: 1.03, rotate: 1 }}
             >
-              <div className="bg-gray-900 h-full rounded-xl p-4 backdrop-blur-sm backdrop-filter">
+              <div className="bg-gray-900 h-full rounded-xl p-4 backdrop-blur-sm backdrop-filter ">
                 <motion.div
                   className="text-white mb-3 flex justify-center"
                   whileHover={{ rotate: 360, scale: 1.1 }}
@@ -77,7 +67,7 @@ export default function ModernPrinciplesV3() {
                   {principle.icon}
                 </motion.div>
                 <h3 className="text-lg font-bold text-white text-center mb-2">{principle.title}</h3>
-                <p className="text-gray-300 text-center text-sm">{principle.description}</p>
+                <p className="text-gray-300 text-center text-sl">{principle.description}</p>
                 <motion.div
                   className="mt-3 h-0.5 bg-white rounded-full"
                   initial={{ width: 0 }}

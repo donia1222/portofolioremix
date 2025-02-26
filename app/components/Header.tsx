@@ -1,29 +1,31 @@
-import { NavLink } from "@remix-run/react";
-import { useState, useEffect } from "react";
-import { Code, AppWindow, Newspaper, Menu, X } from "lucide-react";
+"use client"
+
+import { NavLink } from "@remix-run/react"
+import { useState, useEffect, useCallback } from "react"
+import { Code, AppWindow, Newspaper, Menu, X, Home } from "lucide-react"
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastScrollPosition, setLastScrollPosition] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true)
+  const [lastScrollPosition, setLastScrollPosition] = useState(0)
 
-  const controlHeaderVisibility = () => {
-    if (isMenuOpen) return;
-    const currentScrollPosition = window.pageYOffset;
+  const controlHeaderVisibility = useCallback(() => {
+    if (isMenuOpen) return
+    const currentScrollPosition = window.pageYOffset
     if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
-      setIsHeaderVisible(false);
+      setIsHeaderVisible(false)
     } else {
-      setIsHeaderVisible(true);
+      setIsHeaderVisible(true)
     }
-    setLastScrollPosition(currentScrollPosition);
-  };
+    setLastScrollPosition(currentScrollPosition)
+  }, [lastScrollPosition, isMenuOpen])
 
   useEffect(() => {
-    window.addEventListener("scroll", controlHeaderVisibility);
+    window.addEventListener("scroll", controlHeaderVisibility)
     return () => {
-      window.removeEventListener("scroll", controlHeaderVisibility);
-    };
-  }, [lastScrollPosition, isMenuOpen]);
+      window.removeEventListener("scroll", controlHeaderVisibility)
+    }
+  }, [controlHeaderVisibility])
 
   return (
     <>
@@ -35,12 +37,8 @@ export default function Header() {
         <div className="w-full md:max-w-[95%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-40">
           {/* Logo y nombre */}
           <NavLink to="/" className="flex items-center">
-            <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">
-              LWEB
-            </span>
-            <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold">
-              Schweiz
-            </span>
+            <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
+            <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold">Schweiz</span>
           </NavLink>
 
           {/* Botón del menú móvil */}
@@ -61,6 +59,18 @@ export default function Header() {
 
           {/* Menú en pantallas grandes */}
           <nav className="hidden md:flex space-x-6">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                }`
+              }
+            >
+              <Home className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
+              <span>Home</span>
+            </NavLink>
+
             <NavLink
               to="/webs"
               className={({ isActive }) =>
@@ -85,17 +95,7 @@ export default function Header() {
               <span>App-Entwicklung</span>
             </NavLink>
 
-            <NavLink
-              to="/remix"
-              className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
-                }`
-              }
-            >
-              <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-              <span>Custom-Code</span>
-            </NavLink>
+
 
             <NavLink
               to="/roberto"
@@ -119,16 +119,26 @@ export default function Header() {
       {/* Overlay del menú móvil */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
-                      <button
-              onClick={() => setIsMenuOpen(false)}
-              className="absolute top-6 left-1/2 transform -translate-x-1/2 text-white  mt-20 focus:outline-none"
-              aria-label="Cerrar menú"
-            >
-              <X className="h-10 w-10" />
-            </button>
+          <button
+            onClick={() => setIsMenuOpen(false)}
+            className="absolute top-6 left-1/2 transform -translate-x-1/2 text-white mt-20 focus:outline-none"
+            aria-label="Cerrar menú"
+          >
+            <X className="h-10 w-10" />
+          </button>
           <nav className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
-            {/* Botón de cerrar posicionado sobre el menú */}
-
+            <NavLink
+              onClick={() => setIsMenuOpen(false)}
+              to="/"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                }`
+              }
+            >
+              <Home className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
+              <span>Home</span>
+            </NavLink>
 
             <NavLink
               onClick={() => setIsMenuOpen(false)}
@@ -156,19 +166,7 @@ export default function Header() {
               <span>App-Entwicklung</span>
             </NavLink>
 
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              to="/remix"
-              className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
-                }`
-              }
-            >
-              <Newspaper className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-              <span>Custom-Code</span>
-            </NavLink>
-
+   
             <NavLink
               onClick={() => setIsMenuOpen(false)}
               to="/roberto"
@@ -189,5 +187,6 @@ export default function Header() {
         </div>
       )}
     </>
-  );
+  )
 }
+

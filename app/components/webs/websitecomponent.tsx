@@ -3,8 +3,10 @@
 import type React from "react"
 import { Globe, Code, Search, ShieldCheck, ArrowRight, Layout, Zap } from "lucide-react"
 import { motion } from "framer-motion"
-import {Newspaper, Calculator } from 'lucide-react'
+import { Calculator } from "lucide-react"
 import { Link } from "@remix-run/react"
+
+
 interface Benefit {
   icon: React.ElementType
   title: string
@@ -45,10 +47,8 @@ export default function ModernWebDevShowcase() {
     },
   ]
 
-
-
   return (
-    <div className="min-h-screen  text-white">
+    <div className="min-h-screen text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl mt-20 font-extrabold mb-4">
@@ -64,67 +64,29 @@ export default function ModernWebDevShowcase() {
           </p>
         </div>
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-      
-          initial="hidden"
-          animate="visible"
-        >
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" initial="hidden" animate="visible">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="rounded-lg p-6 bg-gray-800 shadow-lg transform transition-all hover:scale-105"
-        
+              className="bg-gray-800 p-6 rounded-xl flex items-start space-x-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
             >
-              <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500">
-                <benefit.icon className="w-8 h-8 text-white" />
+              <div className="bg-gray-700 p-2 rounded-full">
+                <benefit.icon className="w-6 h-6 text-blue-400" />
               </div>
-              <h3 className="text-xl font-semibold text-center mb-4">{benefit.title}</h3>
-              <p className="text-center text-gray-300">{benefit.description}</p>
+              <div>
+                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                <p className="text-gray-300">{benefit.description}</p>
+              </div>
             </motion.div>
           ))}
         </motion.div>
-        <section className="w-full py-12 md:py-24 lg:py-32  bg-gradient-to-r ">
-      <div className="container px-4 md:px-6 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]"
-        >
-          <div className="flex flex-col justify-center space-y-4">
 
-          </div>
-          <div className="flex flex-col items-start space-y-4">
-       
 
-            <Link
-            to="/calculo"
-  className="w-full"
->
-  <motion.div
-    whileHover={{ scale: 1.03 }}
-    whileTap={{ scale: 0.98 }}
-    className="w-full p-6 bg-blue-900  backdrop-blur-lg rounded-2xl shadow-lg hover:bg-opacity-20 transition-all duration-300 group"
-  >
-    <div className="flex items-center space-x-4">
-      <div className="bg-blue-500 p-3 rounded-full">
-        <Calculator className="h-6 w-6 text-white" />
-      </div>
-      <div className="flex-1 space-y-1">
-        <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors duration-300">
-          Wie viel kostet eine Webseite?
-        </h3>
-      </div>
-      <ArrowRight className="h-5 w-5 text-blue-300 group-hover:translate-x-1 transition-transform duration-300" />
-    </div>
-  </motion.div>
-</Link>
 
-          </div>
-        </motion.div>
-      </div>
-    </section>
+
         <div className="mt-16 text-center">
           <h3 className="text-3xl font-bold mb-6">Professionelle Webentwicklung</h3>
           <p className="text-lg mb-8 max-w-3xl mx-auto text-gray-300">
@@ -150,7 +112,7 @@ export default function ModernWebDevShowcase() {
               </p>
             </div>
           </div>
-   
+          
         </div>
       </div>
     </div>

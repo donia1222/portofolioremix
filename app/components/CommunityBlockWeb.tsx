@@ -15,13 +15,7 @@ interface NewsItem {
 }
 
 const newsItems: NewsItem[] = [
-  {
-    icon: <Newspaper className="h-8 w-8 text-blue-400" />,
-    title: "Vorteile der Beauftragung eines Freelancers",
-    description: "Entdecken Sie, wie Freelancer Ihr Projekt zum Erfolg führen können.",
-    link: "/blog#vorteile-der-beauftragung-eines-freelancers",
-    readTime: 5 * 60, // 5 minutes in seconds
-  },
+
   {
     icon: <Calculator className="h-8 w-8 text-green-400" />,
     title: "Wieviel kostet eine maßgeschneiderte Webseite?",
@@ -63,23 +57,10 @@ function CountupTimer({ totalTime }: CountupTimerProps) {
 
 export default function NewsSection() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-gray-900 to-blue-900">
+    <section className="w-full py-12 md:py-24 lg:py-32 0">
       <div className="container px-4 md:px-6 mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-              Aktuelle Neuigkeiten
-            </span>
-          </h2>
-          <p className="text-xl text-gray-300">Bleiben Sie informiert mit unseren neuesten Artikeln</p>
-        </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
           {newsItems.map((item, index) => (
             <motion.div
               key={index}

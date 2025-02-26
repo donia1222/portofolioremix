@@ -125,7 +125,7 @@ export default function WebsiteBuilder() {
       <h1 className="text-white text-2xl sm:text-4xl font-bold mb-2 mt-20 sm:mb-4 text-center">
         Wie viel kostet eine{" "}
         <span className="ml-2 text-pink-400 text-2xl sm:text-4xl font-bold">
-          moderne
+        maßgeschneiderte 
         </span>{" "}
         Webseite?
       </h1>
