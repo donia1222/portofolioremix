@@ -89,11 +89,8 @@ export default function Index() {
         <CommunityBlock />
       </div>
 
-      <Corazones />
+
  
-      <div id="publishedAppsBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="600">
-        <TechnologyCarousemisappsindex/>
-      </div>
 
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />
