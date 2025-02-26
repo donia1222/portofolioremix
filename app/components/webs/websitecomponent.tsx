@@ -51,7 +51,7 @@ export default function ModernWebDevShowcase() {
     <div className="min-h-screen text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mt-20 font-extrabold mb-4">
+          <h2 className="text-4xl md:text-5xl  font-extrabold mb-4">
             Steigern Sie Ihr Geschäft mit einer
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
               {" "}
