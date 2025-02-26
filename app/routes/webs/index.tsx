@@ -9,6 +9,7 @@ import Header from "~/components/Header";
 import { motion } from "framer-motion"
 import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
 
+import CommunityBlock from "~/components/CommunityBlockWeb"; 
 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
@@ -79,7 +80,7 @@ export default function BlogIndex() {
 
         <Websitecomponent />
         
-        
+        <CommunityBlock />
 
       
         <Wencompometopen />
