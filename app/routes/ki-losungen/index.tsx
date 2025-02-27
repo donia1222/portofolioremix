@@ -53,9 +53,7 @@ export default function AIBusinessSolutions() {
         {/* Sección Hero */}
         <div className="mb-24 max-w-4xl mx-auto">
           <div className="flex flex-col items-center text-center">
-            <div className="inline-block p-2 px-4 mb-6 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium tracking-wider transform hover:scale-105 transition-transform duration-300">
-              ZUKUNFTSWEISENDE TECHNOLOGIE
-            </div>
+
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">
               Stärken Sie Ihr Unternehmen mit KI
             </h1>
@@ -71,8 +69,8 @@ export default function AIBusinessSolutions() {
         </div>
 
         {/* Contenido Principal */}
-        <div className="mb-24">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+        <div className="mb-24s">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4s bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
             Maßgeschneiderte KI-Lösungen
           </h2>
           <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-16">
@@ -81,7 +79,7 @@ export default function AIBusinessSolutions() {
           </p>
 
           {/* Cómo funciona */}
-          <div className="grid md:grid-cols-3 gap-8 mb-24">
+          <div className="grid md:grid-cols-3 gap-8 mb-2">
             {[
               {
                 icon: <Brain className="h-10 w-10" />,
@@ -119,56 +117,7 @@ export default function AIBusinessSolutions() {
             ))}
           </div>
 
-          {/* Beneficios */}
-          <h3 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-            Vorteile der KI Integration
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <MessageSquare />,
-                title: "Optimierter Kundenservice",
-                description: "Schnelle und präzise Antworten ohne Wartezeiten.",
-              },
-              {
-                icon: <Bot />,
-                title: "Intelligente Automatisierung",
-                description: "Effizientere Prozesse und Reduzierung repetitiver Aufgaben.",
-              },
-              {
-                icon: <BarChart />,
-                title: "Bessere Entscheidungsfindung",
-                description: "Zugriff auf Echtzeitdaten für fundierte Entscheidungen.",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:z-10"
-                style={{
-                  transform: hoveredCard === index ? "scale(1.05)" : "scale(1)",
-                  transition: "transform 0.3s ease-in-out",
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-800/50 to-purple-800/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative bg-gray-900/80 backdrop-blur-sm border border-gray-800 p-6 h-full rounded-2xl overflow-hidden group-hover:border-blue-500/50 transition-all duration-300">
-                  {/* Esquina animada */}
-                  <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rotate-12 transform group-hover:scale-[2.5] transition-transform duration-500"></div>
-
-                  <div className="relative">
-                    <div className="text-white mb-4 p-2 rounded-full bg-gray-800 inline-block group-hover:bg-blue-600/20 transition-colors duration-300">
-                      {item.icon}
-                    </div>
-                    <h4 className="text-xl font-bold mb-3">{item.title}</h4>
-                    <p className="text-gray-300">{item.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
-        </div>
-
- 
-   
       </div>
     </div>
   )
