@@ -29,7 +29,7 @@
   box-shadow: var(--space-chat-shadow);
   cursor: pointer;
   z-index: 50;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: var(--space-chat-transition);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,18 +38,6 @@
 .space-chat-button:hover {
   background: linear-gradient(to right, var(--space-chat-primary-dark), var(--space-chat-secondary-dark));
   transform: scale(1.05);
-}
-
-/* Chat button visibility */
-.space-chat-button-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.space-chat-button-hidden {
-  opacity: 0;
-  transform: translateY(100%);
-  pointer-events: none;
 }
 
 /* Add this new animation for the Sparkles icon */
@@ -83,18 +71,40 @@
 /* Chat window */
 .space-chat-window {
   position: fixed;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 0;
+  bottom: 1rem;
+  right: 1rem;
+  width: calc(100% - 2rem);
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--space-chat-shadow);
+  border-radius: var(--space-chat-radius);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   z-index: 50;
-  transition: none;
+  border: 1px solid var(--space-chat-border);
+  transition: var(--space-chat-transition);
+}
+
+@media (min-width: 768px) {
+  .space-chat-window {
+    right: 1.5rem;
+  }
+}
+
+.space-chat-open {
+  height: 80vh;
+  max-height: 600px;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.space-chat-closed {
+  height: 0;
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
 }
 
 /* Header */
@@ -141,14 +151,17 @@
 
 /* Messages container */
 .space-chat-messages {
+  padding: 1rem;
   flex: 1;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-height: none;
+  background-image: linear-gradient(to bottom, var(--space-chat-background), rgba(255, 255, 255, 0.8));
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-position: center;
+  max-height: calc(80vh - 120px); /* Ajusta este valor según sea necesario */
 }
 
 /* Suggestions */
@@ -253,8 +266,13 @@
 
 /* Form */
 .space-chat-form {
-  padding: 0.5rem;
-  background-color: var(--space-chat-background);
+  display: flex;
+  align-items: flex-end;
+  padding: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(249, 250, 251, 0.3);
+  backdrop-filter: blur(4px);
+  flex-shrink: 0;
 }
 
 .space-chat-input-container {
@@ -264,16 +282,20 @@
 
 .space-chat-textarea {
   width: 100%;
-  height: 40px;
-  max-height: 40px;
-  padding: 0.5rem 2.5rem 0.5rem 0.5rem;
+  min-height: 40px;
+  max-height: 150px;
+  padding: 0.5rem 1rem;
+  padding-right: 3rem;
   background-color: var(--space-chat-background);
   color: var(--space-chat-text);
   border: 1px solid var(--space-chat-border);
   border-radius: var(--space-chat-radius);
   resize: none;
-  overflow-y: auto;
-  font-size: 16px; /* Previene el zoom en iOS */
+  overflow: hidden;
+  transition: height 0.2s ease;
+  font-family: inherit;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .space-chat-textarea:focus {
@@ -288,10 +310,11 @@
 }
 
 .space-chat-send-btn {
-  right: 0.25rem;
+  position: absolute;
+  right: 0.5rem;
   bottom: 0.25rem;
-  height: 1.75rem;
-  width: 1.75rem;
+  height: 2rem;
+  width: 2rem;
   border-radius: 9999px;
   background: linear-gradient(to right, var(--space-chat-primary), var(--space-chat-secondary));
   color: white;
@@ -437,21 +460,5 @@
   flex-direction: column;
   height: 80vh;
   max-height: 600px;
-}
-
-/* Oculta el botón de chat cuando la ventana está abierta */
-.space-chat-open ~ .space-chat-button {
-  display: none;
-}
-
-/* Ajusta los estilos para pantallas más grandes */
-@media (min-width: 640px) {
-  .space-chat-window {
-    bottom: 1rem;
-    right: 1rem;
-    width: 400px;
-    height: 600px;
-    border-radius: var(--space-chat-radius);
-  }
 }
 
