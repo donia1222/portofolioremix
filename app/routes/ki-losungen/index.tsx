@@ -71,7 +71,7 @@ export default function AIBusinessSolutions() {
         {/* Contenido Principal */}
         <div className="mb-24s">
           <h2 className="text-3xl md:text-4xl font-bold text-center  mt-40 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-            Maßgeschneiderte KI-Lösungen
+            Maßgeschneiderte KI Lösungen
           </h2>
           <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-16">
             Jedes Unternehmen ist einzigartig, und die KI, die Sie verwenden, sollte es auch sein. Modelle, die wie Ihr
