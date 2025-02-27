@@ -1,35 +1,38 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useRef } from "react";
-import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
-import { FaRocket, FaPaperPlane } from "react-icons/fa";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
-import "./SpaceChat.css";
+import type React from "react"
+
+import { useState, useEffect, useRef } from "react"
+import { marked } from "marked"
+import DOMPurify from "dompurify"
+import { X, Trash2, SendHorizontal, Loader2, Sparkles } from "lucide-react"
+import "../css/space-chat.css"
 
 type Message = {
-  role: "system" | "user" | "assistant";
-  content: string; // Aquí para el assistant será HTML (ya convertido)
-};
+  role: "system" | "user" | "assistant"
+  content: string
+}
 
 type ChatResponse = {
-  response?: string;
-  error?: string;
-};
+  response?: string
+  error?: string
+}
 
 export default function SpaceChat() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showClearIcon, setShowClearIcon] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [showClearIcon, setShowClearIcon] = useState(false)
+  const [showChatButton, setShowChatButton] = useState(true)
 
-  const [availableQuestions, setAvailableQuestions] = useState<string[]>([]);
-  const [visibleQuestions, setVisibleQuestions] = useState<string[]>([]);
+  const [availableQuestions, setAvailableQuestions] = useState<string[]>([])
+  const [visibleQuestions, setVisibleQuestions] = useState<string[]>([])
 
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // Preguntas de ejemplo
+  // Example questions
   const allQuestions = [
     "Erstellen Sie Websites?",
     "Bieten Sie Dienstleistungen zur Entwicklung mobiler Anwendungen an?",
@@ -41,51 +44,50 @@ export default function SpaceChat() {
     "Bieten Sie Integrationen für E-Commerce-Lösungen an?",
     "Können Sie mobile Apps für iOS und Android entwickeln?",
     "Welche Support-Optionen bieten Sie nach der Entwicklung an?",
-  ];
+  ]
 
-  // Al montar: cargar mensajes de localStorage (si existían)
+  // Load messages from localStorage on mount
   useEffect(() => {
-    const storedMessages = localStorage.getItem("chatMessages");
+    const storedMessages = localStorage.getItem("chatMessages")
     if (storedMessages) {
-      const parsedMessages = JSON.parse(storedMessages) as Message[];
-      setMessages(parsedMessages);
+      const parsedMessages = JSON.parse(storedMessages) as Message[]
+      setMessages(parsedMessages)
     }
-    initializeQuestions();
-  }, []);
+    initializeQuestions()
+  }, [])
 
-  // Cada vez que haya nuevos mensajes, guardamos en localStorage y hacemos scroll
+  // Save messages to localStorage and scroll to bottom when messages change
   useEffect(() => {
-    localStorage.setItem("chatMessages", JSON.stringify(messages));
-    scrollToBottom();
-  }, [messages]);
+    localStorage.setItem("chatMessages", JSON.stringify(messages))
+    scrollToBottom()
+  }, [messages])
 
-  // Inicializa preguntas "sugeridas" (solo para la primera vez)
+  // Initialize suggested questions (only for the first time)
   const initializeQuestions = () => {
-    const initialVisible = allQuestions.slice(0, 3);
-    const remaining = allQuestions.slice(3);
-    setVisibleQuestions(initialVisible);
-    setAvailableQuestions(remaining);
-  };
+    const initialVisible = allQuestions.slice(0, 3)
+    const remaining = allQuestions.slice(3)
+    setVisibleQuestions(initialVisible)
+    setAvailableQuestions(remaining)
+  }
 
-  // Scroll al último mensaje
+  // Scroll to the last message
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
 
-  // Envía el mensaje del usuario y obtiene la respuesta
+  // Send user message and get response
   const sendMessage = async (messageContent: string) => {
-    setIsLoading(true);
+    if (!messageContent.trim()) return
 
-    // Añadimos el mensaje del usuario
-    const newMessages: Message[] = [
-      ...messages,
-      { role: "user", content: messageContent },
-    ];
+    setIsLoading(true)
 
-    // Tomamos últimos 10 mensajes para el contexto
-    const lastMessages = newMessages.slice(-10);
+    // Add user message
+    const newMessages: Message[] = [...messages, { role: "user", content: messageContent }]
 
-    // Agregamos un mensaje "system" (prompt general)
+    // Take last 10 messages for context
+    const lastMessages = newMessages.slice(-10)
+
+    // Add system message (general prompt)
     const messagesToSend: Message[] = [
       {
         role: "system",
@@ -124,220 +126,227 @@ export default function SpaceChat() {
     `,
       },
       ...lastMessages,
-    ];
+    ]
 
-    // Llamamos al endpoint /chat
-    const response = await fetch("/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: messagesToSend }),
-    });
+    try {
+      // Call the /chat endpoint
+      const response = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: messagesToSend }),
+      })
 
-    const data: ChatResponse = await response.json();
+      const data: ChatResponse = await response.json()
 
-    if (data.response) {
-      // 1) Convertimos de Markdown a HTML (si tu versión de marked es asincrónica)
-      //    Si NO es asincrónica, quita el "await" y usa marked(data.response) directamente.
-      const htmlFromMarkdown = await marked(data.response);
+      if (data.response) {
+        // Convert Markdown to HTML
+        const htmlFromMarkdown = await marked(data.response)
 
-      // 2) Sanitizamos
-      const sanitizedHTML = DOMPurify.sanitize(htmlFromMarkdown);
+        // Sanitize HTML
+        const sanitizedHTML = DOMPurify.sanitize(htmlFromMarkdown)
 
-      // Añadimos la respuesta del bot con HTML ya convertido
-      const updatedMessages: Message[] = [
-        ...newMessages,
-        { role: "assistant", content: sanitizedHTML },
-      ];
+        // Add bot response with converted HTML
+        const updatedMessages: Message[] = [...newMessages, { role: "assistant", content: sanitizedHTML }]
 
-      setMessages(updatedMessages);
-      setInput("");
-      setShowClearIcon(true);
-    } else {
-      console.error(data.error);
+        setMessages(updatedMessages)
+        setInput("")
+        setShowClearIcon(true)
+      } else if (data.error) {
+        console.error(data.error)
+      }
+    } catch (error) {
+      console.error("Failed to send message:", error)
+    } finally {
+      setIsLoading(false)
     }
+  }
 
-    setIsLoading(false);
-  };
-
-  // Cuando el usuario hace clic en una pregunta de ejemplo
+  // Handle click on example question
   const handleQuestionClick = (question: string) => {
-    sendMessage(question);
-    const newVisible = visibleQuestions.filter((q) => q !== question);
-    if (availableQuestions.length > 0) {
-      const [nextQ, ...remainQ] = availableQuestions;
-      newVisible.push(nextQ);
-      setAvailableQuestions(remainQ);
-    }
-    setVisibleQuestions(newVisible);
-  };
+    sendMessage(question)
 
-  // Limpiar todo el chat
+    // Update visible questions
+    const newVisible = visibleQuestions.filter((q) => q !== question)
+
+    if (availableQuestions.length > 0) {
+      const [nextQ, ...remainQ] = availableQuestions
+      newVisible.push(nextQ)
+      setAvailableQuestions(remainQ)
+    }
+
+    setVisibleQuestions(newVisible)
+  }
+
+  // Clear the entire chat
   const clearChat = () => {
-    setMessages([]);
-    setShowClearIcon(false);
-    localStorage.removeItem("chatMessages");
-  };
+    setMessages([])
+    setShowClearIcon(false)
+    localStorage.removeItem("chatMessages")
+  }
+
+  // Auto-resize textarea
+  const autoResizeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const target = e.target
+    setInput(target.value)
+
+    // Reset height to auto to get the correct scrollHeight
+    target.style.height = "auto"
+
+    // Set the height to scrollHeight to fit content
+    target.style.height = `${target.scrollHeight}px`
+
+    // Ensure we don't exceed max height
+    if (target.scrollHeight > 150) {
+      target.style.height = "150px"
+      target.style.overflowY = "auto"
+    } else {
+      target.style.overflowY = "hidden"
+    }
+  }
+
+  useEffect(() => {
+    let lastScrollY = window.pageYOffset
+
+    const handleScroll = () => {
+      const currentScrollY = window.pageYOffset
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down
+        setShowChatButton(false)
+      } else {
+        // Scrolling up
+        setShowChatButton(true)
+      }
+      lastScrollY = currentScrollY
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <>
-      {!isOpen ? (
+      {/* Chat button */}
+      {!isOpen && showChatButton && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-4 right-4 p-4 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 transition-all"
+          className={`space-chat-button ${showChatButton ? "space-chat-button-visible" : "space-chat-button-hidden"}`}
         >
-          <FaRocket className="h-6 w-6" />
+          <Sparkles className="space-chat-icon" />
         </button>
-      ) : (
-        <div
-          className={`fixed bottom-4 right-0 ${
-            isOpen
-              ? "w-full h-[80vh] md:w-[28rem] left-auto"
-              : "w-96 md:w-[28rem] h-[500px]"
-          } bg-gray-900 shadow-2xl rounded-lg flex flex-col overflow-hidden transition-all z-50 border border-indigo-500 transform ${
-            isOpen ? "translate-y-0" : "translate-y-full"
-          } transition-transform duration-500`}
-        >
-          {/* Header */}
-          <div className="bg-indigo-900 text-white p-4 flex justify-between items-center">
-            <h2 className="text-lg font-semibold flex items-center">
-              <FaRocket className="mr-2" /> Lweb KI-Chat
-            </h2>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white hover:bg-indigo-800 p-1 rounded-full transition-all"
-            >
-              <AiOutlineClose className="h-6 w-6" />
-            </button>
-          </div>
+      )}
 
-          {/* Contenedor de mensajes */}
-          <div className="p-4 flex-1 overflow-y-auto space-y-4 bg-[url('/placeholder.svg?height=500&width=500')] bg-cover">
-            {messages.length === 0 ? (
-              // Mostrar preguntas sugeridas si no hay mensajes en el chat
-              <div className="space-y-2">
-                {visibleQuestions.map((question, index) => (
-                  <button
-                    key={index}
-                    className="block w-full text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text px-4 py-2 rounded-full transition-all hover:text-gray-400"
-                    onClick={() => handleQuestionClick(question)}
-                    disabled={isLoading}
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
-            ) : (
-              // Mapeamos los mensajes
-              messages.map((msg, index) => (
-                <div
+      {/* Chat window */}
+      <div className={`space-chat-window ${isOpen ? "space-chat-open" : "space-chat-closed"}`}>
+        {/* Header */}
+        <div className="space-chat-header">
+          <h2 className="space-chat-title">
+            <Sparkles className="space-chat-title-icon" /> Lweb KI-Chat
+          </h2>
+          <button onClick={() => setIsOpen(false)} className="space-chat-close-btn" aria-label="Close chat">
+            <X className="space-chat-icon-sm" />
+          </button>
+        </div>
+
+        {/* Messages container */}
+        <div className="space-chat-messages" ref={messagesEndRef}>
+          {messages.length === 0 ? (
+            // Show suggested questions if no messages in chat
+            <div className="space-chat-suggestions">
+              <p className="space-chat-help-text">Wie kann ich Ihnen helfen?</p>
+              {visibleQuestions.map((question, index) => (
+                <button
                   key={index}
-                  className={`flex ${
-                    msg.role === "user" ? "justify-end" : "justify-start"
+                  className="space-chat-suggestion-btn"
+                  onClick={() => handleQuestionClick(question)}
+                  disabled={isLoading}
+                >
+                  <span className="space-chat-suggestion-text">{question}</span>
+                </button>
+              ))}
+            </div>
+          ) : (
+            // Map messages
+            messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`space-chat-message-container ${
+                  msg.role === "user" ? "space-chat-user" : "space-chat-assistant"
+                }`}
+              >
+                <div
+                  className={`space-chat-message-wrapper ${
+                    msg.role === "user" ? "space-chat-message-user" : "space-chat-message-assistant"
                   }`}
                 >
-                  <div className="flex flex-col max-w-[75%]">
-                    <p
-                      className={`text-xs mb-1 ${
-                        msg.role === "user"
-                          ? "text-indigo-300"
-                          : "text-gray-400"
-                      } opacity-75`}
-                    >
-                      {msg.role === "user" ? "User" : "Bot"}
-                    </p>
+                  <span
+                    className={`space-chat-message-sender ${
+                      msg.role === "user" ? "space-chat-sender-user" : "space-chat-sender-assistant"
+                    }`}
+                  >
+                    {msg.role === "user" ? "Sie" : "Lweb Assistant"}
+                  </span>
 
-                    {/* Renderizado de mensajes */}
-                    {msg.role === "assistant" ? (
-                      // Aquí usamos directamente el HTML que almacenamos en la respuesta
-                      <div
-                        className="px-4 py-2 rounded-lg break-words bg-gray-700 text-gray-200"
-                        dangerouslySetInnerHTML={{ __html: msg.content }}
-                      />
-                    ) : (
-                      // Mensaje del usuario (texto plano)
-                      <div
-                        className={`px-4 py-2 rounded-lg break-words ${
-                          msg.role === "user"
-                            ? "bg-indigo-600 text-white"
-                            : "bg-green-700 text-gray-200"
-                        }`}
-                      >
-                        {msg.content}
-                      </div>
-                    )}
-                  </div>
+                  {/* Message rendering */}
+                  {msg.role === "assistant" ? (
+                    // Use HTML stored in the response
+                    <div
+                      className="space-chat-message space-chat-message-html"
+                      dangerouslySetInnerHTML={{ __html: msg.content }}
+                    />
+                  ) : (
+                    // User message (plain text)
+                    <div className="space-chat-message space-chat-message-text">{msg.content}</div>
+                  )}
                 </div>
-              ))
-            )}
-            <div ref={messagesEndRef} />
-          </div>
+              </div>
+            ))
+          )}
+        </div>
 
-          {/* Input y botón para enviar */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              sendMessage(input);
-            }}
-            className="flex items-center border-t border-indigo-800"
-          >
+        {/* Input and send button */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            sendMessage(input)
+          }}
+          className="space-chat-form"
+        >
+          <div className="space-chat-input-container">
             <textarea
+              ref={textareaRef}
               name="message"
               value={input}
-              onChange={(e) => {
-                setInput(e.target.value);
-                const target = e.target as HTMLTextAreaElement;
-                target.style.height = "auto";
-                target.style.height = `${target.scrollHeight}px`;
-                scrollToBottom();
-              }}
-              className="flex-1 px-4 py-2 bg-gray-800 text-white border-none outline-none placeholder-gray-500 resize-none overflow-hidden"
+              onChange={autoResizeTextarea}
+              className="space-chat-textarea"
               placeholder="Ihre Nachricht hier ..."
               required
               disabled={isLoading}
               rows={1}
             />
-            {showClearIcon && (
-              <button
-                onClick={clearChat}
-                className="text-white hover:bg-red-600 p-2 rounded-full transition-all mr-2"
-              >
-                <AiOutlineDelete className="h-6 w-6" />
-              </button>
-            )}
+
             <button
               type="submit"
-              className="px-4 mr-5 py-2 text-indigo-200 transition-all flex items-center justify-center rounded-[20px]"
-              disabled={isLoading}
+              className={`space-chat-send-btn ${!input.trim() && !isLoading ? "space-chat-btn-disabled" : ""}`}
+              disabled={!input.trim() || isLoading}
+              aria-label="Senden"
             >
               {isLoading ? (
-                <svg
-                  className="animate-spin h-5 w-5 mr-2 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v8H4z"
-                  />
-                </svg>
+                <Loader2 className="space-chat-icon-sm space-chat-spin" />
               ) : (
-                <FaPaperPlane className="h-5 w-5" />
+                <SendHorizontal className="space-chat-icon-sm" />
               )}
-              {isLoading ? "Denken..." : ""}
             </button>
-          </form>
-        </div>
-      )}
+          </div>
+
+          {showClearIcon && (
+            <button type="button" onClick={clearChat} className="space-chat-clear-btn" aria-label="Chat löschen">
+              <Trash2 className="space-chat-icon-sm" />
+            </button>
+          )}
+        </form>
+      </div>
     </>
-  );
+  )
 }
+
