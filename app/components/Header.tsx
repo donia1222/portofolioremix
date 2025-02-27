@@ -2,7 +2,7 @@
 
 import { NavLink } from "@remix-run/react"
 import { useState, useEffect, useCallback } from "react"
-import { Code, AppWindow, Newspaper, Menu, X, Home } from "lucide-react"
+import { Code, AppWindow, Menu, X, Home, Brain } from "lucide-react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -95,7 +95,17 @@ export default function Header() {
               <span>App-Entwicklung</span>
             </NavLink>
 
-
+            <NavLink
+              to="/ki-losungen"
+              className={({ isActive }) =>
+                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                }`
+              }
+            >
+              <Brain className="h-5 w-5 animate-pulse" />
+              <span>KI-Lösungen</span>
+            </NavLink>
 
             <NavLink
               to="/roberto"
@@ -166,7 +176,19 @@ export default function Header() {
               <span>App-Entwicklung</span>
             </NavLink>
 
-   
+            <NavLink
+              onClick={() => setIsMenuOpen(false)}
+              to="/ki-losungen"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                }`
+              }
+            >
+              <Brain className="h-5 w-5 animate-pulse" />
+              <span>KI-Lösungen</span>
+            </NavLink>
+
             <NavLink
               onClick={() => setIsMenuOpen(false)}
               to="/roberto"

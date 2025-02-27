@@ -1,0 +1,199 @@
+"use client"
+
+import { useState, useEffect } from "react"
+import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink } from "lucide-react"
+import Header from "~/components/Header";
+export default function AIBusinessSolutions() {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+
+  useEffect(() => {
+    const style = document.createElement("style")
+    style.textContent = `
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0px); }
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes pulse-glow {
+        0%, 100% { opacity: 0.2; }
+        50% { opacity: 0.4; }
+      }
+      .animate-pulse-glow {
+        animation: pulse-glow 4s ease-in-out infinite;
+      }
+    `
+    document.head.appendChild(style)
+    return () => {
+      document.head.removeChild(style)
+    }
+  }, [])
+
+  return (
+    <div className="bg-black text-white min-h-screen overflow-hidden">
+            <div className="relative z-[9999] mb-20">
+  <Header />
+</div>
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-blue-950 opacity-80"></div>
+
+      {/* Animated background grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+      {/* Glow effects */}
+      <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20 animate-pulse"></div>
+      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-20 animate-pulse delay-1000"></div>
+
+      <div className="relative container mx-auto px-4 py-20">
+        {/* Hero Section */}
+        <div className="mb-24 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center text-center">
+            <div className="inline-block p-2 px-4 mb-6 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium tracking-wider transform hover:scale-105 transition-transform duration-300">
+              ZUKUNFTSWEISENDE TECHNOLOGIE
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">
+              Stärken Sie Ihr Unternehmen mit KI
+            </h1>
+            <p className="text-xl text-gray-300 mb-10 max-w-2xl">
+              Künstliche Intelligenz verändert die Art und Weise, wie Unternehmen arbeiten. Optimieren Sie Prozesse,
+              verbessern Sie den Kundenservice und treffen Sie intelligentere Entscheidungen.
+            </p>
+            <button className="group relative overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:scale-105">
+              <span className="relative z-10 flex items-center">
+                Entdecken Sie die Zukunft
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            </button>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="mb-24">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            Maßgeschneiderte KI-Lösungen
+          </h2>
+          <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-16">
+            Jedes Unternehmen ist einzigartig, und die KI, die Sie verwenden, sollte es auch sein. Modelle, die wie Ihr
+            Team reagieren, abgestimmt auf Ihre Unternehmensvision.
+          </p>
+
+          {/* How it works - Glassmorphism cards */}
+          <div className="grid md:grid-cols-3 gap-8 mb-24">
+            {[
+              {
+                icon: <Brain className="h-10 w-10" />,
+                title: "Personalisiertes Training",
+                description:
+                  "Entwicklung von KI-Modellen, die die spezifischen Bedürfnisse Ihres Unternehmens verstehen.",
+              },
+              {
+                icon: <Cog className="h-10 w-10" />,
+                title: "Fortschrittliches Fine-Tuning",
+                description:
+                  "Anpassung der Modelle für präzise Antworten, die die Essenz Ihres Unternehmens widerspiegeln.",
+              },
+              {
+                icon: <Zap className="h-10 w-10" />,
+                title: "Einfache Implementierung",
+                description: "Integration der KI in Ihr digitales Ökosystem ohne technische Komplikationen.",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="relative group"
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-0 group-hover:opacity-100 blur-lg transition-all duration-500"></div>
+                <div className="relative h-full backdrop-blur-sm bg-gray-900/60 border border-gray-800 p-8 rounded-2xl transition-all duration-300 group-hover:translate-y-[-5px] group-hover:shadow-[0_0_25px_rgba(59,130,246,0.3)]">
+                  <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl p-3 inline-block mb-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                  <p className="text-gray-300">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Benefits - Modern interactive cards */}
+          <h3 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+            Vorteile der KI-Integration
+          </h3>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <MessageSquare />,
+                title: "Optimierter Kundenservice",
+                description: "Schnelle und präzise Antworten ohne Wartezeiten.",
+              },
+              {
+                icon: <Bot />,
+                title: "Intelligente Automatisierung",
+                description: "Effizientere Prozesse und Reduzierung repetitiver Aufgaben.",
+              },
+              {
+                icon: <BarChart />,
+                title: "Bessere Entscheidungsfindung",
+                description: "Zugriff auf Echtzeitdaten für fundierte Entscheidungen.",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-2xl transition-all duration-500 hover:z-10"
+                style={{
+                  transform: hoveredCard === index ? "scale(1.05)" : "scale(1)",
+                  transition: "transform 0.3s ease-in-out",
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-800/50 to-purple-800/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="relative bg-gray-900/80 backdrop-blur-sm border border-gray-800 p-6 h-full rounded-2xl overflow-hidden group-hover:border-blue-500/50 transition-all duration-300">
+                  {/* Animated corner accent */}
+                  <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rotate-12 transform group-hover:scale-[2.5] transition-transform duration-500"></div>
+
+                  <div className="relative">
+                    <div className="text-white mb-4 p-2 rounded-full bg-gray-800 inline-block group-hover:bg-blue-600/20 transition-colors duration-300">
+                      {item.icon}
+                    </div>
+                    <h4 className="text-xl font-bold mb-3">{item.title}</h4>
+                    <p className="text-gray-300">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="relative max-w-4xl mx-auto text-center rounded-3xl overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm"></div>
+          <div className="relative p-12">
+            <h3 className="text-3xl md:text-4xl font-bold mb-6">Bereit, Ihr Unternehmen zu transformieren?</h3>
+            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              Entdecken Sie, wie personalisierte künstliche Intelligenz Ihr Unternehmen auf die nächste Stufe heben
+              kann.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="group relative overflow-hidden rounded-full bg-white text-gray-900 px-8 py-4 font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] transform hover:scale-105">
+                <span className="relative z-10 flex items-center">
+                  Demo anfordern
+                  <ExternalLink className="ml-2 h-5 w-5 group-hover:rotate-45 transition-transform duration-300" />
+                </span>
+              </button>
+              <button className="group relative overflow-hidden rounded-full bg-transparent border border-white/30 backdrop-blur-sm px-8 py-4 text-white font-medium transition-all duration-300 hover:border-white/70 transform hover:scale-105">
+                <span className="relative z-10 flex items-center">
+                  Jetzt kontaktieren
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
