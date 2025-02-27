@@ -193,11 +193,11 @@ export default function SpaceChat() {
     target.style.height = "auto"
 
     // Set the height to scrollHeight to fit content
-    target.style.height = `${target.scrollHeight}px`
+    const newHeight = Math.min(target.scrollHeight, 100) // Limitar a 100px de altura máxima
+    target.style.height = `${newHeight}px`
 
     // Ensure we don't exceed max height
-    if (target.scrollHeight > 150) {
-      target.style.height = "150px"
+    if (newHeight === 100) {
       target.style.overflowY = "auto"
     } else {
       target.style.overflowY = "hidden"
