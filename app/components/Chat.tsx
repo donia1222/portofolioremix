@@ -99,7 +99,9 @@ export default function SpaceChat() {
     - 📧 E-Mail: <a href="mailto:info@lweb.ch" class="custom-link">info@lweb.ch</a>
     - 📞 Telefon: <a href="tel:0817501911" class="custom-link">0817501911</a>
     - 🏢 Adresse: <a href="https://www.google.com/maps/search/?api=1&query=Bahnhofstrasse+9,+9475+Sevelen,+Schweiz" target="_blank" class="custom-link">Bahnhofstrasse 9, 9475 Sevelen, Schweiz 🇨🇭</a>
-    - 🌐 Website: <a href="http://www.lweb.ch" class="custom-link">www.lweb.ch</a>
+    - 🌐 Website lweb: <a href="http://www.lweb.ch" class="custom-link">www.lweb.ch</a>
+    - Website mehr info: <a href="https://www.lweb.ch/webs" class="custom-link">www.lweb.ch/webs</a>
+    - Apps mehr info: <a href="https://www.lweb.ch/apps" class="custom-link">www.lweb.ch/apps</a>
     `,
       },
       ...lastMessages,
