@@ -7,6 +7,7 @@ import { marked } from "marked"
 import DOMPurify from "dompurify"
 import { X, Trash2, SendHorizontal, Loader2, Sparkles } from "lucide-react"
 import "../css/space-chat.css"
+import Head from "next/head"
 
 type Message = {
   role: "system" | "user" | "assistant"
@@ -188,20 +189,6 @@ export default function SpaceChat() {
   const autoResizeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const target = e.target
     setInput(target.value)
-
-    // Reset height to auto to get the correct scrollHeight
-    target.style.height = "auto"
-
-    // Set the height to scrollHeight to fit content
-    const newHeight = Math.min(target.scrollHeight, 100) // Limitar a 100px de altura máxima
-    target.style.height = `${newHeight}px`
-
-    // Ensure we don't exceed max height
-    if (newHeight === 100) {
-      target.style.overflowY = "auto"
-    } else {
-      target.style.overflowY = "hidden"
-    }
   }
 
   useEffect(() => {
@@ -226,6 +213,9 @@ export default function SpaceChat() {
 
   return (
     <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </Head>
       {/* Chat button */}
       {!isOpen && showChatButton && (
         <button
@@ -322,7 +312,7 @@ export default function SpaceChat() {
               placeholder="Ihre Nachricht hier ..."
               required
               disabled={isLoading}
-              rows={1}
+              style={{ height: "40px", maxHeight: "40px", overflowY: "auto" }}
             />
 
             <button
