@@ -1,15 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink } from "lucide-react"
 import Header from "~/components/Header";
 import Chat from "~/components/Chat";
 
-
 export default function AIBusinessSolutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
+  const [isChatVisible, setIsChatVisible] = useState(true)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
+    // Agregar estilos dinámicamente para animaciones
     const style = document.createElement("style")
     style.textContent = `
       @keyframes float {
@@ -34,9 +36,26 @@ export default function AIBusinessSolutions() {
     }
   }, [])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Si se hace scroll hacia abajo (y supera cierto umbral), se oculta el Chat
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsChatVisible(false);
+      } 
+      // Si se hace scroll hacia arriba, se muestra el Chat
+      else if (currentScrollY < lastScrollY.current) {
+        setIsChatVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [])
+
   return (
-    // Se cambia overflow-hidden a overflow-x-hidden
-    <div className="bg-black text-white min-h-screen overflow-x-hidden"> {/* <-- Ajuste */}
+    <div className="bg-black text-white min-h-screen overflow-x-hidden">
       <div className="relative z-[9999] mb-20">
         <Header />
       </div>
@@ -48,14 +67,13 @@ export default function AIBusinessSolutions() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
       {/* Efectos glow (ocultos en pantallas pequeñas) */}
-      <div className="hidden md:block absolute top-20 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20 animate-pulse"></div> {/* <-- Ajuste */}
-      <div className="hidden md:block absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-20 animate-pulse delay-1000"></div> {/* <-- Ajuste */}
+      <div className="hidden md:block absolute top-20 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20 animate-pulse"></div>
+      <div className="hidden md:block absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-20 animate-pulse delay-1000"></div>
 
       <div className="relative container mx-auto px-4 py-20">
         {/* Sección Hero */}
         <div className="mb-24 max-w-4xl mx-auto">
           <div className="flex flex-col items-center text-center">
-
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">
               Stärken Sie Ihr Unternehmen mit KI
             </h1>
@@ -72,7 +90,7 @@ export default function AIBusinessSolutions() {
 
         {/* Contenido Principal */}
         <div className="mb-24s">
-          <h2 className="text-3xl md:text-4xl font-bold text-center  mt-40 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mt-40 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
             Maßgeschneiderte KI Lösungen
           </h2>
           <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-16">
@@ -118,10 +136,14 @@ export default function AIBusinessSolutions() {
               </div>
             ))}
           </div>
-          <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-        <Chat />
-      </div>
-          </div>
+
+          {/* Renderizado condicional del Chat según el scroll */}
+          {isChatVisible && (
+            <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+              <Chat />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
