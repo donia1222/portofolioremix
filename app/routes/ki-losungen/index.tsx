@@ -53,7 +53,7 @@ export default function AIBusinessSolutions() {
             <div className="inline-block p-2 px-4 mb-6 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium tracking-wider transform hover:scale-105 transition-transform duration-300">
               ZUKUNFTSWEISENDE TECHNOLOGIE
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">
               Stärken Sie Ihr Unternehmen mit KI
             </h1>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl">
