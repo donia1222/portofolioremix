@@ -170,6 +170,7 @@ export default function SpaceChat() {
 
     if (availableQuestions.length > 0) {
       const [nextQ, ...remainQ] = availableQuestions
+
       newVisible.push(nextQ)
       setAvailableQuestions(remainQ)
     }
@@ -249,7 +250,7 @@ export default function SpaceChat() {
         </div>
 
         {/* Messages container */}
-        <div className="space-chat-messages" ref={messagesEndRef}>
+        <div className="space-chat-messages">
           {messages.length === 0 ? (
             // Show suggested questions if no messages in chat
             <div className="space-chat-suggestions">
@@ -302,6 +303,8 @@ export default function SpaceChat() {
               </div>
             ))
           )}
+          {/* Añadir este div al final de los mensajes */}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Input and send button */}
