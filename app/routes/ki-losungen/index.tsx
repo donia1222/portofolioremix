@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink } from "lucide-react"
 import Header from "~/components/Header";
+
 export default function AIBusinessSolutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
@@ -32,22 +33,24 @@ export default function AIBusinessSolutions() {
   }, [])
 
   return (
-    <div className="bg-black text-white min-h-screen overflow-hidden">
-            <div className="relative z-[9999] mb-20">
-  <Header />
-</div>
-      {/* Background gradient */}
+    // Se cambia overflow-hidden a overflow-x-hidden
+    <div className="bg-black text-white min-h-screen overflow-x-hidden"> {/* <-- Ajuste */}
+      <div className="relative z-[9999] mb-20">
+        <Header />
+      </div>
+
+      {/* Fondo con degradado */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-blue-950 opacity-80"></div>
 
-      {/* Animated background grid */}
+      {/* Animación de la cuadricula */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-      {/* Glow effects */}
-      <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-20 animate-pulse delay-1000"></div>
+      {/* Efectos glow (ocultos en pantallas pequeñas) */}
+      <div className="hidden md:block absolute top-20 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20 animate-pulse"></div> {/* <-- Ajuste */}
+      <div className="hidden md:block absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-20 animate-pulse delay-1000"></div> {/* <-- Ajuste */}
 
       <div className="relative container mx-auto px-4 py-20">
-        {/* Hero Section */}
+        {/* Sección Hero */}
         <div className="mb-24 max-w-4xl mx-auto">
           <div className="flex flex-col items-center text-center">
             <div className="inline-block p-2 px-4 mb-6 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium tracking-wider transform hover:scale-105 transition-transform duration-300">
@@ -61,16 +64,13 @@ export default function AIBusinessSolutions() {
               verbessern Sie den Kundenservice und treffen Sie intelligentere Entscheidungen.
             </p>
             <button className="group relative overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:scale-105">
-              <span className="relative z-10 flex items-center">
-                Entdecken Sie die Zukunft
-              
-              </span>
+              <span className="relative z-10 flex items-center">Entdecken Sie die Zukunft</span>
               <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </button>
           </div>
         </div>
 
-        {/* Main Content */}
+        {/* Contenido Principal */}
         <div className="mb-24">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
             Maßgeschneiderte KI-Lösungen
@@ -80,7 +80,7 @@ export default function AIBusinessSolutions() {
             Team reagieren, abgestimmt auf Ihre Unternehmensvision.
           </p>
 
-          {/* How it works - Glassmorphism cards */}
+          {/* Cómo funciona */}
           <div className="grid md:grid-cols-3 gap-8 mb-24">
             {[
               {
@@ -119,9 +119,9 @@ export default function AIBusinessSolutions() {
             ))}
           </div>
 
-          {/* Benefits - Modern interactive cards */}
+          {/* Beneficios */}
           <h3 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-            Vorteile der KI-Integration
+            Vorteile der KI Integration
           </h3>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -151,7 +151,7 @@ export default function AIBusinessSolutions() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-800/50 to-purple-800/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <div className="relative bg-gray-900/80 backdrop-blur-sm border border-gray-800 p-6 h-full rounded-2xl overflow-hidden group-hover:border-blue-500/50 transition-all duration-300">
-                  {/* Animated corner accent */}
+                  {/* Esquina animada */}
                   <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rotate-12 transform group-hover:scale-[2.5] transition-transform duration-500"></div>
 
                   <div className="relative">
@@ -167,33 +167,9 @@ export default function AIBusinessSolutions() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="relative max-w-4xl mx-auto text-center rounded-3xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm"></div>
-          <div className="relative p-12">
-            <h3 className="text-3xl md:text-4xl font-bold mb-6">Bereit, Ihr Unternehmen zu transformieren?</h3>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Entdecken Sie, wie personalisierte künstliche Intelligenz Ihr Unternehmen auf die nächste Stufe heben
-              kann.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="group relative overflow-hidden rounded-full bg-white text-gray-900 px-8 py-4 font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] transform hover:scale-105">
-                <span className="relative z-10 flex items-center">
-                  Demo anfordern
-                  <ExternalLink className="ml-2 h-5 w-5 group-hover:rotate-45 transition-transform duration-300" />
-                </span>
-              </button>
-              <button className="group relative overflow-hidden rounded-full bg-transparent border border-white/30 backdrop-blur-sm px-8 py-4 text-white font-medium transition-all duration-300 hover:border-white/70 transform hover:scale-105">
-                <span className="relative z-10 flex items-center">
-                  Jetzt kontaktieren
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </button>
-            </div>
-          </div>
-        </div>
+ 
+   
       </div>
     </div>
   )
 }
-
