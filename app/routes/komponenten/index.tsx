@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Download, Mail, Phone, Globe, MapPin, CreditCard, Code, MessageSquare } from "lucide-react"
+import { Download, Mail, Phone, Globe, MapPin, CreditCard, MessageSquare, FileCode, Code2, Blocks } from "lucide-react"
 import ChatModul from "./ChatModul"
 import Header from "~/components/Header"
 import { useNavigate } from "react-router-dom"
@@ -148,12 +148,15 @@ export default function VCardModul() {
             <ul className="space-y-4">
               {[
                 {
-                  icon: <Code className="text-blue-400" />,
+                  icon: <Blocks className="text-blue-400" />,
                   text: "React-Version: Nahtlose Integration in Ihre React-Anwendungen",
                 },
-                { icon: <Code className="text-blue-400" />, text: "Kompatibel mit Joomla 3.9 und höher." },
                 {
-                  icon: <Code className="text-blue-400" />,
+                  icon: <FileCode className="text-blue-400" />,
+                  text: "Kompatibel mit Joomla 3.9 und höher.",
+                },
+                {
+                  icon: <Code2 className="text-blue-400" />,
                   text: "Reines HTML, CSS und JavaScript: Für maximale Flexibilität und Kompatibilität",
                 },
               ].map((item, index) => (
