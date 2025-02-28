@@ -458,6 +458,7 @@
 /* Asegúrate de que el contenedor de mensajes tenga una altura máxima */
 .space-chat-window {
   display: flex;
+z-index: 1200;
   flex-direction: column;
   height: 80vh;
   max-height: 600px;
