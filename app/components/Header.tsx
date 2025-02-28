@@ -2,7 +2,7 @@
 
 import { NavLink } from "@remix-run/react"
 import { useState, useEffect, useCallback } from "react"
-import { Code, AppWindow, Menu, X, Home, Brain } from "lucide-react"
+import { Code, AppWindow, Menu, X, Home, Brain, Package } from "lucide-react"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,13 +35,13 @@ export default function Header() {
         }`}
       >
         <div className="w-full md:max-w-[95%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-40">
-          {/* Logo y nombre */}
+          {/* Logo and name */}
           <NavLink to="/" className="flex items-center">
             <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
             <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold">Schweiz</span>
           </NavLink>
 
-          {/* Botón del menú móvil */}
+          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -57,7 +57,7 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Menú en pantallas grandes */}
+          {/* Menu for large screens */}
           <nav className="hidden md:flex space-x-6">
             <NavLink
               to="/"
@@ -108,6 +108,18 @@ export default function Header() {
             </NavLink>
 
             <NavLink
+              to="/komponenten"
+              className={({ isActive }) =>
+                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                }`
+              }
+            >
+              <Package className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+              <span>Komponenten</span>
+            </NavLink>
+
+            <NavLink
               to="/roberto"
               className={({ isActive }) =>
                 `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
@@ -126,7 +138,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Overlay del menú móvil */}
+      {/* Mobile menu overlay */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
           <button
@@ -187,6 +199,19 @@ export default function Header() {
             >
               <Brain className="h-5 w-5 animate-pulse" />
               <span>KI-Lösungen</span>
+            </NavLink>
+
+            <NavLink
+              onClick={() => setIsMenuOpen(false)}
+              to="/komponenten"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
+                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                }`
+              }
+            >
+              <Package className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+              <span>Komponenten</span>
             </NavLink>
 
             <NavLink
