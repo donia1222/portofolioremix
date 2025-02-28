@@ -71,6 +71,7 @@
 /* Chat window */
 .space-chat-window {
   position: fixed;
+  z-index: 1200;
   bottom: 1rem;
   right: 1rem;
   width: calc(100% - 2rem);
