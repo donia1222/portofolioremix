@@ -7,6 +7,8 @@ import { marked } from "marked"
 import DOMPurify from "dompurify"
 import { X, Trash2, SendHorizontal, Loader2, Sparkles } from "lucide-react"
 import "../css/space-chat.css"
+import { systemPrompt } from './chatPrompt'
+
 
 type Message = {
   role: "system" | "user" | "assistant"
@@ -44,6 +46,13 @@ export default function SpaceChat() {
     "Bieten Sie Integrationen für E-Commerce-Lösungen an?",
     "Können Sie mobile Apps für iOS und Android entwickeln?",
     "Welche Support-Optionen bieten Sie nach der Entwicklung an?",
+    "Wie funktioniert der KI-Chatbot auf dieser Website?",
+    "Welche Vorteile bietet die Integration eines intelligenten Chatbots?",
+    "Kann ich die Antworten des Chatbots an meine Bedürfnisse anpassen?",
+    "Wie wird das KI-Modell des Chatbots trainiert?",
+    "Wie schnell reagiert der Chatbot auf verschiedenen Geräten?",
+    "Wie wird die Privatsphäre und Datensicherheit im Chatbot gewährleistet?",
+    "Ist der Chatbot in der Lage, mehrere Sprachen und Kontexte zu handhaben?"
   ]
 
   // Load messages from localStorage on mount
@@ -64,8 +73,8 @@ export default function SpaceChat() {
 
   // Initialize suggested questions (only for the first time)
   const initializeQuestions = () => {
-    const initialVisible = allQuestions.slice(0, 3)
-    const remaining = allQuestions.slice(3)
+    const initialVisible = allQuestions.slice(0, 12)
+    const remaining = allQuestions.slice(12)
     setVisibleQuestions(initialVisible)
     setAvailableQuestions(remaining)
   }
@@ -91,39 +100,7 @@ export default function SpaceChat() {
     const messagesToSend: Message[] = [
       {
         role: "system",
-        content: `Hallo! Willkommen bei Lweb.ch, wo wir maßgeschneiderte Lösungen für die Erstellung von Websites, Online-Shops, mobilen Anwendungen und vieles mehr anbieten. Hier sind einige Themen, zu denen ich dir detaillierte Informationen geben kann:
-   
-        1. **Erstellung von maßgeschneiderten Websites**: Bei Lweb.ch erstellen wir maßgeschneiderte Websites, die du vollständig personalisieren kannst, ohne Programmierkenntnisse zu benötigen. Schon ab 990 CHF kannst du eine Website mit einem benutzerfreundlichen Admin-Panel erhalten, in dem du Bilder, Texte, Farben und vieles mehr anpassen kannst. Wir geben dir die Werkzeuge an die Hand, um sicherzustellen, dass deine Website deiner Vision entspricht und du sie selbstständig verwalten kannst, ohne von Entwicklern abhängig zu sein.
-    
-        2. **Online-Shops (E-Commerce)**: Wusstest du, dass du schon ab 2450 CHF deinen eigenen Online-Shop haben kannst? Wir sind auf die Erstellung von Online-Shops spezialisiert, die alle Funktionen bieten, die du brauchst: von der Inventarverwaltung bis hin zur Implementierung sicherer Zahlungsmethoden und der Automatisierung von Versandprozessen. Wir verwenden fortschrittliche Tools wie EasyStore von JoomShaper für Joomla, das eine effiziente Verwaltung und umfassende Anpassung des Designs deines Shops ermöglicht.
-        
-        3. **Integration von Künstlicher Intelligenz (KI) und Chatbots**: Wir implementieren Lösungen für künstliche Intelligenz in Websites, um die Benutzererfahrung zu verbessern. Wir nutzen Technologien wie ChatGPT, um den Kundenservice zu automatisieren, häufige Fragen zu beantworten und rund um die Uhr Unterstützung anzubieten. Mit unserem System können Benutzer in Echtzeit präzise und kontextbezogene Antworten erhalten, was die Interaktion und Kundenzufriedenheit verbessert. Außerdem kann der Chatbot aus jeder Konversation lernen und sich an die spezifischen Bedürfnisse deines Unternehmens anpassen.
-        
-        4. **Entwicklung mit Joomla**: Wir sind Experten für Joomla, ein leistungsstarkes Content-Management-System (CMS), das die Erstellung dynamischer Websites mit einer benutzerfreundlichen Oberfläche erleichtert. Joomla bietet zahlreiche Vorteile wie Flexibilität, einfache Bedienbarkeit und die Möglichkeit, Erweiterungen und Module zu integrieren. Es ist auch sehr SEO-freundlich, was bedeutet, dass deine Website in Suchmaschinen besser sichtbar wird. Zudem ist Joomla sicher und erhält regelmäßige Updates, um deine Website vor Schwachstellen zu schützen.
-        
-        5. **Entwicklung von mobilen Anwendungen (React Native)**: Wir sind spezialisiert auf die Erstellung mobiler Anwendungen für iOS und Android unter Verwendung von React Native, einer Technologie, die es ermöglicht, qualitativ hochwertige Anwendungen mit nur einer Codebasis zu entwickeln. Dies reduziert die Entwicklungszeit und -kosten. Unsere Apps sind schnell, reaktionsschnell und bieten eine hervorragende Benutzererfahrung. Außerdem können wir erweiterte Funktionen wie Push-Benachrichtigungen, In-App-Käufe und Abonnements integrieren, sodass deine App bereit für den Markt ist.
-        
-        6. **Hosting und Domainverwaltung (Hostpoint)**: Wir arbeiten mit Hostpoint, dem führenden Hosting-Anbieter in der Schweiz, um sicherzustellen, dass deine Website auf zuverlässigen und sicheren Servern gehostet wird. Wir kümmern uns um alles, vom Domainkauf bis hin zur Verwaltung skalierbarer Datenbanken, die für Leistung und Sicherheit optimiert sind. Mit Hostpoint wird deine Website eine hohe Verfügbarkeit, optimale Leistung und Schutz vor Cyberbedrohungen haben.
-        
-        7. **SEO und Website-Leistung**: Wir wissen, wie wichtig es ist, dass deine Website nicht nur gut aussieht, sondern auch in Suchmaschinen gut platziert ist. Deshalb setzen wir SEO-Optimierungsstrategien um, um deine Sichtbarkeit bei Google zu verbessern und organischen Traffic zu generieren. Wir sorgen dafür, dass deine Website in Bezug auf Geschwindigkeit, Benutzerfreundlichkeit und mobile Kompatibilität optimiert ist, was Schlüsselfaktoren für eine gute Platzierung in Suchmaschinen sind.
-        
-        8. **Kontinuierliche Unterstützung und Wartung**: Unser Service endet nicht, wenn deine Website oder App online ist. Wir bieten kontinuierlichen Support, um sicherzustellen, dass alles reibungslos funktioniert. Dazu gehören Updates, Sicherheitsverbesserungen und Anpassungen an die neuen Anforderungen deines Unternehmens. Du kannst dich darauf verlassen, dass wir technische Probleme lösen oder Änderungen vornehmen, die du benötigst.
-
-        9. **Über den Gründer, Roberto Salvador**: Roberto Salvador hat seit 2019 fünf Anwendungen veröffentlicht und mehr als 25 Webseiten entwickelt. Er ist spezialisiert auf moderne Technologien wie React Native, Astro, Next.js, Remix, JavaScript, TypeScript, CSS und Tailwind. Zudem kann er Projekte auf Plattformen wie Vercel und GCP (Google Cloud Platform) effizient deployen. Täglich widmet er 4 bis 5 Stunden dem autodidaktischen Lernen und der Praxis, während er seit 2010 erfolgreich ein anderes Geschäft führt.
-
-        Zusätzlich bieten wir kostenlose Testversionen an, damit du die Qualität unserer Arbeit bewerten kannst, bevor du dich verpflichtest. Wenn du ein Projekt im Kopf hast oder einfach nur deine Optionen erkunden möchtest, helfe ich dir gerne weiter und zeige dir, wie wir zusammenarbeiten können, um deine Ideen zu verwirklichen.
-        **kurze und prägnante Antworten**
-        
-    
-    **Kontakt**:
-    - 📧 E-Mail: <a href="mailto:info@lweb.ch" class="custom-link">info@lweb.ch</a>
-    - 📞 Telefon: <a href="tel:0817501911" class="custom-link">0817501911</a>
-    - 🏢 Adresse: <a href="https://www.google.com/maps/search/?api=1&query=Bahnhofstrasse+9,+9475+Sevelen,+Schweiz" target="_blank" class="custom-link">Bahnhofstrasse 9, 9475 Sevelen, Schweiz 🇨🇭</a>
-    - 🌐 Website lweb: <a href="http://www.lweb.ch" class="custom-link">www.lweb.ch</a>
-    - Website mehr info: <a href="https://www.lweb.ch/webs" class="custom-link">www.lweb.ch/webs</a>
-    - Apps mehr info: <a href="https://www.lweb.ch/apps" class="custom-link">www.lweb.ch/apps</a>
-    - KI Lösungen: <a href="https://www.lweb.ch/ki-losungen" class="custom-link">www.lweb.ch/ki-losungen</a>
-    `,
+        content: systemPrompt,
       },
       ...lastMessages,
     ]
@@ -245,7 +222,7 @@ export default function SpaceChat() {
             <Sparkles className="space-chat-title-icon" /> Lweb KI-Chat
           </h2>
           <button onClick={() => setIsOpen(false)} className="space-chat-close-btn" aria-label="Close chat">
-            <X className="space-chat-icon-sm" />
+          <X className="space-chat-icon-sl mt-4" />
           </button>
         </div>
 
