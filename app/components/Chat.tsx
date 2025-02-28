@@ -1,14 +1,12 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect, useRef } from "react"
 import { marked } from "marked"
 import DOMPurify from "dompurify"
 import { X, Trash2, SendHorizontal, Loader2, Sparkles } from "lucide-react"
 import "../css/space-chat.css"
-import { systemPrompt } from './chatPrompt'
-
+import { systemPrompt } from "./chatPrompt"
 
 type Message = {
   role: "system" | "user" | "assistant"
@@ -34,8 +32,10 @@ export default function SpaceChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // Example questions
+  // Array de preguntas de ejemplo.
+  // Se incluye la opción especial para contactar por WhatsApp.
   const allQuestions = [
+    "Kontaktieren Sie uns per WhatsApp?", // Pregunta especial para WhatsApp
     "Erstellen Sie Websites?",
     "Bieten Sie Dienstleistungen zur Entwicklung mobiler Anwendungen an?",
     "Wie funktioniert die künstliche Intelligenz in Ihren Lösungen?",
@@ -55,7 +55,7 @@ export default function SpaceChat() {
     "Ist der Chatbot in der Lage, mehrere Sprachen und Kontexte zu handhaben?"
   ]
 
-  // Load messages from localStorage on mount
+  // Cargar mensajes guardados en localStorage al montar el componente
   useEffect(() => {
     const storedMessages = localStorage.getItem("chatMessages")
     if (storedMessages) {
@@ -65,13 +65,13 @@ export default function SpaceChat() {
     initializeQuestions()
   }, [])
 
-  // Save messages to localStorage and scroll to bottom when messages change
+  // Guardar mensajes en localStorage y desplazar la vista al final cada vez que cambian
   useEffect(() => {
     localStorage.setItem("chatMessages", JSON.stringify(messages))
     scrollToBottom()
   }, [messages])
 
-  // Initialize suggested questions (only for the first time)
+  // Inicializar preguntas sugeridas: se muestran las primeras 12 y el resto se guarda en availableQuestions
   const initializeQuestions = () => {
     const initialVisible = allQuestions.slice(0, 12)
     const remaining = allQuestions.slice(12)
@@ -79,34 +79,31 @@ export default function SpaceChat() {
     setAvailableQuestions(remaining)
   }
 
-  // Scroll to the last message
+  // Desplazar la vista hasta el final del chat
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
-  // Send user message and get response
+  // Función para enviar el mensaje del usuario y obtener respuesta del servidor
   const sendMessage = async (messageContent: string) => {
     if (!messageContent.trim()) return
 
     setIsLoading(true)
 
-    // Add user message
+    // Añadir el mensaje del usuario a la lista de mensajes
     const newMessages: Message[] = [...messages, { role: "user", content: messageContent }]
 
-    // Take last 10 messages for context
+    // Se toman los últimos 10 mensajes para el contexto
     const lastMessages = newMessages.slice(-10)
 
-    // Add system message (general prompt)
+    // Crear el arreglo de mensajes a enviar (incluye el prompt del sistema)
     const messagesToSend: Message[] = [
-      {
-        role: "system",
-        content: systemPrompt,
-      },
+      { role: "system", content: systemPrompt },
       ...lastMessages,
     ]
 
     try {
-      // Call the /chat endpoint
+      // Llamar al endpoint /chat
       const response = await fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -116,15 +113,14 @@ export default function SpaceChat() {
       const data: ChatResponse = await response.json()
 
       if (data.response) {
-        // Convert Markdown to HTML
+        // Convertir la respuesta de Markdown a HTML
         const htmlFromMarkdown = await marked(data.response)
 
-        // Sanitize HTML
+        // Sanitizar el HTML para evitar vulnerabilidades
         const sanitizedHTML = DOMPurify.sanitize(htmlFromMarkdown)
 
-        // Add bot response with converted HTML
+        // Añadir la respuesta del asistente a la lista de mensajes
         const updatedMessages: Message[] = [...newMessages, { role: "assistant", content: sanitizedHTML }]
-
         setMessages(updatedMessages)
         setInput("")
         setShowClearIcon(true)
@@ -138,50 +134,67 @@ export default function SpaceChat() {
     }
   }
 
-  // Handle click on example question
+  // Función para abrir WhatsApp con un mensaje predefinido
+  const openWhatsApp = () => {
+    // Número de WhatsApp en formato internacional sin símbolos (ejemplo: 491234567890)
+    const whatsappNumber = "491234567890"
+    // Mensaje predefinido en alemán
+    const message = "Hallo, ich bin an Ihren Dienstleistungen interessiert"
+    // Construir la URL para abrir WhatsApp
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    // Abrir WhatsApp en una nueva pestaña
+    window.open(url, "_blank")
+  }
+
+  // Manejar el clic en una pregunta de ejemplo
   const handleQuestionClick = (question: string) => {
+    // Si la pregunta es la opción de WhatsApp, abrir WhatsApp y no enviar al chat
+    if (question.includes("WhatsApp")) {
+      openWhatsApp()
+      return
+    }
+
+    // Enviar la pregunta como mensaje al chat
     sendMessage(question)
 
-    // Update visible questions
+    // Actualizar las preguntas visibles: eliminar la pregunta seleccionada
     const newVisible = visibleQuestions.filter((q) => q !== question)
-
+    // Si hay preguntas disponibles, agregar la siguiente a la lista visible
     if (availableQuestions.length > 0) {
       const [nextQ, ...remainQ] = availableQuestions
-
       newVisible.push(nextQ)
       setAvailableQuestions(remainQ)
     }
-
     setVisibleQuestions(newVisible)
   }
 
-  // Clear the entire chat
+  // Función para limpiar el chat
   const clearChat = () => {
     setMessages([])
     setShowClearIcon(false)
     localStorage.removeItem("chatMessages")
   }
 
-  // Auto-resize textarea
+  // Autoajustar la altura del textarea
   const autoResizeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const target = e.target
     setInput(target.value)
-
-    // Mantener una altura fija
+    // Mantener una altura fija de 40px y overflow auto para el scroll vertical
     target.style.height = "40px"
     target.style.overflowY = "auto"
   }
 
+  // Mostrar/ocultar el botón del chat según el scroll
   useEffect(() => {
     let lastScrollY = window.pageYOffset
 
     const handleScroll = () => {
       const currentScrollY = window.pageYOffset
       if (currentScrollY > lastScrollY) {
-        // Scrolling down
+        // Ocultar botón al hacer scroll hacia abajo
         setShowChatButton(false)
       } else {
-        // Scrolling up
+        // Mostrar botón al hacer scroll hacia arriba
         setShowChatButton(true)
       }
       lastScrollY = currentScrollY
@@ -192,7 +205,7 @@ export default function SpaceChat() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Efecto para desactivar el zoom
+  // Desactivar el zoom en dispositivos móviles
   useEffect(() => {
     const metaViewport = document.querySelector("meta[name=viewport]")
     if (metaViewport) {
@@ -207,29 +220,29 @@ export default function SpaceChat() {
 
   return (
     <>
-      {/* Chat button */}
+      {/* Botón para abrir el chat */}
       {!isOpen && showChatButton && (
         <button onClick={() => setIsOpen(true)} className="space-chat-button">
           <Sparkles className="space-chat-icon" />
         </button>
       )}
 
-      {/* Chat window */}
+      {/* Ventana del chat */}
       <div className={`space-chat-window ${isOpen ? "space-chat-open" : "space-chat-closed"}`}>
-        {/* Header */}
+        {/* Cabecera */}
         <div className="space-chat-header">
           <h2 className="space-chat-title">
             <Sparkles className="space-chat-title-icon" /> Lweb KI-Chat
           </h2>
           <button onClick={() => setIsOpen(false)} className="space-chat-close-btn" aria-label="Close chat">
-          <X className="space-chat-icon-sl mt-4" />
+            <X className="space-chat-icon-sl mt-4" />
           </button>
         </div>
 
-        {/* Messages container */}
+        {/* Contenedor de mensajes */}
         <div className="space-chat-messages">
           {messages.length === 0 ? (
-            // Show suggested questions if no messages in chat
+            // Mostrar las preguntas sugeridas si aún no hay mensajes en el chat
             <div className="space-chat-suggestions">
               <p className="space-chat-help-text">Wie kann ich Ihnen helfen?</p>
               {visibleQuestions.map((question, index) => (
@@ -244,47 +257,31 @@ export default function SpaceChat() {
               ))}
             </div>
           ) : (
-            // Map messages
+            // Mostrar cada mensaje del chat
             messages.map((msg, index) => (
               <div
                 key={index}
-                className={`space-chat-message-container ${
-                  msg.role === "user" ? "space-chat-user" : "space-chat-assistant"
-                }`}
+                className={`space-chat-message-container ${msg.role === "user" ? "space-chat-user" : "space-chat-assistant"}`}
               >
-                <div
-                  className={`space-chat-message-wrapper ${
-                    msg.role === "user" ? "space-chat-message-user" : "space-chat-message-assistant"
-                  }`}
-                >
-                  <span
-                    className={`space-chat-message-sender ${
-                      msg.role === "user" ? "space-chat-sender-user" : "space-chat-sender-assistant"
-                    }`}
-                  >
+                <div className={`space-chat-message-wrapper ${msg.role === "user" ? "space-chat-message-user" : "space-chat-message-assistant"}`}>
+                  <span className={`space-chat-message-sender ${msg.role === "user" ? "space-chat-sender-user" : "space-chat-sender-assistant"}`}>
                     {msg.role === "user" ? "Sie" : "Lweb Assistant"}
                   </span>
-
-                  {/* Message rendering */}
+                  {/* Renderizar el mensaje */}
                   {msg.role === "assistant" ? (
-                    // Use HTML stored in the response
-                    <div
-                      className="space-chat-message space-chat-message-html"
-                      dangerouslySetInnerHTML={{ __html: msg.content }}
-                    />
+                    <div className="space-chat-message space-chat-message-html" dangerouslySetInnerHTML={{ __html: msg.content }} />
                   ) : (
-                    // User message (plain text)
                     <div className="space-chat-message space-chat-message-text">{msg.content}</div>
                   )}
                 </div>
               </div>
             ))
           )}
-          {/* Añadir este div al final de los mensajes */}
+          {/* Div para desplazar automáticamente al final del chat */}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input and send button */}
+        {/* Formulario de entrada de mensaje y botón de envío */}
         <form
           onSubmit={(e) => {
             e.preventDefault()
@@ -304,7 +301,6 @@ export default function SpaceChat() {
               disabled={isLoading}
               rows={1}
             />
-
             <button
               type="submit"
               className={`space-chat-send-btn ${!input.trim() && !isLoading ? "space-chat-btn-disabled" : ""}`}
@@ -318,7 +314,6 @@ export default function SpaceChat() {
               )}
             </button>
           </div>
-
           {showClearIcon && (
             <button type="button" onClick={clearChat} className="space-chat-clear-btn" aria-label="Chat löschen">
               <Trash2 className="space-chat-icon-sm" />
@@ -329,4 +324,3 @@ export default function SpaceChat() {
     </>
   )
 }
-

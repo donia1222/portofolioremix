@@ -29,9 +29,9 @@ export default function VCardModul() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-blue-900 flex flex-col items-center justify-center pb-20">
-      <div className="relative z-[9999] mb-20">
+  
         <Header />
-      </div>
+
 
       {/* Filter/Toggle Component */}
       <div className="mb-8 mt-8">
