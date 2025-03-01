@@ -1,10 +1,19 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect, useRef } from "react"
+import React, { useState, useEffect, useRef, ChangeEvent } from "react"
 import { marked } from "marked"
 import DOMPurify from "dompurify"
-import { X, Trash2, SendHorizontal, Loader2, Sparkles } from "lucide-react"
+import {
+  X,
+  Trash2,
+  SendHorizontal,
+  Loader2,
+  Sparkles,
+  Plus,
+  ChevronLeft,
+  ChevronRight,
+  Minus,
+} from "lucide-react"
 import "../css/space-chat.css"
 import { systemPrompt } from "./chatPrompt"
 
@@ -29,13 +38,21 @@ export default function SpaceChat() {
   const [availableQuestions, setAvailableQuestions] = useState<string[]>([])
   const [visibleQuestions, setVisibleQuestions] = useState<string[]>([])
 
+  // Estados para el flujo de cita
+  const [appointmentStep, setAppointmentStep] = useState(0)
+  const [appointmentService, setAppointmentService] = useState("")
+  const [appointmentName, setAppointmentName] = useState("")
+  const [appointmentDate, setAppointmentDate] = useState("")
+  const [appointmentTime, setAppointmentTime] = useState("")
+
+  // Estado para mostrar/ocultar el calendario
+  const [calendarOpen, setCalendarOpen] = useState(false)
+
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  // Array de preguntas de ejemplo.
-  // Se incluye la opción especial para contactar por WhatsApp.
+  // Array de preguntas de ejemplo
   const allQuestions = [
-    "Kontaktieren Sie uns per WhatsApp?", // Pregunta especial para WhatsApp
     "Erstellen Sie Websites?",
     "Bieten Sie Dienstleistungen zur Entwicklung mobiler Anwendungen an?",
     "Wie funktioniert die künstliche Intelligenz in Ihren Lösungen?",
@@ -47,16 +64,17 @@ export default function SpaceChat() {
     "Können Sie mobile Apps für iOS und Android entwickeln?",
     "Welche Support-Optionen bieten Sie nach der Entwicklung an?",
     "Wie funktioniert der KI-Chatbot auf dieser Website?",
+    "Einen Termin vereinbaren?",
     "Welche Vorteile bietet die Integration eines intelligenten Chatbots?",
     "Kann ich die Antworten des Chatbots an meine Bedürfnisse anpassen?",
     "Wie wird das KI-Modell des Chatbots trainiert?",
     "Wie schnell reagiert der Chatbot auf verschiedenen Geräten?",
     "Wie wird die Privatsphäre und Datensicherheit im Chatbot gewährleistet?",
-    "Ist der Chatbot in der Lage, mehrere Sprachen und Kontexte zu handhaben?"
+    "Ist der Chatbot in der Lage, mehrere Sprachen und Kontexte zu handhaben?",
   ]
 
-  // Cargar mensajes guardados en localStorage al montar el componente
   useEffect(() => {
+    // Cargar mensajes previos del localStorage
     const storedMessages = localStorage.getItem("chatMessages")
     if (storedMessages) {
       const parsedMessages = JSON.parse(storedMessages) as Message[]
@@ -65,13 +83,12 @@ export default function SpaceChat() {
     initializeQuestions()
   }, [])
 
-  // Guardar mensajes en localStorage y desplazar la vista al final cada vez que cambian
   useEffect(() => {
+    // Guardar en localStorage cada vez que cambien los mensajes
     localStorage.setItem("chatMessages", JSON.stringify(messages))
     scrollToBottom()
   }, [messages])
 
-  // Inicializar preguntas sugeridas: se muestran las primeras 12 y el resto se guarda en availableQuestions
   const initializeQuestions = () => {
     const initialVisible = allQuestions.slice(0, 12)
     const remaining = allQuestions.slice(12)
@@ -79,31 +96,23 @@ export default function SpaceChat() {
     setAvailableQuestions(remaining)
   }
 
-  // Desplazar la vista hasta el final del chat
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
-  // Función para enviar el mensaje del usuario y obtener respuesta del servidor
+  // Enviar mensaje al servidor
   const sendMessage = async (messageContent: string) => {
     if (!messageContent.trim()) return
 
     setIsLoading(true)
-
-    // Añadir el mensaje del usuario a la lista de mensajes
     const newMessages: Message[] = [...messages, { role: "user", content: messageContent }]
-
-    // Se toman los últimos 10 mensajes para el contexto
     const lastMessages = newMessages.slice(-10)
-
-    // Crear el arreglo de mensajes a enviar (incluye el prompt del sistema)
     const messagesToSend: Message[] = [
       { role: "system", content: systemPrompt },
       ...lastMessages,
     ]
 
     try {
-      // Llamar al endpoint /chat
       const response = await fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -113,53 +122,62 @@ export default function SpaceChat() {
       const data: ChatResponse = await response.json()
 
       if (data.response) {
-        // Convertir la respuesta de Markdown a HTML
-        const htmlFromMarkdown = await marked(data.response)
-
-        // Sanitizar el HTML para evitar vulnerabilidades
+        const htmlFromMarkdown = marked(data.response) as string
         const sanitizedHTML = DOMPurify.sanitize(htmlFromMarkdown)
-
-        // Añadir la respuesta del asistente a la lista de mensajes
-        const updatedMessages: Message[] = [...newMessages, { role: "assistant", content: sanitizedHTML }]
+        const updatedMessages: Message[] = [
+          ...newMessages,
+          { role: "assistant", content: sanitizedHTML },
+        ]
         setMessages(updatedMessages)
         setInput("")
         setShowClearIcon(true)
       } else if (data.error) {
-        console.error(data.error)
+        console.error("Error del servidor:", data.error)
       }
     } catch (error) {
-      console.error("Failed to send message:", error)
+      console.error("Fallo al enviar el mensaje:", error)
     } finally {
       setIsLoading(false)
     }
   }
 
-  // Función para abrir WhatsApp con un mensaje predefinido
+  // Abrir WhatsApp con un mensaje prefabricado (ejemplo)
   const openWhatsApp = () => {
-    // Número de WhatsApp en formato internacional sin símbolos (ejemplo: 491234567890)
-    const whatsappNumber = "491234567890"
-    // Mensaje predefinido en alemán
+    const whatsappNumber = "491234567890" // Reemplaza con tu número
     const message = "Hallo, ich bin an Ihren Dienstleistungen interessiert"
-    // Construir la URL para abrir WhatsApp
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-    // Abrir WhatsApp en una nueva pestaña
     window.open(url, "_blank")
   }
 
-  // Manejar el clic en una pregunta de ejemplo
+  // Enviar cita a WhatsApp y resetear flujo
+  const sendAppointmentRequest = () => {
+    // Cambia a tu número
+    const whatsappNumber = "0041765608645" 
+    // Ajustamos el mensaje para que contenga la fecha en DD-MM-YYYY
+    const message = `Hallo, ich möchte einen Termin vereinbaren.
+Service: ${appointmentService}
+Name: ${appointmentName}
+Datum: ${appointmentDate}
+Uhrzeit: ${appointmentTime}`
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
+    window.open(url, "_blank")
+    // Reiniciar
+    setAppointmentStep(0)
+    setAppointmentService("")
+    setAppointmentName("")
+    setAppointmentDate("")
+    setAppointmentTime("")
+    setCalendarOpen(false)
+  }
+
+  // Detectar clic en pregunta sugerida
   const handleQuestionClick = (question: string) => {
-    // Si la pregunta es la opción de WhatsApp, abrir WhatsApp y no enviar al chat
-    if (question.includes("WhatsApp")) {
-      openWhatsApp()
+    if (question.includes("Termin vereinbaren")) {
+      setAppointmentStep(1)
       return
     }
-
-    // Enviar la pregunta como mensaje al chat
     sendMessage(question)
-
-    // Actualizar las preguntas visibles: eliminar la pregunta seleccionada
     const newVisible = visibleQuestions.filter((q) => q !== question)
-    // Si hay preguntas disponibles, agregar la siguiente a la lista visible
     if (availableQuestions.length > 0) {
       const [nextQ, ...remainQ] = availableQuestions
       newVisible.push(nextQ)
@@ -168,44 +186,38 @@ export default function SpaceChat() {
     setVisibleQuestions(newVisible)
   }
 
-  // Función para limpiar el chat
+  // Borrar todo el chat
   const clearChat = () => {
     setMessages([])
     setShowClearIcon(false)
     localStorage.removeItem("chatMessages")
   }
 
-  // Autoajustar la altura del textarea
-  const autoResizeTextarea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  // Crecimiento automático del textarea
+  const autoResizeTextarea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const target = e.target
     setInput(target.value)
-    // Mantener una altura fija de 40px y overflow auto para el scroll vertical
     target.style.height = "40px"
     target.style.overflowY = "auto"
   }
 
-  // Mostrar/ocultar el botón del chat según el scroll
+  // Ocultar o mostrar botón del chat según scroll
   useEffect(() => {
     let lastScrollY = window.pageYOffset
-
     const handleScroll = () => {
       const currentScrollY = window.pageYOffset
       if (currentScrollY > lastScrollY) {
-        // Ocultar botón al hacer scroll hacia abajo
         setShowChatButton(false)
       } else {
-        // Mostrar botón al hacer scroll hacia arriba
         setShowChatButton(true)
       }
       lastScrollY = currentScrollY
     }
-
     window.addEventListener("scroll", handleScroll, { passive: true })
-
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Desactivar el zoom en dispositivos móviles
+  // Ajustar meta viewport en móvil
   useEffect(() => {
     const metaViewport = document.querySelector("meta[name=viewport]")
     if (metaViewport) {
@@ -218,109 +230,479 @@ export default function SpaceChat() {
     }
   }, [])
 
+  // Maneja la selección de fecha (ahora en DD-MM-YYYY)
+  const handleDateSelect = (selectedDate: string) => {
+    setAppointmentDate(selectedDate)
+    setCalendarOpen(false)
+  }
+
+  // Renderiza formulario de cita
+  const renderAppointmentFlow = () => {
+    return (
+      <div className="appointment-flow">
+        <div className="appointment-flow-header">
+          <button
+            style={{ backgroundColor: "#ef4444", marginRight: "0.5rem" }}
+            onClick={() => {
+              setAppointmentStep(0)
+              setCalendarOpen(false)
+            }}
+          >
+            Termin abbrechen
+          </button>
+          {/* Botón 'Zurück': retrocede un paso si estamos en un step mayor a 1 */}
+          {appointmentStep > 1 && (
+            <button
+              style={{ backgroundColor: "#999" }}
+              onClick={() => setAppointmentStep(appointmentStep - 1)}
+            >
+              Zurück
+            </button>
+          )}
+        </div>
+
+        {appointmentStep === 1 && (
+          <div>
+            <p>Möchten Sie einen Termin mit Lweb vereinbaren?</p>
+            <button onClick={() => setAppointmentStep(2)}>Ja</button>
+            <button onClick={() => setAppointmentStep(0)}>Nein</button>
+          </div>
+        )}
+        {appointmentStep === 2 && (
+          <div>
+            <p>Welcher Service interessiert Sie?</p>
+            <button
+              onClick={() => {
+                setAppointmentService("Website erstellen")
+                setAppointmentStep(3)
+              }}
+            >
+              Website erstellen
+            </button>
+            <button
+              onClick={() => {
+                setAppointmentService("App erstellen")
+                setAppointmentStep(3)
+              }}
+            >
+              App erstellen
+            </button>
+            <button
+              onClick={() => {
+                setAppointmentService("Künstliche Intelligenz")
+                setAppointmentStep(3)
+              }}
+            >
+              Künstliche Intelligenz
+            </button>
+            <button
+              onClick={() => {
+                setAppointmentService("Personalisierte Komponenten")
+                setAppointmentStep(3)
+              }}
+            >
+              Personalisierte Komponenten
+            </button>
+          </div>
+        )}
+        {appointmentStep === 3 && (
+          <div>
+            <p>Wie ist Ihr Name?</p>
+            <input
+              type="text"
+              value={appointmentName}
+              onChange={(e) => setAppointmentName(e.target.value)}
+              placeholder="Ihr Name"
+            />
+            <button
+              onClick={() => {
+                if (appointmentName.trim()) setAppointmentStep(4)
+              }}
+            >
+              Weiter
+            </button>
+          </div>
+        )}
+        {appointmentStep === 4 && (
+          <div>
+            <p>Wählen Sie ein Datum :</p>
+            <button
+              onClick={() => setCalendarOpen(!calendarOpen)}
+              aria-label="Kalender öffnen"
+              style={{ marginBottom: "1rem" }}
+            >
+          {calendarOpen ? (
+  <Minus style={{ color: "white", fontWeight: "bold" }} />
+) : (
+  <Plus style={{ color: "white", fontWeight: "bold" }} />
+)}
+            </button>
+
+            {calendarOpen && <CustomCalendar onDateSelect={handleDateSelect} />}
+
+            {appointmentDate && (
+              <div style={{ marginTop: "1rem" }}>
+                <strong>Gewähltes Datum:</strong> {appointmentDate}
+              </div>
+            )}
+{!calendarOpen && (
+            <button
+              onClick={() => {
+                if (appointmentDate) setAppointmentStep(5)
+              }}
+              style={{ display: "block", marginTop: "1rem" }}
+            >
+              Weiter
+            </button>
+            )}
+          </div>
+        )}
+        {appointmentStep === 5 && (
+          <div>
+            <p>Wählen Sie eine Uhrzeit:</p>
+            <div className="time-slots">
+              {[
+                "09:30",
+                "10:00",
+                "10:30",
+                "11:00",
+                "11:30",
+                "13:30",
+                "14:00",
+                "14:30",
+                "15:00",
+                "15:30",
+                "16:00",
+                "16:30",
+              ].map((time) => (
+                <button
+                  key={time}
+                  onClick={() => {
+                    setAppointmentTime(time)
+                    setAppointmentStep(6)
+                  }}
+                >
+                  {time}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        {appointmentStep === 6 && (
+          <div>
+            <p>Überprüfen Sie Ihre Angaben:</p>
+            <p>
+              <strong>Service:</strong> {appointmentService}
+            </p>
+            <p>
+              <strong>Name:</strong> {appointmentName}
+            </p>
+            <p>
+              <strong>Datum:</strong> {appointmentDate}
+            </p>
+            <p>
+              <strong>Uhrzeit:</strong> {appointmentTime}
+            </p>
+            <button onClick={sendAppointmentRequest}>Anfrage senden</button>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <>
-      {/* Botón para abrir el chat */}
+      {/* Botón flotante para abrir chat */}
       {!isOpen && showChatButton && (
         <button onClick={() => setIsOpen(true)} className="space-chat-button">
           <Sparkles className="space-chat-icon" />
         </button>
       )}
 
-      {/* Ventana del chat */}
       <div className={`space-chat-window ${isOpen ? "space-chat-open" : "space-chat-closed"}`}>
-        {/* Cabecera */}
         <div className="space-chat-header">
           <h2 className="space-chat-title">
             <Sparkles className="space-chat-title-icon" /> Lweb KI-Chat
           </h2>
-          <button onClick={() => setIsOpen(false)} className="space-chat-close-btn" aria-label="Close chat">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="space-chat-close-btn"
+            aria-label="Close chat"
+          >
             <X className="space-chat-icon-sl mt-4" />
           </button>
         </div>
 
-        {/* Contenedor de mensajes */}
-        <div className="space-chat-messages">
-          {messages.length === 0 ? (
-            // Mostrar las preguntas sugeridas si aún no hay mensajes en el chat
-            <div className="space-chat-suggestions">
-              <p className="space-chat-help-text">Wie kann ich Ihnen helfen?</p>
-              {visibleQuestions.map((question, index) => (
-                <button
-                  key={index}
-                  className="space-chat-suggestion-btn"
-                  onClick={() => handleQuestionClick(question)}
-                  disabled={isLoading}
-                >
-                  <span className="space-chat-suggestion-text">{question}</span>
-                </button>
-              ))}
-            </div>
-          ) : (
-            // Mostrar cada mensaje del chat
-            messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`space-chat-message-container ${msg.role === "user" ? "space-chat-user" : "space-chat-assistant"}`}
-              >
-                <div className={`space-chat-message-wrapper ${msg.role === "user" ? "space-chat-message-user" : "space-chat-message-assistant"}`}>
-                  <span className={`space-chat-message-sender ${msg.role === "user" ? "space-chat-sender-user" : "space-chat-sender-assistant"}`}>
-                    {msg.role === "user" ? "Sie" : "Lweb Assistant"}
-                  </span>
-                  {/* Renderizar el mensaje */}
-                  {msg.role === "assistant" ? (
-                    <div className="space-chat-message space-chat-message-html" dangerouslySetInnerHTML={{ __html: msg.content }} />
-                  ) : (
-                    <div className="space-chat-message space-chat-message-text">{msg.content}</div>
-                  )}
+        {appointmentStep > 0 ? (
+          renderAppointmentFlow()
+        ) : (
+          <>
+            <div className="space-chat-messages">
+              {messages.length === 0 ? (
+                <div className="space-chat-suggestions">
+                  <p className="space-chat-help-text">Wie kann ich Ihnen helfen?</p>
+                  {visibleQuestions.map((question, index) => (
+                    <button
+                      key={index}
+                      className="space-chat-suggestion-btn"
+                      onClick={() => handleQuestionClick(question)}
+                      disabled={isLoading}
+                    >
+                      <span className="space-chat-suggestion-text">{question}</span>
+                    </button>
+                  ))}
                 </div>
-              </div>
-            ))
-          )}
-          {/* Div para desplazar automáticamente al final del chat */}
-          <div ref={messagesEndRef} />
-        </div>
-
-        {/* Formulario de entrada de mensaje y botón de envío */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            sendMessage(input)
-          }}
-          className="space-chat-form"
-        >
-          <div className="space-chat-input-container">
-            <textarea
-              ref={textareaRef}
-              name="message"
-              value={input}
-              onChange={autoResizeTextarea}
-              className="space-chat-textarea"
-              placeholder="Ihre Nachricht hier ..."
-              required
-              disabled={isLoading}
-              rows={1}
-            />
-            <button
-              type="submit"
-              className={`space-chat-send-btn ${!input.trim() && !isLoading ? "space-chat-btn-disabled" : ""}`}
-              disabled={!input.trim() || isLoading}
-              aria-label="Senden"
-            >
-              {isLoading ? (
-                <Loader2 className="space-chat-icon-sm space-chat-spin" />
               ) : (
-                <SendHorizontal className="space-chat-icon-sm" />
+                messages.map((msg, index) => (
+                  <div
+                    key={index}
+                    className={`space-chat-message-container ${
+                      msg.role === "user" ? "space-chat-user" : "space-chat-assistant"
+                    }`}
+                  >
+                    <div
+                      className={`space-chat-message-wrapper ${
+                        msg.role === "user"
+                          ? "space-chat-message-user"
+                          : "space-chat-message-assistant"
+                      }`}
+                    >
+                      <span
+                        className={`space-chat-message-sender ${
+                          msg.role === "user"
+                            ? "space-chat-sender-user"
+                            : "space-chat-sender-assistant"
+                        }`}
+                      >
+                        {msg.role === "user" ? "Sie" : "Lweb Assistant"}
+                      </span>
+                      {msg.role === "assistant" ? (
+                        <div
+                          className="space-chat-message space-chat-message-html"
+                          dangerouslySetInnerHTML={{ __html: msg.content }}
+                        />
+                      ) : (
+                        <div className="space-chat-message space-chat-message-text">
+                          {msg.content}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
               )}
-            </button>
-          </div>
-          {showClearIcon && (
-            <button type="button" onClick={clearChat} className="space-chat-clear-btn" aria-label="Chat löschen">
-              <Trash2 className="space-chat-icon-sm" />
-            </button>
-          )}
-        </form>
+              <div ref={messagesEndRef} />
+            </div>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault()
+                sendMessage(input)
+              }}
+              className="space-chat-form"
+            >
+              <div className="space-chat-input-container">
+                <textarea
+                  ref={textareaRef}
+                  name="message"
+                  value={input}
+                  onChange={autoResizeTextarea}
+                  className="space-chat-textarea"
+                  placeholder="Ihre Nachricht hier ..."
+                  required
+                  disabled={isLoading}
+                  rows={1}
+                />
+                <button
+                  type="submit"
+                  className={`space-chat-send-btn ${
+                    !input.trim() && !isLoading ? "space-chat-btn-disabled" : ""
+                  }`}
+                  disabled={!input.trim() || isLoading}
+                  aria-label="Senden"
+                >
+                  {isLoading ? (
+                    <Loader2 className="space-chat-icon-sm space-chat-spin" />
+                  ) : (
+                    <SendHorizontal className="space-chat-icon-sm" />
+                  )}
+                </button>
+              </div>
+              {showClearIcon && (
+                <button
+                  type="button"
+                  onClick={clearChat}
+                  className="space-chat-clear-btn"
+                  aria-label="Chat löschen"
+                >
+                  <Trash2 className="space-chat-icon-sm" />
+                </button>
+              )}
+            </form>
+          </>
+        )}
       </div>
     </>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Componente de calendario más ancho pero menos alto, con formato final DD-MM-YYYY
+// ---------------------------------------------------------------------------
+type CustomCalendarProps = {
+  onDateSelect: (selectedDate: string) => void
+}
+
+function CustomCalendar({ onDateSelect }: CustomCalendarProps) {
+  const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear())
+  const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth()) // 0 = enero
+
+  // Días en alemán (lunes = 0)
+  const weekDays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
+
+  const monthFormatter = new Intl.DateTimeFormat("de-DE", { month: "long" })
+  const yearFormatter = new Intl.DateTimeFormat("de-DE", { year: "numeric" })
+
+  // Mes anterior
+  const handlePrevMonth = () => {
+    let newMonth = currentMonth - 1
+    let newYear = currentYear
+    if (newMonth < 0) {
+      newMonth = 11
+      newYear = currentYear - 1
+    }
+    setCurrentMonth(newMonth)
+    setCurrentYear(newYear)
+  }
+
+  // Mes siguiente
+  const handleNextMonth = () => {
+    let newMonth = currentMonth + 1
+    let newYear = currentYear
+    if (newMonth > 11) {
+      newMonth = 0
+      newYear = currentYear + 1
+    }
+    setCurrentMonth(newMonth)
+    setCurrentYear(newYear)
+  }
+
+  // Número de días del mes actual
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate()
+
+  // Día de la semana del 1 (Sunday=0, Monday=1, etc.)
+  let startDay = new Date(currentYear, currentMonth, 1).getDay()
+  // Ajuste para que lunes sea 0 en vez de domingo
+  if (startDay === 0) {
+    startDay = 6
+  } else {
+    startDay = startDay - 1
+  }
+
+  // Celdas en blanco para alinear inicio del mes
+  const blankCells = Array.from({ length: startDay }, () => null)
+
+  // Array de días
+  const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1)
+
+  // Clic en un día
+  const handleDayClick = (day: number) => {
+    const selectedDateObj = new Date(currentYear, currentMonth, day)
+    const dayOfWeek = selectedDateObj.getDay() // 0=Dom, 6=Sáb
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      return // No seleccionar fines de semana
+    }
+
+    // Formato DD-MM-YYYY
+    const dd = String(day).padStart(2, "0")
+    const mm = String(currentMonth + 1).padStart(2, "0")
+    const yyyy = String(currentYear)
+    const selectedDate = `${dd}-${mm}-${yyyy}`
+
+    onDateSelect(selectedDate)
+  }
+
+  const monthName = monthFormatter.format(new Date(currentYear, currentMonth))
+  const yearName = yearFormatter.format(new Date(currentYear, currentMonth))
+
+  return (
+    <div
+      style={{
+        width: "320px",        // Más ancho
+        border: "1px solid #ccc",
+        padding: "0.4rem",
+        textAlign: "center",
+        marginTop: "0.3rem",
+        fontSize: "0.875rem",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "0.4rem",
+        }}
+      >
+        <button onClick={handlePrevMonth} aria-label="Vorheriger Monat">
+          <ChevronLeft />
+        </button>
+        <h4 style={{ margin: 0, fontSize: "0.95rem" }}>
+          {monthName} {yearName}
+        </h4>
+        <button onClick={handleNextMonth} aria-label="Nächster Monat">
+          <ChevronRight />
+        </button>
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(7, 1fr)",
+          marginBottom: "0.3rem",
+        }}
+      >
+        {weekDays.map((wd) => (
+          <div key={wd} style={{ fontWeight: "bold", textAlign: "center" }}>
+            {wd}
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(7, 1fr)",
+          rowGap: "0.2rem",
+        }}
+      >
+        {blankCells.map((_, index) => (
+          <div key={`blank-${index}`} />
+        ))}
+        {daysArray.map((day) => {
+          const dateObj = new Date(currentYear, currentMonth, day)
+          const dayOfWeek = dateObj.getDay()
+          const isWeekend = dayOfWeek === 0 || dayOfWeek === 6
+
+          const dayStyle: React.CSSProperties = {
+            color: isWeekend ? "#aaa" : "#000",
+            cursor: isWeekend ? "not-allowed" : "pointer",
+            border: "1px solid #ccc",
+            borderRadius: "3px",
+            textAlign: "center",
+            padding: "0.3rem 0",   // Menos alto
+          }
+
+          return (
+            <div
+              key={day}
+              style={dayStyle}
+              onClick={() => handleDayClick(day)}
+            >
+              {day}
+            </div>
+          )
+        })}
+      </div>
+    </div>
   )
 }

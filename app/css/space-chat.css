@@ -145,9 +145,7 @@
   transition: var(--space-chat-transition);
 }
 
-.space-chat-close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
+
 
 /* Messages container */
 .space-chat-messages {
@@ -462,3 +460,44 @@
   max-height: 600px;
 }
 
+/* Estilos para el flujo de cita */
+.appointment-flow {
+  background-color: var(--space-chat-background-muted);
+  border: 1px solid var(--space-chat-border);
+  border-radius: var(--space-chat-radius);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--space-chat-shadow);
+  color: var(--space-chat-text);
+}
+
+.appointment-flow p {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.appointment-flow button {
+  margin: 0.25rem 0.25rem 0.25rem 0;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(to right, var(--space-chat-primary), var(--space-chat-secondary));
+  color: white;
+  border: none;
+  border-radius: var(--space-chat-radius-sm);
+  cursor: pointer;
+  transition: var(--space-chat-transition);
+}
+
+.appointment-flow button:hover {
+  background: linear-gradient(to right, var(--space-chat-primary-dark), var(--space-chat-secondary-dark));
+}
+
+.appointment-flow input[type="text"],
+.appointment-flow input[type="date"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--space-chat-border);
+  border-radius: var(--space-chat-radius);
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+/* Estilo personalizado para el botón de cancelar cita */
