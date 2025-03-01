@@ -122,9 +122,7 @@ export default function Component() {
                   <p className="mb-4">
                     Hallo 👋, Ich bin Roberto Salvador. Seit 2019 begeistert mich die Entwicklung von Webseiten und mobilen Anwendungen. Täglich widme ich 4 bis 5 Stunden dem autodidaktischen Lernen und Üben.
                   </p>
-                  <p>
-                    Im Jahr 2020 habe ich meine erste Anwendung veröffentlicht. Derzeit, im Jahr 2024, habe ich fünf Anwendungen veröffentlicht und etwa 25 Webseiten erstellt.
-                  </p>
+            
                 </div>
               )}
               {activeSection === 'mobile' && (
