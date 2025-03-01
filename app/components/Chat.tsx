@@ -53,6 +53,7 @@ export default function SpaceChat() {
 
   // Array de preguntas de ejemplo
   const allQuestions = [
+    "Einen Termin über WhatsApp vereinbaren?", 
     "Erstellen Sie Websites?",
     "Bieten Sie Dienstleistungen zur Entwicklung mobiler Anwendungen an?",
     "Wie funktioniert die künstliche Intelligenz in Ihren Lösungen?",
@@ -64,7 +65,6 @@ export default function SpaceChat() {
     "Können Sie mobile Apps für iOS und Android entwickeln?",
     "Welche Support-Optionen bieten Sie nach der Entwicklung an?",
     "Wie funktioniert der KI-Chatbot auf dieser Website?",
-    "Einen Termin vereinbaren?",
     "Welche Vorteile bietet die Integration eines intelligenten Chatbots?",
     "Kann ich die Antworten des Chatbots an meine Bedürfnisse anpassen?",
     "Wie wird das KI-Modell des Chatbots trainiert?",
@@ -101,45 +101,93 @@ export default function SpaceChat() {
   }
 
   // Enviar mensaje al servidor
-  const sendMessage = async (messageContent: string) => {
-    if (!messageContent.trim()) return
+// En la parte de tu SpaceChat.tsx
+const sendMessage = async (messageContent: string) => {
+  if (!messageContent.trim()) return
 
-    setIsLoading(true)
-    const newMessages: Message[] = [...messages, { role: "user", content: messageContent }]
-    const lastMessages = newMessages.slice(-10)
-    const messagesToSend: Message[] = [
-      { role: "system", content: systemPrompt },
-      ...lastMessages,
-    ]
+  // 1) Convertimos a minúsculas
+  const lowerText = messageContent.toLowerCase()
 
-    try {
-      const response = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: messagesToSend }),
-      })
+  // 2) Definimos las palabras clave que activan el flujo de cita
+  //    (puedes poner "termin über whatsapp vereinbaren", "cita", etc.)
+  const appointmentKeywords = [
+    "termin vereinbaren",
+    "termin über whatsapp",
+    "einen termin über whatsapp vereinbaren",
+    "termin buchen",
+    "termin reservieren",
+    "termin vereinbarung",
+    "termin anfragen",
+        // Inglés
+    "appointment",
+    "book a meeting",
+    "schedule appointment",
+        // Español
+    "agendar cita",
+    "reservar cita",
+    "una cita",
+    // Italiano
+    "prenotare un appuntamento",
+    "fissare un appuntamento",
+    "appuntamento",
+    "prenotazione appuntamento",
+    "richiedere un appuntamento",
+    // Francés
+    "prendre rendez-vous",
+    "réserver un rendez-vous",
+    "fixer un rendez-vous",
+    "demander un rendez-vous",
+    "rendez-vous",
+    "réserver un créneau",
+    "planifier un rendez-vous",
+  ]
+  
 
-      const data: ChatResponse = await response.json()
-
-      if (data.response) {
-        const htmlFromMarkdown = marked(data.response) as string
-        const sanitizedHTML = DOMPurify.sanitize(htmlFromMarkdown)
-        const updatedMessages: Message[] = [
-          ...newMessages,
-          { role: "assistant", content: sanitizedHTML },
-        ]
-        setMessages(updatedMessages)
-        setInput("")
-        setShowClearIcon(true)
-      } else if (data.error) {
-        console.error("Error del servidor:", data.error)
-      }
-    } catch (error) {
-      console.error("Fallo al enviar el mensaje:", error)
-    } finally {
-      setIsLoading(false)
-    }
+  // 3) Si detectamos alguna de esas palabras, forzamos el flujo
+  if (appointmentKeywords.some((kw) => lowerText.includes(kw))) {
+    setAppointmentStep(1)
+    setInput("") // limpiar el campo
+    return // IMPORTANTE: no seguimos para no mandar a GPT
   }
+
+  // 4) Si no, entonces sí mandamos el mensaje a la IA
+  setIsLoading(true)
+  const newMessages: Message[] = [...messages, { role: "user", content: messageContent }]
+  const lastMessages = newMessages.slice(-10)
+  const messagesToSend: Message[] = [
+    { role: "system", content: systemPrompt },
+    ...lastMessages,
+  ]
+
+  try {
+    const response = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: messagesToSend }),
+    })
+
+    const data: ChatResponse = await response.json()
+
+    if (data.response) {
+      const htmlFromMarkdown = marked(data.response) as string
+      const sanitizedHTML = DOMPurify.sanitize(htmlFromMarkdown)
+      const updatedMessages: Message[] = [
+        ...newMessages,
+        { role: "assistant", content: sanitizedHTML },
+      ]
+      setMessages(updatedMessages)
+      setInput("")
+      setShowClearIcon(true)
+    } else if (data.error) {
+      console.error("Error del servidor:", data.error)
+    }
+  } catch (error) {
+    console.error("Fallo al enviar el mensaje:", error)
+  } finally {
+    setIsLoading(false)
+  }
+}
+
 
   // Enviar cita a WhatsApp y resetear flujo
   const sendAppointmentRequest = () => {
@@ -164,7 +212,7 @@ Uhrzeit: ${appointmentTime}`
 
   // Detectar clic en pregunta sugerida
   const handleQuestionClick = (question: string) => {
-    if (question.includes("Termin vereinbaren")) {
+    if (question.includes("Termin über WhatsApp vereinbaren")) {
       setAppointmentStep(1)
       return
     }
@@ -323,11 +371,11 @@ Uhrzeit: ${appointmentTime}`
               aria-label="Kalender öffnen"
               style={{ marginBottom: "1rem" }}
             >
-          {calendarOpen ? (
-  <Minus style={{ color: "white", fontWeight: "bold" }} />
-) : (
-  <Plus style={{ color: "white", fontWeight: "bold" }} />
-)}
+              {calendarOpen ? (
+                <Minus style={{ color: "white", fontWeight: "bold" }} />
+              ) : (
+                <Plus style={{ color: "white", fontWeight: "bold" }} />
+              )}
             </button>
 
             {calendarOpen && <CustomCalendar onDateSelect={handleDateSelect} />}
@@ -337,15 +385,15 @@ Uhrzeit: ${appointmentTime}`
                 <strong>Gewähltes Datum:</strong> {appointmentDate}
               </div>
             )}
-{!calendarOpen && (
-            <button
-              onClick={() => {
-                if (appointmentDate) setAppointmentStep(5)
-              }}
-              style={{ display: "block", marginTop: "1rem" }}
-            >
-              Weiter
-            </button>
+            {!calendarOpen && (
+              <button
+                onClick={() => {
+                  if (appointmentDate) setAppointmentStep(5)
+                }}
+                style={{ display: "block", marginTop: "1rem" }}
+              >
+                Weiter
+              </button>
             )}
           </div>
         )}
