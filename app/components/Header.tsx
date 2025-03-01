@@ -3,6 +3,58 @@
 import { NavLink } from "@remix-run/react"
 import { useState, useEffect, useCallback } from "react"
 import { Code, AppWindow, Menu, X, Home, Brain, Package } from "lucide-react"
+import { motion } from "framer-motion"
+import "./header.css"
+
+// Importamos los componentes necesarios del FloatingBubblesBackground
+function Bubble({ x, y, size, color }: { x: number; y: number; size: number; color: string }) {
+  return (
+    <motion.circle
+      cx={x}
+      cy={y}
+      r={size}
+      fill={color}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{
+        opacity: [0.7, 0.3, 0.7],
+        scale: [1, 1.2, 1],
+        x: x + Math.random() * 100 - 50,
+        y: y + Math.random() * 100 - 50,
+      }}
+      transition={{
+        duration: 5 + Math.random() * 10,
+        repeat: Number.POSITIVE_INFINITY,
+        repeatType: "reverse",
+      }}
+    />
+  )
+}
+
+function FloatingBubbles() {
+  const [bubbles, setBubbles] = useState<Array<{ id: number; x: number; y: number; size: number; color: string }>>([])
+
+  useEffect(() => {
+    const newBubbles = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 20 + 5,
+      color: `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.3)`,
+    }))
+    setBubbles(newBubbles)
+  }, [])
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      <svg className="w-full h-full">
+        <title>Floating Bubbles</title>
+        {bubbles.map((bubble) => (
+          <Bubble key={bubble.id} {...bubble} />
+        ))}
+      </svg>
+    </div>
+  )
+}
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -62,8 +114,8 @@ export default function Header() {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -74,8 +126,8 @@ export default function Header() {
             <NavLink
               to="/webs"
               className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -86,8 +138,8 @@ export default function Header() {
             <NavLink
               to="/apps"
               className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -98,8 +150,8 @@ export default function Header() {
             <NavLink
               to="/ki-losungen"
               className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -110,8 +162,8 @@ export default function Header() {
             <NavLink
               to="/komponenten"
               className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -122,8 +174,8 @@ export default function Header() {
             <NavLink
               to="/roberto"
               className={({ isActive }) =>
-                `text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -138,9 +190,10 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu overlay with FloatingBubbles background */}
       {isMenuOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
+          <FloatingBubbles />
           <button
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-6 left-1/2 transform -translate-x-1/2 text-white mt-20 focus:outline-none"
@@ -148,13 +201,13 @@ export default function Header() {
           >
             <X className="h-8 w-8" />
           </button>
-          <nav className="relative bg-[#b3b3ffd5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
+          <nav className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
             <NavLink
               onClick={() => setIsMenuOpen(false)}
               to="/"
               className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -166,8 +219,8 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               to="/webs"
               className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -179,8 +232,8 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               to="/apps"
               className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -192,8 +245,8 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               to="/ki-losungen"
               className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -205,8 +258,8 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               to="/komponenten"
               className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
@@ -218,8 +271,8 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
               to="/roberto"
               className={({ isActive }) =>
-                `flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group ${
-                  isActive ? "border-b-2 border-[#40e0d0]" : ""
+                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                  isActive ? "active" : ""
                 }`
               }
             >
