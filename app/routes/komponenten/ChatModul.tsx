@@ -149,7 +149,7 @@ export default function ChatModulIntegrated() {
             <h2 className="text-2xl font-bold text-pink-400 mb-4">Funktionen im Überblick</h2>
             <div className="grid md:grid-cols-1 gap-6">
               <div className="bg-gray-750 p-5 rounded-lg border border-gray-700">
-                <h3 className="text-xl font-semibold text-pink-400 mb-2">Für Besucher</h3>
+
                 <ul className="space-y-2">
       
                   <li className="text-gray-300">• Dateiübertragung für schnellen Support</li>
