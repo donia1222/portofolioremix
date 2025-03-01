@@ -146,9 +146,9 @@ export default function Header() {
             className="absolute top-6 left-1/2 transform -translate-x-1/2 text-white mt-20 focus:outline-none"
             aria-label="Cerrar menú"
           >
-            <X className="h-10 w-10" />
+            <X className="h-8 w-8" />
           </button>
-          <nav className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
+          <nav className="relative bg-[#b3b3ffd5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
             <NavLink
               onClick={() => setIsMenuOpen(false)}
               to="/"
