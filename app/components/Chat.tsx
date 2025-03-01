@@ -141,18 +141,10 @@ export default function SpaceChat() {
     }
   }
 
-  // Abrir WhatsApp con un mensaje prefabricado (ejemplo)
-  const openWhatsApp = () => {
-    const whatsappNumber = "491234567890" // Reemplaza con tu número
-    const message = "Hallo, ich bin an Ihren Dienstleistungen interessiert"
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
-    window.open(url, "_blank")
-  }
-
   // Enviar cita a WhatsApp y resetear flujo
   const sendAppointmentRequest = () => {
     // Cambia a tu número
-    const whatsappNumber = "0041765608645" 
+    const whatsappNumber = "+41765608645" 
     // Ajustamos el mensaje para que contenga la fecha en DD-MM-YYYY
     const message = `Hallo, ich möchte einen Termin vereinbaren.
 Service: ${appointmentService}
