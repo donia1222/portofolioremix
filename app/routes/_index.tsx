@@ -1,19 +1,22 @@
-"use client"
+// Importaciones existentes
+import { Link } from "@remix-run/react";
+import Header from "~/components/Header";
+import DeliverBlock from "~/components/DeliverBlock";
+import CorePrinciplesBlock from "~/components/CorePrinciplesBlock";
+import OpenSourceBlock from "~/components/OpenSourceBlock"; 
+import CommunityBlock from "~/components/CommunityBlock"; 
+import Corazones from "~/components/Corazoneshome"; 
+import ContactModule from "~/components/contactModuledos"; 
+import TechnologyCarousel from "~/components/TechnologyCarousel/TechnologyCarousel"; 
+import { useEffect, useState } from "react";
+import AOS from "aos";
+import type { LinksFunction } from "@remix-run/node";
+import { FiMessageSquare } from "react-icons/fi";
+import Chat from "~/components/Chat";
+import CookieBanner from "~/components/CookieBanner"; 
+import TechnologyCarousemisappsindex from "~/components/TechnologyCarousel/TechnologyCarousemisappsindex"; 
+import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock'; 
 
-import Header from "~/components/Header"
-import DeliverBlock from "~/components/DeliverBlock"
-import CorePrinciplesBlock from "~/components/CorePrinciplesBlock"
-import OpenSourceBlock from "~/components/OpenSourceBlock"
-import CommunityBlock from "~/components/CommunityBlock"
-import ContactModule from "~/components/contactModuledos"
-import TechnologyCarousel from "~/components/TechnologyCarousel/TechnologyCarousel"
-import { useEffect } from "react"
-import AOS from "aos"
-import type { LinksFunction } from "@remix-run/node"
-import Chat from "~/components/Chat"
-import CookieBanner from "~/components/CookieBanner"
-import CloudTextBlock5 from "~/components/CloudTextBlock/CloudTextBlock"
-import AnimatedBackground from "~/components/AnimatedBackground"
 
 export const links: LinksFunction = () => {
   return [
@@ -24,66 +27,89 @@ export const links: LinksFunction = () => {
       crossOrigin: "anonymous",
       referrerPolicy: "no-referrer",
     },
-  ]
+  ];
+};
+
+interface Star {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  speed: number;
+  opacity: number;
 }
 
 export default function Index() {
-  useEffect(() => {
-    // Initialize AOS
-    if (typeof window !== "undefined") {
-      AOS.init({
-        duration: 1000,
-        once: false,
-      })
-    }
-  }, [])
+  const [isLoading, setIsLoading] = useState(true);
+  const [stars, setStars] = useState<Star[]>([]);
+  
+  const chips = [
+    "Moderne Webseiten",
+    "KI-Lösungen",
+    "App-Entwicklung",
+    "Custom Plugins",
+    "und mehr"
+  ]
+
+;
+
 
   return (
-    <AnimatedBackground>
-      <div className="min-h-screen relative overflow-auto">
-        {/* Banner de Cookies */}
-        <CookieBanner />
+    <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-70" />
 
-        {/* Navegación */}
-        <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
-          <Header />
-        </nav>
+      
+      {/* Banner de Cookies */}
+      <CookieBanner />
 
-        {/* Contenido Principal */}
-        <main className="text-center relative p-10">
-          <CloudTextBlock5 />
+      {/* Navegación */}
+      <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
+        <Header />
 
-          {/* Bloques de Contenido con Animaciones AOS */}
-          <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
-            <DeliverBlock />
-          </div>
+      </nav>
 
-          <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
-            <CorePrinciplesBlock />
-          </div>
+      {/* Contenido Principal */}
+      <main className="text-center relative p-10">
 
-          <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
-            <CommunityBlock />
-          </div>
 
-          <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
-            <OpenSourceBlock />
-          </div>
+    
+      </main>
+      <CloudTextBlock5 />
 
-          <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
-            <TechnologyCarousel />
-          </div>
-
-          <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-            <ContactModule />
-          </div>
-
-          <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-            <Chat />
-          </div>
-        </main>
+      {/* Bloques de Contenido con Animaciones AOS */}
+      <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
+        <DeliverBlock />
       </div>
-    </AnimatedBackground>
-  )
-}
 
+      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+        <CorePrinciplesBlock />
+      </div>
+
+      <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
+        <CommunityBlock />
+      </div>
+
+
+ 
+
+      <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
+        <OpenSourceBlock />
+      </div>
+
+      <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
+        <TechnologyCarousel />
+      </div>
+
+
+
+      <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <ContactModule />
+      </div>
+
+      <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <Chat />
+      </div>
+
+    </div>
+  );
+}
