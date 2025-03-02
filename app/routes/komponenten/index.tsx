@@ -34,7 +34,7 @@ export default function VCardModul() {
       </div>
 
       {/* Filter/Toggle Component */}
-      <div className="mb-8 mt-8">
+      <div className="mb-10 mt-20">
         <div className="bg-gray-800 rounded-full p-1 flex shadow-lg border border-gray-700">
           <button
             className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center space-x-2 ${

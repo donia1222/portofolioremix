@@ -8,8 +8,11 @@ export default function AnimatedText() {
   const controls = useAnimation()
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const text = "La vida es mejor cuando es animada"
-  const letters = text.split("")
+  // Split the text into two parts
+  const textTop = "Das Leben ist besser"
+  const textBottom = "wenn es animiert ist"
+  const lettersTop = textTop.split("")
+  const lettersBottom = textBottom.split("")
 
   useEffect(() => {
     setIsVisible(true)
@@ -177,25 +180,26 @@ export default function AnimatedText() {
   return (
     <motion.div
       ref={containerRef}
-      className="relative flex items-center justify-center min-h-screen overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028]"
+      className="relative flex items-center justify-center p-40 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
       {/* Main text container */}
       <div className="relative z-10 px-8 py-16 mx-auto text-center max-w-4xl backdrop-blur-sm bg-black/30 rounded-xl border border-[#00FFFF]/20 shadow-[0_0_50px_rgba(0,255,255,0.15)]">
+        {/* Top text: "Das Leben ist besser" */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="flex flex-wrap justify-center mb-8"
+          className="flex flex-wrap justify-center mb-6"
         >
-          {letters.map((letter, i) => (
+          {lettersTop.map((letter, i) => (
             <motion.span
-              key={i}
+              key={`top-${i}`}
               custom={i}
               variants={letterVariants}
-              className={`text-5xl md:text-7xl font-bold ${letter === " " ? "mr-4" : ""}`}
+              className={`text-5xl sm:text-6xl md:text-7xl font-bold ${letter === " " ? "mr-4" : ""}`}
               style={{
                 display: "inline-block",
                 color: "#fff",
@@ -212,41 +216,36 @@ export default function AnimatedText() {
           ))}
         </motion.div>
 
-        {/* Animated subtitle with glitch effect */}
-        <AnimatePresence>
-          {isVisible && (
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={glitchAnimation}
-              className="mt-8 text-xl text-[#14F195] font-medium max-w-2xl mx-auto"
-            >
-              Diseños futuristas con efectos visuales impactantes
-            </motion.p>
-          )}
-        </AnimatePresence>
-
-        {/* Interactive button */}
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0 0 30px rgba(0, 255, 255, 0.7)",
-            background: "linear-gradient(90deg, #FF00FF, #00FFFF)",
-          }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-12 px-10 py-4 bg-transparent text-white font-medium rounded-full border-2 border-[#00FFFF] relative overflow-hidden group"
+        {/* Bottom text: "wenn es animiert ist" */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={controls}
+          className="flex flex-wrap justify-center mb-8"
         >
-          <span className="relative z-10">EXPLORAR</span>
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-[#FF00FF] to-[#00FFFF] opacity-0 group-hover:opacity-100"
-            initial={{ x: "-100%" }}
-            whileHover={{ x: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        </motion.button>
+          {lettersBottom.map((letter, i) => (
+            <motion.span
+              key={`bottom-${i}`}
+              custom={i + lettersTop.length} // Offset the animation timing
+              variants={letterVariants}
+              className={`text-4xl sm:text-5xl md:text-6xl font-bold ${letter === " " ? "mr-4" : ""}`}
+              style={{
+                display: "inline-block",
+                color: "#fff",
+                textShadow: "0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(255, 0, 255, 0.5)",
+              }}
+              whileHover={{
+                scale: 1.2,
+                color: ["#fff", "#00FFFF", "#FF00FF", "#fff"],
+                transition: { duration: 0.5, times: [0, 0.3, 0.6, 1] },
+              }}
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </motion.div>
+
+
 
         {/* Tech circuit lines */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
