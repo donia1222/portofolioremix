@@ -120,7 +120,7 @@ export default function Component() {
                     className="w-48 h-48 rounded-full object-cover mb-4"
                   />
                   <p className="mb-4">
-                    Hallo 👋, Ich bin Roberto Salvador. Seit 2019 begeistert mich die Entwicklung von Webseiten und mobilen Anwendungen. Täglich widme ich 4 bis 5 Stunden dem autodidaktischen Lernen und Üben.
+                  In einer Welt, in der es nicht immer einfach ist, als Freelancer zu überleben, habe ich auch einen anderen Job. Doch Programmieren ist meine Leidenschaft, und ich nutze meine Freizeit, um moderne, animierte und funktionale Websites mit React und Joomla zu entwickeln. Außerdem erstelle ich Online-Shops und mobile Apps.
                   </p>
             
                 </div>
