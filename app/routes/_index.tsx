@@ -16,7 +16,7 @@ import Chat from "~/components/Chat";
 import CookieBanner from "~/components/CookieBanner"; 
 import TechnologyCarousemisappsindex from "~/components/TechnologyCarousel/TechnologyCarousemisappsindex"; 
 import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock'; 
-
+import CloudTextAnime from '~/components/CloudTextBlock/AnimateTexVida'; 
 
 export const links: LinksFunction = () => {
   return [
@@ -92,6 +92,11 @@ export default function Index() {
 
  
 
+      <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <CloudTextAnime />
+      </div>
+
+
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />
       </div>
@@ -99,8 +104,6 @@ export default function Index() {
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
         <TechnologyCarousel />
       </div>
-
-
 
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />

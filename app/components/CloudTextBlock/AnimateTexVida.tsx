@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { motion, useAnimation, AnimatePresence, type Variants } from "framer-motion"
+import { motion, useAnimation, type Variants } from "framer-motion"
 
 export default function AnimatedText() {
   const [isVisible, setIsVisible] = useState(false)
@@ -9,8 +9,8 @@ export default function AnimatedText() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Split the text into two parts
-  const textTop = "Das Leben ist besser"
-  const textBottom = "wenn es animiert ist"
+  const textTop = "Animation macht"
+  const textBottom = "das Leben besser"
   const lettersTop = textTop.split("")
   const lettersBottom = textBottom.split("")
 
@@ -31,7 +31,7 @@ export default function AnimatedText() {
       containerRef.current.appendChild(canvas)
 
       const ctx = canvas.getContext("2d")
-      let particles: any[] = []
+      let particles: Particle[] = []
 
       const resizeCanvas = () => {
         if (containerRef.current) {
@@ -123,7 +123,7 @@ export default function AnimatedText() {
 
       return () => {
         window.removeEventListener("resize", resizeCanvas)
-        if (containerRef.current) {
+        if (containerRef.current && containerRef.current.contains(canvas)) {
           containerRef.current.removeChild(canvas)
         }
       }
@@ -180,26 +180,26 @@ export default function AnimatedText() {
   return (
     <motion.div
       ref={containerRef}
-      className="relative flex items-center justify-center p-40 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028]"
+      className="relative flex items-center justify-center p-4 sm:p-8 md:p-16 lg:p-40 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028] min-h-[500px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
       {/* Main text container */}
-      <div className="relative z-10 px-8 py-16 mx-auto text-center max-w-4xl backdrop-blur-sm bg-black/30 rounded-xl border border-[#00FFFF]/20 shadow-[0_0_50px_rgba(0,255,255,0.15)]">
-        {/* Top text: "Das Leben ist besser" */}
+      <div className="relative z-10 px-4 sm:px-8 py-8 sm:py-16 mx-auto text-center max-w-4xl backdrop-blur-sm bg-black/30 rounded-xl border border-[#00FFFF]/20 shadow-[0_0_50px_rgba(0,255,255,0.15)]">
+        {/* Top text: "Animation macht" */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="flex flex-wrap justify-center mb-6"
+          className="flex flex-wrap justify-center mb-4 sm:mb-6"
         >
           {lettersTop.map((letter, i) => (
             <motion.span
               key={`top-${i}`}
               custom={i}
               variants={letterVariants}
-              className={`text-5xl sm:text-6xl md:text-7xl font-bold ${letter === " " ? "mr-4" : ""}`}
+              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold ${letter === " " ? "mr-4" : ""}`}
               style={{
                 display: "inline-block",
                 color: "#fff",
@@ -216,19 +216,19 @@ export default function AnimatedText() {
           ))}
         </motion.div>
 
-        {/* Bottom text: "wenn es animiert ist" */}
+        {/* Bottom text: "das Leben besser" */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="flex flex-wrap justify-center mb-8"
+          className="flex flex-wrap justify-center mb-6 sm:mb-8"
         >
           {lettersBottom.map((letter, i) => (
             <motion.span
               key={`bottom-${i}`}
               custom={i + lettersTop.length} // Offset the animation timing
               variants={letterVariants}
-              className={`text-4xl sm:text-5xl md:text-6xl font-bold ${letter === " " ? "mr-4" : ""}`}
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${letter === " " ? "mr-4" : ""}`}
               style={{
                 display: "inline-block",
                 color: "#fff",
@@ -244,8 +244,6 @@ export default function AnimatedText() {
             </motion.span>
           ))}
         </motion.div>
-
-
 
         {/* Tech circuit lines */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
