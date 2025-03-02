@@ -65,7 +65,7 @@ export default function ChatModulIntegrated() {
           >
             <div className="p-8 md:p-12 grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold text-pink-400 mb-4">Chat-Modul</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-pink-400 mb-4">KI Chat-Modul</h1>
                 <p className="text-lg text-gray-300 mb-6">
                   Verbessern Sie den Kundensupport mit unserem leistungsstarken Live-Chat-Modul.
                 </p>
