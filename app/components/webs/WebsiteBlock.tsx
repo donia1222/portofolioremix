@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ExternalLink } from "lucide-react"
-
+import ContactModule from "~/components/contactModuledos"; 
 interface Website {
   id: number
   title: string
@@ -128,6 +128,9 @@ export default function ModifiedWebsiteShowcase() {
             </motion.a>
           ))}
         </div>
+        <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <ContactModule />
+      </div>
       </div>
     </div>
   )

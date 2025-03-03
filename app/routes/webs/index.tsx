@@ -8,7 +8,7 @@ import AnimatedGradientText from '~/components/AnimatedGradientText';
 import Header from "~/components/Header";
 import { motion } from "framer-motion"
 import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
-
+import ContactModule from "~/components/contactModuledos"; 
 import CommunityBlock from "~/components/CommunityBlockWeb"; 
 
 export default function BlogIndex() {
@@ -93,7 +93,6 @@ export default function BlogIndex() {
       </div>
 
       <div className="relative">
-
 
       </div>
     </div>

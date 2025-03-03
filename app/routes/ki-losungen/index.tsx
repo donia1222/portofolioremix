@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink } from "lucide-react"
 import Header from "~/components/Header";
 import Chat from "~/components/Chat";
-
+import ContactModule from "~/components/contactModuledos"; 
 
 export default function AIBusinessSolutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -121,8 +121,13 @@ export default function AIBusinessSolutions() {
           <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <Chat />
       </div>
+      
           </div>
       </div>
+      <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <ContactModule />
+      </div>
+
     </div>
   )
 }
