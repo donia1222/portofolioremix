@@ -104,7 +104,12 @@ export default function ContactModule() {
   return (
     <section className="bg-gradient-to-b from-gray-900 to-gray-800 text-white py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-   
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-extrabold tracking-tight sm:text-4xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-100 to-teal-100">
+            Kontaktieren Sie LWEB Schweiz
+          </h2>
+          <p className="text-xl text-gray-400">Lassen Sie uns gemeinsam Ihre digitale Vision verwirklichen</p>
+        </div>
 
         <div className="bg-gray-800 shadow-xl rounded-lg overflow-hidden">
           <div className="p-6 sm:p-10">
