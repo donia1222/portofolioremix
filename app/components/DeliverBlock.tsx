@@ -3,7 +3,6 @@
 import { useEffect, useState, useRef } from "react";
 
 const images = [
-  "/tecj.png",
   "/fitnes.png",
   "/programming-background-with-person-working-with-codes-computer.jpg",
   // Añade más imágenes según sea necesario
