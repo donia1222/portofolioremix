@@ -103,24 +103,24 @@ export default function Component() {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="relative z-[99999] top-8 right-4 text-gray-400 hover:text-white "
+                className="absolute top-4 right-4 text-gray-400 hover:text-white"
                 onClick={() => setActiveSection(null)}
               >
                 <X className="w-6 h-6" />
               </button>
               {activeSection === 'about' && (
                 <div>
-                  <h2 className="text-3xl font-bold mb-4  mt-10 file:flex items-center">
-  
+                  <h2 className="text-3xl font-bold mb-4 flex items-center">
+                    <Star className="w-10 h-10 mr-2 text-yellow-400" />
                     Über mich
                   </h2>
                   <img 
                     src="/yo2.png"
                     alt="Avatar de Roberto Salvador"
-                    className="w-40 h-40 rounded-full object-cover mb-4"
+                    className="w-48 h-48 rounded-full object-cover mb-4"
                   />
                   <p className="mb-4">
-                  In einer Welt, in der es nicht immer einfach ist, als Freelancer zu überleben, habe ich auch einen anderen Job. Doch Programmieren ist meine Leidenschaft, und ich nutze meine Freizeit, um moderne, animierte und funktionale Websites mit React und Joomla zu entwickeln. Außerdem erstelle ich Online-Shops und mobile Apps.
+                    Hallo 👋, Ich bin Roberto Salvador. Seit 2019 begeistert mich die Entwicklung von Webseiten und mobilen Anwendungen. 
                   </p>
             
                 </div>
