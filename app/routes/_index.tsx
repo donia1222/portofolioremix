@@ -6,7 +6,7 @@ import CorePrinciplesBlock from "~/components/CorePrinciplesBlock";
 import OpenSourceBlock from "~/components/OpenSourceBlock"; 
 import CommunityBlock from "~/components/CommunityBlock"; 
 import Corazones from "~/components/Corazoneshome"; 
-import ContactModule from "~/components/contactModuledos"; 
+import ContactModule from "~/components/contactModuleFooter"; 
 import TechnologyCarousel from "~/components/TechnologyCarousel/TechnologyCarousel"; 
 import { useEffect, useState } from "react";
 import AOS from "aos";
