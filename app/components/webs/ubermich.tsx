@@ -138,9 +138,7 @@ export default function Component() {
                     <li>
                       <strong className="text-blue-300">UI/UX Design:</strong> Intuitive und ansprechende Designs, die die Interaktion der Benutzer mit Ihrer Anwendung verbessern.
                     </li>
-                    <li>
-                      <strong className="text-blue-300">API-Integration:</strong> Ich verbinde Ihre Anwendung mit externen Diensten und Plattformen, um ihre Funktionalität zu erweitern.
-                    </li>
+           
                   </ul>
                 </div>
               )}
