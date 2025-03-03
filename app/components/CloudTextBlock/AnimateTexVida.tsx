@@ -9,8 +9,8 @@ export default function AnimatedText() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   // Split the text into two parts
-  const textTop = "Animation macht"
-  const textBottom = "das Leben besser"
+  const textTop = "Animierte"
+  const textBottom = "Komponenten"
   const lettersTop = textTop.split("")
   const lettersBottom = textBottom.split("")
 
