@@ -2,7 +2,7 @@ import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
 import AppBlock from "~/components/AppBlock"; 
 import Header from "~/components/Header";
-
+import ContactModule from "~/components/contactModuledos"; 
 
 import { useState, useEffect } from "react";
 
@@ -64,7 +64,11 @@ export default function BlogIndex() {
       <div className="relative">
       <div className="relative z-[9999]">
   <Header />
+  
 </div>
+<div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <ContactModule />
+      </div>
 
       </div>
     </div>

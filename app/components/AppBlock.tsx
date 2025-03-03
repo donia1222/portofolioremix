@@ -55,7 +55,7 @@ export default function PublishedAppsBlock() {
   }
 
   return (
-    <div className="w-full py-16  text-white overflow-hidden ">
+    <div className="w-full   text-white overflow-hidden ">
 
 
       <div className="container mx-auto px-4 py-10  ">
