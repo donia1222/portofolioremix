@@ -85,7 +85,7 @@ export default function FreelancerShowcase() {
           und einzigartige <span className="text-pink-400 animate-pulse">{typedText}</span>
         </h2>
         <p className="text-lg text-blue-200 max-w-2xl mx-auto p-8 animate-fade-in mb-10">
-          Als Freelancer biete ich maßgeschneiderte Webseiten mit den neuesten Technologien wie Joomla 5, Astro, Next.js und Remix. Meine individuellen Lösungen sind perfekt auf Ihre Bedürfnisse zugeschnitten.
+          Als Freelancer biete ich maßgeschneiderte Webseiten mit den neuesten Technologien wie Joomla 5, Astro, Next.js, Remix.. Meine individuellen Lösungen sind perfekt auf Ihre Bedürfnisse zugeschnitten.
         </p>
 
         <div className="flex justify-center" ref={numbersRef}>

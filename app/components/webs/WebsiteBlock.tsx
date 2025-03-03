@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { X, ExternalLink, Info } from "lucide-react"
+import { motion } from "framer-motion"
+import { ExternalLink } from "lucide-react"
 
 interface Website {
   id: number
@@ -60,17 +59,7 @@ const websites: Website[] = [
     link: "https://shop.lweb.ch",
     color: "#45AAF2",
   },
-  {
-    id: 5,
-    title: "Immobilie",
-    description: "Maßgeschneiderte Immobilien-Website",
-    fullDescription:
-      "Eine maßgeschneiderte Website für ein Immobilienunternehmen mit intuitiver Immobiliensuche, detaillierten Objektbeschreibungen und Kontaktformular für Interessenten. Die Seite bietet auch virtuelle 3D-Touren, interaktive Karten und ein Client-Portal für registrierte Benutzer.",
-    mainImage: "/inmo.png",
-    additionalImages: ["/inmo.png", "/inmo3.png", "/apart.png", "/apart2.png"],
-    link: "https://inmo.lweb.ch",
-    color: "#A55EEA",
-  },
+
   {
     id: 6,
     title: "El Español",
@@ -85,65 +74,42 @@ const websites: Website[] = [
   // New projects
   {
     id: 7,
-    title: "TechHub",
-    description: "Innovatives Tech-Blog und Community-Plattform",
+    title: "Rrapi",
+    description: "Immobilienagentur",
     fullDescription:
-      "TechHub ist eine dynamische Plattform für Technologie-Enthusiasten. Sie bietet aktuelle Tech-News, ausführliche Produktrezensionen und eine lebendige Community für Diskussionen. Mit personalisierten Inhaltsempfehlungen und einem Expertenforum ist TechHub die zentrale Anlaufstelle für alle Tech-Interessierten.",
+      "",
     mainImage: "/tecj.png",
-    additionalImages: [
- 
-    ],
-    link: "https://techhub-example.com",
+    additionalImages: [],
+    link: "https://rrapi.ch/",
     color: "#3498db",
   },
 
-  {
-    id: 9,
-    title: "FitnessPro",
-    description: "Personalisierte Fitness- und Wellness-App",
-    fullDescription:
-      "FitnessPro ist eine umfassende Fitness-App, die personalisierte Trainingspläne, Ernährungsberatung und Fortschrittsverfolgung bietet. Mit KI-gestützten Empfehlungen, Live-Streaming-Kursen und einer Gemeinschaft von Gleichgesinnten macht FitnessPro das Erreichen von Fitnesszielen einfacher und motivierender.",
-    mainImage: "/fitnes.png",
-    additionalImages: [
-
-    ],
-    link: "https://fitnesspro-example.com",
-    color: "#e74c3c",
-  },
-
-
-  {
-    id: 12,
-    title: "EcoTravel",
-    description: "Plattform für nachhaltiges Reisen",
-    fullDescription:
-      "EcoTravel ist die führende Plattform für umweltbewusste Reisende. Sie bietet eine Auswahl an öko-zertifizierten Unterkünften, CO2-neutralen Transportmöglichkeiten und nachhaltigen Aktivitäten weltweit. Mit einem Kohlenstoff-Fußabdruck-Rechner und Tipps für verantwortungsvolles Reisen hilft EcoTravel, die Schönheit der Welt zu erkunden und gleichzeitig zu schützen.",
-    mainImage: "/travel.png",
-    additionalImages: [
-
-    ],
-    link: "https://ecotravel-example.com",
-    color: "#16a085",
-  },
 ]
 
 export default function ModifiedWebsiteShowcase() {
-  const [selectedWebsite, setSelectedWebsite] = useState<Website | null>(null)
-
   return (
     <div className="min-h-screen bg-gray-900 text-white py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-20">
-        <span className="text-pink-500">Webprojekte</span>
-        </h2>
+      <motion.h2
+          className="text-4xl md:text-5xl font-black text-center mb-20 tracking-tight"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+          Einige Beispiele
+          </span>
+        </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {websites.map((website) => (
-            <motion.div
+            <motion.a
               key={website.id}
+              href={website.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer"
               whileHover={{ y: -10 }}
               transition={{ duration: 0.3 }}
-              onClick={() => setSelectedWebsite(website)}
             >
               <img
                 src={website.mainImage || "/placeholder.svg"}
@@ -155,57 +121,14 @@ export default function ModifiedWebsiteShowcase() {
                   {website.title}
                 </h3>
                 <p className="text-gray-400 mb-4 text-sm">{website.description}</p>
-       
+                <div className="flex justify-end">
+                  <ExternalLink className="w-5 h-5" />
+                </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
-
-      <AnimatePresence>
-        {selectedWebsite && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50"
-            onClick={() => setSelectedWebsite(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, y: 50 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 50 }}
-              className="bg-gray-800 rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-3xl font-bold" style={{ color: selectedWebsite.color }}>
-                  {selectedWebsite.title}
-                </h2>
-                <button
-                  onClick={() => setSelectedWebsite(null)}
-                  className="text-gray-400 hover:text-white transition duration-200"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
-              <p className="text-gray-300 mb-6">{selectedWebsite.fullDescription}</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                {selectedWebsite.additionalImages.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img || "/placeholder.svg"}
-                    alt={`${selectedWebsite.title} detail ${index + 1}`}
-                    className="w-full h-48 object-cover rounded-lg shadow-md"
-                  />
-                ))}
-              </div>
-   
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }
-
