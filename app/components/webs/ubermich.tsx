@@ -187,9 +187,6 @@ export default function Component() {
                     <li>
                       <strong className="text-red-300">Kontinuierlicher Support:</strong> Ich biete kontinuierliche Unterstützung und Wartung, um sicherzustellen, dass Ihre App oder Website jederzeit einwandfrei funktioniert.
                     </li>
-                    <li>
-    <strong className="text-red-300">Kostenersparnis:</strong> Die Beauftragung eines Freelancers reduziert die Kosten für Ihre Webseite erheblich, da Sie Einsparungen bei Personalkosten erzielen.
-  </li>
                   </ul>
              
                 </div>
