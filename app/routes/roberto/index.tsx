@@ -62,7 +62,7 @@ export default function BlogIndex() {
       />
       <div className="fixed inset-0 bg-black bg-opacity-50" />
 
-      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200 ">
         <Websitecomponent />
 
         <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
