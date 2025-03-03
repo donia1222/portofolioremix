@@ -30,7 +30,7 @@ export default function AppBenefitsShowcase() {
   return (
     <div className="min-h-screen text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 mt-16">
           Stärken Sie Ihr Unternehmen mit einer{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">App</span>
         </h2>

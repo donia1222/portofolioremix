@@ -5,6 +5,7 @@ import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink
 import Header from "~/components/Header";
 import Chat from "~/components/Chat";
 import ContactModule from "~/components/contactModuledos"; 
+import ScrollToTop from "~/components/scroll-to-top"
 
 export default function AIBusinessSolutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
@@ -127,7 +128,7 @@ export default function AIBusinessSolutions() {
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />
       </div>
-
+      <ScrollToTop />
     </div>
   )
 }

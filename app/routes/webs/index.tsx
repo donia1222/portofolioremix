@@ -10,7 +10,7 @@ import { motion } from "framer-motion"
 import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
 import ContactModule from "~/components/contactModuledos"; 
 import CommunityBlock from "~/components/CommunityBlockWeb"; 
-
+import ScrollToTop from "~/components/scroll-to-top"
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,11 +69,7 @@ export default function BlogIndex() {
  
 
       <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
-             
-      <div className=" bg-cover bg-center flex flex-col items-center justify-start font-poppins rounded-lg mt-40 ">
-      <AnimatedGradientText texts={['Responsive', 'Schnell', 'Modern', 'Animiert']} className="text-white" />
-      
-                  </div>
+
                   <div className="relative z-[9999]">
   <Header />
 </div>
@@ -88,7 +84,7 @@ export default function BlogIndex() {
 
 
    </div>
-
+   <ScrollToTop />
   
       </div>
 

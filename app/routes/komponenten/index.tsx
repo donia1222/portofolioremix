@@ -6,7 +6,7 @@ import { Download, Mail, Phone, Globe, MapPin, CreditCard, MessageSquare, FileCo
 import ChatModul from "./ChatModul"
 import Header from "~/components/Header"
 import { useNavigate } from "react-router-dom"
-
+import ScrollToTop from "~/components/scroll-to-top"
 import handleDownloadVCard from "~/components/downloadVCard"
 
 export default function VCardModul() {
@@ -173,7 +173,7 @@ export default function VCardModul() {
           <ChatModul />
         </div>
       )}
-
+  <ScrollToTop />
       {zeigeVersionen && (
         <motion.div
           initial={{ opacity: 0 }}

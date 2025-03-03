@@ -3,7 +3,7 @@ import { Link } from "@remix-run/react";
 import AppBlock from "~/components/AppBlock"; 
 import Header from "~/components/Header";
 import ContactModule from "~/components/contactModuledos"; 
-
+import ScrollToTop from "~/components/scroll-to-top"
 import { useState, useEffect } from "react";
 
 export default function BlogIndex() {
@@ -69,7 +69,7 @@ export default function BlogIndex() {
 <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />
       </div>
-
+      <ScrollToTop />
       </div>
     </div>
     </div>
