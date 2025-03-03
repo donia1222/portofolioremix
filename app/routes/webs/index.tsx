@@ -80,11 +80,11 @@ export default function BlogIndex() {
 
         <Websitecomponent />
         
-        <CommunityBlock />
+        <CommunityBlock />å
 
         <Wencompometopen />
 
-
+        <WebsiteBlock />
 
 
    </div>
