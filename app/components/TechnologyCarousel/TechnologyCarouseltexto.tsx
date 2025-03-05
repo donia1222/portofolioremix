@@ -29,8 +29,8 @@ export default function AppBenefitsShowcase() {
 
   return (
     <div className="min-h-screen text-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 mt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-40 mt-16">
           Stärken Sie Ihr Unternehmen mit einer{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">App</span>
         </h2>
@@ -56,7 +56,7 @@ export default function AppBenefitsShowcase() {
         </motion.div>
 
         <div className="mt-16 text-center">
-          <h3 className="text-3xl font-bold mb-6">Entwicklung</h3>
+          <h3 className="text-3xl font-bold mb-6 mt-40">Entwicklung</h3>
           <p className="text-lg mb-6 max-w-3xl mx-auto text-gray-300">
             Ich bin ein freiberuflicher Entwickler, spezialisiert auf die Erstellung mobiler Anwendungen mit React
             Native. Dank dieser Technologie sind meine Anwendungen sowohl mit iOS als auch mit Android kompatibel und

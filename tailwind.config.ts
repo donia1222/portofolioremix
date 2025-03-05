@@ -69,7 +69,7 @@ export default {
         'float-text': 'floatText 3s ease-in-out infinite',
       },
       backgroundImage: {
-        'animated-gradient': 'linear-gradient(-45deg, #1e3c72, #254988, #562f7e, #0b463f)',
+        'animated-gradient': 'linear-gradient(-45deg, #1e3c72,  black,  #1e3c72, black)',
       },
       backgroundSize: {
         '400%': '400%',
