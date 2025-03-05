@@ -8,7 +8,7 @@ import { Link } from "@remix-run/react"
 const webElements = [
   { name: "Startseite", price: 350, description: "Eine attraktive Willkommensseite" },
   { name: "Fotogalerie", price: 200, description: "Zeigen Sie Ihre besten Bilder" },
-  { name: "Kontaktformular", price: 150, description: "Ermöglichen Sie Kunden, Sie zu kontaktieren" },
+  { name: "Kontakt", price: 150, description: "Ermöglichen Sie Kunden, Sie zu kontaktieren" },
   { name: "Blog", price: 300, description: "Teilen Sie Neuigkeiten und Artikel" },
   {
     name: "Online-Shop",
@@ -24,7 +24,7 @@ const webElements = [
   { name: "Formular", price: 350, description: "Ermöglichen Sie Reservierungen" },
   { name: "Video", price: 200, description: "Teilen Sie Unternehmensvideos" },
   { name: "Newsletter", price: 220, description: "Sammeln Sie E-Mails für Marketing" },
-  { name: "D-Visitenkarte", price: 280, description: "Digitale Visitenkarte herunterladen" },
+  { name: "Visitenkarte", price: 280, description: "Digitale Visitenkarte herunterladen" },
 ]
 
 const transitionProps = {
