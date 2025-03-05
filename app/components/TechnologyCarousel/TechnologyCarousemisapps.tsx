@@ -13,7 +13,7 @@ interface App {
 const apps: App[] = [
   {
     id: 0,
-    name: "Hundezonen Schweiz",
+    name: "Hundezonen",
     description: "15.000 Downloads in der Schweiz!",
     image: "adaptive-iconcopia2.jpeg",
     link: "https://foodscan-ai.com"
