@@ -6,10 +6,10 @@ import Header from "~/components/Header";
 import Chat from "~/components/Chat";
 import ContactModule from "~/components/contactModuledos"; 
 import ScrollToTop from "~/components/scroll-to-top"
-
+import { useNavigate } from 'react-router-dom';
 export default function AIBusinessSolutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-
+  const navigate = useNavigate();
   useEffect(() => {
     const style = document.createElement("style")
     style.textContent = `
@@ -34,7 +34,10 @@ export default function AIBusinessSolutions() {
       document.head.removeChild(style)
     }
   }, [])
-
+  const handleClick = () => {
+    // Navigate to bot.tsx route (adjust the path as needed)
+    navigate('/bot');
+  };
   return (
     // Se cambia overflow-hidden a overflow-x-hidden
     <div className="bg-black text-white min-h-screen overflow-x-hidden"> {/* <-- Ajuste */}
@@ -64,10 +67,13 @@ export default function AIBusinessSolutions() {
               Künstliche Intelligenz verändert die Art und Weise, wie Unternehmen arbeiten. Optimieren Sie Prozesse,
               verbessern Sie den Kundenservice und treffen Sie intelligentere Entscheidungen.
             </p>
-            <button className="group relative overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:scale-105">
-              <span className="relative z-10 flex items-center">Entdecken Sie die Zukunft</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            </button>
+            <button
+      className="group relative overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:scale-105"
+      onClick={handleClick}
+    >
+      <span className="relative z-10 flex items-center">Entdecken Sie die Zukunft</span>
+      <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+    </button>
           </div>
         </div>
 

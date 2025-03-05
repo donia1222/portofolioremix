@@ -58,7 +58,7 @@ export default function ModernWebDevShowcase() {
               professionellen Webpräsenz
             </span>
           </h2>
-          <p className="text-xl max-w-3xl mx-auto text-gray-300">
+          <p className="text-xl max-w-3xl mx-auto text-gray-300 mb-40">
             Entfesseln Sie das volle Potenzial Ihrer Online-Präsenz mit modernsten Webentwicklungslösungen,
             maßgeschneidert für Ihre Bedürfnisse.
           </p>
@@ -87,7 +87,7 @@ export default function ModernWebDevShowcase() {
 
 
 
-        <div className="mt-16 text-center">
+        <div className="mt-40 text-center">
           <h3 className="text-3xl font-bold mb-6">Professionelle Webentwicklung</h3>
           <p className="text-lg mb-8 max-w-3xl mx-auto text-gray-300">
             Als erfahrener Webentwickler biete ich maßgeschneiderte Lösungen, die Ihr Unternehmen online zum Strahlen
