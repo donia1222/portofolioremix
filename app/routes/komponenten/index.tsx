@@ -153,7 +153,7 @@ export default function VCardModul() {
                 },
                 {
                   icon: <FileCode className="text-blue-400" />,
-                  text: "Kompatibel mit Joomla 3.9 und höher.",
+                  text: "Plug and Play: WordPress & Joomla",
                 },
                 {
                   icon: <Code2 className="text-blue-400" />,
@@ -195,4 +195,3 @@ export default function VCardModul() {
     </div>
   )
 }
-
