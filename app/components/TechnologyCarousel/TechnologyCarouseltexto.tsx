@@ -69,11 +69,6 @@ export default function AppBenefitsShowcase() {
             Ihnen eine kostenlose Testversion einer Anwendung zur Verfügung stellen, damit Sie die Qualität meiner
             Arbeit beurteilen können.
           </p>
-          <p className="text-lg mb-8 max-w-3xl mx-auto text-gray-300">
-            Wenn Sie ein Webentwicklungsunternehmen sind, das nach einer Zusammenarbeit in mobilen Projekten sucht,
-            würde ich mich freuen, mit Ihnen zusammenzuarbeiten. Kontaktieren Sie mich für weitere Details und erfahren
-            Sie, wie ich Ihnen helfen kann, Ihre Idee auf die nächste Stufe zu bringen.
-          </p>
         </div>
       </div>
     </div>
