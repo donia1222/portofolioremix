@@ -44,12 +44,14 @@ export default function ChatModulIntegrated() {
   return (
     <div className="min-h-screen  bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto flex flex-col items-center justify-center pb-20">
 
-
+              <div className="relative z-[9999] mb-20">
         <Header />
-
+      </div>
       {showDemo ? (
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-4xl ">
+               <div className="relative z-[9999] ">
           <SpaceChat />
+          </div>
           <div className="mt-4 text-center">
             <button 
               onClick={() => setShowDemo(false)}
