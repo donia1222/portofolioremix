@@ -1,12 +1,15 @@
 "use client"
 
-import { NavLink } from "@remix-run/react"
+import type React from "react"
+
+import { NavLink, useLocation } from "@remix-run/react"
 import { useState, useEffect, useCallback } from "react"
 import { Code, AppWindow, Menu, X, Home, Brain, Package } from "lucide-react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import "./header.css"
+import "./transitions.css"
 
-// Importamos los componentes necesarios del FloatingBubblesBackground
+// Bubble component remains the same
 function Bubble({ x, y, size, color }: { x: number; y: number; size: number; color: string }) {
   return (
     <motion.circle
@@ -30,6 +33,7 @@ function Bubble({ x, y, size, color }: { x: number; y: number; size: number; col
   )
 }
 
+// FloatingBubbles component remains the same
 function FloatingBubbles() {
   const [bubbles, setBubbles] = useState<Array<{ id: number; x: number; y: number; size: number; color: string }>>([])
 
@@ -56,14 +60,48 @@ function FloatingBubbles() {
   )
 }
 
+// New component for animated navigation indicator
+function NavigationIndicator() {
+  const location = useLocation()
+
+  // Define positions for each route
+  const indicatorPositions = {
+    "/": 0,
+    "/webs": 1,
+    "/apps": 2,
+    "/ki-losungen": 3,
+    "/komponenten": 4,
+    "/roberto": 5,
+  }
+
+  const position = indicatorPositions[location.pathname as keyof typeof indicatorPositions] || 0
+
+  return (
+    <motion.div
+      className="absolute bottom-0 h-1rounded-full"
+      initial={false}
+      animate={{
+        width: "40px",
+        x: `calc(${position} * (100% + 24px) + 20px)`,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+      }}
+    />
+  )
+}
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [lastScrollPosition, setLastScrollPosition] = useState(0)
+  const location = useLocation()
 
   const controlHeaderVisibility = useCallback(() => {
     if (isMenuOpen) return
-    const currentScrollPosition = window.pageYOffset
+    const currentScrollPosition = window.scrollY || document.documentElement.scrollTop
     if (currentScrollPosition > lastScrollPosition && currentScrollPosition > 100) {
       setIsHeaderVisible(false)
     } else {
@@ -79,38 +117,92 @@ export default function Header() {
     }
   }, [controlHeaderVisibility])
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [location])
+
+  // Prevent default link behavior and handle navigation manually
+  const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // The NavLink component will handle the actual navigation
+    // Just prevent any additional behaviors from happening
+    if (window.scrollY > 0) {
+      window.scrollTo({
+        top: 0,
+        behavior: "auto",
+      })
+    }
+  }
+
   return (
     <>
-      <header
-        className={`w-full py-4 px-4 fixed top-0 left-0 z-40 transition-transform duration-300 ${
-          isHeaderVisible ? "translate-y-0" : "-translate-y-full"
-        }`}
+      <motion.header
+        className={`w-full py-4 px-4 fixed top-0 left-0 z-[90]`}
+        initial={{ y: 0 }}
+        animate={{ y: isHeaderVisible ? 0 : -100 }}
+        transition={{ duration: 0.3 }}
       >
-        <div className="w-full md:max-w-[95%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-40">
+        <motion.div
+          className="w-full md:max-w-[95%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-between items-center px-4 md:px-8 py-3 shadow-lg z-40"
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
           {/* Logo and name */}
-          <NavLink to="/" className="flex items-center">
-            <span className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold">LWEB</span>
-            <span className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold">Schweiz</span>
+          <NavLink to="/" className="flex items-center" onClick={handleNavigation}>
+            <motion.span
+              className="text-blue-300 text-lg sm:text-xl md:text-2xl font-bold"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              LWEB
+            </motion.span>
+            <motion.span
+              className="ml-2 text-[#ff69b4] text-lg sm:text-xl md:text-2xl font-bold"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              Schweiz
+            </motion.span>
           </NavLink>
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button
+            <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-white focus:outline-none"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
+              whileTap={{ scale: 0.9 }}
             >
-              {isMenuOpen ? (
-                <X className="h-8 w-8 text-white transition-transform duration-300" />
-              ) : (
-                <Menu className="h-8 w-8 text-white transition-transform duration-300" />
-              )}
-            </button>
+              <AnimatePresence mode="wait">
+                {isMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="h-8 w-8 text-white" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="h-8 w-8 text-white" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
 
           {/* Menu for large screens */}
-          <nav className="hidden md:flex space-x-6">
+          <nav className="hidden md:flex space-x-6 relative">
             <NavLink
               to="/"
               className={({ isActive }) =>
@@ -118,6 +210,7 @@ export default function Header() {
                   isActive ? "active" : ""
                 }`
               }
+              onClick={handleNavigation}
             >
               <Home className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
               <span>Home</span>
@@ -130,6 +223,7 @@ export default function Header() {
                   isActive ? "active" : ""
                 }`
               }
+              onClick={handleNavigation}
             >
               <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
               <span>Webentwicklung</span>
@@ -142,6 +236,7 @@ export default function Header() {
                   isActive ? "active" : ""
                 }`
               }
+              onClick={handleNavigation}
             >
               <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
               <span>App-Entwicklung</span>
@@ -154,6 +249,7 @@ export default function Header() {
                   isActive ? "active" : ""
                 }`
               }
+              onClick={handleNavigation}
             >
               <Brain className="h-5 w-5 animate-pulse" />
               <span>KI-Lösungen</span>
@@ -166,6 +262,7 @@ export default function Header() {
                   isActive ? "active" : ""
                 }`
               }
+              onClick={handleNavigation}
             >
               <Package className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
               <span>Komponenten</span>
@@ -178,114 +275,92 @@ export default function Header() {
                   isActive ? "active" : ""
                 }`
               }
+              onClick={handleNavigation}
             >
               <span>Über mich</span>
-              <img
+              <motion.img
                 src="/yo2.png"
                 alt="Avatar de Roberto Salvador"
                 className="w-10 h-10 rounded-full ml-2 border-2 border-gray-700"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
               />
             </NavLink>
+
+            {/* Animated navigation indicator */}
+            <NavigationIndicator />
           </nav>
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
 
       {/* Mobile menu overlay with FloatingBubbles background */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-center justify-center">
-          <FloatingBubbles />
-          <button
-            onClick={() => setIsMenuOpen(false)}
-            className="absolute top-6 left-1/2 transform -translate-x-1/2 text-white mt-20 focus:outline-none"
-            aria-label="Cerrar menú"
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-[100] flex items-start pt-20 justify-center overflow-y-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            <X className="h-8 w-8" />
-          </button>
-          <nav className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm">
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              to="/"
-              className={({ isActive }) =>
-                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
-                  isActive ? "active" : ""
-                }`
-              }
+            <FloatingBubbles />
+            <motion.nav
+              className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm mb-10"
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
             >
-              <Home className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
-              <span>Home</span>
-            </NavLink>
+              <motion.button
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute top-4 right-4 text-white focus:outline-none"
+                aria-label="Cerrar menú"
+                whileTap={{ scale: 0.9 }}
+              >
+                <X className="h-6 w-6" />
+              </motion.button>
 
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              to="/webs"
-              className={({ isActive }) =>
-                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
-                  isActive ? "active" : ""
-                }`
-              }
-            >
-              <Code className="h-5 w-5 group-hover:scale-125 transition-transform duration-300" />
-              <span>Webentwicklung</span>
-            </NavLink>
-
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              to="/apps"
-              className={({ isActive }) =>
-                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
-                  isActive ? "active" : ""
-                }`
-              }
-            >
-              <AppWindow className="h-5 w-5 group-hover:translate-y-[-4px] transition-transform duration-300" />
-              <span>App-Entwicklung</span>
-            </NavLink>
-
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              to="/ki-losungen"
-              className={({ isActive }) =>
-                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
-                  isActive ? "active" : ""
-                }`
-              }
-            >
-              <Brain className="h-5 w-5 animate-pulse" />
-              <span>KI-Lösungen</span>
-            </NavLink>
-
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              to="/komponenten"
-              className={({ isActive }) =>
-                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
-                  isActive ? "active" : ""
-                }`
-              }
-            >
-              <Package className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-              <span>Komponenten</span>
-            </NavLink>
-
-            <NavLink
-              onClick={() => setIsMenuOpen(false)}
-              to="/roberto"
-              className={({ isActive }) =>
-                `nav-link flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
-                  isActive ? "active" : ""
-                }`
-              }
-            >
-              <img
-                src="/yo2.png"
-                alt="Avatar de Roberto Salvador"
-                className="w-12 h-12 rounded-full border-2 border-gray-600"
-              />
-              <span>Über mich</span>
-            </NavLink>
-          </nav>
-        </div>
-      )}
+              {/* Mobile menu items with staggered animation */}
+              {[
+                { to: "/", icon: <Home className="h-6 w-6" />, label: "Home" },
+                { to: "/webs", icon: <Code className="h-6 w-6" />, label: "Webentwicklung" },
+                { to: "/apps", icon: <AppWindow className="h-6 w-6" />, label: "App-Entwicklung" },
+                { to: "/ki-losungen", icon: <Brain className="h-6 w-6" />, label: "KI-Lösungen" },
+                { to: "/komponenten", icon: <Package className="h-6 w-6" />, label: "Komponenten" },
+                {
+                  to: "/roberto",
+                  icon: <img src="/yo2.png" alt="Avatar" className="w-12 h-12 rounded-full border-2 border-gray-600" />,
+                  label: "Über mich",
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.to}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
+                  className="py-2"
+                >
+                  <NavLink
+                    onClick={(e) => {
+                      setIsMenuOpen(false)
+                      handleNavigation(e)
+                    }}
+                    to={item.to}
+                    className={({ isActive }) =>
+                      `nav-link flex items-center hover:text-[#40e0d0] transition-colors duration-200 group relative ${
+                        isActive ? "active" : ""
+                      }`
+                    }
+                  >
+                    <span className="flex items-center justify-center w-10">{item.icon}</span>
+                    <span className="ml-3 text-lg">{item.label}</span>
+                  </NavLink>
+                </motion.div>
+              ))}
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
