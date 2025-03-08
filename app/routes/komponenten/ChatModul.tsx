@@ -45,7 +45,9 @@ export default function ChatModulIntegrated() {
     <div className="flex flex-col items-center justify-center">
       {showDemo ? (
         <div className="w-full max-w-4xl">
+                    <div className="relative z-[9999] ">
           <SpaceChat />
+          </div>
           <div className="mt-4 text-center">
             <button 
               onClick={() => setShowDemo(false)}
