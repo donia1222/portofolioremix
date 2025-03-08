@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Code, Server } from 'lucide-react';
-
+import ContactModule from "~/components/contactModuledos"; 
 const animateNumbers = (element: HTMLDivElement, start: number, end: number, duration: number) => {
   let startTime: number | null = null;
 
@@ -91,11 +91,11 @@ export default function FreelancerShowcase() {
         <div className="flex justify-center" ref={numbersRef}>
           <div className="bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl text-left transform transition-all duration-500 hover:scale-105">
             <div className="flex items-center justify-between mb-4 animate-slide-in-left">
-              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="32">0</p>
+              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="42">0</p>
               <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
             </div>
             <div className="flex items-center justify-between mb-4 animate-slide-in-left" style={{animationDelay: '0.2s'}}>
-              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="12">0</p>
+              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="19">0</p>
               <p className="text-blue-200 ml-4">Webseiten mit React</p>
             </div>
             <div className="flex items-center justify-between animate-slide-in-left" style={{animationDelay: '0.4s'}}>
@@ -106,6 +106,9 @@ export default function FreelancerShowcase() {
         </div>
 
 
+      </div>
+      <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+        <ContactModule />
       </div>
     </section>
   );
