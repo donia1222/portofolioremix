@@ -80,7 +80,7 @@ export default function BlogIndex() {
 
         <Wencompometopen />
 
-        <WebsiteBlock />
+
 
 
    </div>
