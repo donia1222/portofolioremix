@@ -1,4 +1,32 @@
+/* Header styles */
+.nav-link {
+  position: relative;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #40e0d0;
+}
+
 .nav-link.active {
   color: #40e0d0; /* Turquoise color for active link */
+}
+
+/* Mobile menu specific styles */
+@media (max-width: 768px) {
+  .nav-link {
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  .nav-link.active {
+    color: #40e0d0;
+    font-weight: 600;
+  }
+
+  .nav-link:hover {
+    transform: translateX(5px);
+  }
 }
 
