@@ -64,7 +64,7 @@ export default function SpaceChat() {
     "Können Sie mobile Apps für iOS und Android entwickeln?",
     "Welche Support-Optionen bieten Sie nach der Entwicklung an?",
     "Wie funktioniert der KI-Chatbot auf dieser Website?",
-    "Welche Vorteile bietet die Integration eines intelligenten Chatbots?",
+    "Einen Termin über WhatsApp vereinbaren?", 
     "Kann ich die Antworten des Chatbots an meine Bedürfnisse anpassen?",
     "Wie wird das KI-Modell des Chatbots trainiert?",
     "Wie schnell reagiert der Chatbot auf verschiedenen Geräten?",
