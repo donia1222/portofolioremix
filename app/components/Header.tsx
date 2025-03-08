@@ -305,7 +305,7 @@ export default function Header() {
           >
             <FloatingBubbles />
             <motion.nav
-              className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-6 w-11/12 max-w-sm mb-10"
+              className="relative bg-[#9393b2d5] backdrop-filter backdrop-blur-lg rounded-lg p-8 space-y-2 w-11/12 max-w-sm mb-10"
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
