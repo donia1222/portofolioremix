@@ -53,7 +53,6 @@ export default function SpaceChat() {
 
   // Array de preguntas de ejemplo
   const allQuestions = [
-    "Einen Termin über WhatsApp vereinbaren?", 
     "Erstellen Sie Websites?",
     "Bieten Sie Dienstleistungen zur Entwicklung mobiler Anwendungen an?",
     "Wie funktioniert die künstliche Intelligenz in Ihren Lösungen?",
@@ -71,6 +70,7 @@ export default function SpaceChat() {
     "Wie schnell reagiert der Chatbot auf verschiedenen Geräten?",
     "Wie wird die Privatsphäre und Datensicherheit im Chatbot gewährleistet?",
     "Ist der Chatbot in der Lage, mehrere Sprachen und Kontexte zu handhaben?",
+    "Einen Termin über WhatsApp vereinbaren?", 
   ]
 
   useEffect(() => {
