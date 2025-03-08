@@ -1,15 +1,30 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink } from "lucide-react"
-import Header from "~/components/Header";
-import Chat from "~/components/Chat";
-import ContactModule from "~/components/contactModuledos"; 
+import { useState, useEffect, useRef } from "react"
+import { Brain, Zap, Cog } from "lucide-react"
+import Header from "~/components/Header"
+import Chat from "~/components/Chat"
+import ContactModule from "~/components/contactModuledos"
 import ScrollToTop from "~/components/scroll-to-top"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
+import { motion, useScroll, useTransform } from "framer-motion" // Added framer-motion imports
+
 export default function AIBusinessSolutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const parallaxRef = useRef(null) // Added ref for parallax section
+
+  // Added scroll animation logic
+  const { scrollYProgress } = useScroll({
+    target: parallaxRef,
+    offset: ["start end", "end start"],
+  })
+
+  // Text animation transforms
+  const x1 = useTransform(scrollYProgress, [0, 1], ["-100%", "100%"])
+  const x2 = useTransform(scrollYProgress, [0, 1], ["100%", "-100%"])
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+
   useEffect(() => {
     const style = document.createElement("style")
     style.textContent = `
@@ -34,32 +49,33 @@ export default function AIBusinessSolutions() {
       document.head.removeChild(style)
     }
   }, [])
+
   const handleClick = () => {
     // Navigate to bot.tsx route (adjust the path as needed)
-    navigate('/bot');
-  };
+    navigate("/bot")
+  }
+
   return (
     // Se cambia overflow-hidden a overflow-x-hidden
-    <div className="bg-black text-white min-h-screen overflow-x-hidden"> {/* <-- Ajuste */}
+    <div className="bg-black text-white min-h-screen overflow-x-hidden">
+      {" "}
+      {/* <-- Ajuste */}
       <div className="relative z-[9999] mb-20">
         <Header />
       </div>
-
       {/* Fondo con degradado */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-blue-950 opacity-80"></div>
-
       {/* Animación de la cuadricula */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-
       {/* Efectos glow (ocultos en pantallas pequeñas) */}
-      <div className="hidden md:block absolute top-20 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20 animate-pulse"></div> {/* <-- Ajuste */}
-      <div className="hidden md:block absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-20 animate-pulse delay-1000"></div> {/* <-- Ajuste */}
-
+      <div className="hidden md:block absolute top-20 left-1/4 w-96 h-96 bg-blue-500 rounded-full filter blur-[128px] opacity-20 animate-pulse"></div>{" "}
+      {/* <-- Ajuste */}
+      <div className="hidden md:block absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-[128px] opacity-20 animate-pulse delay-1000"></div>{" "}
+      {/* <-- Ajuste */}
       <div className="relative container mx-auto px-4 py-20">
         {/* Sección Hero */}
         <div className="mb-24 max-w-4xl mx-auto">
           <div className="flex flex-col items-center text-center">
-
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">
               Stärken Sie Ihr Unternehmen mit KI
             </h1>
@@ -68,14 +84,44 @@ export default function AIBusinessSolutions() {
               verbessern Sie den Kundenservice und treffen Sie intelligentere Entscheidungen.
             </p>
             <button
-      className="group relative overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:scale-105"
-      onClick={handleClick}
-    >
-      <span className="relative z-10 flex items-center">Entdecken Sie die Zukunft</span>
-      <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-    </button>
+              className="group relative overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:scale-105"
+              onClick={handleClick}
+            >
+              <span className="relative z-10 flex items-center">Entdecken Sie die Zukunft</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            </button>
           </div>
         </div>
+
+        {/* NEW PARALLAX SECTION */}
+        <div ref={parallaxRef} className="relative min-h-[40vh] w-full mb-32 overflow-hidden rounded-2xl">
+          {/* Background image */}
+          <div className="">
+   
+            {/* Overlay gradient */}
+ 
+          </div>
+
+          {/* Animated text layers */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center overflow-hidden">
+            <motion.div style={{ x: x1 }} className="text-[8vw] font-bold text-white/10 whitespace-nowrap">
+              KÜNSTLICHE INTELLIGENZ
+            </motion.div>
+
+            <motion.div style={{ x: x2 }} className="text-[8vw] font-bold text-white/10 whitespace-nowrap mt-[-5vw]">
+              INNOVATION ZUKUNFT
+            </motion.div>
+          </div>
+
+          {/* Content */}
+          <motion.div
+            style={{ opacity }}
+            className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center px-4"
+          >
+  
+          </motion.div>
+        </div>
+        {/* END NEW PARALLAX SECTION */}
 
         {/* Contenido Principal */}
         <div className="mb-24s">
@@ -126,10 +172,9 @@ export default function AIBusinessSolutions() {
             ))}
           </div>
           <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-        <Chat />
-      </div>
-      
+            <Chat />
           </div>
+        </div>
       </div>
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />
@@ -138,3 +183,4 @@ export default function AIBusinessSolutions() {
     </div>
   )
 }
+
