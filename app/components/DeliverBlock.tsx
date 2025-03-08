@@ -42,7 +42,7 @@ export default function DeliverBlock() {
           <h2 className="text-4xl md:text-6xl font-bold text-white  max-w-4xl p-4">
             Modernität in <span className="text-pink-400">jedem Pixel</span>
           </h2>
-          <p className="text-xl text-blue-200 max-w-2xl mx-auto md:mx-0 p-4">
+          <p className="text-xm text-blue-200 max-w-2xl mx-auto md:mx-0 p-4 mb-6">
             Ich fusioniere modernes Design mit fesselnden Animationen, um Websites zu kreieren, die in jedem Detail herausstechen. Jedes Pixel wird sorgfältig ausgearbeitet, um Interaktivität und Ästhetik zu bieten und Ihren Nutzern ein unvergessliches Navigationserlebnis zu ermöglichen.
           </p>
         </div>
