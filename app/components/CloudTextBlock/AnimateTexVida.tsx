@@ -1,18 +1,24 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { motion, useAnimation, type Variants } from "framer-motion"
+import { motion, useAnimation, type Variants, useScroll, useTransform } from "framer-motion"
+import Phone from "~/components/phone-slideshowHome"
 
 export default function AnimatedText() {
   const [isVisible, setIsVisible] = useState(false)
   const controls = useAnimation()
   const containerRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLDivElement>(null)
 
-  // Split the text into two parts
-  const textTop = "Animierte"
-  const textBottom = "Komponenten"
-  const lettersTop = textTop.split("")
-  const lettersBottom = textBottom.split("")
+  // Scroll animation setup
+  const { scrollYProgress } = useScroll({
+    target: textRef,
+    offset: ["start end", "end start"],
+  })
+
+  // Transform values based on scroll position
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -100])
+  const textOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0])
 
   useEffect(() => {
     setIsVisible(true)
@@ -26,7 +32,7 @@ export default function AnimatedText() {
       canvas.style.left = "0"
       canvas.style.width = "100%"
       canvas.style.height = "100%"
-      canvas.style.zIndex = "1"
+      canvas.style.zIndex = "-1"
       canvas.style.pointerEvents = "none"
       containerRef.current.appendChild(canvas)
 
@@ -180,79 +186,31 @@ export default function AnimatedText() {
   return (
     <motion.div
       ref={containerRef}
-      className="relative flex items-center justify-center p-4 sm:p-8 md:p-16 lg:p-40 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028] min-h-[500px]"
+      className="relative flex flex-col items-center justify-center p-4 sm:p-8 md:p-16 lg:p-40 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028] min-h-[500px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* Main text container */}
-      <div className="relative z-10 px-4 sm:px-8 py-8 sm:py-16 mx-auto text-center max-w-4xl backdrop-blur-sm bg-black/30 rounded-xl border border-[#00FFFF]/20 shadow-[0_0_50px_rgba(0,255,255,0.15)]">
-        {/* Top text: "Animation macht" */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
-          className="flex flex-wrap justify-center mb-4 sm:mb-6"
-        >
-          {lettersTop.map((letter, i) => (
-            <motion.span
-              key={`top-${i}`}
-              custom={i}
-              variants={letterVariants}
-              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold ${letter === " " ? "mr-4" : ""}`}
-              style={{
-                display: "inline-block",
-                color: "#fff",
-                textShadow: "0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(255, 0, 255, 0.5)",
-              }}
-              whileHover={{
-                scale: 1.2,
-                color: ["#fff", "#00FFFF", "#FF00FF", "#fff"],
-                transition: { duration: 0.5, times: [0, 0.3, 0.6, 1] },
-              }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </motion.div>
-
-        {/* Bottom text: "das Leben besser" */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
-          className="flex flex-wrap justify-center mb-6 sm:mb-8"
-        >
-          {lettersBottom.map((letter, i) => (
-            <motion.span
-              key={`bottom-${i}`}
-              custom={i + lettersTop.length} // Offset the animation timing
-              variants={letterVariants}
-              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${letter === " " ? "mr-4" : ""}`}
-              style={{
-                display: "inline-block",
-                color: "#fff",
-                textShadow: "0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(255, 0, 255, 0.5)",
-              }}
-              whileHover={{
-                scale: 1.2,
-                color: ["#fff", "#00FFFF", "#FF00FF", "#fff"],
-                transition: { duration: 0.5, times: [0, 0.3, 0.6, 1] },
-              }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </motion.div>
-
-        {/* Tech circuit lines */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-0 w-1/3 h-px bg-gradient-to-r from-transparent via-[#00FFFF] to-transparent"></div>
-          <div className="absolute top-0 right-0 w-1/4 h-px bg-gradient-to-l from-transparent via-[#FF00FF] to-transparent"></div>
-          <div className="absolute bottom-0 left-0 w-1/2 h-px bg-gradient-to-r from-transparent via-[#00FFFF] to-transparent"></div>
-          <div className="absolute top-1/4 right-0 w-px h-1/3 bg-gradient-to-b from-transparent via-[#00FFFF] to-transparent"></div>
-          <div className="absolute top-1/3 left-0 w-px h-1/4 bg-gradient-to-b from-transparent via-[#FF00FF] to-transparent"></div>
-        </div>
+      {/* NATIVE APPS text with scroll animation */}
+      <motion.h1
+        className="text-4xl sm:text-5xl md:text-6xl font-bold mb-12 text-center bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent px-4 w-full"
+        initial={{ y: 0 }}
+        animate={{
+          y: [0, -20, 0, -10, 0],
+          textShadow: ["0px 0px 0px rgba(0,0,0,0)", "0px 0px 15px rgba(0,255,255,0.7)", "0px 0px 0px rgba(0,0,0,0)"],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Number.POSITIVE_INFINITY,
+          repeatType: "reverse",
+          times: [0, 0.2, 0.5, 0.7, 1],
+          ease: "easeInOut",
+        }}
+      >
+        NATIVE APPS
+      </motion.h1>
+      <div className="relative z-10">
+        <Phone />
       </div>
     </motion.div>
   )
