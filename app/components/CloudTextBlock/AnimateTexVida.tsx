@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { motion, useAnimation, type Variants, useScroll, useTransform } from "framer-motion"
 import Phone from "~/components/phone-slideshowHome"
+import PhoneTwo from "~/components/phone-slideshowTwo"
 
 export default function AnimatedText() {
   const [isVisible, setIsVisible] = useState(false)
@@ -209,8 +210,11 @@ export default function AnimatedText() {
       >
         NATIVE APPS
       </motion.h1>
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full">
         <Phone />
+        <div className="hidden sm:block">
+          <PhoneTwo />
+        </div>
       </div>
     </motion.div>
   )
