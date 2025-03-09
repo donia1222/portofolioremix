@@ -558,7 +558,7 @@ export function WebsitePreview() {
   }
 
   return (
-    <div className="bg-white h-full overflow-auto">
+    <div className="bg-white h-full overflow-x-hidden">
       {/* Header */}
       <motion.header
         initial={{ y: -20, opacity: 0 }}
@@ -727,7 +727,7 @@ export function WebsitePreview() {
             </div>
 
             {/* Mobile Language Selector */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex flex-wrap items-center gap-2 mb-4">
               {["de", "fr", "it", "en"].map((lang) => (
                 <motion.button
                   key={lang}
@@ -773,7 +773,7 @@ export function WebsitePreview() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="relative h-[500px] overflow-hidden" ref={heroRef}>
+      <section className="relative h-[60vh] md:h-[500px] overflow-hidden" ref={heroRef}>
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-indigo-900/80 z-10"
           style={{ opacity: heroOpacity }}
@@ -787,11 +787,11 @@ export function WebsitePreview() {
           }}
         ></motion.div>
         <div className="relative z-10 container mx-auto h-full flex flex-col justify-center p-4 text-white">
-          <motion.h2 className="text-4xl md:text-6xl font-bold mb-4" style={{ y: heroTextY }}>
+          <motion.h2 className="text-3xl md:text-6xl font-bold mb-4" style={{ y: heroTextY }}>
             {t.collection}
           </motion.h2>
           <motion.p
-            className="text-lg md:text-xl mb-6 max-w-lg"
+            className="text-base md:text-xl mb-6 max-w-lg"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.4 }}
@@ -818,10 +818,10 @@ export function WebsitePreview() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-indigo-50 to-purple-50">
+      <section className="py-12 md:py-16 bg-gradient-to-r from-indigo-50 to-purple-50">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold mb-12 text-center text-indigo-800"
+            className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center text-indigo-800"
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
@@ -829,39 +829,39 @@ export function WebsitePreview() {
           >
             {t.stats}
           </motion.h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
             {[
               {
                 value: 25000,
                 label: t.happyCustomers,
-                icon: <User className="mx-auto mb-2 text-indigo-600" size={32} />,
+                icon: <User className="mx-auto mb-2 text-indigo-600" size={24} />,
               },
               {
                 value: 1500,
                 label: t.products,
-                icon: <ShoppingBag className="mx-auto mb-2 text-indigo-600" size={32} />,
+                icon: <ShoppingBag className="mx-auto mb-2 text-indigo-600" size={24} />,
               },
-              { value: 15, label: t.countries, icon: <MapPin className="mx-auto mb-2 text-indigo-600" size={32} /> },
-              { value: 32, label: t.storeLocations, icon: <Home className="mx-auto mb-2 text-indigo-600" size={32} /> },
+              { value: 15, label: t.countries, icon: <MapPin className="mx-auto mb-2 text-indigo-600" size={24} /> },
+              { value: 32, label: t.storeLocations, icon: <Home className="mx-auto mb-2 text-indigo-600" size={24} /> },
             ].map((stat, index) => (
               <motion.div
                 key={index}
-                className="p-6 bg-white rounded-xl shadow-md"
+                className="p-3 md:p-6 bg-white rounded-xl shadow-md"
                 variants={scaleUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{
-                  y: -10,
+                  y: -5,
                   boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                 }}
               >
                 {stat.icon}
-                <h3 className="text-3xl font-bold text-indigo-600 mb-2">
+                <h3 className="text-xl md:text-3xl font-bold text-indigo-600 mb-1 md:mb-2">
                   <AnimatedCounter value={stat.value} />
                 </h3>
-                <p className="text-gray-600">{stat.label}</p>
+                <p className="text-sm md:text-base text-gray-600">{stat.label}</p>
               </motion.div>
             ))}
           </div>
@@ -869,9 +869,9 @@ export function WebsitePreview() {
       </section>
 
       {/* Featured Categories */}
-      <section className="py-16 container mx-auto px-4">
+      <section className="py-12 md:py-16 container mx-auto px-4">
         <motion.h2
-          className="text-3xl font-bold mb-12 text-center"
+          className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center"
           variants={fadeIn}
           initial="hidden"
           whileInView="visible"
@@ -880,7 +880,7 @@ export function WebsitePreview() {
           {t.categories}
         </motion.h2>
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -906,9 +906,9 @@ export function WebsitePreview() {
           ].map((category, index) => (
             <motion.div
               key={index}
-              className="group relative rounded-lg overflow-hidden h-60 cursor-pointer"
+              className="group relative rounded-lg overflow-hidden h-40 md:h-60 cursor-pointer"
               variants={slideUp}
-              whileHover={{ y: -10 }}
+              whileHover={{ y: -5 }}
             >
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300 z-10"></div>
               <motion.img
@@ -920,7 +920,7 @@ export function WebsitePreview() {
               />
               <div className="absolute inset-0 flex items-center justify-center z-20">
                 <motion.h3
-                  className="text-white font-bold text-2xl"
+                  className="text-white font-bold text-lg md:text-2xl"
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.1 * index }}
@@ -934,10 +934,10 @@ export function WebsitePreview() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold mb-12 text-center"
+            className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center"
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
@@ -946,7 +946,7 @@ export function WebsitePreview() {
             {t.featuredProducts}
           </motion.h2>
           <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -957,9 +957,9 @@ export function WebsitePreview() {
                 key={index}
                 className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
                 variants={slideUp}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -5 }}
               >
-                <div className="relative h-72 overflow-hidden group">
+                <div className="relative h-56 md:h-72 overflow-hidden group">
                   <motion.img
                     src={product.image || "/placeholder.svg"}
                     alt={product.name}
@@ -999,18 +999,18 @@ export function WebsitePreview() {
                     <Heart size={18} />
                   </motion.button>
                 </div>
-                <div className="p-5">
+                <div className="p-4 md:p-5">
                   <div className="flex items-center gap-1 mb-1">
                     <RatingStars rating={product.rating} />
                     <span className="text-xs text-gray-500">({product.reviews})</span>
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+                  <h3 className="font-semibold text-base md:text-lg mb-2">{product.name}</h3>
                   <div className="flex justify-between items-center">
                     <div>
                       {product.oldPrice && (
                         <span className="text-gray-400 line-through text-sm mr-2">{product.oldPrice}</span>
                       )}
-                      <span className="font-bold text-indigo-600 text-lg">{product.price}</span>
+                      <span className="font-bold text-indigo-600 text-base md:text-lg">{product.price}</span>
                     </div>
                     <motion.button
                       className={`${product.tag === "outOfStock" ? "bg-gray-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700"} text-white p-2 rounded-full transition-colors`}
@@ -1025,9 +1025,9 @@ export function WebsitePreview() {
               </motion.div>
             ))}
           </motion.div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 md:mt-12">
             <motion.button
-              className="border-2 border-indigo-600 text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-indigo-600 hover:text-white transition-colors"
+              className="border-2 border-indigo-600 text-indigo-600 px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold hover:bg-indigo-600 hover:text-white transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -1038,16 +1038,16 @@ export function WebsitePreview() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-indigo-50">
+      <section className="py-12 md:py-16 bg-indigo-50">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8 md:mb-12"
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-2">{t.testimonials}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">{t.testimonials}</h2>
             <p className="text-gray-600">{t.testimonialDesc}</p>
           </motion.div>
 
@@ -1055,25 +1055,27 @@ export function WebsitePreview() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTestimonialIndex}
-                className="bg-white p-8 rounded-xl shadow-lg"
+                className="bg-white p-4 md:p-8 rounded-xl shadow-lg"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5 }}
               >
-                <div className="flex flex-col md:flex-row gap-6 items-center">
-                  <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
+                <div className="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
+                  <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden flex-shrink-0">
                     <img
                       src={testimonials[activeTestimonialIndex].image || "/placeholder.svg"}
                       alt={testimonials[activeTestimonialIndex].name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="flex-1">
-                    <div className="mb-2">
+                  <div className="flex-1 text-center md:text-left">
+                    <div className="mb-2 flex justify-center md:justify-start">
                       <RatingStars rating={testimonials[activeTestimonialIndex].rating} />
                     </div>
-                    <p className="text-gray-700 italic mb-4">"{testimonials[activeTestimonialIndex].text}"</p>
+                    <p className="text-gray-700 italic mb-4 text-sm md:text-base">
+                      "{testimonials[activeTestimonialIndex].text}"
+                    </p>
                     <div>
                       <h4 className="font-bold text-indigo-600">{testimonials[activeTestimonialIndex].name}</h4>
                       <p className="text-gray-500 text-sm">{testimonials[activeTestimonialIndex].location}</p>
@@ -1094,42 +1096,42 @@ export function WebsitePreview() {
             </div>
 
             <motion.button
-              className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-12 bg-white p-2 rounded-full shadow-md text-indigo-600 hidden md:block"
+              className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-indigo-600"
               onClick={prevTestimonial}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={20} />
             </motion.button>
 
             <motion.button
-              className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-12 bg-white p-2 rounded-full shadow-md text-indigo-600 hidden md:block"
+              className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-indigo-600"
               onClick={nextTestimonial}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={20} />
             </motion.button>
           </div>
         </div>
       </section>
 
       {/* Instagram Section */}
-      <section className="py-16">
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8 md:mb-12"
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-2">{t.ourInstagram}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">{t.ourInstagram}</h2>
             <p className="text-gray-600">{t.followUs}</p>
           </motion.div>
 
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -1150,7 +1152,7 @@ export function WebsitePreview() {
             ))}
           </motion.div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-6 md:mt-8">
             <motion.a
               href="#"
               className="inline-flex items-center gap-2 text-indigo-600 font-semibold"
@@ -1165,7 +1167,7 @@ export function WebsitePreview() {
       </section>
 
       {/* Newsletter with background image */}
-      <section className="py-20 relative">
+      <section className="py-12 md:py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600/90 to-indigo-600/90 z-0"></div>
         <motion.div
           className="absolute inset-0 bg-cover bg-center opacity-40"
@@ -1179,7 +1181,7 @@ export function WebsitePreview() {
         ></motion.div>
         <div className="container mx-auto px-4 text-center relative z-10 text-white">
           <motion.h2
-            className="text-3xl font-bold mb-4"
+            className="text-2xl md:text-3xl font-bold mb-3 md:mb-4"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -1188,7 +1190,7 @@ export function WebsitePreview() {
             {t.newsletter}
           </motion.h2>
           <motion.p
-            className="mb-8 max-w-lg mx-auto"
+            className="mb-6 md:mb-8 max-w-lg mx-auto text-sm md:text-base"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -1206,10 +1208,10 @@ export function WebsitePreview() {
             <input
               type="email"
               placeholder={t.emailPlaceholder}
-              className="px-4 py-3 rounded-l-full rounded-r-full sm:rounded-r-none flex-grow text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="px-4 py-2 md:py-3 rounded-l-full rounded-r-full sm:rounded-r-none flex-grow text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <motion.button
-              className="bg-white text-indigo-600 px-6 py-3 rounded-r-full rounded-l-full sm:rounded-l-none font-semibold hover:bg-indigo-50 transition-colors"
+              className="bg-white text-indigo-600 px-4 md:px-6 py-2 md:py-3 rounded-r-full rounded-l-full sm:rounded-l-none font-semibold hover:bg-indigo-50 transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -1220,10 +1222,10 @@ export function WebsitePreview() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-900 text-white py-8 md:py-12">
         <div className="container mx-auto px-4">
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-4 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -1231,24 +1233,24 @@ export function WebsitePreview() {
           >
             <motion.div variants={slideUp}>
               <motion.div className="flex items-center gap-2 mb-4" whileHover={{ x: 5 }}>
-                <div className="h-10 w-10 bg-white rounded-full flex items-center justify-center">
-                  <div className="text-indigo-600 font-bold text-xl">A</div>
+                <div className="h-8 w-8 md:h-10 md:w-10 bg-white rounded-full flex items-center justify-center">
+                  <div className="text-indigo-600 font-bold text-lg md:text-xl">A</div>
                 </div>
-                <h3 className="text-2xl font-bold">Alpenmode</h3>
+                <h3 className="text-xl md:text-2xl font-bold">Alpenmode</h3>
               </motion.div>
-              <p className="text-gray-400">{t.quality}</p>
+              <p className="text-gray-400 text-sm md:text-base">{t.quality}</p>
 
-              <div className="flex gap-4 mt-6">
+              <div className="flex gap-3 md:gap-4 mt-4 md:mt-6">
                 {[
-                  <Facebook key="fb" size={20} />,
-                  <Instagram key="ig" size={20} />,
-                  <Twitter key="tw" size={20} />,
-                  <Linkedin key="ln" size={20} />,
+                  <Facebook key="fb" size={18} />,
+                  <Instagram key="ig" size={18} />,
+                  <Twitter key="tw" size={18} />,
+                  <Linkedin key="ln" size={18} />,
                 ].map((icon, index) => (
                   <motion.a
                     key={index}
                     href="#"
-                    className="bg-gray-800 w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:bg-indigo-600 hover:text-white transition-all"
+                    className="bg-gray-800 w-7 h-7 md:w-8 md:h-8 rounded-full flex items-center justify-center text-gray-400 hover:bg-indigo-600 hover:text-white transition-all"
                     onClick={handleLinkClick}
                     whileHover={{ y: -5 }}
                     whileTap={{ scale: 0.9 }}
@@ -1260,8 +1262,8 @@ export function WebsitePreview() {
             </motion.div>
 
             <motion.div variants={slideUp}>
-              <h4 className="font-bold text-lg mb-4">{t.links}</h4>
-              <ul className="space-y-3">
+              <h4 className="font-bold text-base md:text-lg mb-3 md:mb-4">{t.links}</h4>
+              <ul className="space-y-2 md:space-y-3 text-sm md:text-base">
                 {[t.home, t.products, t.categories, t.newsletter].map((item, index) => (
                   <motion.li key={index} whileHover={{ x: 5 }}>
                     <a href="#" className="text-gray-400 hover:text-white transition-colors" onClick={handleLinkClick}>
@@ -1273,8 +1275,8 @@ export function WebsitePreview() {
             </motion.div>
 
             <motion.div variants={slideUp}>
-              <h4 className="font-bold text-lg mb-4">{t.help}</h4>
-              <ul className="space-y-3">
+              <h4 className="font-bold text-base md:text-lg mb-3 md:mb-4">{t.help}</h4>
+              <ul className="space-y-2 md:space-y-3 text-sm md:text-base">
                 {[t.contact, t.shipping, t.returns, t.faq].map((item, index) => (
                   <motion.li key={index} whileHover={{ x: 5 }}>
                     <a href="#" className="text-gray-400 hover:text-white transition-colors" onClick={handleLinkClick}>
@@ -1286,22 +1288,22 @@ export function WebsitePreview() {
             </motion.div>
 
             <motion.div variants={slideUp}>
-              <h4 className="font-bold text-lg mb-4">{t.contact}</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-start gap-3">
-                  <MapPin size={18} className="text-indigo-400 flex-shrink-0 mt-1" />
+              <h4 className="font-bold text-base md:text-lg mb-3 md:mb-4">{t.contact}</h4>
+              <ul className="space-y-2 md:space-y-3 text-sm md:text-base text-gray-400">
+                <li className="flex items-start gap-2 md:gap-3">
+                  <MapPin size={16} className="text-indigo-400 flex-shrink-0 mt-1" />
                   <span>
                     Bahnhofstrasse 42
                     <br />
                     8001 Zürich, Schweiz
                   </span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Mail size={18} className="text-indigo-400 flex-shrink-0" />
+                <li className="flex items-center gap-2 md:gap-3">
+                  <Mail size={16} className="text-indigo-400 flex-shrink-0" />
                   <span>info@alpenmode.ch</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Phone size={18} className="text-indigo-400 flex-shrink-0" />
+                <li className="flex items-center gap-2 md:gap-3">
+                  <Phone size={16} className="text-indigo-400 flex-shrink-0" />
                   <span>+41 44 123 45 67</span>
                 </li>
               </ul>
@@ -1309,14 +1311,14 @@ export function WebsitePreview() {
           </motion.div>
 
           <motion.div
-            className="border-t border-gray-800 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center"
+            className="border-t border-gray-800 mt-6 md:mt-10 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
           >
-            <p className="text-gray-400">{t.copyright}</p>
-            <div className="flex gap-6 mt-4 md:mt-0">
+            <p className="text-gray-400 text-sm md:text-base">{t.copyright}</p>
+            <div className="flex gap-4 md:gap-6 mt-4 md:mt-0 text-sm md:text-base">
               {[t.privacy, t.terms, t.cookies].map((item, index) => (
                 <motion.a
                   key={index}
@@ -1332,9 +1334,6 @@ export function WebsitePreview() {
           </motion.div>
         </div>
       </footer>
-
-
-
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Download, ChevronRight, ChevronLeft } from "lucide-react"
 import Phone from "~/components/phone-slideshow"
 
+
 interface App {
   id: number
   name: string
