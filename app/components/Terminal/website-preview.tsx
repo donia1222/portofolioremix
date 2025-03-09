@@ -778,14 +778,15 @@ export function WebsitePreview() {
           className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-indigo-900/80 z-10"
           style={{ opacity: heroOpacity }}
         ></motion.div>
-        <motion.div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop')",
-            scale: heroScale,
-          }}
-        ></motion.div>
+        <motion.div className="absolute inset-0 overflow-hidden" style={{ scale: heroScale }}>
+          <video autoPlay muted loop playsInline className="absolute w-full h-full object-cover">
+            <source
+              src="0_Woman_Skateboarding_1280x720.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
+        </motion.div>
         <div className="relative z-10 container mx-auto h-full flex flex-col justify-center p-4 text-white">
           <motion.h2 className="text-3xl md:text-6xl font-bold mb-4" style={{ y: heroTextY }}>
             {t.collection}
