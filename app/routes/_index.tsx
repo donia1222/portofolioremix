@@ -19,6 +19,7 @@ import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock';
 import CloudTextAnime from '~/components/CloudTextBlock/AnimateTexVida'; 
 import ScrollToTop from "~/components/scroll-to-top"
 
+
 export const links: LinksFunction = () => {
   return [
     {
@@ -59,7 +60,7 @@ export default function Index() {
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
     <div className="fixed inset-0 bg-black bg-opacity-70" />
 
-      
+
       {/* Banner de Cookies */}
       <CookieBanner />
 
@@ -101,7 +102,6 @@ export default function Index() {
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />
       </div>
-
 
 
 

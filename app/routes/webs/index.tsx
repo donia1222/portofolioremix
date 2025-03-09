@@ -11,6 +11,10 @@ import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
 import ContactModule from "~/components/contactModuledos"; 
 import CommunityBlock from "~/components/CommunityBlockWeb"; 
 import ScrollToTop from "~/components/scroll-to-top"
+
+import { ComputerSimulator } from '~/components/Terminal/computer-simulator'; 
+
+
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,10 +77,14 @@ export default function BlogIndex() {
                   <div className="relative z-[9999]">
   <Header />
 </div>
+      
 
         <Websitecomponent />
-        
+ 
         <CommunityBlock />å
+        <div id="technologyCarousel" className="w-full  flex justify-center relative" data-aos="fade-up" data-aos-delay="800">
+        <ComputerSimulator />
+      </div>
 
         <Wencompometopen />
 
