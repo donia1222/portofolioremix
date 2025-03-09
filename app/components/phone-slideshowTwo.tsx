@@ -7,7 +7,7 @@ export default function PhoneSlideshow() {
 
   // Array of image URLs - replace with your actual images
   const images = [
-    "/IMG_2483.PNG",
+    "/dtr.png",
     "/IMG_2488.PNG",
     "/IMG_2485.PNG",
     "/IMG_2486.PNG",
