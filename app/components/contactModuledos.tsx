@@ -195,6 +195,12 @@ export default function ContactModule() {
       <p>Bahnhofstrasse 9, 9475 Sevelen, Schweiz </p>
       <p><strong>Telefon:</strong> 081 750 1911</p>
       <p><strong>E-Mail:</strong> <a href="mailto:info@lweb.ch">info@lweb.ch</a></p>
+      <footer className="mt-10 text-sm text-gray-500">
+            einige Bilder stammen von {" "}
+        <a href="https://www.freepik.com" target="_blank" rel="noopener noreferrer" className="underline">
+          Freepik
+        </a>
+      </footer>
     </>
   }
 />
