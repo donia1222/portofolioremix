@@ -212,6 +212,16 @@ export default function TableManagement() {
             </div>
             <div className="flex justify-between items-center">
               <div className="text-gray-800 font-medium">{table.id}</div>
+
+              {/* Número de personas (antes era el estado) */}
+              <div className="flex items-center gap-1 text-gray-600">
+                <Users size={16} />
+                <span className="text-lg font-medium">{table.people}</span>
+              </div>
+            </div>
+
+            {/* Estado (antes era el número de personas) */}
+            <div className="mt-2 flex items-center justify-between bg-white">
               <div
                 className={`text-sm ${table.status === "free" ? "text-blue-500" : "text-pink-500"} font-medium flex items-center gap-1`}
               >
@@ -226,14 +236,6 @@ export default function TableManagement() {
                     <span>Besetzt</span>
                   </>
                 )}
-              </div>
-            </div>
-
-            {/* People counter */}
-            <div className="mt-2 flex items-center justify-between bg-white">
-              <div className="flex items-center gap-1 text-gray-600">
-                <Users size={16} />
-                <span>{table.people}</span>
               </div>
               <div className="flex items-center gap-1">
                 <button
@@ -357,4 +359,6 @@ export default function TableManagement() {
     </div>
   )
 }
+
+
 
