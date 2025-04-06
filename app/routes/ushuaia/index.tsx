@@ -176,20 +176,22 @@ export default function TableManagement() {
         </div>
       </div>
 
-      {/* Category Filter */}
+      {/* Category Filter - with horizontal scroll for small screens */}
       <div className="sticky top-0 bg-white z-10 py-4 mb-6 shadow-md border-b">
-        <div className="flex gap-2">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`px-4 py-1.5 rounded-md text-white font-medium shadow-md ${
-                category.id === selectedCategory ? "bg-pink-500" : "bg-blue-500"
-              }`}
-            >
-              {category.label} ({category.count})
-            </button>
-          ))}
+        <div className="overflow-x-auto pb-2 -mx-4 px-4">
+          <div className="flex gap-2 min-w-max">
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-4 py-1.5 rounded-md text-white font-medium shadow-md whitespace-nowrap ${
+                  category.id === selectedCategory ? "bg-pink-500" : "bg-blue-500"
+                }`}
+              >
+                {category.label} ({category.count})
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
