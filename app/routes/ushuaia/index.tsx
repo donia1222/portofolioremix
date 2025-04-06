@@ -19,11 +19,10 @@ type CategoryOption = {
 }
 
 export default function TableManagement() {
-  // Categories
+  // Categories - Removed "Alle" and put "Fumoir" first
   const categories: CategoryOption[] = [
-    { id: "all", label: "Alle", count: 68 },
-    { id: "restaurant", label: "Restaurant", count: 22 },
     { id: "fumoir", label: "Raucherbereich", count: 26 },
+    { id: "restaurant", label: "Restaurant", count: 22 },
     { id: "terrasse", label: "Terrasse", count: 20 },
   ]
 
@@ -49,8 +48,8 @@ export default function TableManagement() {
     people: 0,
   }))
 
-  // States
-  const [selectedCategory, setSelectedCategory] = useState("all")
+  // States - Default to "fumoir" instead of "all"
+  const [selectedCategory, setSelectedCategory] = useState("fumoir")
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedTable, setSelectedTable] = useState<{
     category: string
@@ -93,7 +92,7 @@ export default function TableManagement() {
       case "terrasse":
         return tables.terrasse
       default:
-        return [...tables.restaurant, ...tables.fumoir, ...tables.terrasse]
+        return tables.fumoir // Default to fumoir instead of all tables
     }
   }
 
@@ -359,6 +358,4 @@ export default function TableManagement() {
     </div>
   )
 }
-
-
 
