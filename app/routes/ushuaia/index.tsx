@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect } from "react"
 import { Plus, Minus, Users, Check, X, Unlock, UserCheck } from "lucide-react"
 
 // Types
@@ -15,14 +15,15 @@ type TableItem = {
 type CategoryOption = {
   id: string
   label: string
+  count: number
 }
 
 export default function TableManagement() {
-  // Categories - Removed counts as they will be calculated dynamically
+  // Categories - Removed "Alle" and put "Fumoir" first
   const categories: CategoryOption[] = [
-    { id: "fumoir", label: "Raucherbereich" },
-    { id: "restaurant", label: "Restaurant" },
-    { id: "terrasse", label: "Terrasse" },
+    { id: "fumoir", label: "Raucherbereich", count: 26 },
+    { id: "restaurant", label: "Restaurant", count: 22 },
+    { id: "terrasse", label: "Terrasse", count: 20 },
   ]
 
   // Create tables for each category
@@ -79,15 +80,6 @@ export default function TableManagement() {
   // Save to localStorage whenever tables change
   useEffect(() => {
     localStorage.setItem("tableStatuses", JSON.stringify(tables))
-  }, [tables])
-
-  // Calculate free tables count for each category
-  const freeTables = useMemo(() => {
-    return {
-      restaurant: tables.restaurant.filter((table) => table.status === "free").length,
-      fumoir: tables.fumoir.filter((table) => table.status === "free").length,
-      terrasse: tables.terrasse.filter((table) => table.status === "free").length,
-    }
   }, [tables])
 
   // Get current tables based on selected category
@@ -195,7 +187,7 @@ export default function TableManagement() {
                   category.id === selectedCategory ? "bg-pink-500" : "bg-blue-500"
                 }`}
               >
-                {category.label} ({freeTables[category.id as keyof typeof freeTables]})
+                {category.label} ({category.count})
               </button>
             ))}
           </div>

@@ -123,7 +123,7 @@ export default function ContactModule() {
                   <p className="text-base text-gray-300">
                     <strong className="text-blue-300">Telefon: </strong>
                     <a href="tel:+41817501911" className="hover:text-blue-400 transition duration-300">
-                      081 750 1911
+                      081 750 19 11
                     </a>
                   </p>
                   <p className="text-base text-gray-300 mt-2">
