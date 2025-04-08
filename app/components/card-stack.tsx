@@ -512,7 +512,7 @@ export default function PortfolioShowcase() {
         <div className="h-1 w-24 bg-white mx-auto mt-2 mb-3 opacity-50"></div>
         <p className="text-gray-400 mt-2">Meine bisher abgeschlossenen Projekte für das Jahr 2025</p>
       </div>
-      <div className="relative h-[600px] w-full">
+      <div className="relative h-[600px] w-full px-4 md:px-0 mb-16 md:mb-8">
         <AnimatePresence mode="popLayout">
           {projects.slice(0, 3).map((project, index) => (
             <ProjectCard
@@ -530,7 +530,7 @@ export default function PortfolioShowcase() {
 
         {/* Navigation buttons - only visible on desktop */}
         {!isMobile && (
-          <div className="absolute bottom-[-160px] left-0 right-0 flex justify-center space-x-4">
+          <div className="absolute bottom-[-180px] left-0 right-0 flex justify-center space-x-4">
             <motion.button
               className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-800 text-white shadow-lg"
               whileHover={{ scale: 1.1 }}
