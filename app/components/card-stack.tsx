@@ -279,7 +279,8 @@ function ProjectCard({
         opacity: 1,
         y: yOffset,
         x: xOffset,
-        scale: 1 - index * 0.04,
+        scale: isMobile ? 1 - index * 0.06 : 1 - index * 0.04, // Smaller scale on mobile
+        width: isMobile ? `${100 - index * 5}%` : "100%", // Narrower width on mobile
         rotateZ: index * -3, // Slight rotation for each card
       }}
       exit={{
@@ -297,7 +298,7 @@ function ProjectCard({
         boxShadow: `0 ${10 + index * 5}px ${30 + index * 10}px ${project.colors.shadow}`,
         backgroundColor: project.colors.primary,
       }}
-      className="absolute left-0 top-0 h-full w-full cursor-grab overflow-hidden rounded-2xl active:cursor-grabbing"
+      className="absolute left-0 top-0 h-full w-full sm:w-full max-w-[280px] sm:max-w-none mx-auto right-0 cursor-grab overflow-hidden rounded-2xl active:cursor-grabbing"
       drag={isMobile && index === 0} // Allow drag only on mobile for the top card
       dragConstraints={{ top: 0, bottom: 0, left: 0, right: 0 }}
       dragElastic={0.6}
@@ -320,7 +321,7 @@ function ProjectCard({
         style={{ color: project.colors.text }}
       >
         {/* Card Header */}
-        <div className="flex items-center justify-between p-4">
+        <div className="flex items-center justify-between p-3 sm:p-4">
           <div className="rounded-full bg-opacity-20 p-2" style={{ backgroundColor: `${project.colors.text}20` }}>
             {getIconComponent(project.icon)}
           </div>
@@ -337,14 +338,14 @@ function ProjectCard({
 
         {/* Card Title */}
         <div className="px-4 py-2">
-          <h2 className="text-3xl font-bold">{project.title}</h2>
-          <h3 className="text-xl font-medium" style={{ color: `${project.colors.text}99` }}>
+          <h2 className="text-2xl sm:text-3xl font-bold">{project.title}</h2>
+          <h3 className="text-lg sm:text-xl font-medium" style={{ color: `${project.colors.text}99` }}>
             {project.category}
           </h3>
         </div>
 
-        {/* Card Image */}
-        <div className="mt-2 overflow-hidden px-4">
+        {/* Card Image - solo visible en pantallas medianas y grandes */}
+        <div className="mt-2 overflow-hidden px-4 hidden sm:block">
           <div
             className="aspect-video w-full overflow-hidden rounded-xl bg-cover bg-center"
             style={{
@@ -355,7 +356,7 @@ function ProjectCard({
         </div>
 
         {/* Card Footer */}
-        <div className="mt-auto p-4">
+        <div className="mt-auto p-3 sm:p-4">
           {/* Technology tags */}
           <div className="mb-3 flex flex-wrap gap-1">
             {project.technologies.map((tech, i) => (
@@ -512,7 +513,7 @@ export default function PortfolioShowcase() {
         <div className="h-1 w-24 bg-white mx-auto mt-2 mb-3 opacity-50"></div>
         <p className="text-gray-400 mt-2">Meine bisher abgeschlossenen Projekte für das Jahr 2025</p>
       </div>
-      <div className="relative h-[600px] w-full px-4 md:px-0 mb-16 md:mb-8">
+      <div className="relative h-[350px] sm:h-[500px] md:h-[600px] w-full max-w-[85%] sm:max-w-[90%] md:max-w-full mx-auto px-4 md:px-0 mb-16 md:mb-8">
         <AnimatePresence mode="popLayout">
           {projects.slice(0, 3).map((project, index) => (
             <ProjectCard
