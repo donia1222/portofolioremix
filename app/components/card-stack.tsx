@@ -2,18 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import {
-  Code,
-  Globe,
-  Github,
-  ExternalLink,
-  Database,
-  Server,
-  Smartphone,
-  ShoppingCart,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react"
+import { Code, Globe, Github, ExternalLink, Database, Server, Smartphone, ShoppingCart, ChevronLeft, ChevronRight, Bitcoin } from 'lucide-react'
 import type React from "react"
 
 interface PortfolioItem {
@@ -118,6 +107,23 @@ const initialProjects: PortfolioItem[] = [
       secondary: "#2d5f8a",
       text: "#ffffff",
       shadow: "rgba(26, 58, 95, 0.6)",
+    },
+  },
+  {
+    id: 6,
+    title: "Crypto",
+    category: "Remix & Web3, Demo-Page",
+    description:
+      "Eine moderne Kryptowährungs-Dashboard-Anwendung mit Echtzeit-Preisdaten, Portfolio-Tracking und Marktanalysen.",
+    imageUrl: "/crypto-dashboard.jpeg",
+    icon: "crypto",
+    projectUrl: "https://remix-crypto.vercel.app",
+    technologies: ["Remix", "React", "Web3.js", "TailwindCSS"],
+    colors: {
+      primary: "#1f2937",
+      secondary: "#374151",
+      text: "#ffffff",
+      shadow: "rgba(31, 41, 55, 0.6)",
     },
   },
 ]
@@ -460,6 +466,8 @@ export default function PortfolioShowcase() {
         return <Github className="h-5 w-5" />
       case "code":
         return <Code className="h-5 w-5" />
+      case "crypto":
+        return <Bitcoin className="h-5 w-5" />
       case "external":
       default:
         return <ExternalLink className="h-5 w-5" />
