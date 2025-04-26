@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Download, Github, X, Linkedin, MessageSquare, Phone, Mail, MapPin, ChevronDown } from "lucide-react"
+import { Download, Github, X, Linkedin, MessageSquare, Phone, Mail, MapPin } from "lucide-react"
 
 // Modal component with animations
 const Modal = ({
@@ -127,7 +127,7 @@ const handleDownloadVCard = () => {
     "FN:LWEB Schweiz",
     "ORG:LWEB Schweiz",
     "TITLE:Web Development",
-    "TEL;TYPE=WORK,VOICE:+41817501911",
+    "TEL;TYPE=WORK,VOICE:0765608645",
     "ADR;TYPE=WORK:;;Chalberweidstrasse 38;Sevelen;;9475;Schweiz",
     "EMAIL;TYPE=PREF,INTERNET:info@lweb.ch",
     "URL:https://lweb.ch",
@@ -252,17 +252,13 @@ export default function ContactModule() {
                 <h3 className="text-2xl font-bold text-white mb-6">Kontaktinformationen</h3>
 
                 <div className="grid gap-4">
-                  <ContactCard
-                    icon={<MapPin className="h-5 w-5" />}
-                    title="Adresse"
-                    value=" 9475 Sevelen, Schweiz🇨🇭"
-                  />
+                  <ContactCard icon={<MapPin className="h-5 w-5" />} title="Adresse" value=" 9475 Sevelen, Schweiz🇨🇭" />
 
                   <ContactCard
                     icon={<Phone className="h-5 w-5" />}
                     title="Telefon"
-                    value="081 750 19 11"
-                    href="tel:+41817501911"
+                    value="0765608645"
+                    href="tel:+410765608645"
                   />
 
                   <ContactCard
@@ -278,9 +274,7 @@ export default function ContactModule() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6 }}
-                >
-                 
-                </motion.div>
+                ></motion.div>
 
                 <AnimatePresence>
                   {isFormOpen && (
