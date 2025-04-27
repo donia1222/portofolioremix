@@ -5,6 +5,7 @@ import Header from "~/components/Header";
 import ContactModule from "~/components/contactModuledos"; 
 import ScrollToTop from "~/components/scroll-to-top"
 import { useState, useEffect } from "react";
+import FreelanceAvailability from "~/components/freelance-availability"
 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
@@ -67,6 +68,7 @@ export default function BlogIndex() {
   
 </div>
 <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+<FreelanceAvailability />
         <ContactModule />
       </div>
       <ScrollToTop />

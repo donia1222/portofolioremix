@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Code, Server } from 'lucide-react';
 import ContactModule from "~/components/contactModuledos"; 
+import FreelanceAvailability from "~/components/freelance-availability"
+
 const animateNumbers = (element: HTMLDivElement, start: number, end: number, duration: number) => {
   let startTime: number | null = null;
 
@@ -108,6 +110,7 @@ export default function FreelancerShowcase() {
 
       </div>
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+      <FreelanceAvailability />
         <ContactModule />
       </div>
     </section>

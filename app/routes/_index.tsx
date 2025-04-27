@@ -19,7 +19,7 @@ import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock';
 import CloudTextAnime from '~/components/CloudTextBlock/AnimateTexVida'; 
 import ScrollToTop from "~/components/scroll-to-top"
 import CardStack from "../components/card-stack"
-
+import FreelanceAvailability from "../components/freelance-availability"
 export const links: LinksFunction = () => {
   return [
     {
@@ -108,7 +108,7 @@ export default function Index() {
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
         <TechnologyCarousel />
       </div>
-
+      <FreelanceAvailability />
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <ContactModule />
       </div>
