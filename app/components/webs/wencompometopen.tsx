@@ -109,7 +109,7 @@ export default function FreelancerShowcase() {
 
 
       </div>
-      <main className="min-h-screen  p-4 md:p-8">
+      <main className=" p-4 md:p-8">
       <div className="mx-auto max-w-7xl py-12">
         <PortfolioMasonry />
       </div>
