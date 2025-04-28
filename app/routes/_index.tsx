@@ -4,9 +4,9 @@ import Header from "~/components/Header";
 import DeliverBlock from "~/components/DeliverBlock";
 import CorePrinciplesBlock from "~/components/CorePrinciplesBlock";
 import OpenSourceBlock from "~/components/OpenSourceBlock"; 
-import CommunityBlock from "~/components/CommunityBlock"; 
-import Corazones from "~/components/Corazoneshome"; 
-import ContactModule from "~/components/contactModuleFooter"; 
+import CommunityBlock from "~/components/Community/CommunityBlock"; 
+import Corazones from "~/components/Corazones/Corazoneshome"; 
+import ContactModule from "~/components/Contact/contactModuleFooter"; 
 import TechnologyCarousel from "~/components/TechnologyCarousel/TechnologyCarousel"; 
 import { useEffect, useState } from "react";
 import AOS from "aos";
@@ -18,7 +18,7 @@ import TechnologyCarousemisappsindex from "~/components/TechnologyCarousel/Techn
 import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock'; 
 import CloudTextAnime from '~/components/CloudTextBlock/AnimateTexVida'; 
 import ScrollToTop from "~/components/scroll-to-top"
-import CardStack from "../components/card-stack"
+import CardStack from "../components/PortfolioGrid"
 import FreelanceAvailability from "../components/freelance-availability"
 export const links: LinksFunction = () => {
   return [
@@ -96,13 +96,9 @@ export default function Index() {
       <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
         <OpenSourceBlock />
       </div>
-      <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-24">
 
-      <div className="w-full max-w-md">
-        <CardStack />
-      </div>
-      
-    </main>
+
+
 
 
       <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">

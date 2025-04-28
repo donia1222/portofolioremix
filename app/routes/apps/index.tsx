@@ -2,7 +2,7 @@ import { blogPosts } from "~/data/Apps";
 import { Link } from "@remix-run/react";
 import AppBlock from "~/components/AppBlock"; 
 import Header from "~/components/Header";
-import ContactModule from "~/components/contactModuledos"; 
+import ContactModule from "~/components/Contact/contactModuledos"; 
 import ScrollToTop from "~/components/scroll-to-top"
 import { useState, useEffect } from "react";
 import FreelanceAvailability from "~/components/freelance-availability"

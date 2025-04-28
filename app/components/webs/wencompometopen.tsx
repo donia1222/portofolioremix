@@ -3,9 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ExternalLink, Code, Server } from 'lucide-react';
-import ContactModule from "~/components/contactModuledos"; 
+import ContactModule from "~/components/Contact/contactModuledos"; 
 import FreelanceAvailability from "~/components/freelance-availability"
-
+import PortfolioMasonry from "./PortfolioGrid"
 const animateNumbers = (element: HTMLDivElement, start: number, end: number, duration: number) => {
   let startTime: number | null = null;
 
@@ -109,8 +109,15 @@ export default function FreelancerShowcase() {
 
 
       </div>
+      <main className="min-h-screen  p-4 md:p-8">
+      <div className="mx-auto max-w-7xl py-12">
+        <PortfolioMasonry />
+      </div>
+    </main>
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
       <FreelanceAvailability />
+
+
         <ContactModule />
       </div>
     </section>

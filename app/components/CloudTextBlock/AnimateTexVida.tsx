@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useRef } from "react"
 import { motion, useAnimation, type Variants, useScroll, useTransform } from "framer-motion"
-import Phone from "~/components/phone-slideshowHome"
-import PhoneTwo from "~/components/phone-slideshowTwo"
+import Phone from "~/components/PhoneSlideshow/phone-slideshowHome"
+import PhoneTwo from "~/components/PhoneSlideshow/phone-slideshowTwo"
 
 export default function AnimatedText() {
   const [isVisible, setIsVisible] = useState(false)
