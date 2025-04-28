@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink } from "lucide-react"
 import Header from "~/components/Header";
 import Chat from "~/components/Chat";
-import ContactModule from "~/components/contactModuledos"; 
+import ContactModule from "~/components/Contact/contactModuledos"; 
 import ScrollToTop from "~/components/scroll-to-top"
 import { useNavigate } from 'react-router-dom';
 export default function AIBusinessSolutions() {

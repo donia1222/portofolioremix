@@ -4,8 +4,8 @@ import WebsiteBlock from "~/components/webs/WebsiteBlock";
 import Websitecomponent from "~/components/webs/ubermich"; 
 import ImageRevealTextScroll from "~/components/image-reveal-text-scroll"; 
 import { useState, useEffect } from "react";
-import Corazones from "~/components/Corazonesdos"; 
-import ContactModule from "~/components/contactModuledos"; 
+import Corazones from "~/components/Corazones/Corazonesdos"; 
+import ContactModule from "~/components/Contact/contactModuledos"; 
 import Header from "~/components/Header";
 
 export default function BlogIndex() {

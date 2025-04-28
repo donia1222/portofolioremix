@@ -8,8 +8,8 @@ import AnimatedGradientText from '~/components/AnimatedGradientText';
 import Header from "~/components/Header";
 import { motion } from "framer-motion"
 import { ArrowRight, Newspaper, Calculator } from 'lucide-react'
-import ContactModule from "~/components/contactModuledos"; 
-import CommunityBlock from "~/components/CommunityBlockWeb"; 
+import ContactModule from "~/components/Contact/contactModuledos"; 
+import CommunityBlock from "~/components/Community/CommunityBlockWeb"; 
 import ScrollToTop from "~/components/scroll-to-top"
 
 import { ComputerSimulator } from '~/components/Terminal/computer-simulator'; 

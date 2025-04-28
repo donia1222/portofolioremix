@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ExternalLink } from "lucide-react"
-import ContactModule from "~/components/contactModuledos"; 
+import ContactModule from "~/components/Contact/contactModuledos"; 
 interface Website {
   id: number
   title: string
