@@ -83,6 +83,17 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://remix-crypto.vercel.app",
     technologies: ["Remix", "React", "Web3.js", "TailwindCSS"],
   },
+  {
+    id: 7,
+    title: "BeautyStyle",
+    category: "React & Framer Motion",
+    description:
+      "Moderner Friseursalon mit personalisierten Schönheitsdienstleistungen und interaktiven Animationen für ein einzigartiges Kundenerlebnis.",
+    imageUrl: "/salon.png",
+    icon: "globe",
+    projectUrl: "https://beautystyles.vercel.app",
+    technologies: ["React", "Framer Motion", "TailwindCSS", "Remix"],
+  },
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
@@ -223,7 +234,7 @@ export default function PortfolioMasonry() {
 
             <div className="mt-4 flex justify-end">
               <button className="flex items-center gap-1 text-sm font-medium text-purple-400 transition-colors hover:text-purple-300">
-              Siehe Details
+                Siehe Details
                 <ArrowUpRight className="h-4 w-4" />
               </button>
             </div>

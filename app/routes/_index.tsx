@@ -18,7 +18,7 @@ import TechnologyCarousemisappsindex from "~/components/TechnologyCarousel/Techn
 import CloudTextBlock5 from '~/components/CloudTextBlock/CloudTextBlock'; 
 import CloudTextAnime from '~/components/CloudTextBlock/AnimateTexVida'; 
 import ScrollToTop from "~/components/scroll-to-top"
-import CardStack from "../components/PortfolioGrid"
+import CardStack from "../components/webs/PortfolioGrid"
 import FreelanceAvailability from "../components/freelance-availability"
 export const links: LinksFunction = () => {
   return [
