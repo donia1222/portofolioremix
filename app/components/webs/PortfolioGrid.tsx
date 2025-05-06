@@ -89,7 +89,7 @@ const portfolioItems: PortfolioItem[] = [
     category: "React & Framer Motion",
     description:
       "Moderner Friseursalon mit personalisierten Schönheitsdienstleistungen und interaktiven Animationen für ein einzigartiges Kundenerlebnis.",
-    imageUrl: "/salon.png",
+    imageUrl: "/woman-getting-her-hair-cut-beauty-salon_23-2149167399.jpg",
     icon: "globe",
     projectUrl: "https://beautystyles.vercel.app",
     technologies: ["React", "Framer Motion", "TailwindCSS", "Remix"],
