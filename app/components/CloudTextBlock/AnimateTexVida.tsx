@@ -187,7 +187,7 @@ export default function AnimatedText() {
   return (
     <motion.div
       ref={containerRef}
-      className="relative flex flex-col items-center justify-center p-4 sm:p-8 md:p-16 lg:p-40 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028] min-h-[500px]"
+      className="relative flex flex-col items-center justify-center p-4 sm:p-8 md:p-16 lg:p-40  mt-20 overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[#0a0028] min-h-[500px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
