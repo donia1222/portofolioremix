@@ -20,6 +20,7 @@ import CloudTextAnime from '~/components/CloudTextBlock/AnimateTexVida';
 import ScrollToTop from "~/components/scroll-to-top"
 import CardStack from "../components/webs/PortfolioGrid"
 import FreelanceAvailability from "../components/freelance-availability"
+import CommunityTemplate from "~/components/Community/CommunityTemplate";
 export const links: LinksFunction = () => {
   return [
     {
@@ -82,11 +83,10 @@ export default function Index() {
         <CorePrinciplesBlock />
       </div>
 
+
       <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
-        <CommunityBlock />
+        <CommunityTemplate/>
       </div>
-
-
 
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <CloudTextAnime />
