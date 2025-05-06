@@ -130,16 +130,7 @@ export const TemplateShowcase = ({
             </span>
           </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="text-blue-200 mb-6 max-w-lg"
-          >
-            Bei BeautyStyle verwandeln wir Ihr Image mit den neuesten personalisierten Schönheitsbehandlungen und
-            -techniken.
-          </motion.p>
-
+    
    
 
           <motion.div
