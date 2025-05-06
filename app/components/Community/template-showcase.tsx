@@ -122,7 +122,7 @@ export const TemplateShowcase = ({
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-4xl font-bold mb-2 text-white"
+            className="text-3xl font-bold mb-2 text-white"
           >
             Entdecken Sie Ihren{" "}
             <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
@@ -140,24 +140,7 @@ export const TemplateShowcase = ({
             -techniken.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="flex items-center space-x-2 mb-6"
-          >
-            {[1, 2, 3, 4, 5].map((star, index) => (
-              <motion.div
-                key={star}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
-              >
-                <Star className="text-yellow-300 fill-yellow-300" size={20} />
-              </motion.div>
-            ))}
-            <span className="text-blue-200 text-sm ml-2"></span>
-          </motion.div>
+   
 
           <motion.div
             initial={{ opacity: 0, y: -20 }}
