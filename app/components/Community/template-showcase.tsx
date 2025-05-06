@@ -167,7 +167,7 @@ export const TemplateShowcase = ({
           >
             <div className="mr-4">
               <span className="text-white text-3xl font-bold">
-                1500 CHF
+                1450 CHF
               </span>
             </div>
             <span className="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm font-medium backdrop-blur-sm">
