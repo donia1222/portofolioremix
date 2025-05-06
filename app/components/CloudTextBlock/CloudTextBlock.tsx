@@ -36,7 +36,7 @@ const CloudTextBlock: React.FC = () => {
   const radius = 40;
 
   return (
-    <div className="flex items-center justify-center py-20 mr-48">
+    <div className="flex items-center justify-center py-20 mr-48 mt-20">
       <div className="relative w-96 h-96 md:w-[500px] md:h-[500px]">
         {texts.map((text, index) => {
           const position = calculatePosition(index, totalTexts, radius);
