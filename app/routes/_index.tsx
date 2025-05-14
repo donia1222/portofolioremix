@@ -59,7 +59,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-    <div className="fixed inset-0 bg-black bg-opacity-70" />
+    <div className="fixed inset-0 bg-black bg-opacity-90" />
 
       
  
