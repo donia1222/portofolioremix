@@ -2,95 +2,84 @@
 
 import type React from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Newspaper, Calculator, Palette, Clock } from "lucide-react"
+import { ArrowRight, Calculator } from "lucide-react"
 import { Link } from "@remix-run/react"
-import { useState, useEffect } from "react"
 
 interface NewsItem {
   icon: React.ReactNode
   title: string
   description: string
   link: string
-  readTime?: number
 }
 
 const newsItems: NewsItem[] = [
-
   {
-    icon: <Calculator className="h-8 w-8 text-green-400" />,
+    icon: <Calculator className="h-10 w-10 text-pink-400" />,
     title: "Wieviel kostet eine maßgeschneiderte Webseite?",
-    description: "Ein umfassender Leitfaden zur Budgetplanung für Ihre Webpräsenz.",
+    description:
+      "Ein umfassender Leitfaden zur Budgetplanung für Ihre Webpräsenz. Erfahren Sie mehr über die verschiedenen Faktoren, die die Kosten einer professionellen Website beeinflussen können, und wie Sie Ihr Budget optimal planen können.",
     link: "/calculo",
   },
-  {
-    icon: <Palette className="h-8 w-8 text-yellow-400" />,
-    title: "Kosteneffiziente, vorgefertigte Webseiten",
-    description: "Flexible Weblösung ermöglicht es Ihnen, Ihre Inhalte **selbst zu aktualisieren**",
-    link: "/low-cost-website-info",
-  },
+  // You can add more news items here
 ]
-
-interface CountupTimerProps {
-  totalTime: number
-}
-
-function CountupTimer({ totalTime }: CountupTimerProps) {
-  const [timeElapsed, setTimeElapsed] = useState<number>(0)
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeElapsed((prevTime: number) => (prevTime < totalTime ? prevTime + 1 : totalTime))
-    }, 1000)
-
-    return () => clearInterval(timer)
-  }, [totalTime])
-
-  const minutes = Math.floor(timeElapsed / 60)
-  const seconds = timeElapsed % 60
-
-  return (
-    <span>
-      {minutes}:{seconds.toString().padStart(2, "0")} min gelesen
-    </span>
-  )
-}
 
 export default function NewsSection() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 0">
-      <div className="container px-4 md:px-6 mx-auto">
+    <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-950">
+      <div className="container px-4 md:px-6 mx-auto max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Neueste <span className="text-pink-400">Artikel</span>
+          </h2>
+          <div className="w-32 h-1 bg-blue-500 mx-auto rounded-full mb-8"></div>
+          <p className="text-gray-300 max-w-3xl mx-auto text-lg">
+            Entdecken Sie unsere neuesten Einblicke und Ratgeber für Ihre digitale Präsenz.
+          </p>
+        </motion.div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+        <div className="flex justify-center">
           {newsItems.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: index * 0.2, duration: 0.5 }}
+              className="w-full max-w-4xl"
             >
-              <Link to={item.link} className="block">
+              <Link to={item.link} className="block w-full">
                 <motion.div
-                  whileHover={{ scale: 1.03, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+                  whileHover={{
+                    scale: 1.02,
+                    boxShadow: "0 25px 50px rgba(0,0,0,0.3)",
+                    y: -8,
+                  }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                  className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl overflow-hidden shadow-xl border border-gray-700/30 backdrop-blur-sm"
                 >
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 bg-gray-700 rounded-full">{item.icon}</div>
-                      {item.readTime && (
-                        <div className="flex items-center text-gray-400">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span className="text-sm">
-                            <CountupTimer totalTime={item.readTime} />
-                          </span>
-                        </div>
-                      )}
+                  <div className="p-10 md:p-12">
+                    <div className="flex items-center mb-8">
+                      <div
+                        className="p-4 bg-gray-700/50 rounded-xl backdrop-blur-sm 
+                                   shadow-inner border border-gray-600/30 
+                                   bg-gradient-to-br from-gray-700 to-gray-800 mr-6"
+                      >
+                        {item.icon}
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">{item.title}</h3>
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                    <p className="text-gray-400 mb-4">{item.description}</p>
+
+                    <p className="text-gray-300 mb-8 text-lg leading-relaxed">{item.description}</p>
+
                     <div className="flex items-center text-blue-400 group">
-                      <span className="mr-2 group-hover:mr-4 transition-all duration-300">Mehr lesen</span>
-                      <ArrowRight className="h-5 w-5 group-hover:translate-x-2 transition-all duration-300" />
+                      <span className="mr-2 font-medium text-lg group-hover:mr-4 transition-all duration-300">
+                        Mehr lesen
+                      </span>
+                      <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-all duration-300" />
                     </div>
                   </div>
                 </motion.div>
@@ -102,4 +91,3 @@ export default function NewsSection() {
     </section>
   )
 }
-

@@ -100,7 +100,7 @@ export default function WebsiteBuilder() {
         <div className="max-w-7xl mx-auto">
           <div className="w-full md:max-w-[50%] mx-auto bg-[#6d6d864f] backdrop-filter backdrop-blur-lg rounded-full flex justify-center items-center px-4 md:px-8 py-3 shadow-lg z-10">
             <Link
-              to="/"
+              to="/webs"
               className="fixed left-2 z-20 text-blue-100 hover:text-blue-100 transition-colors duration-300"
             >
               <svg

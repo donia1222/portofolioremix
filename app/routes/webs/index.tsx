@@ -66,7 +66,7 @@ export default function BlogIndex() {
       
       {/* Fondo con animación de zoom */}
       <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
-      <div className="fixed inset-0 bg-black bg-opacity-50" />
+      <div className="fixed inset-0 bg-black bg-opacity-70" />
 
       {/* Estrella fugaz */}
       <div className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full animate-shootingStar" />
