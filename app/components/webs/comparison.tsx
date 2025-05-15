@@ -130,27 +130,7 @@ export default function Comparison() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Animated title */}
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h1
-            ref={titleRef}
-            className="text-3xl xs:text-4xl md:text-5xl font-bold text-center mt-8 text-white animated-title perspective-container overflow-hidden"
-            style={{ wordBreak: "break-word", overflowWrap: "break-word", maxWidth: "100%" }}
-          >
-            CMS oder
-          </h1>
-          <h1
-            ref={titleRef2}
-            className="text-3xl xs:text-4xl md:text-5xl font-bold text-center mb-16 mt-4 text-white animated-title perspective-container overflow-hidden"
-            style={{ wordBreak: "break-word", overflowWrap: "break-word", maxWidth: "100%" }}
-          >
-            Moderne Frameworks?
-          </h1>
-        </motion.div>
+   
 
         {/* Mobile legend - visible only on small screens */}
         <div className="md:hidden mb-6">
