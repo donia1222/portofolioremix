@@ -313,7 +313,7 @@ function ComparisonTable() {
     {
       aspect: "Ansatz",
       cms: '"Klicken & Bauen", mit Vorlagen und Plugins',
-      framework: "Benutzerdefinierte Entwicklung (wie LEGO bauen)",
+      framework: "Entwicklung (wie LEGO bauen)",
       cmsIcon: "mouse-pointer",
       frameworkIcon: "code-2",
     },
