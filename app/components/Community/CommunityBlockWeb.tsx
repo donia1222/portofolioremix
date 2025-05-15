@@ -70,10 +70,10 @@ export default function NewsSection() {
                       >
                         {item.icon}
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-bold text-white leading-tight">{item.title}</h3>
+                      <h3 className="text-2xm md:text-3xl font-bold text-pink-400 leading-tight">{item.title}</h3>
                     </div>
 
-                    <p className="text-gray-300 mb-8 text-lg leading-relaxed">{item.description}</p>
+                    <p className="text-gray-300 mb-8 eading-relaxed">{item.description}</p>
 
                     <div className="flex items-center text-blue-400 group">
                       <span className="mr-2 font-medium text-lg group-hover:mr-4 transition-all duration-300">

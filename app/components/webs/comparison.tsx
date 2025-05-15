@@ -18,11 +18,12 @@ export default function Comparison() {
   const [activeTab, setActiveTab] = useState("comparison")
   const [mounted, setMounted] = useState(false)
   const titleRef = useRef<HTMLHeadingElement>(null)
+  const titleRef2 = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
     setMounted(true)
 
-    // Initialize the title animation
+    // Initialize the title animation for first part
     if (titleRef.current) {
       const title = titleRef.current
 
@@ -43,73 +44,66 @@ export default function Comparison() {
           space.innerHTML = "&nbsp;"
           space.className = "char-space"
           wrapper.appendChild(space)
-        } else if (char === "v" && text[i - 1] === " " && text[i + 1] === "s") {
-          // Special handling for "vs"
-          const vsSpan = document.createElement("span")
-          vsSpan.className = "vs-text"
-          vsSpan.textContent = "vs"
-          vsSpan.style.animationDelay = `${i * 0.05}s`
-          wrapper.appendChild(vsSpan)
-          // Skip the next character (s)
-          return
-        } else if (char === "s" && text[i - 1] === "v" && text[i - 2] === " ") {
-          // Skip the "s" in "vs" as we've already added it
-          return
         } else {
           // For other characters, create animated spans
           const charSpan = document.createElement("span")
-          charSpan.className = "animated-char"
+          charSpan.className = "animated-char cms-char"
           charSpan.textContent = char
           charSpan.style.animationDelay = `${i * 0.05}s`
-
-          // Add special classes for different parts of the title
-          if (text.substring(0, i).includes("CMS") && !text.substring(0, i).includes("vs")) {
-            charSpan.classList.add("cms-char")
-          } else if (text.substring(i).includes("Frameworks")) {
-            charSpan.classList.add("framework-char")
-          }
-
           wrapper.appendChild(charSpan)
         }
       })
+    }
 
-      // Add particle effects
-      const particleContainer = document.createElement("div")
-      particleContainer.className = "particle-container"
+    // Initialize the title animation for second part
+    if (titleRef2.current) {
+      const title = titleRef2.current
 
-      // Create particles
-      for (let i = 0; i < 40; i++) {
-        const particle = document.createElement("div")
-        particle.className = "particle"
-        particle.style.left = `${Math.random() * 100}%`
-        particle.style.animationDelay = `${Math.random() * 5}s`
-        particle.style.animationDuration = `${3 + Math.random() * 7}s`
+      // Split the text into individual characters for animation
+      const text = title.innerText
+      title.innerHTML = ""
 
-        // Randomly assign particle types
-        if (i % 3 === 0) {
-          particle.classList.add("particle-cms")
-        } else if (i % 3 === 1) {
-          particle.classList.add("particle-framework")
+      // Create the wrapper for the 3D effect
+      const wrapper = document.createElement("div")
+      wrapper.className = "title-3d-wrapper"
+      title.appendChild(wrapper)
+
+      // Process each character
+      ;[...text].forEach((char, i) => {
+        if (char === " ") {
+          // For spaces, add a space element
+          const space = document.createElement("span")
+          space.innerHTML = "&nbsp;"
+          space.className = "char-space"
+          wrapper.appendChild(space)
+        } else if (char === "?") {
+          // Special handling for question mark
+          const qSpan = document.createElement("span")
+          qSpan.className = "animated-char question-mark"
+          qSpan.textContent = "?"
+          qSpan.style.animationDelay = `${i * 0.05}s`
+          wrapper.appendChild(qSpan)
         } else {
-          particle.classList.add("particle-vs")
+          // For other characters, create animated spans
+          const charSpan = document.createElement("span")
+          charSpan.className = "animated-char framework-char"
+          charSpan.textContent = char
+          charSpan.style.animationDelay = `${i * 0.05}s`
+          wrapper.appendChild(charSpan)
         }
-
-        particleContainer.appendChild(particle)
-      }
-
-      title.appendChild(particleContainer)
+      })
     }
   }, [])
 
   return (
-    <section className="relative overflow-hidden py-16 mt-20 ">
+    <section className="relative overflow-hidden py-16 mt-20">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-0"></div>
 
       {/* Animated background elements */}
       <div className="absolute inset-0 z-0 opacity-30">
         <motion.div
-          className="absolute top-20 right-10 w-72 h-72 rounded-full bg-violet-600 filter blur-[100px] "
+          className="absolute top-20 right-10 w-72 h-72 rounded-full bg-violet-600 filter blur-[100px]"
           animate={{
             x: [0, -50, 0],
             y: [0, 30, 0],
@@ -147,15 +141,15 @@ export default function Comparison() {
             className="text-3xl xs:text-4xl md:text-5xl font-bold text-center mt-8 text-white animated-title perspective-container overflow-hidden"
             style={{ wordBreak: "break-word", overflowWrap: "break-word", maxWidth: "100%" }}
           >
-            CMS oder 
+            CMS oder
           </h1>
           <h1
-  ref={titleRef}
-  className="text-3xl xs:text-4xl md:text-5xl font-bold text-center mb-16 mt-4 text-white animated-title perspective-container overflow-hidden"
->
-  Moderne Frameworks<span className="text-blue-500">?</span>
-</h1>
-
+            ref={titleRef2}
+            className="text-3xl xs:text-4xl md:text-5xl font-bold text-center mb-16 mt-4 text-white animated-title perspective-container overflow-hidden"
+            style={{ wordBreak: "break-word", overflowWrap: "break-word", maxWidth: "100%" }}
+          >
+            Moderne Frameworks?
+          </h1>
         </motion.div>
 
         {/* Mobile legend - visible only on small screens */}
@@ -166,7 +160,6 @@ export default function Comparison() {
             transition={{ duration: 0.5 }}
             className="flex flex-col gap-2 bg-gray-800/50 backdrop-blur-lg rounded-xl p-4 border border-gray-700 shadow-lg"
           >
-        
             <div className="grid grid-cols-2 gap-2">
               <div className="flex items-center gap-2 bg-amber-900/50 px-3 py-3 rounded-lg border-l-4 border-amber-600">
                 <div className="w-5 h-5 rounded-full bg-amber-700 flex items-center justify-center">
@@ -187,7 +180,7 @@ export default function Comparison() {
                     <path d="M2 12l10 5 10-5"></path>
                   </svg>
                 </div>
-                <span className="text-amber-300 font-medium">WordPress / CMS</span>
+                <span className="text-amber-300 font-medium">CMS</span>
               </div>
               <div className="flex items-center gap-2 bg-violet-900/50 px-3 py-3 rounded-lg border-l-4 border-violet-600">
                 <div className="w-5 h-5 rounded-full bg-violet-700 flex items-center justify-center">
@@ -207,7 +200,7 @@ export default function Comparison() {
                     <polyline points="14 2 14 8 20 8"></polyline>
                   </svg>
                 </div>
-                <span className="text-violet-300 font-medium">Moderne Frameworks</span>
+                <span className="text-violet-300 font-medium">Frameworks</span>
               </div>
             </div>
           </motion.div>
@@ -320,42 +313,42 @@ function ComparisonTable() {
     {
       aspect: "Ansatz",
       cms: '"Klicken & Bauen", mit Vorlagen und Plugins',
-      framework: "Benutzerdefinierte Entwicklung von Grund auf (wie mit LEGO bauen)",
+      framework: "Benutzerdefinierte Entwicklung (wie LEGO bauen)",
       cmsIcon: "mouse-pointer",
       frameworkIcon: "code-2",
     },
     {
       aspect: "Content-Management",
       cms: "Integriert (visuelle Editoren, Admin-Panel)",
-      framework: "Muss mit Headless-CMS integriert werden (z.B.: Sanity, Strapi, usw.)",
+      framework: "Headless-CMS Integration (Sanity, Strapi, usw.)",
       cmsIcon: "edit-3",
       frameworkIcon: "puzzle",
     },
     {
       aspect: "Lernkurve",
       cms: "Niedrig (für einen schnellen Start)",
-      framework: "Mittel/hoch (erfordert Kenntnisse moderner Programmierung)",
+      framework: "Mittel/hoch (erfordert moderne Programmierung)",
       cmsIcon: "trending-up",
       frameworkIcon: "bar-chart",
     },
     {
-      aspect: "Geschwindigkeit / Leistung",
-      cms: "Abhängig von Hosting und Optimierung (kann mit vielen Plugins langsam sein)",
-      framework: "Sehr hohe Geschwindigkeit, besonders mit SSR und SSG",
+      aspect: "Geschwindigkeit",
+      cms: "Abhängig von Hosting und Optimierung",
+      framework: "Sehr hohe Geschwindigkeit mit SSR und SSG",
       cmsIcon: "activity",
       frameworkIcon: "zap",
     },
     {
       aspect: "Skalierbarkeit",
       cms: "Begrenzt ohne fortgeschrittene Plugins",
-      framework: "Sehr hoch, ideal für große Apps und maßgeschneiderte Projekte",
+      framework: "Sehr hoch, ideal für große Projekte",
       cmsIcon: "git-branch",
       frameworkIcon: "git-merge",
     },
     {
       aspect: "Sicherheit",
       cms: "Anfälliger, wenn nicht aktualisiert",
-      framework: "Sicherer bei Einhaltung bewährter Praktiken (weniger Abhängigkeiten)",
+      framework: "Sicherer bei bewährten Praktiken",
       cmsIcon: "shield",
       frameworkIcon: "shield-check",
     },
@@ -371,7 +364,6 @@ function ComparisonTable() {
       {/* Header for mobile - will be hidden on desktop */}
       <div className="md:hidden p-4 bg-gray-900/80 border-b border-gray-700 text-center">
         <h3 className="text-lg font-semibold text-white mb-1">Vergleich</h3>
-        <p className="text-gray-400 text-sm">Tippen Sie auf einen Aspekt für Details</p>
       </div>
 
       {/* Desktop header row */}
@@ -474,7 +466,7 @@ function ComparisonTable() {
                     <path d={getIconPath(item.cmsIcon)}></path>
                   </svg>
                 </div>
-                <p className="text-sm text-gray-300">{item.cms}</p>
+                <p className="text-sm text-gray-300 break-words">{item.cms}</p>
               </div>
             </div>
 
@@ -500,7 +492,7 @@ function ComparisonTable() {
                     <path d={getIconPath(item.frameworkIcon)}></path>
                   </svg>
                 </div>
-                <p className="text-sm text-gray-300">{item.framework}</p>
+                <p className="text-sm text-gray-300 break-words">{item.framework}</p>
               </div>
             </div>
           </div>
@@ -603,7 +595,7 @@ function RecommendationSection() {
     },
     {
       need: "Shop mit Warenkorb, Produkten, usw.",
-      recommendation: "WordPress + WooCommerce oder Next.js + individuelles Backend",
+      recommendation: "WordPress + WooCommerce oder Next.js + Backend",
       icon: "shopping-cart",
       color: "green",
     },
