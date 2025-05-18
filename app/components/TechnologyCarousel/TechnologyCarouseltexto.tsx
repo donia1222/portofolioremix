@@ -1,9 +1,28 @@
 "use client"
 
 import { Bell, CreditCard, ShoppingCart, User, Check, Smartphone, Globe, Zap, Code, Shield } from "lucide-react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 export default function AppBenefitsShowcase() {
+  // State for typing animation
+  const [displayText, setDisplayText] = useState("")
+  const fullText = "Native App"
+
+  // Typing animation effect
+  useEffect(() => {
+    let currentIndex = 0
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setDisplayText(fullText.substring(0, currentIndex))
+        currentIndex++
+      } else {
+        clearInterval(typingInterval)
+      }
+    }, 150) // Speed of typing animation
+
+    return () => clearInterval(typingInterval)
+  }, [])
+
   // Inicializar IntersectionObserver para animaciones más efficientes
   useEffect(() => {
     // Función para manejar animaciones con IntersectionObserver (más eficiente que AOS)
@@ -114,7 +133,8 @@ export default function AppBenefitsShowcase() {
         >
           Stärken Sie Ihr Unternehmen mit einer{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-            Native App
+            {displayText}
+            <span className="animate-pulse">|</span>
           </span>
         </h2>
 
