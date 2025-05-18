@@ -34,7 +34,7 @@ export default function NewsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Neueste <span className="text-pink-400">Artikel</span>
+          Preise <span className="text-pink-400">berechnen</span>
           </h2>
           <div className="w-32 h-1 bg-blue-500 mx-auto rounded-full mb-8"></div>
           <p className="text-gray-300 max-w-3xl mx-auto text-lg">
@@ -77,7 +77,7 @@ export default function NewsSection() {
 
                     <div className="flex items-center text-blue-400 group">
                       <span className="mr-2 font-medium text-lg group-hover:mr-4 transition-all duration-300">
-                        Mehr lesen
+                      Berechnen
                       </span>
                       <ArrowRight className="h-6 w-6 group-hover:translate-x-2 transition-all duration-300" />
                     </div>

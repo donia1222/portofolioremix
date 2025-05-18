@@ -58,14 +58,17 @@ export default function BlogIndex() {
 
 
 
-      <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
-        <AppBlock />
-      </div>
-
       <div className="relative">
       <div className="relative z-[9999]">
   <Header />
   
+
+
+  <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+        <AppBlock />
+      </div>
+
+
 </div>
 <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
 <FreelanceAvailability />

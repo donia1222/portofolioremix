@@ -1,5 +1,31 @@
-import { useState, useEffect, useRef } from 'react'
-import { Calendar, MapPin, Clock, Star, ShoppingBag, Menu, Activity, CreditCard, Wallet, PiggyBank, Dumbbell, Apple, Music, Code, Utensils, ShoppingCart } from 'lucide-react'
+"use client"
+
+import React from "react"
+
+import { useState, useEffect, useRef } from "react"
+import {
+  Calendar,
+  MapPin,
+  Clock,
+  Star,
+  Menu,
+  Activity,
+  CreditCard,
+  Wallet,
+  PiggyBank,
+  Music,
+  Code,
+  Utensils,
+  ShoppingCart,
+  Sparkles,
+  Zap,
+  ArrowRight,
+  Heart,
+  Award,
+  Smartphone,
+  Shirt,
+} from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface Event {
   id: number
@@ -18,6 +44,7 @@ interface MenuItem {
   price: string
   description: string
   image: string
+  rating: number
 }
 
 interface Product {
@@ -25,6 +52,9 @@ interface Product {
   name: string
   price: string
   image: string
+  discount?: string
+  category: string
+  colors: string[]
 }
 
 interface WorkoutSession {
@@ -41,40 +71,159 @@ interface SavingsGoal {
   currentAmount: number
   targetAmount: number
   icon: React.ElementType
+  color: string
 }
 
 const events: Event[] = [
-  { id: 1, name: "Sommer Musikfestival", date: "15 JUL", time: "14:00 - 22:00 Uhr", location: "Zentralpark", image: "https://img.freepik.com/free-photo/excited-audience-watching-confetti-fireworks-having-fun-music-festival-night_637285-559.jpg?w=1380&t=st=1697664204~exp=1697664804~hmac=dc69c8b1871ce0c0b16484a4a23b5d8a9e4d5b7eb71a7c87bf6dbb5d0c5f2c2e", icon: Music, color: "bg-pink-500" },
-  { id: 2, name: "Tech-Konferenz 2024", date: "22 AUG", time: "09:00 - 17:00 Uhr", location: "Kongresszentrum", image: "https://img.freepik.com/free-photo/audience-watching-presentation-seminar-auditorium_637285-10149.jpg?w=1380&t=st=1697664243~exp=1697664843~hmac=1a40e8f5f8a1d8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9", icon: Code, color: "bg-blue-500" },
-  { id: 3, name: "Essen & Wein Expo", date: "10 SEP", time: "11:00 - 20:00 Uhr", location: "Rathaus", image: "https://img.freepik.com/free-photo/top-view-table-full-delicious-food-composition_23-2149141352.jpg?w=1380&t=st=1697664275~exp=1697664875~hmac=1a40e8f5f8a1d8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9f8f9", icon: Utensils, color: "bg-green-500" },
+  {
+    id: 1,
+    name: "Sommer Musikfestival",
+    date: "15 JUL",
+    time: "14:00 - 22:00 Uhr",
+    location: "Zentralpark",
+    image: "/placeholder-8np22.png",
+    icon: Music,
+    color: "bg-gradient-to-r from-pink-500 to-purple-500",
+  },
+  {
+    id: 2,
+    name: "Tech-Konferenz 2024",
+    date: "22 AUG",
+    time: "09:00 - 17:00 Uhr",
+    location: "Kongresszentrum",
+    image: "/placeholder-8db1r.png",
+    icon: Code,
+    color: "bg-gradient-to-r from-blue-500 to-cyan-500",
+  },
+  {
+    id: 3,
+    name: "Essen & Wein Expo",
+    date: "10 SEP",
+    time: "11:00 - 20:00 Uhr",
+    location: "Rathaus",
+    image: "/gourmet-food-wine-festival.png",
+    icon: Utensils,
+    color: "bg-gradient-to-r from-green-500 to-emerald-500",
+  },
 ]
 
 const menuItems: MenuItem[] = [
-  { id: 1, name: "Margherita Pizza", price: "12,99 €", description: "Klassisch mit Tomaten und Mozzarella", image: "https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg?w=1380&t=st=1697645972~exp=1697646572~hmac=be045e9f5e7a0b1e4c5e5b7d8e0e4c1e9f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8" },
-  { id: 2, name: "Gegrillter Lachs", price: "18,99 €", description: "Mit Zitronenbutter-Sauce", image: "https://img.freepik.com/free-photo/baked-salmon-garnished-with-asparagus-tomatoes-garlic_2829-18739.jpg?w=1380&t=st=1697646047~exp=1697646647~hmac=be045e9f5e7a0b1e4c5e5b7d8e0e4c1e9f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8" },
-  { id: 3, name: "Caesar Salat", price: "9,99 €", description: "Römersalat, Croutons, Parmesan", image: "https://img.freepik.com/free-photo/caesar-salad-with-chicken-breast-plate_140725-6998.jpg?w=1380&t=st=1697646085~exp=1697646685~hmac=be045e9f5e7a0b1e4c5e5b7d8e0e4c1e9f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8" },
+  {
+    id: 1,
+    name: "Margherita Pizza",
+    price: "12,99 €",
+    description: "Klassisch mit Tomaten und Mozzarella",
+    image: "/gourmet-margherita.png",
+    rating: 4,
+  },
+  {
+    id: 2,
+    name: "Gegrillter Lachs",
+    price: "18,99 €",
+    description: "Mit Zitronenbutter-Sauce",
+    image: "/grilled-salmon-lemon-asparagus.png",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Caesar Salat",
+    price: "9,99 €",
+    description: "Römersalat, Croutons, Parmesan",
+    image: "/caesar-salad-chicken.png",
+    rating: 4,
+  },
 ]
 
-const products: Product[] = [
-  { id: 1, name: "Kabellose Ohrhörer", price: "79,99 €", image: "https://lweb.ch/images/2024/07/30/app-icon-1024x10241x-copia13.png" },
-  { id: 2, name: "Smartwatch", price: "129,99 €", image: "https://img.freepik.com/free-photo/rendering-smart-home-device_23-2151039302.jpg?uid=R88092278&ga=GA1.1.308254377.1728506310&semt=ais_hybrid" },
-  { id: 3, name: "Tragbares Ladegerät", price: "39,99 €", image: "https://img.freepik.com/free-photo/powerbank-cellphone-wooden-table_1387-513.jpg?uid=R88092278&ga=GA1.1.308254377.1728506310&semt=ais_hybrid" },
+const fashionProducts: Product[] = [
+  {
+    id: 1,
+    name: "Elegantes Sommerkleid",
+    price: "49,99 €",
+    discount: "69,99 €",
+    image: "/summer-dress.png",
+    category: "Kleider",
+    colors: ["#F8B195", "#355C7D", "#000000"],
+  },
+  {
+    id: 2,
+    name: "Lässige Jeansjacke",
+    price: "59,99 €",
+    image: "/denim-jacket.png",
+    category: "Jacken",
+    colors: ["#5D8CAE", "#1E3A5F", "#000000"],
+  },
+  {
+    id: 3,
+    name: "Stilvolle Sonnenbrille",
+    price: "29,99 €",
+    discount: "39,99 €",
+    image: "/stylish-sunglasses.png",
+    category: "Accessoires",
+    colors: ["#000000", "#6D4C41", "#B71C1C"],
+  },
+  {
+    id: 4,
+    name: "Leder Sneakers",
+    price: "79,99 €",
+    image: "/leather-sneakers.png",
+    category: "Schuhe",
+    colors: ["#FFFFFF", "#000000", "#795548"],
+  },
 ]
 
 const workoutSessions: WorkoutSession[] = [
-  { id: 1, name: "Morgenlauf", duration: "30 Min", caloriesBurned: 300, image: "https://img.freepik.com/free-photo/young-fitness-man-studio_7502-5008.jpg?w=1380&t=st=1697647433~exp=1697648033~hmac=be045e9f5e7a0b1e4c5e5b7d8e0e4c1e9f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8" },
-  { id: 2, name: "Yoga-Sitzung", duration: "45 Min", caloriesBurned: 180, image: "https://img.freepik.com/free-photo/young-woman-practicing-yoga-home_1303-20706.jpg?w=1380&t=st=1697647475~exp=1697648075~hmac=be045e9f5e7a0b1e4c5e5b7d8e0e4c1e9f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8" },
-  { id: 3, name: "Krafttraining", duration: "60 Min", caloriesBurned: 400, image: "https://img.freepik.com/free-photo/young-fitness-man-studio_7502-5005.jpg?w=1380&t=st=1697647505~exp=1697648105~hmac=be045e9f5e7a0b1e4c5e5b7d8e0e4c1e9f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8" },
+  {
+    id: 1,
+    name: "Morgenlauf",
+    duration: "30 Min",
+    caloriesBurned: 300,
+    image: "/athletic-runner-sunrise.png",
+  },
+  {
+    id: 2,
+    name: "Yoga-Sitzung",
+    duration: "45 Min",
+    caloriesBurned: 180,
+    image: "/yoga-studio.png",
+  },
+  {
+    id: 3,
+    name: "Krafttraining",
+    duration: "60 Min",
+    caloriesBurned: 400,
+    image: "/gym-weightlifting.png",
+  },
 ]
 
 const savingsGoals: SavingsGoal[] = [
-  { id: 1, name: "Notfallfonds", currentAmount: 2500, targetAmount: 5000, icon: Wallet },
-  { id: 2, name: "Urlaub", currentAmount: 1200, targetAmount: 3000, icon: PiggyBank },
-  { id: 3, name: "Neues Auto", currentAmount: 5000, targetAmount: 20000, icon: CreditCard },
+  {
+    id: 1,
+    name: "Notfallfonds",
+    currentAmount: 2500,
+    targetAmount: 5000,
+    icon: Wallet,
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    id: 2,
+    name: "Urlaub",
+    currentAmount: 1200,
+    targetAmount: 3000,
+    icon: PiggyBank,
+    color: "from-amber-500 to-orange-500",
+  },
+  {
+    id: 3,
+    name: "Neues Auto",
+    currentAmount: 5000,
+    targetAmount: 20000,
+    icon: CreditCard,
+    color: "from-purple-500 to-pink-500",
+  },
 ]
 
-export default function EnhancedResponsiveAppSwitcher() {
-  const [currentApp, setCurrentApp] = useState<'events' | 'restaurant' | 'store' | 'fitness' | 'savings'>('events')
+export default function EnhancedAppSwitcher() {
+  const [currentApp, setCurrentApp] = useState<"events" | "restaurant" | "store" | "fitness" | "savings">("events")
   const phoneContentRef = useRef<HTMLDivElement>(null)
   const mainContentRef = useRef<HTMLDivElement>(null)
   const [isPhoneScrolled, setIsPhoneScrolled] = useState(false)
@@ -97,12 +246,12 @@ export default function EnhancedResponsiveAppSwitcher() {
 
     const phoneContent = phoneContentRef.current
     if (phoneContent) {
-      phoneContent.addEventListener('scroll', handleScroll)
+      phoneContent.addEventListener("scroll", handleScroll)
     }
 
     return () => {
       if (phoneContent) {
-        phoneContent.removeEventListener('scroll', handleScroll)
+        phoneContent.removeEventListener("scroll", handleScroll)
       }
     }
   }, [])
@@ -111,44 +260,66 @@ export default function EnhancedResponsiveAppSwitcher() {
     const mainContent = mainContentRef.current
     if (mainContent) {
       if (isPhoneScrolled) {
-        mainContent.style.overflowY = 'auto'
+        mainContent.style.overflowY = "auto"
       } else {
-        mainContent.style.overflowY = 'hidden'
+        mainContent.style.overflowY = "hidden"
       }
     }
   }, [isPhoneScrolled])
 
   const EventsApp = () => (
-    <div className="h-full bg-gradient-to-b from-blue-50 to-purple-50 overflow-y-auto ">
-      <div className="sticky top-0 bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 shadow-md z-10">
-        <h1 className="text-2xl font-bold">Kommende Veranstaltungen</h1>
+    <div className="h-full bg-gradient-to-b from-blue-50 to-purple-50 overflow-y-auto">
+      <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-6 px-4 shadow-lg z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold">Veranstaltungen</h1>
+          <div className="flex space-x-2">
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <Sparkles className="w-4 h-4" />
+            </button>
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <Calendar className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       </div>
       <div className="p-4 space-y-6">
         {events.map((event) => (
-          <div key={event.id} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition-all hover:scale-105">
+          <motion.div
+            key={event.id}
+            className="bg-white rounded-xl shadow-xl overflow-hidden transform transition-all hover:scale-102 hover:shadow-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            whileHover={{ y: -5 }}
+          >
             <div className="relative h-48">
-              <img src={event.image} alt={event.name} className="w-full h-full object-cover" />
-              <div className={`absolute top-0 right-0 ${event.color} text-white px-3 py-1 rounded-bl-lg`}>
+              <img src={event.image || "/placeholder.svg"} alt={event.name} className="w-full h-full object-cover" />
+              <div className={`absolute top-0 right-0 ${event.color} text-white px-4 py-2 rounded-bl-xl font-medium`}>
                 {event.date}
               </div>
             </div>
-            <div className="p-4">
-              <div className="flex items-center mb-2">
-                <event.icon className={`w-6 h-6 ${event.color} text-white rounded-full p-1 mr-2`} />
-                <h2 className="text-xl font-semibold text-gray-700">{event.name}</h2>
+            <div className="p-5">
+              <div className="flex items-center mb-3">
+                <div className={`${event.color} p-2 rounded-lg mr-3`}>
+                  <event.icon className="w-5 h-5 text-white" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-800">{event.name}</h2>
               </div>
-              <div className="text-gray-600 space-y-1">
+              <div className="text-gray-600 space-y-2">
                 <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-2 text-gray-400" />
+                  <Clock className="w-4 h-4 mr-2 text-blue-500" />
                   <span className="text-sm">{event.time}</span>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="w-4 h-4 mr-2 text-gray-400" />
+                  <MapPin className="w-4 h-4 mr-2 text-purple-500" />
                   <span className="text-sm">{event.location}</span>
                 </div>
               </div>
+              <button className="mt-4 w-12 h-12 mx-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full flex items-center justify-center hover:from-blue-600 hover:to-purple-700 transition-colors">
+                <ArrowRight className="w-5 h-5" />
+              </button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>
@@ -156,115 +327,361 @@ export default function EnhancedResponsiveAppSwitcher() {
 
   const RestaurantApp = () => (
     <div className="h-full bg-gradient-to-b from-amber-50 to-orange-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white p-4 shadow-md z-10 ">
-        <h1 className="text-2xl font-bold">Gourmet-Genüsse</h1>
+      <div className="sticky top-0 bg-gradient-to-r from-amber-500 to-orange-500 text-white py-6 px-4 shadow-lg z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold">Gourmet-Genüsse</h1>
+          <div className="flex space-x-2">
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <Heart className="w-4 h-4" />
+            </button>
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <ShoppingCart className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="p-4 space-y-4">
+      <div className="p-4 space-y-5">
         {menuItems.map((item) => (
-          <div key={item.id} className="bg-white rounded-lg shadow-md p-4 transform transition-all hover:scale-105">
-            <div className="flex items-center mb-2">
-              <img src={item.image} alt={item.name} className="w-24 h-24 object-cover rounded-md mr-4" />
-              <div>
-                <h2 className="text-xl font-semibold text-gray-600 ">{item.name}</h2>
-                <div className="text-amber-600 font-bold text-lg">{item.price}</div>
+          <motion.div
+            key={item.id}
+            className="bg-white rounded-xl shadow-lg p-4 transform transition-all"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            whileHover={{
+              y: -5,
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            }}
+          >
+            <div className="flex items-start space-x-4">
+              <img
+                src={item.image || "/placeholder.svg"}
+                alt={item.name}
+                className="w-24 h-24 object-cover rounded-xl"
+              />
+              <div className="flex-1">
+                <h2 className="text-xl font-bold text-gray-800">{item.name}</h2>
+                <div className="inline-block bg-amber-100 text-amber-600 font-medium text-sm px-2 py-1 rounded-md mt-1">
+                  {item.price}
+                </div>
+                <p className="text-gray-600 text-sm mt-1">{item.description}</p>
+                <div className="mt-2 flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`w-4 h-4 ${i < item.rating ? "text-amber-500 fill-amber-500" : "text-gray-300"}`}
+                    />
+                  ))}
+                  <span className="ml-2 text-sm text-gray-500">{item.rating}.0</span>
+                </div>
               </div>
             </div>
-            <p className="text-gray-600">{item.description}</p>
-            <div className="mt-2 flex items-center text-amber-500">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className={`w-5 h-5 ${i < 4 ? 'fill-current' : ''}`} />
-              ))}
-            </div>
-          </div>
+            <button className="mt-3 w-12 h-12 mx-auto bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full flex items-center justify-center hover:from-amber-600 hover:to-orange-600 transition-colors">
+              <ShoppingCart className="w-5 h-5" />
+            </button>
+          </motion.div>
         ))}
       </div>
     </div>
   )
 
-  const StoreApp = () => (
-    <div className="h-full bg-gradient-to-b from-indigo-50 to-blue-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-4 shadow-md z-10">
-        <h1 className="text-2xl font-bold">TechShop</h1>
-      </div>
-      <div className="p-4 grid grid-cols-2 gap-4">
-        {products.map((product) => (
-          <div  key={product.id} className="bg-white rounded-lg shadow-md p-4 flex flex-col transform transition-all hover:scale-105">
-            <img src={product.image} alt={product.name} className="h-40 w-full object-cover rounded-md mb-4" />
-            <h2 className="text-lg font-semibold text-indigo-900 mb-2">{product.name}</h2>
-            <div className="text-indigo-600 font-bold text-xl mt-auto mb-2">{product.price}</div>
-            <button className="w-full bg-indigo-600 text-white py-2 px-4 rounded-full text-sm font-medium hover:bg-indigo-700 transition-colors">
-              <ShoppingCart className="w-5 h-5 mx-auto" />
+  const FashionStoreApp = () => (
+    <div className="h-full bg-gradient-to-b from-rose-50 to-pink-50 overflow-y-auto">
+      <div className="sticky top-0 bg-gradient-to-r from-rose-500 to-pink-500 text-white py-6 px-4 shadow-lg z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold">ModeBoutique</h1>
+          <div className="flex space-x-2">
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <Heart className="w-4 h-4" />
+            </button>
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <ShoppingCart className="w-4 h-4" />
             </button>
           </div>
-        ))}
+        </div>
+      </div>
+
+      <div className="p-4">
+        <div className="flex items-center space-x-2 overflow-x-auto pb-2 mb-4 scrollbar-hide">
+          <button className="bg-rose-500 text-white px-4 py-2 rounded-full text-sm whitespace-nowrap">Alle</button>
+          <button className="bg-white text-gray-700 px-4 py-2 rounded-full text-sm whitespace-nowrap border border-gray-200">
+            Kleider
+          </button>
+          <button className="bg-white text-gray-700 px-4 py-2 rounded-full text-sm whitespace-nowrap border border-gray-200">
+            Jacken
+          </button>
+          <button className="bg-white text-gray-700 px-4 py-2 rounded-full text-sm whitespace-nowrap border border-gray-200">
+            Accessoires
+          </button>
+          <button className="bg-white text-gray-700 px-4 py-2 rounded-full text-sm whitespace-nowrap border border-gray-200">
+            Schuhe
+          </button>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          {fashionProducts.map((product) => (
+            <motion.div
+              key={product.id}
+              className="bg-white rounded-xl shadow-lg overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              whileHover={{
+                y: -5,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+              }}
+            >
+              <div className="relative">
+                {product.discount && (
+                  <div className="absolute top-2 left-2 bg-rose-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                    Sale
+                  </div>
+                )}
+                <div className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-1.5 rounded-full">
+                  <Heart className="w-4 h-4 text-rose-500" />
+                </div>
+                <img
+                  src={product.image || "/placeholder.svg"}
+                  alt={product.name}
+                  className="h-40 w-full object-cover"
+                />
+              </div>
+              <div className="p-3">
+                <div className="text-xs text-gray-500 mb-1">{product.category}</div>
+                <h2 className="text-sm font-bold text-gray-800 mb-1 line-clamp-1">{product.name}</h2>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className="text-rose-600 font-bold text-sm">{product.price}</div>
+                    {product.discount && (
+                      <div className="ml-2 text-xs text-gray-400 line-through">{product.discount}</div>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-2 flex items-center justify-between">
+                  <div className="flex space-x-1">
+                    {product.colors.map((color, i) => (
+                      <div
+                        key={i}
+                        className="w-4 h-4 rounded-full border border-gray-300"
+                        style={{ backgroundColor: color }}
+                      ></div>
+                    ))}
+                  </div>
+                  <button className="w-8 h-8 bg-rose-500 text-white rounded-full flex items-center justify-center hover:bg-rose-600 transition-colors">
+                    <ShoppingCart className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-6 bg-white rounded-xl p-4 shadow-lg">
+          <h3 className="text-base font-bold text-gray-800 mb-3">Empfohlen für dich</h3>
+          <div className="flex overflow-x-auto space-x-4 pb-2 scrollbar-hide">
+            <div className="flex-shrink-0 w-36">
+              <img
+                src="/fashion-recommendation-1.png"
+                alt="Empfehlung"
+                className="w-full h-24 object-cover rounded-lg mb-2"
+              />
+              <div className="text-xs font-medium">Sommer Kollektion</div>
+              <div className="text-xs text-gray-500">Neue Styles</div>
+            </div>
+            <div className="flex-shrink-0 w-36">
+              <img
+                src="/fashion-recommendation-2.png"
+                alt="Empfehlung"
+                className="w-full h-24 object-cover rounded-lg mb-2"
+              />
+              <div className="text-xs font-medium">Bestseller</div>
+              <div className="text-xs text-gray-500">Top Produkte</div>
+            </div>
+            <div className="flex-shrink-0 w-36">
+              <img
+                src="/fashion-recommendation-3.png"
+                alt="Empfehlung"
+                className="w-full h-24 object-cover rounded-lg mb-2"
+              />
+              <div className="text-xs font-medium">Sale</div>
+              <div className="text-xs text-gray-500">Bis zu 50%</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
 
   const FitnessApp = () => (
     <div className="h-full bg-gradient-to-b from-green-50 to-teal-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-green-500 to-teal-500 text-white p-4 shadow-md z-10 ">
-        <h1 className="text-2xl font-bold">Fitness-Tracker</h1>
-      </div>
-      <div className="p-4 space-y-4">
-        {workoutSessions.map((session) => (
-          <div key={session.id} className="bg-white rounded-lg shadow-md p-4 flex items-center transform  transition-all hover:scale-105">
-            <img src={session.image} alt={session.name} className="w-24 h-24 object-cover rounded-md mr-4" />
-            <div>
-              <h2 className="text-xl font-semibold text-gray-700">{session.name}</h2>
-              <div className="text-gray-600">Dauer: {session.duration}</div>
-              <div className="text-green-600 font-bold">Kalorien: {session.caloriesBurned}</div>
-            </div>
-          </div>
-        ))}
-        <div className="bg-gradient-to-r from-green-100 to-teal-100 rounded-lg p-6 mt-6">
-          <h3 className="text-xl font-semibold mb-4 text-gray-600">Tägliche Zusammenfassung</h3>
-          <div className="flex items-center justify-between ">
-            <div className="flex items-center">
-              <Dumbbell className="w-6 h-6 mr-2 text-green-600" />
-              <span className="text-lg text-gray-600">Workouts gesamt: 3</span>
-            </div>
-            <div className="flex items-center">
-              <Activity className="w-6 h-6 mr-2 text-green-600" />
-              <span className="text-lg text-gray-600">Verbrannte Kalorien: 880</span>
-            </div>
+      <div className="sticky top-0 bg-green-500 text-white py-6 px-4 shadow-lg z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold">Fitness-Tracker</h1>
+          <div className="flex space-x-2">
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <Award className="w-4 h-4" />
+            </button>
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <Activity className="w-4 h-4" />
+            </button>
           </div>
         </div>
+      </div>
+      <div className="p-4 space-y-5">
+        <motion.div
+          className="bg-white rounded-xl shadow-lg p-5"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <h3 className="text-base font-bold mb-4 text-gray-800">Tägliche Aktivität</h3>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center">
+                <Zap className="w-5 h-5 text-white" />
+              </div>
+              <div className="ml-3">
+                <div className="text-xs text-gray-500">Schritte</div>
+                <div className="text-lg font-bold text-gray-800">8,742</div>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
+                <Activity className="w-5 h-5 text-white" />
+              </div>
+              <div className="ml-3">
+                <div className="text-xs text-gray-500">Kalorien</div>
+                <div className="text-lg font-bold text-gray-800">880</div>
+              </div>
+            </div>
+          </div>
+          <div className="w-full bg-gray-100 rounded-full h-2 mb-1">
+            <div className="bg-green-500 h-2 rounded-full" style={{ width: "75%" }}></div>
+          </div>
+          <div className="text-right text-sm text-gray-500">75% des Tagesziels</div>
+        </motion.div>
+
+        <h3 className="text-base font-bold mt-6 mb-3 text-gray-800 px-1">Letzte Workouts</h3>
+
+        {workoutSessions.map((session, index) => (
+          <motion.div
+            key={session.id}
+            className="bg-white rounded-xl shadow-lg p-4 flex items-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+            whileHover={{
+              y: -5,
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            }}
+          >
+            <img
+              src={session.image || "/placeholder.svg"}
+              alt={session.name}
+              className="w-16 h-16 object-cover rounded-xl mr-4"
+            />
+            <div className="flex-1">
+              <h2 className="text-lg font-bold text-gray-800">{session.name}</h2>
+              <div className="flex items-center mt-1 space-x-4">
+                <div className="flex items-center text-gray-600 text-xs">
+                  <Clock className="w-3 h-3 mr-1 text-green-500" />
+                  {session.duration}
+                </div>
+                <div className="flex items-center text-gray-600 text-xs">
+                  <Zap className="w-3 h-3 mr-1 text-green-500" />
+                  {session.caloriesBurned} kcal
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+
+        <button className="mt-4 w-12 h-12 mx-auto bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+          <ArrowRight className="w-5 h-5" />
+        </button>
       </div>
     </div>
   )
 
   const SavingsApp = () => (
     <div className="h-full bg-gradient-to-b from-purple-50 to-pink-50 overflow-y-auto">
-      <div className="sticky top-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 shadow-md z-10 ">
-        <h1 className="text-2xl font-bold">Sparziele-Tracker</h1>
-      </div>
-      <div className="p-4 space-y-4">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-semibold mb-2 text-gray-600">Gesamtersparnis</h2>
-          <div className="text-4xl font-bold text-purple-600">8.700 €</div>
+      <div className="sticky top-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-6 px-4 shadow-lg z-10">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold">Sparziele</h1>
+          <div className="flex space-x-2">
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <PiggyBank className="w-4 h-4" />
+            </button>
+            <button className="p-1.5 rounded-full bg-white/20 hover:bg-white/30 transition-colors">
+              <CreditCard className="w-4 h-4" />
+            </button>
+          </div>
         </div>
-        {savingsGoals.map((goal) => (
-          <div key={goal.id} className="bg-white rounded-lg shadow-md p-6 transform transition-all hover:scale-105">
-            <div className="flex items-center justify-between mb-4">
+      </div>
+      <div className="p-4 space-y-5">
+        <motion.div
+          className="bg-white rounded-xl shadow-lg p-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-base font-bold text-gray-800">Gesamtersparnis</h2>
+            <div className="text-sm text-gray-500">Diesen Monat</div>
+          </div>
+          <div className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+            8.700 €
+          </div>
+          <div className="mt-3 flex items-center text-green-500 text-sm">
+            <Sparkles className="w-4 h-4 mr-1" />
+            <span>+450 € seit letztem Monat</span>
+          </div>
+        </motion.div>
+
+        <h3 className="text-base font-bold mt-6 mb-3 text-gray-800 px-1">Meine Ziele</h3>
+
+        {savingsGoals.map((goal, index) => (
+          <motion.div
+            key={goal.id}
+            className="bg-white rounded-xl shadow-lg p-5"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+            whileHover={{
+              y: -5,
+              boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            }}
+          >
+            <div className="flex items-center justify-between mb-3">
               <div className="flex items-center">
-                <goal.icon className="w-8 h-8 mr-3 text-purple-500" />
-                <h2 className="text-xl font-semibold text-gray-700">{goal.name}</h2>
+                <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${goal.color} flex items-center justify-center`}>
+                  <goal.icon className="w-5 h-5 text-white" />
+                </div>
+                <h2 className="ml-3 text-lg font-bold text-gray-800">{goal.name}</h2>
               </div>
-              <div className="text-purple-600 font-bold text-lg">
-                {goal.currentAmount} € / {goal.targetAmount} €
+              <div className="text-purple-600 font-medium text-sm bg-purple-100 px-2 py-1 rounded-full">
+                {Math.round((goal.currentAmount / goal.targetAmount) * 100)}%
               </div>
             </div>
-            <div className="w-full bg-purple-100 rounded-full h-4">
+            <div className="flex items-center justify-between mb-2 text-sm">
+              <span className="text-gray-500">Aktuell</span>
+              <span className="text-gray-500">Ziel</span>
+            </div>
+            <div className="flex items-center justify-between mb-3">
+              <span className="font-medium text-sm text-gray-800">{goal.currentAmount} €</span>
+              <span className="font-medium text-sm text-gray-800">{goal.targetAmount} €</span>
+            </div>
+            <div className="w-full bg-gray-100 rounded-full h-3">
               <div
-                className="bg-gradient-to-r from-purple-500 to-pink-500 h-4 rounded-full"
+                className={`bg-gradient-to-r ${goal.color} h-3 rounded-full`}
                 style={{ width: `${(goal.currentAmount / goal.targetAmount) * 100}%` }}
               ></div>
             </div>
-          </div>
+          </motion.div>
         ))}
-        <button className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-colors">
-          Neues Sparziel hinzufügen
+
+        <button className="mt-4 w-12 h-12 mx-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center hover:from-purple-700 hover:to-pink-700 transition-colors">
+          <ArrowRight className="w-5 h-5" />
         </button>
       </div>
     </div>
@@ -272,84 +689,112 @@ export default function EnhancedResponsiveAppSwitcher() {
 
   const renderApp = () => {
     switch (currentApp) {
-      case 'events':
+      case "events":
         return <EventsApp />
-      case 'restaurant':
+      case "restaurant":
         return <RestaurantApp />
-      case 'store':
-        return <StoreApp />
-      case 'fitness':
+      case "store":
+        return <FashionStoreApp />
+      case "fitness":
         return <FitnessApp />
-      case 'savings':
+      case "savings":
         return <SavingsApp />
     }
   }
 
+  const appIcons = {
+    events: Calendar,
+    restaurant: Menu,
+    store: Shirt,
+    fitness: Activity,
+    savings: PiggyBank,
+  }
+
+  const appColors = {
+    events: "from-blue-500 to-purple-600",
+    restaurant: "from-amber-500 to-orange-500",
+    store: "from-rose-500 to-pink-500",
+    fitness: "from-green-500 to-teal-500",
+    savings: "from-purple-600 to-pink-600",
+  }
+
+  const appNames = {
+    events: "Veranstaltungen",
+    restaurant: "Restaurant",
+    store: "ModeBoutique",
+    fitness: "Fitness",
+    savings: "Sparziele",
+  }
+
   return (
     <div className="mb-20" ref={mainContentRef}>
-      <div className="max-w-7xl mx-auto bg-gradient-to-br bg-[#73738a59] rounded-3xl shadow-xl overflow-hidden ">
+      <div className="max-w-7xl mx-auto bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-700">
         <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/3 p-6 lg:p-8">
-            <h2 className="text-3xl font-bold text-white mt-20 text-center mb-10">Content-Management-Apps</h2>
+          <div className="lg:w-1/3 p-6 lg:p-8 bg-gradient-to-br from-gray-800 to-gray-900">
+            <motion.h2
+              className="text-3xl font-bold text-white mt-10 text-center mb-10"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+                Content-Management-Apps
+              </span>
+            </motion.h2>
+
             <div className="space-y-4">
-              <button 
-                onClick={() => setCurrentApp('events')}
-                className={`w-full px-6 py-3 rounded-full shadow-md flex items-center justify-center transition-colors ${
-                  currentApp === 'events' ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white' : 'bg-white text-blue-500 hover:bg-blue-50'
-                }`}
-              >
-                <Calendar className="w-5 h-5 mr-2" />
-                Veranstaltungen
-              </button>
-              <button 
-                onClick={() => setCurrentApp('restaurant')}
-                className={`w-full px-6 py-3 rounded-full shadow-md flex items-center justify-center transition-colors ${
-                  currentApp === 'restaurant' ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white' : 'bg-white text-amber-600 hover:bg-amber-50'
-                }`}
-              >
-                <Menu className="w-5 h-5 mr-2" />
-                Restaurant
-              </button>
-              <button 
-                onClick={() => setCurrentApp('store')}
-                className={`w-full px-6 py-3 rounded-full shadow-md flex items-center justify-center transition-colors ${
-                  currentApp === 'store' ? 'bg-gradient-to-r from-indigo-600 to-blue-600 text-white' : 'bg-white text-indigo-600 hover:bg-indigo-50'
-                }`}
-              >
-                <ShoppingBag className="w-5 h-5 mr-2" />
-                Online-Shop
-              </button>
-              <button 
-                onClick={() => setCurrentApp('fitness')}
-                className={`w-full px-6 py-3 rounded-full shadow-md flex items-center justify-center transition-colors ${
-                  currentApp === 'fitness' ? 'bg-gradient-to-r from-green-500 to-teal-500 text-white' : 'bg-white text-green-600 hover:bg-green-50'
-                }`}
-              >
-                <Activity className="w-5 h-5 mr-2" />
-                Fitness
-              </button>
-              <button 
-                onClick={() => setCurrentApp('savings')}
-                className={`w-full px-6 py-3 rounded-full shadow-md flex items-center justify-center transition-colors ${
-                  currentApp === 'savings' ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white' : 'bg-white text-purple-600 hover:bg-purple-50'
-                }`}
-              >
-                <PiggyBank className="w-5 h-5 mr-2" />
-                Sparziele
-              </button>
+              {(Object.keys(appNames) as Array<keyof typeof appNames>).map((app, index) => (
+                <motion.button
+                  key={app}
+                  onClick={() => setCurrentApp(app)}
+                  className={`w-full px-6 py-4 rounded-xl shadow-lg flex items-center justify-between transition-all duration-300 ${
+                    currentApp === app
+                      ? `bg-gradient-to-r ${appColors[app]} text-white`
+                      : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  }`}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div className="flex items-center">
+                    {React.createElement(appIcons[app], { className: "w-5 h-5 mr-3" })}
+                    <span className="font-medium">{appNames[app]}</span>
+                  </div>
+                  {currentApp === app && <div className="w-2 h-2 rounded-full bg-white"></div>}
+                </motion.button>
+              ))}
             </div>
+
+
           </div>
-          
-          <div className="lg:w-2/3 p-6 lg:p-8">
-            <div className="relative border-[14px] border-gray-900 rounded-[3rem] overflow-hidden shadow-xl bg-gray-900" 
-                 style={{ height: '600px', width: '100%', maxWidth: '320px', margin: '0 auto' }}>
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-7 bg-gray-900 rounded-b-3xl"></div>
+
+          <div className="lg:w-2/3 p-6 lg:p-8 flex items-center justify-center">
+            <motion.div
+              className="relative border-[14px] border-gray-900 rounded-[3rem] overflow-hidden shadow-2xl bg-gray-900"
+              style={{ height: "600px", width: "100%", maxWidth: "320px", margin: "0 auto" }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-7 bg-gray-900 rounded-b-3xl z-10"></div>
               <div className="h-full w-full bg-white overflow-hidden rounded-[2.3rem]">
-                <div ref={phoneContentRef} className="h-full overflow-y-auto">
-                  {renderApp()}
-                </div>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentApp}
+                    ref={phoneContentRef}
+                    className="h-full overflow-y-auto"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {renderApp()}
+                  </motion.div>
+                </AnimatePresence>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
