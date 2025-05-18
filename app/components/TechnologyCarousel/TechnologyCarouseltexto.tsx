@@ -108,7 +108,7 @@ export default function AppBenefitsShowcase() {
     <div className="min-h-screen text-white py-8 md:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-12 md:mb-20 mt-8 md:mt-16 animate-on-scroll"
+          className="text-4xl md:text-4xl lg:text-5xl font-bold text-center mb-12 md:mb-20 mt-16 md:mt-16 animate-on-scroll"
           data-animation="animate-fade-down"
           data-delay="100"
         >
