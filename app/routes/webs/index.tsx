@@ -82,7 +82,7 @@ export default function BlogIndex() {
         <Websitecomponent />
  
         <CommunityBlock />
-        <div id="technologyCarousel" className="w-full  p-4 flex justify-center relative" data-aos="fade-up" data-aos-delay="800">
+        <div id="technologyCarousel" className="w-full  mt-16 p-4 flex justify-center relative" data-aos="fade-up" data-aos-delay="800">
         <ComputerSimulator />
       </div>
 
