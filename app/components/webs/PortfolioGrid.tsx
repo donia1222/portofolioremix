@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Globe, Database, Server, Smartphone, Bitcoin, ArrowUpRight, X, ChevronLeft, ChevronRight } from "lucide-react"
 
@@ -190,6 +192,12 @@ export default function PortfolioMasonry() {
     }
   }
 
+  // Manejar clic en proyecto para ir directamente a la web
+  const handleProjectClick = (e: React.MouseEvent, project: PortfolioItem) => {
+    e.stopPropagation()
+    window.open(project.projectUrl, "_blank", "noopener,noreferrer")
+  }
+
   return (
     <div className="w-full">
       {/* Encabezado */}
@@ -232,7 +240,7 @@ export default function PortfolioMasonry() {
           <div
             key={project.id}
             className="relative overflow-hidden rounded-xl border border-zinc-700 cursor-pointer hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 h-[280px] group"
-            onClick={() => setSelectedProject(project)}
+            onClick={(e) => handleProjectClick(e, project)}
           >
             {/* Imagen de fondo */}
             <div className="absolute inset-0 w-full h-full">
@@ -255,8 +263,6 @@ export default function PortfolioMasonry() {
 
               <h3 className="text-xl font-bold text-white mt-10">{project.title}</h3>
 
-
-
               <div className="mt-auto">
                 <div className="flex flex-wrap gap-1.5 mb-4">
                   {project.technologies.slice(0, 3).map((tech, index) => (
@@ -275,8 +281,11 @@ export default function PortfolioMasonry() {
                 </div>
 
                 <div className="flex justify-end">
-                  <button className="flex items-center gap-1 text-sm font-medium text-purple-300 transition-colors hover:text-purple-200 group-hover:underline">
-                    Siehe Details
+                  <button
+                    className="flex items-center gap-1 text-sm font-medium text-purple-300 transition-colors hover:text-purple-200 group-hover:underline"
+                    onClick={(e) => handleProjectClick(e, project)}
+                  >
+                    Web besuchen
                     <ArrowUpRight className="h-4 w-4" />
                   </button>
                 </div>
@@ -293,7 +302,7 @@ export default function PortfolioMasonry() {
         </div>
       )}
 
-      {/* Modal de detalle */}
+      {/* Modal de detalle - Mantenido por si se quiere volver a usar en el futuro */}
       {selectedProject && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
@@ -376,7 +385,7 @@ export default function PortfolioMasonry() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-purple-500/20 hover:scale-105"
                   >
-                    Projekt besuchen
+                    Web besuchen
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                 </div>
