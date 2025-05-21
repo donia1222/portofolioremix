@@ -108,6 +108,7 @@ export default function PortfolioMasonry() {
   const [filter, setFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [columns, setColumns] = useState(3)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   // Responsive columns
   useEffect(() => {
@@ -125,6 +126,19 @@ export default function PortfolioMasonry() {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
+
+  // Manejar cambio de filtro con animación
+  const handleFilterChange = (newFilter: string) => {
+    if (filter === newFilter) return
+
+    setIsAnimating(true)
+    setTimeout(() => {
+      setFilter(newFilter)
+      setTimeout(() => {
+        setIsAnimating(false)
+      }, 50)
+    }, 300)
+  }
 
   // Filtrar proyectos
   const filteredProjects = portfolioItems.filter((project) => {
@@ -181,7 +195,7 @@ export default function PortfolioMasonry() {
       {/* Encabezado */}
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
-          Projekte <span className="text-purple-400">2025</span>
+          Meine Projekte <span className="text-purple-400">2025</span>
         </h1>
         <div className="mx-auto mt-3 h-1 w-24 bg-gradient-to-r from-purple-500 to-pink-500"></div>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
@@ -190,17 +204,17 @@ export default function PortfolioMasonry() {
       </div>
 
       {/* Filtros y búsqueda */}
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2">
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center">
+        <div className="flex flex-wrap gap-2 justify-center">
           {categories.map((category) => (
             <button
               key={category}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all ${
+              className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all duration-300 ${
                 filter === category
-                  ? "bg-purple-500/20 text-purple-300 border border-purple-500/30"
-                  : "bg-zinc-800/50 text-white/70 border border-zinc-700 hover:border-zinc-600"
+                  ? "bg-purple-500/20 text-purple-300 border border-purple-500/30 scale-110"
+                  : "bg-zinc-800/50 text-white/70 border border-zinc-700 hover:border-zinc-600 hover:scale-105"
               }`}
-              onClick={() => setFilter(category)}
+              onClick={() => handleFilterChange(category)}
             >
               {category === "all" ? "Alle" : category}
             </button>
@@ -209,7 +223,11 @@ export default function PortfolioMasonry() {
       </div>
 
       {/* Grid layout con imágenes de fondo */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ${
+          isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+        }`}
+      >
         {filteredProjects.map((project) => (
           <div
             key={project.id}
@@ -235,9 +253,9 @@ export default function PortfolioMasonry() {
                 <span className="text-sm font-medium text-white/90">{project.category}</span>
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+              <h3 className="text-xl font-bold text-white mt-10">{project.title}</h3>
 
-              <p className="text-sm text-white/80 line-clamp-2 mb-4">{project.description}</p>
+
 
               <div className="mt-auto">
                 <div className="flex flex-wrap gap-1.5 mb-4">
@@ -269,7 +287,7 @@ export default function PortfolioMasonry() {
       </div>
 
       {/* Mensaje si no hay resultados */}
-      {filteredProjects.length === 0 && (
+      {filteredProjects.length === 0 && !isAnimating && (
         <div className="mt-12 text-center">
           <p className="text-lg text-white/70">Keine Projekte gefunden. Versuchen Sie es mit anderen Suchkriterien.</p>
         </div>
