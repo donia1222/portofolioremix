@@ -19,9 +19,21 @@ interface PortfolioItem {
 
 // Datos de proyectos
 const portfolioItems: PortfolioItem[] = [
+    {
+    id: 0,
+    title: "Ushuaia Bar & Lounge",
+    category: "Next.js",
+    description:
+      "Premium Cocktail, Hookah & Terrace in Buchs. Eine luxuriöse Bar-Lounge mit einzigartiger Atmosphäre, modernem Design und erstklassigem Service.",
+    imageUrl:
+      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/luxury-shisha-lounge-Tx5dzL9GTbmlEt1YT7S3ZYLqvHmS1e.png",
+    icon: "server",
+    projectUrl: "https://ushuaia.vercel.app",
+    technologies: ["Next.js", "React", "Framer Motion", "TailwindCSS"],
+  },
   {
     id: 1,
-    title: "Ushuaia&Cantina",
+    title: "Cantina Tex-Mex",
     category: "Remix",
     description:
       "Ein Restaurant mit einer Pub-Atmosphäre, das ein einzigartiges gastronomisches Erlebnis bietet und Essen mit Unterhaltung kombiniert.",
