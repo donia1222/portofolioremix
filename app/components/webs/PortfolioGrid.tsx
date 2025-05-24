@@ -42,16 +42,27 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://www.cantinatexmex.ch",
     technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
-  {
+    {
     id: 2,
-    title: "Bouquet Mediterraneo",
-    category: "Remix",
+    title: "Crypto",
+    category: "Remix & Web3",
     description:
-      "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
-    imageUrl: "/IMG_2734.jpeg",
+      "Eine moderne Kryptowährungs-Dashboard-Anwendung mit Echtzeit-Preisdaten, Portfolio-Tracking, Marktanalysen und Conexion APIs.",
+    imageUrl: "/crypto-abstract-bg.png",
+    icon: "crypto",
+    projectUrl: "https://remix-crypto.vercel.app",
+    technologies: ["Remix", "React", "Web3.js", "TailwindCSS"],
+  },
+  {
+    id: 3,
+    title: "BeautyStyle",
+    category: "Remix & Framer Motion",
+    description:
+      "Moderner Friseursalon mit personalisierten Schönheitsdienstleistungen und interaktiven Animationen für ein einzigartiges Kundenerlebnis.",
+    imageUrl: "/woman-getting-her-hair-cut-beauty-salon_23-2149167399.jpg",
     icon: "globe",
-    projectUrl: "https://www.bouquetmediterraneo.ch",
-    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
+    projectUrl: "https://beautystyles.vercel.app",
+    technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
   },
   {
     id: 4,
@@ -75,30 +86,20 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://rrapi.ch",
     technologies: ["HTML", "CSS", "PHP", "JavaScript"],
   },
+
   {
     id: 6,
-    title: "Crypto",
-    category: "Remix & Web3",
+    title: "Bouquet Mediterraneo",
+    category: "Remix",
     description:
-      "Eine moderne Kryptowährungs-Dashboard-Anwendung mit Echtzeit-Preisdaten, Portfolio-Tracking, Marktanalysen und Conexion APIs.",
-    imageUrl: "/crypto-abstract-bg.png",
-    icon: "crypto",
-    projectUrl: "https://remix-crypto.vercel.app",
-    technologies: ["Remix", "React", "Web3.js", "TailwindCSS"],
+      "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
+    imageUrl: "/IMG_2734.jpeg",
+    icon: "globe",
+    projectUrl: "https://www.bouquetmediterraneo.ch",
+    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
   {
     id: 7,
-    title: "BeautyStyle",
-    category: "Remix & Framer Motion",
-    description:
-      "Moderner Friseursalon mit personalisierten Schönheitsdienstleistungen und interaktiven Animationen für ein einzigartiges Kundenerlebnis.",
-    imageUrl: "/woman-getting-her-hair-cut-beauty-salon_23-2149167399.jpg",
-    icon: "globe",
-    projectUrl: "https://beautystyles.vercel.app",
-    technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
-  },
-  {
-    id: 8,
     title: "El Español",
     category: "Remix",
     description:
@@ -109,7 +110,7 @@ const portfolioItems: PortfolioItem[] = [
     technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
   {
-    id: 9,
+    id: 8,
     title: "LKS Renovatio",
     category: "Next.js",
     description:
