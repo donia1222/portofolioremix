@@ -19,14 +19,14 @@ interface PortfolioItem {
 
 // Datos de proyectos
 const portfolioItems: PortfolioItem[] = [
-    {
+  {
     id: 0,
     title: "Ushuaia Bar & Lounge",
     category: "Next.js",
     description:
       "Premium Cocktail, Hookah & Terrace in Buchs. Eine luxuriöse Bar-Lounge mit einzigartiger Atmosphäre, modernem Design und erstklassigem Service.",
     imageUrl:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/luxury-shisha-lounge-Tx5dzL9GTbmlEt1YT7S3ZYLqvHmS1e.png",
+      "/abstract-smoke.png",
     icon: "server",
     projectUrl: "https://ushuaia.vercel.app",
     technologies: ["Next.js", "React", "Framer Motion", "TailwindCSS"],
@@ -97,6 +97,28 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://beautystyles.vercel.app",
     technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
   },
+  {
+    id: 8,
+    title: "El Español",
+    category: "Remix",
+    description:
+      "Authentisches spanisches Restaurant in der Schweiz. Traditionelle iberische Küche mit modernem Touch und gemütlicher Atmosphäre für ein unvergessliches kulinarisches Erlebnis.",
+    imageUrl: "http://localhost:5174/programming-background-with-person-working-with-codes-computer.jpg",
+    icon: "globe",
+    projectUrl: "#", // En proceso - 50%
+    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
+  },
+  {
+    id: 9,
+    title: "LKS Renovatio",
+    category: "Next.js",
+    description:
+      "Professionelles Renovationsunternehmen spezialisiert auf die Modernisierung von Häusern und Wohnungen. Hochwertige Handwerksarbeit mit innovativen Lösungen für Ihr Zuhause.",
+    imageUrl: "http://localhost:5174/programming-background-with-person-working-with-codes-computer.jpg",
+    icon: "server",
+    projectUrl: "#", // En proceso - 80%
+    technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
+  },
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
@@ -123,13 +145,28 @@ export default function PortfolioMasonry() {
   const [searchQuery, setSearchQuery] = useState<string>("")
   const [columns, setColumns] = useState(3)
   const [isAnimating, setIsAnimating] = useState(false)
+  const [projectsToShow, setProjectsToShow] = useState(4)
+  const [isMobile, setIsMobile] = useState(false)
+  const [progressModal, setProgressModal] = useState<{
+    show: boolean
+    project: PortfolioItem | null
+    progress: number
+  }>({
+    show: false,
+    project: null,
+    progress: 0,
+  })
 
-  // Responsive columns
+  // Responsive columns and mobile detection
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
+      const width = window.innerWidth
+      const mobile = width < 1024 // lg breakpoint
+      setIsMobile(mobile)
+
+      if (width < 640) {
         setColumns(1)
-      } else if (window.innerWidth < 1024) {
+      } else if (width < 1024) {
         setColumns(2)
       } else {
         setColumns(3)
@@ -146,6 +183,9 @@ export default function PortfolioMasonry() {
     if (filter === newFilter) return
 
     setIsAnimating(true)
+    if (isMobile) {
+      setProjectsToShow(4) // Reset to show only 4 projects on mobile
+    }
     setTimeout(() => {
       setFilter(newFilter)
       setTimeout(() => {
@@ -155,7 +195,7 @@ export default function PortfolioMasonry() {
   }
 
   // Filtrar proyectos
-  const filteredProjects = portfolioItems.filter((project) => {
+  const allFilteredProjects = portfolioItems.filter((project) => {
     // Filtrar por categoría
     const categoryMatch = filter === "all" || project.category.toLowerCase().includes(filter.toLowerCase())
 
@@ -167,6 +207,9 @@ export default function PortfolioMasonry() {
 
     return categoryMatch && searchMatch
   })
+
+  // En pantallas grandes mostrar todos, en móviles solo los limitados
+  const filteredProjects = isMobile ? allFilteredProjects.slice(0, projectsToShow) : allFilteredProjects
 
   // Distribuir proyectos en columnas equilibradas
   const distributeProjects = () => {
@@ -204,10 +247,28 @@ export default function PortfolioMasonry() {
     }
   }
 
-  // Manejar clic en proyecto para ir directamente a la web
+  // Manejar clic en proyecto para ir directamente a la web o mostrar progreso
   const handleProjectClick = (e: React.MouseEvent, project: PortfolioItem) => {
     e.stopPropagation()
+
+    // Proyectos en desarrollo
+    if (project.projectUrl === "#") {
+      let progress = 50
+      if (project.title === "LKS Renovatio") progress = 80
+
+      setProgressModal({
+        show: true,
+        project: project,
+        progress: progress,
+      })
+      return
+    }
+
     window.open(project.projectUrl, "_blank", "noopener,noreferrer")
+  }
+
+  const handleShowMore = () => {
+    setProjectsToShow((prev) => prev + 4)
   }
 
   return (
@@ -307,8 +368,24 @@ export default function PortfolioMasonry() {
         ))}
       </div>
 
+      {/* Botón Ver más - Solo en móviles */}
+      {isMobile && projectsToShow < allFilteredProjects.length && !isAnimating && (
+        <div className="mt-12 text-center">
+          <button
+            onClick={handleShowMore}
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-purple-500/20 hover:scale-105"
+          >
+            Mehr anzeigen
+            <ArrowUpRight className="h-4 w-4" />
+          </button>
+          <p className="mt-3 text-sm text-white/60">
+            {allFilteredProjects.length - projectsToShow} weitere Projekte verfügbar
+          </p>
+        </div>
+      )}
+
       {/* Mensaje si no hay resultados */}
-      {filteredProjects.length === 0 && !isAnimating && (
+      {allFilteredProjects.length === 0 && !isAnimating && (
         <div className="mt-12 text-center">
           <p className="text-lg text-white/70">Keine Projekte gefunden. Versuchen Sie es mit anderen Suchkriterien.</p>
         </div>
@@ -400,6 +477,63 @@ export default function PortfolioMasonry() {
                     Web besuchen
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal de progreso */}
+      {progressModal.show && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          onClick={() => setProgressModal({ show: false, project: null, progress: 0 })}
+        >
+          <div
+            className="relative w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-700 shadow-2xl shadow-purple-500/10 p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Botón cerrar */}
+            <button
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 text-white transition-colors hover:bg-zinc-700"
+              onClick={() => setProgressModal({ show: false, project: null, progress: 0 })}
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            {/* Contenido del modal */}
+            <div className="text-center">
+              <div className="mb-4">
+                <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-purple-500/20">
+                  <ProjectIcon type={progressModal.project?.icon || "globe"} />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{progressModal.project?.title}</h3>
+                <p className="text-sm text-white/70 mb-6">Projekt in Entwicklung</p>
+              </div>
+
+              {/* Barra de progreso */}
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-sm text-white/80">Fortschritt</span>
+                  <span className="text-sm font-medium text-purple-300">{progressModal.progress}%</span>
+                </div>
+                <div className="w-full bg-zinc-800 rounded-full h-3">
+                  <div
+                    className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${progressModal.progress}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <p className="text-white/80 text-sm mb-4">
+                  Dieses Projekt befindet sich derzeit in der Entwicklungsphase. Wir arbeiten hart daran, es bald
+                  fertigzustellen.
+                </p>
+                <div className="flex items-center justify-center gap-2 text-xs text-white/60">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+                  <span>In Bearbeitung...</span>
                 </div>
               </div>
             </div>
