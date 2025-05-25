@@ -165,7 +165,7 @@ export default function Component() {
                 <div>
                   <h2 className="text-3xl font-bold mb-4 flex items-center">
                     <Bot className="w-20 h-20 mr-2 text-pink-400" />
-                    ChatGPT mein Co-Pilot ✨
+                    V0 Vercel mein Co-Pilot ✨
                   </h2>
                   <p>
                     Seit einem Jahr nutze ich ChatGPT als meinen Co-Piloten, um die Arbeit zu beschleunigen. Dadurch spare ich enorm viel Zeit. Obwohl man alles immer sorgfältig überwachen muss.

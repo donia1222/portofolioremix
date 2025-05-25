@@ -279,7 +279,7 @@ export default function PortfolioMasonry() {
       {/* Encabezado */}
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
-          Meine Projekte <span className="text-purple-400">2025</span>
+          Projekte <span className="text-purple-400">2025</span>
         </h1>
         <div className="mx-auto mt-3 h-1 w-24 bg-gradient-to-r from-purple-500 to-pink-500"></div>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
