@@ -33,17 +33,6 @@ const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 1,
-    title: "Cantina Tex-Mex",
-    category: "Remix",
-    description:
-      "Ein Restaurant mit einer Pub-Atmosphäre, das ein einzigartiges gastronomisches Erlebnis bietet und Essen mit Unterhaltung kombiniert.",
-    imageUrl: "/IMG_2733.jpeg",
-    icon: "globe",
-    projectUrl: "https://www.cantinatexmex.ch",
-    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
-  },
-    {
-    id: 2,
     title: "Crypto",
     category: "Remix & Web3",
     description:
@@ -53,8 +42,8 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://remix-crypto.vercel.app",
     technologies: ["Remix", "React", "Web3.js", "TailwindCSS"],
   },
-  {
-    id: 3,
+    {
+    id: 2,
     title: "BeautyStyle",
     category: "Remix & Framer Motion",
     description:
@@ -63,6 +52,17 @@ const portfolioItems: PortfolioItem[] = [
     icon: "globe",
     projectUrl: "https://beautystyles.vercel.app",
     technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
+  },
+  {
+    id: 3,
+    title: "Cantina Tex-Mex",
+    category: "Remix",
+    description:
+      "Ein Restaurant mit einer Pub-Atmosphäre, das ein einzigartiges gastronomisches Erlebnis bietet und Essen mit Unterhaltung kombiniert.",
+    imageUrl: "/IMG_2733.jpeg",
+    icon: "globe",
+    projectUrl: "https://www.cantinatexmex.ch",
+    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
   {
     id: 4,
@@ -77,14 +77,15 @@ const portfolioItems: PortfolioItem[] = [
   },
   {
     id: 5,
-    title: "Rrapi Immobilien",
-    category: "HTML",
+    title: "Renovation",
+    category: "Next.js",
     description:
-      "Immobilienagentur, spezialisiert auf exklusive Immobilien mit maßgeschneiderten Dienstleistungen für Käufer und Verkäufer.",
-    imageUrl: "/apart.png",
-    icon: "globe",
-    projectUrl: "https://rrapi.ch",
-    technologies: ["HTML", "CSS", "PHP", "JavaScript"],
+      "Professionelles Renovationsunternehmen spezialisiert auf die Modernisierung von Häusern und Wohnungen. Hochwertige Handwerksarbeit mit innovativen Lösungen für Ihr Zuhause.",
+    imageUrl: "/interior-design-with-photoframes-blue-couch.jpg",
+    icon: "server",
+    projectUrl: "https://renovation-tau.vercel.app", // En proceso - 80%
+    technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
+  
   },
 
   {
@@ -98,6 +99,17 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://www.bouquetmediterraneo.ch",
     technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
+    {
+    id: 9,
+    title: "Rrapi Immobilien",
+    category: "HTML",
+    description:
+      "Immobilienagentur, spezialisiert auf exklusive Immobilien mit maßgeschneiderten Dienstleistungen für Käufer und Verkäufer.",
+    imageUrl: "/apart.png",
+    icon: "globe",
+    projectUrl: "https://rrapi.ch",
+    technologies: ["HTML", "CSS", "PHP", "JavaScript"],
+  },
   {
     id: 7,
     title: "El Español",
@@ -109,17 +121,7 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "#", // En proceso - 50%
     technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
-  {
-    id: 8,
-    title: "LKS Renovatio",
-    category: "Next.js",
-    description:
-      "Professionelles Renovationsunternehmen spezialisiert auf die Modernisierung von Häusern und Wohnungen. Hochwertige Handwerksarbeit mit innovativen Lösungen für Ihr Zuhause.",
-    imageUrl: "http://localhost:5174/programming-background-with-person-working-with-codes-computer.jpg",
-    icon: "server",
-    projectUrl: "#", // En proceso - 80%
-    technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
-  },
+
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
