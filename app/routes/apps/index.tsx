@@ -1,5 +1,4 @@
-import { blogPosts } from "~/data/Apps";
-import { Link } from "@remix-run/react";
+
 import AppBlock from "~/components/AppBlock"; 
 import Header from "~/components/Header";
 import ContactModule from "~/components/Contact/contactModuledos"; 
@@ -9,16 +8,8 @@ import FreelanceAvailability from "~/components/freelance-availability"
 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [lastScrollPosition, setLastScrollPosition] = useState(0);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+
 
   // Efecto para simular el tiempo de carga de 1 segundo
   useEffect(() => {
