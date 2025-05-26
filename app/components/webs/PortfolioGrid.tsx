@@ -40,7 +40,7 @@ const portfolioItems: PortfolioItem[] = [
     imageUrl: "/crypto-abstract-bg.png",
     icon: "crypto",
     projectUrl: "https://remix-crypto.vercel.app",
-    technologies: ["Remix", "React", "Web3.js", "TailwindCSS"],
+    technologies: ["Remix", "React","API",  "Web3.js", "TailwindCSS"],
   },
     {
     id: 2,
@@ -88,6 +88,18 @@ const portfolioItems: PortfolioItem[] = [
   
   },
 
+  {
+    id: 6,
+    title: "Bouquet Mediterraneo",
+    category: "Remix",
+    description:
+      "Professionelles Renovationsunternehmen spezialisiert auf die Modernisierung von Häusern und Wohnungen. Hochwertige Handwerksarbeit mit innovativen Lösungen für Ihr Zuhause.",
+    imageUrl: "/gourmet-food-wine-festival.png",
+    icon: "server",
+    projectUrl: "https://www.bouquetmediterraneo.ch", // En proceso - 80%
+     technologies: ["Remix", "React", "Web3.js", "TailwindCSS"],
+  
+  },
 
     {
     id: 9,
