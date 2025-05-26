@@ -87,18 +87,20 @@ const portfolioItems: PortfolioItem[] = [
     technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
   
   },
-
   {
-    id: 6,
-    title: "Bouquet Mediterraneo",
-    category: "Remix",
+    id: 5,
+    title: "Renovation",
+    category: "Next.js",
     description:
-      "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
-    imageUrl: "/IMG_2734.jpeg",
-    icon: "globe",
-    projectUrl: "https://www.bouquetmediterraneo.ch",
-    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
+      "Professionelles Renovationsunternehmen spezialisiert auf die Modernisierung von Häusern und Wohnungen. Hochwertige Handwerksarbeit mit innovativen Lösungen für Ihr Zuhause.",
+    imageUrl: "/interior-design-with-photoframes-blue-couch.jpg",
+    icon: "server",
+    projectUrl: "https://renovation-tau.vercel.app", // En proceso - 80%
+    technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
+  
   },
+
+
     {
     id: 9,
     title: "Rrapi Immobilien",
@@ -110,18 +112,18 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://rrapi.ch",
     technologies: ["HTML", "CSS", "PHP", "JavaScript"],
   },
+  
   {
-    id: 7,
-    title: "El Español",
+    id: 8,
+    title: "VoiceList",
     category: "Remix",
     description:
-      "Authentisches spanisches Restaurant in der Schweiz. Traditionelle iberische Küche mit modernem Touch und gemütlicher Atmosphäre für ein unvergessliches kulinarisches Erlebnis.",
-    imageUrl: "http://localhost:5174/programming-background-with-person-working-with-codes-computer.jpg",
+      "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
+    imageUrl: "/IMG_3145 2.jpg",
     icon: "globe",
-    projectUrl: "#", // En proceso - 50%
+    projectUrl: "https://www.speak-list.com",
     technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
-
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
