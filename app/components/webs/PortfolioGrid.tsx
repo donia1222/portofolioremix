@@ -87,18 +87,6 @@ const portfolioItems: PortfolioItem[] = [
     technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
   
   },
-  {
-    id: 5,
-    title: "Renovation",
-    category: "Next.js",
-    description:
-      "Professionelles Renovationsunternehmen spezialisiert auf die Modernisierung von Häusern und Wohnungen. Hochwertige Handwerksarbeit mit innovativen Lösungen für Ihr Zuhause.",
-    imageUrl: "/interior-design-with-photoframes-blue-couch.jpg",
-    icon: "server",
-    projectUrl: "https://renovation-tau.vercel.app", // En proceso - 80%
-    technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
-  
-  },
 
 
     {
