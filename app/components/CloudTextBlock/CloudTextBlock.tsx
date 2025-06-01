@@ -165,7 +165,7 @@ const CloudTextBlock: React.FC = () => {
         >
           <div className="text-center">
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent mb-4"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent mb-4 p-4"
               animate={{
                 opacity: [0.8, 1, 0.8],
               }}
