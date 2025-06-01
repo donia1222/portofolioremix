@@ -1,74 +1,195 @@
-// app/components/CloudTextBlock.tsx
+"use client"
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import type React from "react"
+import { motion } from "framer-motion"
 
-const texts = [
-  'Moderne Webseiten',
-  'KI-Lösungen',
-  'App-Entwicklung',
-  'Custom Plugins',
-  'Custom Komponenten',
-];
+const texts = ["Moderne Webseiten", "KI-Lösungen", "App-Entwicklung", "Custom Plugins", "Custom Komponenten"]
 
 const gradients = [
-  'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500',
-  'bg-gradient-to-r from-green-400 via-blue-500 to-purple-500',
-  'bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500',
-  'bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500',
-  'bg-gradient-to-r from-red-400 via-yellow-500 to-pink-500',
-  'bg-gradient-to-r from-green-400 via-teal-500 to-blue-500',
-  'bg-gradient-to-r from-pink-400 via-red-500 to-yellow-500',
-  'bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500',
-  'bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-500',
-  'bg-gradient-to-r from-orange-400 via-red-500 to-yellow-500',
-];
-
-const calculatePosition = (index: number, total: number, radius: number) => {
-  const angle = (2 * Math.PI / total) * index - Math.PI / 2;
-  const x = 50 + radius * Math.cos(angle);
-  const y = 50 + radius * Math.sin(angle);
-  return { top: `${y}%`, left: `${x}%` };
-};
+  "from-violet-400 via-purple-500 to-transparent",
+  "from-emerald-400 via-cyan-500 to-transparent",
+  "from-amber-400 via-orange-500 to-transparent",
+  "from-sky-400 via-blue-500 to-transparent",
+  "from-rose-400 via-pink-500 to-transparent",
+]
 
 const CloudTextBlock: React.FC = () => {
-  const totalTexts = texts.length;
-  const radius = 40;
-
   return (
-    <div className="flex items-center justify-center py-20 mr-48 mt-20">
-      <div className="relative w-96 h-96 md:w-[500px] md:h-[500px]">
+    <div className="relative w-full h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+      {/* Starfield background */}
+      <div className="absolute inset-0">
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-white rounded-full opacity-60"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              opacity: [0.3, 1, 0.3],
+              scale: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "reverse",
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Comet texts */}
+      <div className="relative w-full h-full flex flex-col justify-center items-center">
         {texts.map((text, index) => {
-          const position = calculatePosition(index, totalTexts, radius);
+          // Alternar direcciones: algunos de izquierda a derecha, otros de derecha a izquierda
+          const isLeftToRight = index % 2 === 0
+
+          const startPositions = isLeftToRight
+            ? [
+                { x: "-30%", y: "15%" },
+                { x: "-25%", y: "35%" },
+                { x: "-35%", y: "65%" },
+              ]
+            : [
+                { x: "130%", y: "25%" },
+                { x: "125%", y: "55%" },
+              ]
+
+          const endPositions = isLeftToRight
+            ? [
+                { x: "130%", y: "5%" },
+                { x: "125%", y: "25%" },
+                { x: "135%", y: "55%" },
+              ]
+            : [
+                { x: "-30%", y: "15%" },
+                { x: "-35%", y: "45%" },
+              ]
+
+          const currentStart = isLeftToRight
+            ? startPositions[Math.floor(index / 2)]
+            : startPositions[Math.floor((index - 1) / 2)]
+
+          const currentEnd = isLeftToRight
+            ? endPositions[Math.floor(index / 2)]
+            : endPositions[Math.floor((index - 1) / 2)]
+
           return (
-            <motion.span
+            <motion.div
               key={index}
-              className={`absolute text-3xl md:text-5xl font-bold text-transparent ${gradients[index % gradients.length]} bg-clip-text`}
+              className="absolute"
               style={{
-                top: position.top,
-                left: position.left,
-                transform: 'translate(-50%, -50%)',
-                opacity: 0, // Oculto inicialmente
+                left: currentStart.x,
+                top: currentStart.y,
               }}
               animate={{
-                y: [0, -10, 0],
-                x: [0, 10, 0],
-                opacity: [0, 1, 0], // Aparición progresiva con animación
+                x: [0, `calc(${currentEnd.x} - ${currentStart.x})`],
+                y: [0, `calc(${currentEnd.y} - ${currentStart.y})`],
               }}
               transition={{
-                duration: 4,
-                repeat: Infinity,
-                delay: index * 0.5,
-                ease: 'easeInOut',
+                duration: 3 + index * 0.1,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "loop",
+                delay: index * 0.4,
+                ease: "linear",
               }}
             >
-              {text}
-            </motion.span>
-          );
+              {/* Comet tail */}
+              <motion.div
+                className={`absolute w-96 h-2 bg-gradient-to-r ${gradients[index]} blur-sm opacity-70`}
+                style={{
+                  transform: isLeftToRight ? "rotate(-15deg)" : "rotate(15deg)",
+                  transformOrigin: isLeftToRight ? "left center" : "right center",
+                }}
+                animate={{
+                  scaleX: [0, 1, 0.8, 0],
+                  opacity: [0, 0.8, 0.6, 0],
+                }}
+                transition={{
+                  duration: 3 + index * 0.1,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "loop",
+                  delay: index * 0.4,
+                  ease: "linear",
+                }}
+              />
+
+              {/* Comet head (text) */}
+              <motion.span
+                className={`relative z-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r ${gradients[index].replace("to-transparent", "to-white")} bg-clip-text text-transparent drop-shadow-2xl`}
+                style={{
+                  filter: "drop-shadow(0 0 10px rgba(255,255,255,0.5))",
+                }}
+                animate={{
+                  opacity: [0, 1, 1, 0],
+                  scale: [0.8, 1.1, 1, 0.9],
+                }}
+                transition={{
+                  duration: 3 + index * 0.1,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "loop",
+                  delay: index * 0.4,
+                  ease: "easeInOut",
+                }}
+              >
+                {text}
+              </motion.span>
+
+              {/* Glow effect */}
+              <motion.div
+                className={`absolute -inset-4 bg-gradient-to-r ${gradients[index]} rounded-full blur-xl opacity-30 -z-10`}
+                animate={{
+                  scale: [0.5, 1.5, 1.2, 0.8],
+                  opacity: [0, 0.4, 0.3, 0],
+                }}
+                transition={{
+                  duration: 3 + index * 0.1,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "loop",
+                  delay: index * 0.4,
+                  ease: "linear",
+                }}
+              />
+            </motion.div>
+          )
         })}
+
+        {/* Central title */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center z-20"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="text-center">
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent mb-4"
+              animate={{
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+              }}
+            >
+              Digitale Innovation
+            </motion.h1>
+            <motion.p
+              className="text-lg sm:text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+            >
+              Moderne Lösungen für die digitale Zukunft
+            </motion.p>
+          </div>
+        </motion.div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CloudTextBlock;
+export default CloudTextBlock
