@@ -67,7 +67,7 @@ export default function Index() {
       <CookieBanner />
 
       {/* Navegación */}
-      <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-20">
+      <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-120">
         <Header />
 
       </nav>
