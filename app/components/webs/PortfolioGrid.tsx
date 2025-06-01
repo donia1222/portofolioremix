@@ -150,6 +150,17 @@ const portfolioItems: PortfolioItem[] = [
     technologies: ["Next.js", "React", "TailwindCSS"],
   },
 
+      {
+    id: 12,
+    title: "React Components",
+   category: "Remix",
+    description:
+      "Modern components for your React projects",
+    imageUrl: "/programming-background-with-person-working-with-codes-computer.jpg",
+    icon: "globe",
+    projectUrl: "https://animated-text-components-for-remix.vercel.app",
+    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
+  },
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
