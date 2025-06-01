@@ -124,6 +124,17 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://www.speak-list.com",
     technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
   },
+    {
+    id: 10,
+    title: "FoodScan AI",
+   category: "Next.js",
+    description:
+      "Transform Your Fridge into Recipes!",
+    imageUrl: "/2149255915.jpg",
+    icon: "globe",
+    projectUrl: "https://www.foodscan-ai.com",
+    technologies: ["Next.js", "React", "TailwindCSS"],
+  },
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
