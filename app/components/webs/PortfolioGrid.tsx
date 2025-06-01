@@ -19,18 +19,18 @@ interface PortfolioItem {
 
 // Datos de proyectos
 const portfolioItems: PortfolioItem[] = [
-  {
-    id: 0,
-    title: "Ushuaia Bar & Lounge",
-    category: "Next.js",
+      {
+    id: 2,
+    title: "BeautyStyle",
+    category: "Remix & Framer Motion",
     description:
-      "Premium Cocktail, Hookah & Terrace in Buchs. Eine luxuriöse Bar-Lounge mit einzigartiger Atmosphäre, modernem Design und erstklassigem Service.",
-    imageUrl:
-      "/abstract-smoke.png",
-    icon: "server",
-    projectUrl: "https://ushuaia.vercel.app",
-    technologies: ["Next.js", "React", "Framer Motion", "TailwindCSS"],
+      "Moderner Friseursalon mit personalisierten Schönheitsdienstleistungen und interaktiven Animationen für ein einzigartiges Kundenerlebnis.",
+    imageUrl: "/woman-getting-her-hair-cut-beauty-salon_23-2149167399.jpg",
+    icon: "globe",
+    projectUrl: "https://beautystyles.vercel.app",
+    technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
   },
+
   {
     id: 1,
     title: "Crypto",
@@ -42,17 +42,31 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://remix-crypto.vercel.app",
     technologies: ["Remix", "React","API",  "Web3.js", "TailwindCSS"],
   },
-    {
-    id: 2,
-    title: "BeautyStyle",
-    category: "Remix & Framer Motion",
+  
+      {
+    id: 11,
+    title: "WebM, WebP Converter",
+   category: "Next.js",
     description:
-      "Moderner Friseursalon mit personalisierten Schönheitsdienstleistungen und interaktiven Animationen für ein einzigartiges Kundenerlebnis.",
-    imageUrl: "/woman-getting-her-hair-cut-beauty-salon_23-2149167399.jpg",
+      "Convert your videos to WebM format for better web performance",
+    imageUrl: "/20945639.jpg",
     icon: "globe",
-    projectUrl: "https://beautystyles.vercel.app",
-    technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
+    projectUrl: "https://web-m-video-converter.vercel.app",
+    technologies: ["Next.js", "React", "TailwindCSS"],
   },
+    {
+    id: 0,
+    title: "Ushuaia Bar & Lounge",
+    category: "Next.js",
+    description:
+      "Premium Cocktail, Hookah & Terrace in Buchs. Eine luxuriöse Bar-Lounge mit einzigartiger Atmosphäre, modernem Design und erstklassigem Service.",
+    imageUrl:
+      "/abstract-smoke.png",
+    icon: "server",
+    projectUrl: "https://ushuaia.vercel.app",
+    technologies: ["Next.js", "React", "Framer Motion", "TailwindCSS"],
+  },
+
   {
     id: 3,
     title: "Cantina Tex-Mex",
@@ -135,6 +149,7 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://www.foodscan-ai.com",
     technologies: ["Next.js", "React", "TailwindCSS"],
   },
+
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
