@@ -38,7 +38,7 @@ export default function DeliverBlock() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-12 sm:py-20">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         {[...Array(20)].map((_, i) => (
@@ -65,11 +65,11 @@ export default function DeliverBlock() {
       </div>
 
       {/* Main content container */}
-      <div className="max-w-7xl mx-auto px-6 relative z-10" onMouseMove={handleMouseMove}>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-6 relative z-10" onMouseMove={handleMouseMove}>
+        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-16 items-center">
           {/* Text content with enhanced animations */}
           <motion.div
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8 px-4 sm:px-0"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -86,7 +86,7 @@ export default function DeliverBlock() {
             {/* Main title with gradient and animations */}
             <div className="space-y-4">
               <motion.h2
-                className="text-5xl lg:text-7xl font-bold leading-tight"
+                className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -116,7 +116,7 @@ export default function DeliverBlock() {
 
             {/* Description with typewriter effect */}
             <motion.p
-              className="text-lg text-blue-200/80 leading-relaxed max-w-xl"
+              className="text-base sm:text-lg text-blue-200/80 leading-relaxed max-w-xl pr-4 sm:pr-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -126,7 +126,7 @@ export default function DeliverBlock() {
             </motion.p>
 
             {/* Interactive stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8">
               {[
                 { number: "100+", label: "Projekte" },
                 { number: "99%", label: "Zufriedenheit" },
@@ -149,7 +149,7 @@ export default function DeliverBlock() {
 
           {/* Enhanced image section */}
           <motion.div
-            className="relative"
+            className="relative px-4 sm:px-8 lg:px-0 mt-12 lg:mt-0"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -173,7 +173,7 @@ export default function DeliverBlock() {
             />
 
             {/* Main image container with 3D effect */}
-            <div className="relative w-96 h-96 mx-auto">
+            <div className="relative w-80 h-80 sm:w-96 sm:h-96 mx-auto">
               {/* Glowing border */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 rounded-2xl opacity-50 blur-lg"
