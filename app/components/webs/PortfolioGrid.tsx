@@ -63,7 +63,7 @@ const portfolioItems: PortfolioItem[] = [
     imageUrl:
       "/abstract-smoke.png",
     icon: "server",
-    projectUrl: "https://ushuaia.vercel.app",
+    projectUrl: "https://www.ushuaia-bar.ch",
     technologies: ["Next.js", "React", "Framer Motion", "TailwindCSS"],
   },
 
