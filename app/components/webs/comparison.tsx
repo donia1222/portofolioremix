@@ -98,10 +98,10 @@ export default function Comparison() {
   return (
     <section className="relative overflow-hidden py-16 mt-20">
       {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 z-0"></div>
+      <div className="absolute inset-0 z-0"></div>
 
       {/* Animated background elements */}
-      <div className="absolute inset-0 z-0 opacity-30">
+      <div className="absolute inset-0 z-0">
         <motion.div
           className="absolute top-20 right-10 w-72 h-72 rounded-full bg-violet-600 filter blur-[100px]"
           animate={{

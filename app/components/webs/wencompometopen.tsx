@@ -80,7 +80,7 @@ export default function FreelancerShowcase() {
   }, []);
 
   return (
-    <section className="w-full text-center  relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 mt-20">
+    <section className="w-full text-center  relative overflow-hidden mt-20">
       <div className="container mx-auto px-4 py-10 pb-10 relative mt-8">
         <h2 className="text-4xl md:text-6xl text-white max-w-4xl mx-auto mb-5 animate-fade-in-up">
           Moderne, ansprechende <br />
