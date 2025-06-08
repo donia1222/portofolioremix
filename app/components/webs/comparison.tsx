@@ -103,7 +103,7 @@ export default function Comparison() {
       {/* Animated background elements */}
       <div className="absolute inset-0 z-0">
         <motion.div
-          className="absolute top-20 right-10 w-72 h-72 rounded-full bg-violet-600 filter blur-[100px]"
+          className="absolute top-20 right-10 w-72 h-72 rounded-full "
           animate={{
             x: [0, -50, 0],
             y: [0, 30, 0],
@@ -114,18 +114,7 @@ export default function Comparison() {
             ease: "easeInOut",
           }}
         />
-        <motion.div
-          className="absolute bottom-20 left-10 w-72 h-72 rounded-full bg-blue-600 filter blur-[100px]"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            repeat: Number.POSITIVE_INFINITY,
-            duration: 18,
-            ease: "easeInOut",
-          }}
-        />
+     
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
