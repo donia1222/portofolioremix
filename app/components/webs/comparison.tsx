@@ -132,60 +132,7 @@ export default function Comparison() {
         {/* Animated title */}
    
 
-        {/* Mobile legend - visible only on small screens */}
-        <div className="md:hidden mb-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col gap-2 bg-gray-800/50 backdrop-blur-lg rounded-xl p-4 border border-gray-700 shadow-lg"
-          >
-            <div className="grid grid-cols-2 gap-2">
-              <div className="flex items-center gap-2 bg-amber-900/50 px-3 py-3 rounded-lg border-l-4 border-amber-600">
-                <div className="w-5 h-5 rounded-full bg-amber-700 flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-amber-300"
-                  >
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                    <path d="M2 17l10 5 10-5"></path>
-                    <path d="M2 12l10 5 10-5"></path>
-                  </svg>
-                </div>
-                <span className="text-amber-300 font-medium">CMS</span>
-              </div>
-              <div className="flex items-center gap-2 bg-violet-900/50 px-3 py-3 rounded-lg border-l-4 border-violet-600">
-                <div className="w-5 h-5 rounded-full bg-violet-700 flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="text-violet-300"
-                  >
-                    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                  </svg>
-                </div>
-                <span className="text-violet-300 font-medium">Frameworks</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
+      
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
