@@ -81,31 +81,12 @@ export default function FreelancerShowcase() {
 
   return (
     <section className="w-full text-center  relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 mt-20">
-      <div className="container mx-auto px-4 py-10 pb-20 relative">
+      <div className="container mx-auto px-4 py-10 pb-10 relative mt-8">
         <h2 className="text-4xl md:text-6xl text-white max-w-4xl mx-auto mb-5 animate-fade-in-up">
           Moderne, ansprechende <br />
           und einzigartige <span className="text-pink-400 animate-pulse">{typedText}</span>
         </h2>
-        <p className="text-lg text-blue-200 max-w-2xl mx-auto p-8 animate-fade-in mb-10">
-          Als Freelancer biete ich maßgeschneiderte Webseiten mit den neuesten Technologien wie Joomla 5, Astro, Next.js, Remix.. Meine individuellen Lösungen sind perfekt auf Ihre Bedürfnisse zugeschnitten.
-        </p>
 
-        <div className="flex justify-center" ref={numbersRef}>
-          <div className="bg-gray-800 bg-opacity-80 p-8 rounded-lg shadow-2xl text-left transform transition-all duration-500 hover:scale-105">
-            <div className="flex items-center justify-between mb-4 animate-slide-in-left">
-              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="42">0</p>
-              <p className="text-blue-200 ml-4">Webseiten mit Joomla</p>
-            </div>
-            <div className="flex items-center justify-between mb-4 animate-slide-in-left" style={{animationDelay: '0.2s'}}>
-              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="19">0</p>
-              <p className="text-blue-200 ml-4">Webseiten mit React</p>
-            </div>
-            <div className="flex items-center justify-between animate-slide-in-left" style={{animationDelay: '0.4s'}}>
-              <p className="text-4xl font-bold text-blue-400 number mr-4" data-value="5">0</p>
-              <p className="text-blue-200 ml-4">Native Apps</p>
-            </div>
-          </div>
-        </div>
 
 
       </div>

@@ -211,7 +211,7 @@ export default function Comparison() {
                 <path d="M2 12l10 5 10-5"></path>
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-white">Meine Präferenz</h2>
+            <h2 className="text-xl font-bold text-white">CMSs vs Frameworks</h2>
           </div>
           <p className="text-gray-300 text-lg">
             Als Freelancer bevorzuge ich die Arbeit mit modernen Frameworks wie Remix, Next.js und React. Diese bieten
