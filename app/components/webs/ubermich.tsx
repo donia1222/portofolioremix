@@ -1,8 +1,6 @@
 "use client"
-
-import type React from "react"
 import { useState, useEffect, useRef } from "react"
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { Smartphone, Globe, Bot, Rocket, Mail, Phone, MapPin, Github, Linkedin, Twitter } from "lucide-react"
 
 const services = [
@@ -13,7 +11,7 @@ const services = [
     icon: Smartphone,
     gradient: "from-blue-400 via-purple-500 to-pink-500",
     description: "Entwicklung nativer und plattformübergreifender mobiler Anwendungen mit modernsten Technologien.",
-    features: ["React Native", "Flutter", "Swift", "Kotlin"],
+    features: ["React Native", "Xcode", ],
   },
   {
     id: "web",
@@ -22,7 +20,7 @@ const services = [
     icon: Globe,
     gradient: "from-green-400 via-blue-500 to-purple-600",
     description: "Responsive Webseiten und Web-Apps mit optimaler Performance und SEO.",
-    features: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    features: ["Next.js", "React", "TypeScript", ],
   },
   {
     id: "ai",
@@ -31,7 +29,7 @@ const services = [
     icon: Bot,
     gradient: "from-orange-400 via-red-500 to-pink-600",
     description: "Integration von KI-Technologien zur Automatisierung und Verbesserung von Geschäftsprozessen.",
-    features: ["OpenAI API", "Machine Learning", "Automation", "Chatbots"],
+    features: ["OpenAI API", "Automation", "Chatbots"],
   },
   {
     id: "consulting",
@@ -40,7 +38,7 @@ const services = [
     icon: Rocket,
     gradient: "from-purple-400 via-pink-500 to-red-500",
     description: "Strategische Beratung für digitale Transformation und Technologie-Implementierung.",
-    features: ["Architecture", "Strategy", "Optimization", "Scaling"],
+    features: ["Architecture", "Optimization", "Scaling"],
   },
 ]
 
@@ -72,89 +70,75 @@ const Particle = ({ index }: { index: number }) => {
 
 const ServiceCard = ({ service, index }: { service: (typeof services)[0]; index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  const rotateX = useSpring(useTransform(mouseY, [-300, 300], [15, -15]))
-  const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-15, 15]))
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    mouseX.set(e.clientX - centerX)
-    mouseY.set(e.clientY - centerY)
-  }
 
   return (
     <motion.div
       className="relative group cursor-pointer"
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1, duration: 0.6 }}
-      onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
     >
       <motion.div
-        className="relative h-80 rounded-3xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl"
-        whileHover={{ scale: 1.05, z: 50 }}
+        className="relative h-64 rounded-2xl overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300"
+        whileHover={{ scale: 1.02, y: -5 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         {/* Gradient Background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-20`} />
-
-        {/* Animated Gradient Overlay */}
         <motion.div
-          className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0`}
-          animate={{ opacity: isHovered ? 0.3 : 0 }}
+          className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-10`}
+          animate={{ opacity: isHovered ? 0.2 : 0.1 }}
           transition={{ duration: 0.3 }}
         />
 
         {/* Content */}
-        <div className="relative z-10 p-8 h-full flex flex-col justify-between">
-          <div>
+        <div className="relative z-10 p-6 h-full flex flex-col">
+          <div className="flex items-center mb-4">
             <motion.div
-              className="mb-6"
+              className="mr-4"
               animate={{ scale: isHovered ? 1.1 : 1 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              <service.icon className="w-12 h-12 text-white mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-2">{service.title}</h3>
-              <p className="text-white/80 text-sm">{service.subtitle}</p>
+              <service.icon className="w-8 h-8 text-white" />
             </motion.div>
-
-            <motion.p
-              className="text-white/90 text-sm leading-relaxed mb-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isHovered ? 1 : 0.7 }}
-              transition={{ duration: 0.3 }}
-            >
-              {service.description}
-            </motion.p>
+            <div>
+              <h3 className="text-lg font-bold text-white">{service.title}</h3>
+              <p className="text-white/70 text-sm">{service.subtitle}</p>
+            </div>
           </div>
 
+          <p className="text-white/80 text-sm leading-relaxed mb-4 flex-grow">{service.description}</p>
+
           <motion.div
-            className="space-y-2"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+            className="space-y-1"
+            initial={{ opacity: 0.7 }}
+            animate={{ opacity: isHovered ? 1 : 0.7 }}
             transition={{ duration: 0.3 }}
           >
-       
+            <div className="flex flex-wrap gap-2">
+              {service.features.map((feature, idx) => (
+                <motion.span
+                  key={feature}
+                  className="px-2 py-1 bg-white/10 rounded-full text-white/90 text-xs border border-white/20"
+                  initial={{ scale: 0.9, opacity: 0.8 }}
+                  animate={{ scale: isHovered ? 1 : 0.9, opacity: isHovered ? 1 : 0.8 }}
+                  transition={{ delay: idx * 0.05, duration: 0.2 }}
+                >
+                  {feature}
+                </motion.span>
+              ))}
+            </div>
           </motion.div>
         </div>
 
-        {/* Shine Effect */}
+        {/* Hover Border Effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
-          initial={{ x: "-100%" }}
-          animate={{ x: isHovered ? "100%" : "-100%" }}
-          transition={{ duration: 0.6 }}
+          className="absolute inset-0 rounded-2xl border-2 border-transparent"
+          animate={{
+            borderColor: isHovered ? "rgba(255, 255, 255, 0.3)" : "rgba(255, 255, 255, 0.1)",
+          }}
+          transition={{ duration: 0.3 }}
         />
       </motion.div>
     </motion.div>
@@ -199,7 +183,7 @@ export default function Component() {
 
       {/* Mouse Follower */}
       <motion.div
-        className="fixed w-96 h-96 rounded-full bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 pointer-events-none z-0 blur-3xl"
+        className="fixed w-96 h-96 rounded-full bg-gradient-to-r from-blue-400/10 via-purple-500/10 to-pink-500/10 pointer-events-none z-0 blur-3xl"
         animate={{
           x: mousePosition.x - 192,
           y: mousePosition.y - 192,
@@ -211,7 +195,7 @@ export default function Component() {
       <div className="relative z-10">
         {/* Hero Section */}
         <motion.div
-          className="container mx-auto px-6 pt-20 pb-16 text-center"
+          className="container mx-auto px-6 pt-16 pb-12 text-center"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -225,12 +209,12 @@ export default function Component() {
             <img
               src="/yo2.png"
               alt="Roberto Salvador"
-              className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white/20 shadow-2xl mt-20"
+              className="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-white/20 shadow-2xl mt-20"
             />
           </motion.div>
 
           <motion.h1
-            className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent mb-6"
+            className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent mb-6 "
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
@@ -239,7 +223,7 @@ export default function Component() {
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-1xl text-white/80 mb-8 max-w-3xl mx-auto"
+            className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
@@ -269,15 +253,16 @@ export default function Component() {
 
         {/* Services Grid */}
         <div className="container mx-auto px-6 py-16">
- 
+   
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
               <ServiceCard key={service.id} service={service} index={index} />
             ))}
           </div>
         </div>
 
+  
       </div>
     </div>
   )
