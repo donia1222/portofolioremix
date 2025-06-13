@@ -1,0 +1,22 @@
+/* Ensure the body has a dark background from the start */
+body {
+  background-color: #0f172a; /* slate-900 */
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide content until JS loads */
+.js-loading .app-content {
+  opacity: 0;
+}
+
+/* Show loader immediately */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #0f172a, #1e293b, #0f172a);
+}

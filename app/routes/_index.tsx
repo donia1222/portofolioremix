@@ -15,6 +15,20 @@ import CloudTextAnime from "~/components/CloudTextBlock/AnimateTexVida"
 import ScrollToTop from "~/components/scroll-to-top"
 import FreelanceAvailability from "../components/freelance-availability"
 import CommunityTemplate from "~/components/Community/CommunityTemplate"
+import type { MetaFunction } from "@remix-run/node"
+import LoadingScreen from "~/components/LoadingScreen"
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Lweb Schweiz" },
+    { name: "description", content: "Moderne Lösungen für die digitale Zukunft" },
+    { name: "theme-color", content: "#000000" },
+    {
+      name: "keywords",
+      content: "Moderne Webssiten, App-Entwicklung st gallen, App-Entwicklung zurich, App-Entwicklung st gallen",
+    },
+  ]
+}
 
 export const links: LinksFunction = () => {
   return [
@@ -72,78 +86,83 @@ export default function Index() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-auto">
-      {/* Starfield Background */}
-      <div className="fixed inset-0 z-0">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              opacity: star.opacity,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-            }}
-          />
-        ))}
+    <>
+      {/* Loading Screen */}
+      <LoadingScreen minDuration={500} />
+
+      <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-auto">
+        {/* Starfield Background */}
+        <div className="fixed inset-0 z-0">
+          {stars.map((star) => (
+            <div
+              key={star.id}
+              className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+              style={{
+                left: `${star.x}%`,
+                top: `${star.y}%`,
+                opacity: star.opacity,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 3}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Dark overlay for better content visibility */}
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-1" />
+
+        {/* Banner de Cookies */}
+        <div className="relative z-50">
+          <CookieBanner />
+        </div>
+
+        {/* Navegación */}
+        <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-50">
+          <Header />
+        </nav>
+
+        {/* Main Content */}
+        <div className="relative z-10">
+          <CloudTextBlock5 />
+
+          {/* Bloques de Contenido con Animaciones AOS */}
+          <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
+            <DeliverBlock />
+          </div>
+
+          <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
+            <CorePrinciplesBlock />
+          </div>
+
+          <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
+            <CommunityTemplate />
+          </div>
+
+          <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+            <CloudTextAnime />
+          </div>
+
+          <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
+            <OpenSourceBlock />
+          </div>
+
+          <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
+            <TechnologyCarousel />
+          </div>
+
+          <FreelanceAvailability />
+
+          <div id="contactModule2" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+            <ContactModule />
+          </div>
+
+          <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
+            <Chat />
+          </div>
+
+          <ScrollToTop />
+        </div>
       </div>
-
-      {/* Dark overlay for better content visibility */}
-      <div className="fixed inset-0 bg-black bg-opacity-40 z-1" />
-
-      {/* Banner de Cookies */}
-      <div className="relative z-50">
-        <CookieBanner />
-      </div>
-
-      {/* Navegación */}
-      <nav className="absolute top-0 left-0 right-0 flex justify-center items-center p-8 z-50">
-        <Header />
-      </nav>
-
-      {/* Main Content */}
-      <div className="relative z-10">
-        <CloudTextBlock5 />
-
-        {/* Bloques de Contenido con Animaciones AOS */}
-        <div id="deliverBlock" className="w-full relative" data-aos="fade-up">
-          <DeliverBlock />
-        </div>
-
-        <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
-          <CorePrinciplesBlock />
-        </div>
-
-        <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
-          <CommunityTemplate />
-        </div>
-
-        <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-          <CloudTextAnime />
-        </div>
-
-        <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
-          <OpenSourceBlock />
-        </div>
-
-        <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
-          <TechnologyCarousel />
-        </div>
-
-        <FreelanceAvailability />
-
-        <div id="contactModule2" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-          <ContactModule />
-        </div>
-
-        <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-          <Chat />
-        </div>
-
-        <ScrollToTop />
-      </div>
-    </div>
+    </>
   )
 }
