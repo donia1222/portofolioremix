@@ -1,27 +1,48 @@
 "use client"
 
-import type { MetaFunction } from "@remix-run/node"
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-
-export const meta: MetaFunction = () => {
-  return [
-    { title: "CMS vs Modern Frameworks Comparison" },
-    {
-      name: "description",
-      content: "A comparison between WordPress and modern frameworks like React, Remix, and Next.js",
-    },
-  ]
-}
+import { useRef, useState, useEffect } from "react"
+import gsap from "gsap"
 
 export default function Comparison() {
   const [activeTab, setActiveTab] = useState("comparison")
   const [mounted, setMounted] = useState(false)
+
   const titleRef = useRef<HTMLHeadingElement>(null)
   const titleRef2 = useRef<HTMLHeadingElement>(null)
+  const backgroundBlobRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const tabsRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
+  // Initialize animations when component mounts
   useEffect(() => {
     setMounted(true)
+
+    // Animate the background blob
+    if (backgroundBlobRef.current) {
+      gsap.to(backgroundBlobRef.current, {
+        x: -50,
+        y: 30,
+        duration: 7.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+      })
+    }
+
+    // Animate the card entrance
+    if (cardRef.current) {
+      gsap.fromTo(cardRef.current, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" })
+    }
+
+    // Animate the tabs entrance
+    if (tabsRef.current) {
+      gsap.fromTo(
+        tabsRef.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" },
+      )
+    }
 
     // Initialize the title animation for first part
     if (titleRef.current) {
@@ -49,8 +70,21 @@ export default function Comparison() {
           const charSpan = document.createElement("span")
           charSpan.className = "animated-char cms-char"
           charSpan.textContent = char
-          charSpan.style.animationDelay = `${i * 0.05}s`
+
+          // Use GSAP for character animation instead of CSS delays
           wrapper.appendChild(charSpan)
+
+          gsap.fromTo(
+            charSpan,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              delay: i * 0.05,
+              ease: "power2.out",
+            },
+          )
         }
       })
     }
@@ -81,19 +115,65 @@ export default function Comparison() {
           const qSpan = document.createElement("span")
           qSpan.className = "animated-char question-mark"
           qSpan.textContent = "?"
-          qSpan.style.animationDelay = `${i * 0.05}s`
           wrapper.appendChild(qSpan)
+
+          gsap.fromTo(
+            qSpan,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              delay: i * 0.05,
+              ease: "power2.out",
+            },
+          )
         } else {
           // For other characters, create animated spans
           const charSpan = document.createElement("span")
           charSpan.className = "animated-char framework-char"
           charSpan.textContent = char
-          charSpan.style.animationDelay = `${i * 0.05}s`
           wrapper.appendChild(charSpan)
+
+          gsap.fromTo(
+            charSpan,
+            { opacity: 0, y: 20 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.5,
+              delay: i * 0.05,
+              ease: "power2.out",
+            },
+          )
         }
       })
     }
+
+    // Cleanup function
+    return () => {
+      gsap.killTweensOf(backgroundBlobRef.current)
+    }
   }, [])
+
+  // Handle tab switching with GSAP animations
+  const switchTab = (tab: string) => {
+    if (tab === activeTab) return
+
+    // Animate out current content
+    gsap.to(contentRef.current, {
+      opacity: 0,
+      y: -20,
+      duration: 0.3,
+      ease: "power2.in",
+      onComplete: () => {
+        setActiveTab(tab)
+
+        // Animate in new content
+        gsap.fromTo(contentRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" })
+      },
+    })
+  }
 
   return (
     <section className="relative overflow-hidden py-16 mt-20">
@@ -102,30 +182,13 @@ export default function Comparison() {
 
       {/* Animated background elements */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute top-20 right-10 w-72 h-72 rounded-full "
-          animate={{
-            x: [0, -50, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            repeat: Number.POSITIVE_INFINITY,
-            duration: 15,
-            ease: "easeInOut",
-          }}
-        />
-     
+        <div ref={backgroundBlobRef} className="absolute top-20 right-10 w-72 h-72 rounded-full" />
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Animated title */}
-   
-
-      
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        {/* Animated card */}
+        <div
+          ref={cardRef}
           className="bg-gray-800/50 backdrop-blur-lg p-6 rounded-xl mb-10 border border-gray-700 shadow-xl"
         >
           <div className="flex items-center gap-4 mb-4">
@@ -154,13 +217,11 @@ export default function Comparison() {
             mir die Flexibilität, Geschwindigkeit und Kontrolle, die ich für maßgeschneiderte, leistungsstarke
             Webanwendungen benötige.
           </p>
-        </motion.div>
+        </div>
 
         <div className="flex justify-center mb-8">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+          <div
+            ref={tabsRef}
             className="inline-flex rounded-md shadow-lg bg-gray-800/50 backdrop-blur-lg p-1 border border-gray-700"
             role="group"
           >
@@ -171,7 +232,7 @@ export default function Comparison() {
                   ? "bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg"
                   : "bg-transparent text-gray-300 hover:bg-gray-700/50"
               }`}
-              onClick={() => setActiveTab("comparison")}
+              onClick={() => switchTab("comparison")}
             >
               Vergleich
             </button>
@@ -182,42 +243,47 @@ export default function Comparison() {
                   ? "bg-gradient-to-r from-violet-600 to-blue-600 text-white shadow-lg"
                   : "bg-transparent text-gray-300 hover:bg-gray-700/50"
               }`}
-              onClick={() => setActiveTab("recommendation")}
+              onClick={() => switchTab("recommendation")}
             >
               Was ist besser?
             </button>
-          </motion.div>
+          </div>
         </div>
 
-        <AnimatePresence mode="wait">
-          {activeTab === "comparison" ? (
-            <motion.div
-              key="comparison"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <ComparisonTable />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="recommendation"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <RecommendationSection />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div ref={contentRef}>{activeTab === "comparison" ? <ComparisonTable /> : <RecommendationSection />}</div>
       </div>
     </section>
   )
 }
 
 function ComparisonTable() {
+  const tableRef = useRef<HTMLDivElement>(null)
+  const rowRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    // Animate the table entrance
+    if (tableRef.current) {
+      gsap.fromTo(tableRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" })
+    }
+
+    // Animate each row with staggered entrance
+    rowRefs.current.forEach((row, index) => {
+      if (row) {
+        gsap.fromTo(
+          row,
+          { opacity: 0, y: 10 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.3,
+            delay: index * 0.1,
+            ease: "power2.out",
+          },
+        )
+      }
+    })
+  }, [])
+
   const comparisonData = [
     {
       aspect: "Basistechnologie",
@@ -271,10 +337,8 @@ function ComparisonTable() {
   ]
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+    <div
+      ref={tableRef}
       className="overflow-hidden rounded-xl shadow-xl bg-gray-800/50 backdrop-blur-lg border border-gray-700"
     >
       {/* Header for mobile - will be hidden on desktop */}
@@ -289,11 +353,7 @@ function ComparisonTable() {
         </div>
         <div className="bg-amber-900/30 p-6">
           <div className="flex items-center gap-3">
-            <motion.div
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 3 }}
-              className="w-10 h-10 rounded-full bg-amber-800 flex items-center justify-center"
-            >
+            <div className="w-10 h-10 rounded-full bg-amber-800 flex items-center justify-center cms-icon-pulse">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -310,17 +370,13 @@ function ComparisonTable() {
                 <path d="M2 17l10 5 10-5"></path>
                 <path d="M2 12l10 5 10-5"></path>
               </svg>
-            </motion.div>
+            </div>
             <h3 className="text-lg font-semibold text-amber-400">WordPress / CMSs</h3>
           </div>
         </div>
         <div className="bg-violet-900/30 p-6">
           <div className="flex items-center gap-3">
-            <motion.div
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 3 }}
-              className="w-10 h-10 rounded-full bg-violet-800 flex items-center justify-center"
-            >
+            <div className="w-10 h-10 rounded-full bg-violet-800 flex items-center justify-center framework-icon-pulse">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -339,18 +395,16 @@ function ComparisonTable() {
                 <path d="M8 18v-1"></path>
                 <path d="M16 18v-3"></path>
               </svg>
-            </motion.div>
+            </div>
             <h3 className="text-lg font-semibold text-violet-400">React, Remix, Next.js</h3>
           </div>
         </div>
       </div>
 
       {comparisonData.map((item, index) => (
-        <motion.div
+        <div
           key={index}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.1 }}
+          ref={(el) => (rowRefs.current[index] = el)}
           className="flex flex-col md:grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-700 border-t border-gray-700"
         >
           {/* Aspect title - full width on mobile */}
@@ -414,10 +468,7 @@ function ComparisonTable() {
           </div>
 
           {/* Desktop CMS column */}
-          <motion.div
-            whileHover={{ backgroundColor: "rgba(146, 64, 14, 0.4)" }}
-            className="hidden md:block p-6 transition-colors duration-300"
-          >
+          <div className="hidden md:block p-6 transition-colors duration-300 hover-highlight-cms">
             <div className="flex items-start gap-3">
               <div className="mt-1 w-6 h-6 rounded-full bg-amber-800 flex items-center justify-center flex-shrink-0">
                 <svg
@@ -437,13 +488,10 @@ function ComparisonTable() {
               </div>
               <p className="text-gray-300">{item.cms}</p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Desktop Framework column */}
-          <motion.div
-            whileHover={{ backgroundColor: "rgba(109, 40, 217, 0.4)" }}
-            className="hidden md:block p-6 transition-colors duration-300"
-          >
+          <div className="hidden md:block p-6 transition-colors duration-300 hover-highlight-framework">
             <div className="flex items-start gap-3">
               <div className="mt-1 w-6 h-6 rounded-full bg-violet-800 flex items-center justify-center flex-shrink-0">
                 <svg
@@ -463,10 +511,10 @@ function ComparisonTable() {
               </div>
               <p className="text-gray-300">{item.framework}</p>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       ))}
-    </motion.div>
+    </div>
   )
 }
 
@@ -517,26 +565,77 @@ function RecommendationSection() {
     },
   ]
 
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const conclusionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Animate each recommendation card with staggered entrance
+    cardRefs.current.forEach((card, index) => {
+      if (card) {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            delay: index * 0.1,
+            ease: "power2.out",
+          },
+        )
+
+        // Add hover animation
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, { y: -5, duration: 0.3, ease: "power2.out" })
+        })
+
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, { y: 0, duration: 0.3, ease: "power2.out" })
+        })
+      }
+    })
+
+    // Animate the conclusion card
+    if (conclusionRef.current) {
+      gsap.fromTo(
+        conclusionRef.current,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          delay: 0.8,
+          ease: "power2.out",
+        },
+      )
+
+      // Add pulsing shadow animation
+      gsap.to(conclusionRef.current, {
+        boxShadow: "0 0 20px rgba(139, 92, 246, 0.2)",
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      })
+    }
+  }, [])
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="md:col-span-2 mb-2">
         <h2 className="text-2xl font-bold text-white">Was ist besser? Es hängt davon ab, was du brauchst:</h2>
       </div>
 
       {recommendations.map((item, index) => (
-        <motion.div
+        <div
           key={index}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+          ref={(el) => (cardRefs.current[index] = el)}
           className="bg-gray-800/50 backdrop-blur-lg rounded-xl shadow-lg overflow-hidden border border-gray-700 hover:border-blue-500/40 transition-all duration-300"
         >
           <div className={`bg-${item.color}-900/30 p-4 flex items-center gap-4`}>
-            <motion.div
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 3 }}
-              className={`w-12 h-12 rounded-lg bg-${item.color}-800 flex items-center justify-center`}
+            <div
+              className={`w-12 h-12 rounded-lg bg-${item.color}-800 flex items-center justify-center icon-pulse-${item.color}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -552,7 +651,7 @@ function RecommendationSection() {
               >
                 <path d={getIconPath(item.icon)}></path>
               </svg>
-            </motion.div>
+            </div>
             <h3 className="text-lg font-semibold text-white">{item.need}</h3>
           </div>
           <div className="p-6">
@@ -576,32 +675,13 @@ function RecommendationSection() {
               <p className="font-medium text-gray-200">{item.recommendation}</p>
             </div>
           </div>
-        </motion.div>
+        </div>
       ))}
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.8 }}
-        className="md:col-span-2 mt-6"
-      >
-        <motion.div
-          animate={{
-            boxShadow: [
-              "0 0 0 rgba(139, 92, 246, 0.1)",
-              "0 0 20px rgba(139, 92, 246, 0.2)",
-              "0 0 0 rgba(139, 92, 246, 0.1)",
-            ],
-          }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 6 }}
-          className="bg-gradient-to-r from-violet-600 to-blue-600 rounded-xl p-6 shadow-lg border border-violet-400/20"
-        >
+      <div ref={conclusionRef} className="md:col-span-2 mt-6">
+        <div className="bg-gradient-to-r from-violet-600 to-blue-600 rounded-xl p-6 shadow-lg border border-violet-400/20">
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 6 }}
-              className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0"
-            >
+            <div className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 conclusion-icon-float">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="40"
@@ -617,7 +697,7 @@ function RecommendationSection() {
                 <path d="M12 2 2 7l10 5 10-5-10-5Z"></path>
                 <path d="m2 17 10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
-            </motion.div>
+            </div>
             <div>
               <h3 className="text-xl font-bold text-white mb-2">Fazit</h3>
               <p className="text-white/90">
@@ -628,8 +708,8 @@ function RecommendationSection() {
               </p>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </div>
   )
 }
