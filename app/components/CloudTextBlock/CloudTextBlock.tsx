@@ -15,7 +15,7 @@ const gradients = [
 
 const CloudTextBlock: React.FC = () => {
   return (
-    <div className="relative w-full h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+    <div className="relative w-full h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden pt-20">
       {/* Starfield background */}
       <div className="absolute inset-0">
         {[...Array(50)].map((_, i) => (
