@@ -225,7 +225,7 @@ export default function ScrollInteractivePrinciples() {
                 backgroundClip: "text",
               }}
             >
-              Unsere Prinzipien
+              meine Prinzipien
             </motion.h2>
             <motion.div
               className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto rounded-full"
