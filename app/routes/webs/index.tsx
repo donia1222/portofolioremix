@@ -13,7 +13,7 @@ import CommunityBlock from "~/components/Community/CommunityBlockWeb";
 import ScrollToTop from "~/components/scroll-to-top"
 
 import { ComputerSimulator } from '~/components/Terminal/computer-simulator'; 
-
+import LoadingScreen from "~/components/LoadingScreen"
 
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
@@ -63,7 +63,7 @@ export default function BlogIndex() {
 
   return (
     <div className="min-h-screen relative">
-      
+         <LoadingScreen minDuration={500} />
       {/* Fondo con animación de zoom */}
       <div className="min-h-screen bg-animated-gradient bg-400% animate-gradientAnimation relative overflow-auto">
       <div className="fixed inset-0 bg-black bg-opacity-70" />

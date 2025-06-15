@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Check, Plus, Minus, AlertCircle } from "lucide-react"
 import { Link } from "@remix-run/react"
-
+import LoadingScreen from "~/components/LoadingScreen"
 const webElements = [
   { name: "Startseite", price: 350, description: "Eine attraktive Willkommensseite" },
   { name: "Fotogalerie", price: 200, description: "Zeigen Sie Ihre besten Bilder" },
@@ -92,6 +92,7 @@ export default function WebsiteBuilder() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black p-4 sm:p-6 pt-10 sm:pt-20 pb-24 sm:pb-6 overflow-auto">
+            <LoadingScreen minDuration={500} />
       <header
         className={`w-full py-4 px-4 fixed top-0 left-0 z-10 transition-all duration-300 ${
           isHeaderVisible ? "opacity-100" : "opacity-0 pointer-events-none"

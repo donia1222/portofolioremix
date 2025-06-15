@@ -7,6 +7,7 @@ import Chat from "~/components/Chat";
 import ContactModule from "~/components/Contact/contactModuledos"; 
 import ScrollToTop from "~/components/scroll-to-top"
 import { useNavigate } from 'react-router-dom';
+import LoadingScreen from "~/components/LoadingScreen"
 export default function AIBusinessSolutions() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
   const navigate = useNavigate();
@@ -128,7 +129,7 @@ export default function AIBusinessSolutions() {
           <div id="Chat" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
         <Chat />
       </div>
-      
+            <LoadingScreen minDuration={500} />
           </div>
       </div>
       <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">

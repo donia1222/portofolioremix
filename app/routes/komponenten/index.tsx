@@ -8,7 +8,7 @@ import Header from "~/components/Header"
 import { useNavigate } from "react-router-dom"
 import ScrollToTop from "~/components/scroll-to-top"
 import handleDownloadVCard from "~/components/downloadVCard"
-
+import LoadingScreen from "~/components/LoadingScreen"
 export default function VCardModul() {
   const [istHovered, setIstHovered] = useState(false)
   const [zeigeVersionen, setZeigeVersionen] = useState(false)
@@ -32,7 +32,7 @@ export default function VCardModul() {
       <div className="relative mb-20">
         <Header />
       </div>
-
+      <LoadingScreen minDuration={500} />
       {/* Filter/Toggle Component */}
       <div className="mb-10 mt-16">
         <div className="bg-gray-800 rounded-full p-1 flex shadow-lg border border-gray-700">

@@ -5,7 +5,7 @@ import ContactModule from "~/components/Contact/contactModuledos";
 import ScrollToTop from "~/components/scroll-to-top"
 import { useState, useEffect } from "react";
 import FreelanceAvailability from "~/components/freelance-availability"
-
+import LoadingScreen from "~/components/LoadingScreen"
 export default function BlogIndex() {
   const [isLoading, setIsLoading] = useState(true);  // Estado para el loader
 
@@ -58,7 +58,7 @@ export default function BlogIndex() {
   <div id="corePrinciplesBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="200">
         <AppBlock />
       </div>
-
+      <LoadingScreen minDuration={500} />
 
 </div>
 <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
