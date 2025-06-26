@@ -19,6 +19,17 @@ interface PortfolioItem {
 
 // Datos de proyectos
 const portfolioItems: PortfolioItem[] = [
+        {
+    id: 12,
+    title: "HOT & BBQ",
+   category: "Next.js",
+    description:
+      "Die exklusivste Premium-Kollektion von Hot & BBQ",
+    imageUrl: "/ff.jpg",
+    icon: "globe",
+    projectUrl: "https://www.hot-bbq.ch",
+    technologies: ["Website im Aufbau"],
+  },
       {
     id: 2,
     title: "BeautyStyle",
@@ -30,6 +41,7 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://beautystyles.vercel.app",
     technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
   },
+  
 
   {
     id: 1,
@@ -76,7 +88,7 @@ const portfolioItems: PortfolioItem[] = [
     imageUrl: "/IMG_2733.jpeg",
     icon: "globe",
     projectUrl: "https://www.cantinatexmex.ch",
-    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
+    technologies: ["Remix", "React", "TailwindCSS"],
   },
   {
     id: 4,
@@ -98,7 +110,7 @@ const portfolioItems: PortfolioItem[] = [
     imageUrl: "/interior-design-with-photoframes-blue-couch.jpg",
     icon: "server",
     projectUrl: "https://renovation-tau.vercel.app", // En proceso - 80%
-    technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
+    technologies: ["Next.js", "React", "TailwindCSS"],
   
   },
 
@@ -136,7 +148,7 @@ const portfolioItems: PortfolioItem[] = [
     imageUrl: "/IMG_3145 2.jpg",
     icon: "globe",
     projectUrl: "https://www.speak-list.com",
-    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
+    technologies: ["Remix", "React", "TailwindCSS"],
   },
     {
     id: 10,
@@ -150,17 +162,6 @@ const portfolioItems: PortfolioItem[] = [
     technologies: ["Next.js", "React", "TailwindCSS"],
   },
 
-      {
-    id: 12,
-    title: "React Components",
-   category: "Remix",
-    description:
-      "Modern components for your React projects",
-    imageUrl: "/programming-background-with-person-working-with-codes-computer.jpg",
-    icon: "globe",
-    projectUrl: "https://animated-text-components-for-remix.vercel.app",
-    technologies: ["Remix", "React", "TailwindCSS", "JavaScript"],
-  },
 ]
 
 // Componente para renderizar el icono según el tipo de proyecto
