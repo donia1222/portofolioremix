@@ -209,7 +209,7 @@ export default function Component() {
             <img
               src="/yo2.png"
               alt="Roberto Salvador"
-              className="w-24 h-24 rounded-full mx-auto mb-6 border-4 border-white/20 shadow-2xl mt-20"
+              className="w-48 h-48  mx-auto mb-6 border-4 border-white/20 shadow-2xl mt-20"
             />
           </motion.div>
 
