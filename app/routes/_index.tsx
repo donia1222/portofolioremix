@@ -10,12 +10,13 @@ import AOS from "aos"
 import type { LinksFunction } from "@remix-run/node"
 import Chat from "~/components/Chat"
 import CookieBanner from "~/components/CookieBanner"
-import CloudTextBlock5 from "~/components/CloudTextBlock/CloudTextBlock"
+import CloudTextBlock5 from "~/components/showcase/CloudTextBlock5"
 import CloudTextAnime from "~/components/CloudTextBlock/AnimateTexVida"
 import ScrollToTop from "~/components/scroll-to-top"
 import FreelanceAvailability from "../components/freelance-availability"
 import CommunityTemplate from "~/components/Community/CommunityTemplate"
 import OnlineShopShowcase from "~/components/OnlineShopShowcase"
+import GSAPAdvancedAnimation from "~/components/GSAPAdvancedAnimation"
 
 import LoadingScreen from "~/components/LoadingScreen"
 
@@ -123,13 +124,11 @@ export default function Index() {
             <CorePrinciplesBlock />
           </div>
 
-          <div id="communityBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
-            <CommunityTemplate />
+
+       <div id="onlineShopShowcase" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
+            <OnlineShopShowcase />
           </div>
 
-          <div id="contactModule" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
-            <CloudTextAnime />
-          </div>
 
           <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
             <OpenSourceBlock />
@@ -139,7 +138,7 @@ export default function Index() {
             <TechnologyCarousel />
           </div>
 
-
+  
           <FreelanceAvailability />
 
           <div id="contactModule2" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
