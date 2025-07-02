@@ -207,32 +207,7 @@ export default function ScrollInteractivePrinciples() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <motion.h2
-              className="text-4xl md:text-5xl font-bold text-white mb-4"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "linear",
-              }}
-              style={{
-                background: "linear-gradient(90deg, #fff, #60a5fa, #a855f7, #fff)",
-                backgroundSize: "200% 100%",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              meine Prinzipien
-            </motion.h2>
-            <motion.div
-              className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto rounded-full"
-              initial={{ width: 0 }}
-              whileInView={{ width: 96 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            />
+
           </motion.div>
 
           {/* Grid with staggered animations */}

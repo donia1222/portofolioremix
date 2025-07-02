@@ -15,6 +15,7 @@ import CloudTextAnime from "~/components/CloudTextBlock/AnimateTexVida"
 import ScrollToTop from "~/components/scroll-to-top"
 import FreelanceAvailability from "../components/freelance-availability"
 import CommunityTemplate from "~/components/Community/CommunityTemplate"
+import OnlineShopShowcase from "~/components/OnlineShopShowcase"
 
 import LoadingScreen from "~/components/LoadingScreen"
 
@@ -137,6 +138,7 @@ export default function Index() {
           <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
             <TechnologyCarousel />
           </div>
+
 
           <FreelanceAvailability />
 
