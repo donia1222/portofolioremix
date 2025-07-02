@@ -117,7 +117,7 @@ export default function CloudTextBlock5() {
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">
               {renderAnimatedWord(digitaleLetters, 0.5)}
             </h1>
           </motion.div>
@@ -128,7 +128,7 @@ export default function CloudTextBlock5() {
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">
               {renderAnimatedWord(innovationLetters, 1.2)}
             </h1>
           </motion.div>
