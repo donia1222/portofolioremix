@@ -80,7 +80,7 @@ export default function CloudTextBlock5() {
   }
 
   return (
-    <div className="relative overflow-hidden flex items-center justify-center px-4 mt-48 mb-20">
+    <div className="relative overflow-hidden flex items-center justify-center px-4 mt-40 mb-20">
       {/* Animated Background */}
       <div className="absolute inset-0">
         {/* Floating orbs */}
@@ -135,14 +135,7 @@ export default function CloudTextBlock5() {
         </div>
 
         {/* Simple description */}
-        <motion.p
-          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.5, duration: 0.8 }}
-        >
-          Moderne digitale Lösungen mit innovativer Technologie
-        </motion.p>
+ 
 
         {/* Services Grid */}
         <motion.div
@@ -165,7 +158,7 @@ export default function CloudTextBlock5() {
               color: "from-green-400 to-emerald-400"
             },
             { 
-              title: "KI-Komponenten", 
+              title: "KI-Lösungen", 
               subtitle: "Intelligente Lösungen",
               icon: "🤖",
               color: "from-purple-400 to-pink-400"
