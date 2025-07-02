@@ -129,10 +129,6 @@ export default function Index() {
        <div id="onlineShopShowcase" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
             <OnlineShopShowcase />
           </div>
-      {/* Horizontal Scroll Section - Solo móviles */}
-          <div id="horizontalScrollSection" className="w-full relative lg:hidden">
-            <HorizontalScrollSection />
-          </div>
 
           <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
             <OpenSourceBlock />
