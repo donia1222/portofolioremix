@@ -17,6 +17,7 @@ import FreelanceAvailability from "../components/freelance-availability"
 import CommunityTemplate from "~/components/Community/CommunityTemplate"
 import OnlineShopShowcase from "~/components/OnlineShopShowcase"
 import GSAPAdvancedAnimation from "~/components/GSAPAdvancedAnimation"
+import HorizontalScrollSection from "~/components/HorizontalScrollSection"
 
 import LoadingScreen from "~/components/LoadingScreen"
 
@@ -128,7 +129,10 @@ export default function Index() {
        <div id="onlineShopShowcase" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
             <OnlineShopShowcase />
           </div>
-
+      {/* Horizontal Scroll Section - Solo móviles */}
+          <div id="horizontalScrollSection" className="w-full relative lg:hidden">
+            <HorizontalScrollSection />
+          </div>
 
           <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
             <OpenSourceBlock />
@@ -138,7 +142,8 @@ export default function Index() {
             <TechnologyCarousel />
           </div>
 
-  
+    
+
           <FreelanceAvailability />
 
           <div id="contactModule2" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">

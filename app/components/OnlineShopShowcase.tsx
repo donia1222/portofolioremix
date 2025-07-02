@@ -264,36 +264,7 @@ export default function OnlineShopShowcase() {
           </div>
         </motion.div>
 
-        {/* Tech Stack */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-          transition={{ delay: 2.1, duration: 0.8 }}
-        >
-          <h3 className="text-2xl font-bold text-white mb-8">Technologie-Stack</h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              { name: "Next.js", color: "from-gray-900 to-black" },
-              { name: "PHP", color: "from-blue-600 to-purple-600" },
-              { name: "MySQL", color: "from-orange-500 to-red-500" },
-              { name: "OpenAI", color: "from-green-500 to-emerald-600" },
-              { name: "WhatsApp", color: "from-green-400 to-green-600" }
-            ].map((tech, index) => (
-              <motion.div
-                key={tech.name}
-                className={`bg-gradient-to-r ${tech.color} px-6 py-3 rounded-full text-white font-semibold shadow-lg`}
-                whileHover={{ scale: 1.1, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.7 + index * 0.1, duration: 0.5 }}
-              >
-                {tech.name}
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+       
 
         {/* CTA Buttons */}
         <motion.div

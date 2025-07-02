@@ -1,6 +1,6 @@
 "use client"
-import { useEffect, useRef, useState } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
 
 interface ScrollPanel {
   id: string
@@ -12,134 +12,330 @@ interface ScrollPanel {
 
 export default function HorizontalScrollSection() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isClient, setIsClient] = useState(false)
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
+  const horizontalRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setIsClient(true)
+    const initScrollAnimation = async () => {
+      if (typeof window === "undefined") return
+
+      // Importar ScrollTrigger dinámicamente
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger")
+      gsap.registerPlugin(ScrollTrigger)
+
+      const container = containerRef.current
+      const horizontal = horizontalRef.current
+
+      if (!container || !horizontal) return
+
+      // Limpiar ScrollTriggers existentes
+      ScrollTrigger.getAll().forEach(st => st.kill())
+
+      // Configuración diferente para móvil vs desktop
+      const isMobile = window.innerWidth < 1024
+      
+      if (isMobile) {
+        // Configuración para móvil - más centrada
+        let scrollTween = gsap.to(horizontal, {
+          x: () => -(horizontal.scrollWidth - window.innerWidth),
+          ease: "none",
+          scrollTrigger: {
+            trigger: container,
+            pin: true,
+            scrub: 1,
+            start: "center center",
+            end: () => "+=" + (horizontal.scrollWidth - window.innerWidth) * 0.4,
+            invalidateOnRefresh: true,
+          }
+        })
+
+        // Animar contenido móvil
+        const panels = gsap.utils.toArray(".mobile-panel")
+        panels.forEach((panel: any) => {
+          const content = panel.querySelector('.mobile-content')
+          
+          gsap.fromTo(content, 
+            { 
+              opacity: 0, 
+              y: 30 
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: panel,
+                start: "left 80%",
+                end: "left 20%",
+                containerAnimation: scrollTween,
+                toggleActions: "play none none reverse",
+              }
+            }
+          )
+        })
+      } else {
+        // Configuración para desktop
+        let scrollTween = gsap.to(horizontal, {
+          x: () => -(horizontal.scrollWidth - window.innerWidth),
+          ease: "none",
+          scrollTrigger: {
+            trigger: container,
+            pin: true,
+            scrub: 0.8,
+            start: "center center",
+            end: () => "+=" + (horizontal.scrollWidth - window.innerWidth) * 0.5,
+            invalidateOnRefresh: true,
+          }
+        })
+
+        // Animar contenido desktop
+        const panels = gsap.utils.toArray(".horizontal-panel")
+        panels.forEach((panel: any) => {
+          const content = panel.querySelector('.panel-content')
+          
+          gsap.fromTo(content, 
+            { 
+              opacity: 0, 
+              y: 50 
+            },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: panel,
+                start: "left 70%",
+                end: "left 30%",
+                containerAnimation: scrollTween,
+                toggleActions: "play none none reverse",
+              }
+            }
+          )
+        })
+      }
+    }
+
+    // Esperar un poco para que el DOM esté listo
+    const timer = setTimeout(initScrollAnimation, 100)
+
+    return () => {
+      clearTimeout(timer)
+      if (typeof window !== "undefined") {
+        import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
+          ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+        })
+      }
+    }
   }, [])
 
   const panels: ScrollPanel[] = [
     {
-      id: "1",
-      title: "Modern Design",
-      content: "Beautiful, responsive interfaces that adapt to any device with smooth animations and intuitive user experience.",
-      bgColor: "from-blue-600 to-purple-600",
+      id: "💻",
+      title: "Claude Anthropic",
+      content: "Generiert Code, refaktoriert und behebt Bugs automatisch.",
+      bgColor: "from-slate-800 via-slate-900 to-gray-900",
       textColor: "text-white"
     },
     {
-      id: "2", 
-      title: "Performance First",
-      content: "Optimized code and lightning-fast loading times ensure your users never wait for content to appear.",
-      bgColor: "from-green-500 to-teal-600",
+      id: "⚡", 
+      title: "Produktivität x10",
+      content: "Automatisiert repetitive Aufgaben und optimiert den Workflow.",
+      bgColor: "from-gray-800 via-zinc-900 to-slate-900",
       textColor: "text-white"
     },
     {
-      id: "3",
-      title: "AI Integration",
-      content: "Intelligent features powered by cutting-edge AI technology to enhance user engagement and automation.",
-      bgColor: "from-orange-500 to-red-500", 
+      id: "🧠",
+      title: "Schnell Lernen",
+      content: "Entdecke neue Technologien mit praktischen Beispielen.",
+      bgColor: "from-zinc-800 via-gray-900 to-slate-900", 
       textColor: "text-white"
     },
     {
-      id: "4",
-      title: "Scalable Solutions",
-      content: "Built to grow with your business using modern tech stack and best practices for maintainability.",
-      bgColor: "from-purple-600 to-pink-600",
+      id: "🚀",
+      title: "Perfektes Deployment",
+      content: "Automatische Tests und optimiertes Deployment.",
+      bgColor: "from-gray-900 via-slate-900 to-zinc-900", 
+      textColor: "text-white"
+    },
+    {
+      id: "🎯",
+      title: "Echte Ergebnisse",
+      content: "Schnellere Projekte, sauberer Code, weniger Fehler.",
+      bgColor: "from-slate-900 via-gray-900 to-slate-800", 
       textColor: "text-white"
     }
   ]
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"])
-
-  if (!isClient) {
-    return <div className="h-[400vh]" />
-  }
-
   return (
-    <div ref={containerRef} className="h-[400vh] relative">
-      <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-        <motion.div 
-          style={{ x }}
-          className="flex"
+    <div ref={containerRef} className="w-full relative overflow-hidden">
+      {/* Versión móvil - Con GSAP pero optimizada */}
+      <div className="lg:hidden h-[50vh]">
+        <div
+          ref={horizontalRef}
+          className="flex h-full"
+          style={{ width: `${panels.length * 100}vw` }}
         >
           {panels.map((panel, index) => (
             <div
-              key={panel.id}
-              className="min-w-screen h-screen flex items-center justify-center relative"
+              key={index}
+              className="mobile-panel min-w-screen h-full flex items-center justify-center relative"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${panel.bgColor}`} />
               
-              <motion.div
-                className="relative z-10 max-w-2xl mx-auto text-center px-8"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1, duration: 0.8 }}
-                viewport={{ once: false }}
-              >
-                <motion.h2 
-                  className={`text-4xl md:text-6xl font-bold mb-6 ${panel.textColor}`}
-                  initial={{ scale: 0.8 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ delay: index * 0.1 + 0.2, duration: 0.6 }}
-                >
-                  {panel.title}
-                </motion.h2>
-                
-                <motion.p 
-                  className={`text-lg md:text-xl leading-relaxed ${panel.textColor} opacity-90`}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 0.9 }}
-                  transition={{ delay: index * 0.1 + 0.4, duration: 0.8 }}
-                >
-                  {panel.content}
-                </motion.p>
-
-                <motion.div
-                  className="mt-8 flex justify-center"
-                  initial={{ scale: 0, rotate: -180 }}
-                  whileInView={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: index * 0.1 + 0.6, duration: 0.8, type: "spring" }}
-                >
-                  <div className="w-16 h-16 rounded-full border-2 border-white/30 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-white">{panel.id}</span>
-                  </div>
-                </motion.div>
-              </motion.div>
-
-              {/* Decorative elements */}
-              <motion.div
-                className="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/10 blur-xl"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.1, 0.3, 0.1]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  delay: index * 0.5
-                }}
-              />
+              {/* Bordes para móvil */}
+              <div className="absolute inset-3 rounded-2xl border border-white/10">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent" />
+              </div>
               
-              <motion.div
-                className="absolute bottom-20 right-20 w-24 h-24 rounded-full bg-white/10 blur-xl"
-                animate={{
-                  scale: [1.2, 1, 1.2],
-                  opacity: [0.3, 0.1, 0.3]
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  delay: index * 0.3
-                }}
-              />
+              <div className="mobile-content relative z-10 max-w-sm mx-auto text-center px-6">
+                {/* Icono móvil */}
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center mx-auto shadow-xl mb-4">
+                  <span className="text-2xl">{panel.id}</span>
+                </div>
+                
+                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                  {panel.title}
+                </h3>
+                
+                <p className="text-sm text-white/85 leading-relaxed mb-4">
+                  {panel.content}
+                </p>
+
+                {/* Tags móvil */}
+                <div className="flex justify-center gap-2 mb-3">
+                  {index === 0 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">AI</span>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Code</span>
+                    </>
+                  )}
+                  {index === 1 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Speed</span>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Auto</span>
+                    </>
+                  )}
+                  {index === 2 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Learn</span>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Grow</span>
+                    </>
+                  )}
+                  {index === 3 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Deploy</span>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Test</span>
+                    </>
+                  )}
+                  {index === 4 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Results</span>
+                      <span className="px-2 py-1 bg-white/15 rounded text-xs text-white/90">Quality</span>
+                    </>
+                  )}
+                </div>
+
+                <div className="text-white/40 text-xs">
+                  {index === panels.length - 1 ? "Weiter ↓" : `${index + 1}/${panels.length}`}
+                </div>
+              </div>
             </div>
           ))}
-        </motion.div>
+        </div>
+      </div>
+
+      {/* Versión desktop - Con GSAP ScrollTrigger */}
+      <div className="hidden lg:block h-[60vh]">
+        <div
+          ref={horizontalRef}
+          className="flex h-full"
+          style={{ width: `${panels.length * 100}vw` }}
+        >
+          {panels.map((panel, index) => (
+            <div
+              key={index}
+              className="horizontal-panel min-w-screen h-full flex items-center justify-center relative group"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${panel.bgColor}`} />
+              
+              {/* Animated border */}
+              <div className="absolute inset-4 rounded-3xl border border-white/10 group-hover:border-white/20 transition-all duration-700">
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-pulse" />
+                <div className="absolute bottom-1/3 right-1/4 w-1 h-1 bg-white/30 rounded-full animate-pulse delay-1000" />
+                <div className="absolute top-1/2 right-1/3 w-3 h-3 border border-white/15 rounded-full animate-pulse delay-500" />
+              </div>
+              
+              <div className="panel-content relative z-10 max-w-xl mx-auto text-center px-6">
+                {/* Icon container with enhanced glow */}
+                <div className="relative mb-6">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-white/25 to-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center mx-auto shadow-2xl hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">{panel.id}</span>
+                  </div>
+                  <div className="absolute inset-0 w-16 h-16 rounded-2xl bg-white/10 blur-xl mx-auto animate-pulse" />
+                </div>
+                
+                <h2 className={`text-2xl md:text-3xl font-bold mb-4 ${panel.textColor} tracking-tight`}>
+                  {panel.title}
+                </h2>
+                
+                <p className={`text-sm md:text-base leading-relaxed ${panel.textColor} opacity-85 max-w-sm mx-auto mb-6`}>
+                  {panel.content}
+                </p>
+
+                {/* Simplified feature tags */}
+                <div className="flex flex-wrap justify-center gap-2 mb-4">
+                  {index === 0 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">AI</span>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Refactor</span>
+                    </>
+                  )}
+                  {index === 1 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Speed</span>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Auto</span>
+                    </>
+                  )}
+                  {index === 2 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Learn</span>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Grow</span>
+                    </>
+                  )}
+                  {index === 3 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Deploy</span>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Test</span>
+                    </>
+                  )}
+                  {index === 4 && (
+                    <>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Results</span>
+                      <span className="px-2 py-1 bg-white/15 rounded-lg text-xs text-white/90 border border-white/10">Quality</span>
+                    </>
+                  )}
+                </div>
+
+                <div className="text-white/40 text-xs font-medium">
+                  {index === panels.length - 1 ? "Weiter ↓" : `${index + 1}/${panels.length}`}
+                </div>
+              </div>
+
+              {/* Enhanced border separator with animation */}
+              {index < panels.length - 1 && (
+                <div className="absolute right-0 top-1/4 bottom-1/4 w-px">
+                  <div className="w-full h-full bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
