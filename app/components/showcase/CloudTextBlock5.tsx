@@ -80,7 +80,7 @@ export default function CloudTextBlock5() {
   }
 
   return (
-    <div className="relative overflow-hidden flex items-center justify-center px-4 mt-48 ">
+    <div className="relative overflow-hidden flex items-center justify-center px-4 mt-40 mb-20">
       {/* Animated Background */}
       <div className="absolute inset-0">
         {/* Floating orbs */}
