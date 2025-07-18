@@ -135,10 +135,6 @@ animationDuration: `${2 + Math.random() * 3}s`,
 <TechnologyCarousel />
 </div>
 
-{/* HorizontalScrollSection oculto en pantallas pequeñas */}
-<div id="horizontalScrollSection" className="w-full relative hidden md:block" data-aos="fade-up" data-aos-delay="200">
-<HorizontalScrollSection/>
-</div>
 
 <FreelanceAvailability />
 
