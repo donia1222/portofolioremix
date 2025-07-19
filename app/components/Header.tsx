@@ -255,18 +255,7 @@ export default function Header() {
               <span>KI-Lösungen</span>
             </NavLink>
 
-            <NavLink
-              to="/komponenten"
-              className={({ isActive }) =>
-                `nav-link text-white flex items-center space-x-2 hover:text-[#40e0d0] transition-colors duration-200 group relative ${
-                  isActive ? "active" : ""
-                }`
-              }
-              onClick={handleNavigation}
-            >
-              <Package className="h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
-              <span>Komponenten</span>
-            </NavLink>
+ 
 
             <NavLink
               to="/roberto"
@@ -277,7 +266,7 @@ export default function Header() {
               }
               onClick={handleNavigation}
             >
-              <span>Über mich</span>
+              <span></span>
               <motion.img
                 src="/yo2.png"
                 alt="Avatar de Roberto Salvador"
@@ -325,11 +314,10 @@ export default function Header() {
                 { to: "/", icon: <Home className="h-6 w-6" />, label: "Home" },
                 { to: "/webs", icon: <Code className="h-6 w-6" />, label: "Webentwicklung" },
                 { to: "/apps", icon: <AppWindow className="h-6 w-6" />, label: "App-Entwicklung" },
-                { to: "/ki-losungen", icon: <Brain className="h-6 w-6" />, label: "KI-Lösungen" },
-                { to: "/komponenten", icon: <Package className="h-6 w-6" />, label: "Komponenten" },
+                 { to: "/ki-losungen", icon: <Brain className="h-6 w-6" />, label: "KI-Lösungen" },
                 {
                   to: "/roberto",
-                  icon: <img src="/yo2.png" alt="Avatar" className="w-12 h-12 rounded-full border-2 border-gray-600" />,
+                  icon: <img src="/yo2.png" alt="Avatar" className=" rounded-full border-2 border-gray-600" />,
                   label: "Über mich",
                 },
               ].map((item, index) => (
