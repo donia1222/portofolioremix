@@ -176,7 +176,7 @@ export default function Comparison() {
   }
 
   return (
-    <section className="relative overflow-hidden py-16 mt-20">
+    <section className="relative overflow-hidden  ">
       {/* Background gradient */}
       <div className="absolute inset-0 z-0"></div>
 
