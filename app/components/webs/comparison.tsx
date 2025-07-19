@@ -185,7 +185,7 @@ export default function Comparison() {
         <div ref={backgroundBlobRef} className="absolute top-20 right-10 w-72 h-72 rounded-full" />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto   sm:px-6 lg:px-8 relative z-10">
         {/* Animated card */}
         <div
           ref={cardRef}

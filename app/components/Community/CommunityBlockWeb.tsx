@@ -25,7 +25,7 @@ const newsItems: NewsItem[] = [
 
 export default function NewsSection() {
   return (
-    <section className="py-20 ">
+    <section className=" ">
       <div className="container px-4 md:px-6 mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
