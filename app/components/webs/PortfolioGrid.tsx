@@ -177,6 +177,17 @@ const portfolioItems: PortfolioItem[] = [
   
 
 
+    {
+    id: 14,
+    title: "Digitale Rezeptsammlung",
+    category: "React",
+    description:
+      "Scannen oder fotografieren Sie Ihre Rezepte, um sie zu digitalisieren.",
+    imageUrl: "/bueli.png",
+    icon: "globe",
+    projectUrl: "https://recipe-digitizer.vercel.app",
+     technologies: ["React", "Web3.js", "TailwindCSS"],
+  },
 
 ]
 
