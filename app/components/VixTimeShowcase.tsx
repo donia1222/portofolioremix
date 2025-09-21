@@ -38,8 +38,11 @@ export default function VixTimeShowcase() {
     "Funktioniert ohne GPS-Berechtigung",
     "Native iOS Widget mit Mini-Kalender",
     "Live Activities für Dynamic Island",
-    "Freemium-Modell vs. teure Konkurrenz"
+     "Push-Benachrichtigungen",
+    "Freemium-Modell vs. teure Konkurrenz",
   ];
+
+  
 
   useEffect(() => {
     const interval = setInterval(() => {
