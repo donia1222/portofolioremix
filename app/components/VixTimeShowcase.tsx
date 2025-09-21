@@ -109,7 +109,7 @@ export default function VixTimeShowcase() {
                 </div>
                 <div className="text-center md:text-left">
                   <h3 className="text-2xl font-bold mb-4 text-purple-200">
-                    Verfügbar ab 1. Oktoberr 2025
+                    Verfügbar ab  Oktober 2025
                   </h3>
                   <p className="text-gray-300 mb-6 leading-relaxed">
                     Arbeitszeiten mühelos verfolgen. Organisiert bleiben und Produktivität steigern mit automatischer Geofencing-Technologie.
