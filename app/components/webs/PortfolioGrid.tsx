@@ -42,6 +42,17 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://www.vixtime.com",
     technologies: ["Next.js", "React", "TailwindCSS"],
   },
+      {
+    id: 10,
+    title: "FoodScan App",
+   category: "Next.js",
+    description:
+      "Transform Your Fridge into Recipes!",
+    imageUrl: "/2149255915.jpg",
+    icon: "globe",
+    projectUrl: "https://www.foodscan-ai.com",
+    technologies: ["Next.js", "React", "TailwindCSS"],
+  },
           {
     id: 12,
     title: "HOT & BBQ",
@@ -165,17 +176,7 @@ const portfolioItems: PortfolioItem[] = [
   },
   
 
-    {
-    id: 10,
-    title: "FoodScan AI",
-   category: "Next.js",
-    description:
-      "Transform Your Fridge into Recipes!",
-    imageUrl: "/2149255915.jpg",
-    icon: "globe",
-    projectUrl: "https://www.foodscan-ai.com",
-    technologies: ["Next.js", "React", "TailwindCSS"],
-  },
+
 
 ]
 
