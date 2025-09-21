@@ -1,317 +1,258 @@
 "use client"
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { Mic, Camera, Bell, Users, DollarSign, Globe, Smartphone, CheckCircle } from "lucide-react"
 
-import { Bell, CreditCard, ShoppingCart, User, Check, Smartphone, Globe, Zap, Code, Shield } from "lucide-react"
-import { useEffect, useState } from "react"
+export default function BuyVoiceShowcase() {
+  const [activeFeature, setActiveFeature] = useState(0)
 
-export default function AppBenefitsShowcase() {
-  // State for typing animation
-  const [displayText, setDisplayText] = useState("")
-  const fullText = "Native App"
-
-  // Typing animation effect
-  useEffect(() => {
-    let currentIndex = 0
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setDisplayText(fullText.substring(0, currentIndex))
-        currentIndex++
-      } else {
-        clearInterval(typingInterval)
-      }
-    }, 150) // Speed of typing animation
-
-    return () => clearInterval(typingInterval)
-  }, [])
-
-  // Inicializar IntersectionObserver para animaciones más efficientes
-  useEffect(() => {
-    // Función para manejar animaciones con IntersectionObserver (más eficiente que AOS)
-    const setupAnimations = () => {
-      const animatedElements = document.querySelectorAll(".animate-on-scroll")
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const el = entry.target
-              const animation = el.getAttribute("data-animation") || "animate-fade-up"
-              const delay = el.getAttribute("data-delay") || "0"
-
-              setTimeout(
-                () => {
-                  el.classList.add(animation)
-                  el.classList.add("opacity-100")
-                  observer.unobserve(el)
-                },
-                Number.parseInt(delay || "0"),
-              )
-            }
-          })
-        },
-        {
-          threshold: 0.1,
-          rootMargin: "0px 0px -50px 0px",
-        },
-      )
-
-      animatedElements.forEach((el) => {
-        el.classList.add("opacity-0", "transition-all", "duration-700")
-        observer.observe(el)
-      })
-    }
-
-    // Ejecutar después de que el DOM esté completamente cargado
-    if (document.readyState === "complete") {
-      setupAnimations()
-    } else {
-      window.addEventListener("load", setupAnimations)
-      return () => window.removeEventListener("load", setupAnimations)
-    }
-  }, [])
-
-  const benefits = [
+  const features = [
     {
-      icon: Bell,
-      title: "Benachrichtigungen in der App",
-      description: "Halten Sie Ihre Nutzer mit Echtzeit-Push-Benachrichtigungen auf dem Laufenden.",
+      icon: <Mic className="w-6 h-6" />,
+      title: "Spracherkennung",
+      description: "Sprechen Sie Ihre Einkaufsartikel natürlich aus. Unsere KI versteht Ihre Sprachbefehle.",
+      details: "Intelligente Verarbeitung natürlicher Sprache für mühelose Listenerstellung",
     },
     {
-      icon: User,
-      title: "Mehrsprachige Apps",
-      description: "Erreichen Sie ein globales Publikum mit Apps, die mehrere Sprachen unterstützen.",
+      icon: <Camera className="w-6 h-6" />,
+      title: "Foto-Digitalisierung",
+      description: "Fotografieren Sie handgeschriebene Listen und wir digitalisieren sie sofort.",
+      details: "Premium-Funktion: Wandeln Sie jede Papierliste in digitales Format um",
     },
     {
-      icon: CreditCard,
-      title: "Abonnements in der App",
-      description: "Implementieren Sie wiederkehrende Einnahmemodelle mit einfach zu verwaltenden Abonnements.",
+      icon: <Bell className="w-6 h-6" />,
+      title: "Intelligente Benachrichtigungen",
+      description: "Erhalten Sie Push-Benachrichtigungen, um Sie an Ihre Einkäufe zu erinnern.",
+      details: "Vergessen Sie nie wieder wichtige Artikel mit smarten Erinnerungen",
     },
     {
-      icon: ShoppingCart,
-      title: "In-App-Käufe",
-      description: "Monetarisieren Sie Ihre App mit nahtlosen In-App-Kaufmöglichkeiten.",
+      icon: <Users className="w-6 h-6" />,
+      title: "Teilen & Zusammenarbeiten",
+      description: "Teilen Sie Ihre Listen mit Familie und Freunden.",
+      details: "Arbeiten Sie beim Einkaufen zusammen und halten Sie alle synchron",
     },
   ]
 
-  const appTypes = [
-    {
-      name: "E-Commerce",
-      platforms: ["iOS", "Android"],
-      complexity: "Mittel-Hoch",
-      timeframe: "8-12 Wochen",
-      features: ["Produktkatalog", "Warenkorb", "Zahlungsabwicklung", "Benutzerkonten"],
-    },
-    {
-      name: "Social Media",
-      platforms: ["iOS", "Android", "Web"],
-      complexity: "Hoch",
-      timeframe: "12-16 Wochen",
-      features: ["Benutzerprofile", "Feeds", "Messaging", "Medien-Uploads"],
-    },
-    {
-      name: "Fitness & Gesundheit",
-      platforms: ["iOS", "Android"],
-      complexity: "Mittel",
-      timeframe: "6-10 Wochen",
-      features: ["Aktivitätsverfolgung", "Fortschrittsdiagramme", "Ernährungstagebuch", "Workout-Pläne"],
-    },
-    {
-      name: "Business & Produktivität",
-      platforms: ["iOS", "Android", "Web"],
-      complexity: "Mittel-Hoch",
-      timeframe: "8-14 Wochen",
-      features: ["Kalender", "Aufgabenverwaltung", "Dokumentenfreigabe", "Teamkommunikation"],
-    },
+  const languages = [
+    { flag: "🇺🇸", name: "English", code: "EN" },
+    { flag: "🇪🇸", name: "Español", code: "ES" },
+    { flag: "🇩🇪", name: "Deutsch", code: "DE" },
+    { flag: "🇮🇹", name: "Italiano", code: "IT" },
+    { flag: "🇫🇷", name: "Français", code: "FR" },
+    { flag: "🇹🇷", name: "Türkçe", code: "TR" },
+    { flag: "🇵🇹", name: "Português", code: "PT" },
+    { flag: "🇷🇺", name: "Русский", code: "RU" },
+    { flag: "🇸🇦", name: "العربية", code: "AR" },
+    { flag: "🇭🇺", name: "Magyar", code: "HU" },
+    { flag: "🇯🇵", name: "日本語", code: "JA" },
+    { flag: "🇮🇳", name: "हिंदी", code: "HI" },
+    { flag: "🇳🇱", name: "Nederlands", code: "NL" },
   ]
+
+  const cities = [
+    { name: "Zurich", price: "$45.20", description: "Premium pricing estimates" },
+    { name: "New York", price: "$38.75", description: "Real-time price data" },
+    { name: "London", price: "$42.10", description: "Local market prices" },
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveFeature((prev) => (prev + 1) % features.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [features.length])
 
   return (
-    <div className="min-h-screen text-white py-8 md:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2
-          className="text-4xl md:text-4xl lg:text-5xl font-bold text-center mb-12 md:mb-20 mt-16 md:mt-16 animate-on-scroll"
-          data-animation="animate-fade-down"
-          data-delay="100"
+    <div className="w-full bg-gradient-to-b from-slate-900 via-purple-900 to-slate-900 text-white py-20">
+      <div className="container mx-auto px-4">
+        {/* Header Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
         >
-          Stärken Sie Ihr Unternehmen mit einer{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
-            {displayText}
-            <span className="animate-pulse">|</span>
-          </span>
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {benefits.map((benefit, index) => (
-            <div
-              key={index}
-              className="bg-gray-800/60 backdrop-blur-sm p-6 md:p-8 rounded-2xl flex items-start space-x-4 md:space-x-5 border border-gray-700/50 shadow-xl hover:shadow-blue-500/10 transition-all duration-300 hover:-translate-y-1 animate-on-scroll"
-              data-animation="animate-fade-up"
-              data-delay={150 + index * 100}
-            >
-              <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-3 rounded-xl shadow-lg flex-shrink-0">
-                <benefit.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
-              </div>
-              <div>
-                <h3 className="text-lg md:text-xl font-semibold mb-2 md:mb-3">{benefit.title}</h3>
-                <p className="text-sm md:text-base text-gray-300">{benefit.description}</p>
-              </div>
+          <div className="inline-flex items-center gap-3 mb-6">
+            <img src="/images/buyvoice-icon.png" alt="BuyVoice Icon" className="w-16 h-16 rounded-2xl shadow-lg" />
+            <div className="px-4 py-2 bg-purple-600/20 rounded-full border border-purple-500/30">
+              <span className="text-purple-200 text-sm font-medium">Voice-Powered Shopping</span>
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="mt-20 md:mt-32 animate-on-scroll" data-animation="animate-fade-up" data-delay="200">
-          <h3 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-              React Native
-            </span>{" "}
-            <br className="md:hidden" />
-            App-Entwicklung
-          </h3>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent text-balance">
+            BuyVoice
+          </h1>
 
-          {/* Versión para móvil - Cards en lugar de tabla */}
-          <div className="md:hidden space-y-6">
-            {appTypes.map((app, index) => (
-              <div
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed text-balance">
+            Sprechen Sie und wir erledigen den Rest. Sagen Sie Sätze wie "morgen kaufe ich Hähnchen, Tomaten und
+            Zwiebeln" und unsere KI wählt die Zutaten für Ihre Liste aus.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            <div className="flex items-center gap-2 px-4 py-2 bg-green-600/20 rounded-full border border-green-500/30">
+              <CheckCircle className="w-4 h-4 text-green-400" />
+              <span className="text-green-200 text-sm">KI-Powered</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-blue-600/20 rounded-full border border-blue-500/30">
+              <CheckCircle className="w-4 h-4 text-blue-400" />
+              <span className="text-blue-200 text-sm">13 Sprachen</span>
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-orange-600/20 rounded-full border border-orange-500/30">
+              <CheckCircle className="w-4 h-4 text-orange-400" />
+              <span className="text-orange-200 text-sm">iOS Widget</span>
+            </div>
+          </div>
+
+          <a
+            href="https://www.buyvoice.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:from-purple-500 hover:to-blue-500 transition-all duration-300 font-medium text-lg shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            <Smartphone className="w-5 h-5" />
+            Für iOS herunterladen
+          </a>
+        </motion.div>
+
+        {/* Features Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mb-20"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-balance">
+            Leistungsstarke Funktionen für intelligentes Einkaufen
+          </h2>
+          <p className="text-gray-300 text-center mb-12 max-w-3xl mx-auto text-balance">
+            Alles was Sie brauchen, um Ihre Einkäufe effizient zu organisieren und nie wieder einen Artikel zu
+            vergessen.
+          </p>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
                 key={index}
-                className="bg-gray-800/60 backdrop-blur-sm p-6 rounded-2xl border border-gray-700/50 shadow-xl animate-on-scroll"
-                data-animation="animate-fade-up"
-                data-delay={250 + index * 100}
+                className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${
+                  activeFeature === index
+                    ? "bg-gradient-to-br from-purple-600/30 to-blue-600/30 border-purple-400/50 transform scale-105"
+                    : "bg-white/5 border-white/10 hover:bg-white/10"
+                }`}
+                onClick={() => setActiveFeature(index)}
+                whileHover={{ y: -5 }}
               >
-                <h4 className="text-lg font-semibold mb-3">{app.name}</h4>
-
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm font-medium text-gray-400 mb-1">Plattformen</p>
-                    <div className="flex flex-wrap gap-2">
-                      {app.platforms.map((platform, i) => (
-                        <span
-                          key={i}
-                          className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300"
-                        >
-                          {platform === "iOS" && <Smartphone className="w-3 h-3 mr-1" />}
-                          {platform === "Android" && <Smartphone className="w-3 h-3 mr-1" />}
-                          {platform === "Web" && <Globe className="w-3 h-3 mr-1" />}
-                          {platform}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-gray-400 mb-1">Komplexität</p>
-                    <p className="text-sm">{app.complexity}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-gray-400 mb-1">Zeitrahmen</p>
-                    <p className="text-sm">{app.timeframe}</p>
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-medium text-gray-400 mb-1">Funktionen</p>
-                    <div className="flex flex-col gap-1">
-                      {app.features.map((feature, i) => (
-                        <div key={i} className="flex items-center">
-                          <Check className="w-4 h-4 text-green-400 mr-2" />
-                          <span className="text-sm">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <div className="text-purple-400 mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
+                <p className="text-gray-300 text-sm mb-3">{feature.description}</p>
+                <p className="text-purple-200 text-xs">{feature.details}</p>
+              </motion.div>
             ))}
           </div>
+        </motion.div>
 
-          {/* Versión para desktop - Tabla */}
-          <div className="hidden md:block overflow-hidden rounded-2xl border border-gray-700/50 shadow-xl bg-gray-800/60 backdrop-blur-sm">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="bg-gradient-to-r from-blue-500/10 to-purple-500/10">
-                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-200">App-Typ</th>
-                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-200">Plattformen</th>
-                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-200">Komplexität</th>
-                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-200">Zeitrahmen</th>
-                    <th className="py-4 px-6 text-left text-sm font-semibold text-gray-200">Funktionen</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {appTypes.map((app, index) => (
-                    <tr
-                      key={index}
-                      className={`border-t border-gray-700/30 hover:bg-gray-700/20 transition-colors duration-150 animate-on-scroll`}
-                      data-animation="animate-fade-left"
-                      data-delay={250 + index * 100}
-                    >
-                      <td className="py-4 px-6 text-sm font-medium">{app.name}</td>
-                      <td className="py-4 px-6 text-sm">
-                        <div className="flex flex-wrap gap-2">
-                          {app.platforms.map((platform, i) => (
-                            <span
-                              key={i}
-                              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300"
-                            >
-                              {platform === "iOS" && <Smartphone className="w-3 h-3 mr-1" />}
-                              {platform === "Android" && <Smartphone className="w-3 h-3 mr-1" />}
-                              {platform === "Web" && <Globe className="w-3 h-3 mr-1" />}
-                              {platform}
-                            </span>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="py-4 px-6 text-sm">{app.complexity}</td>
-                      <td className="py-4 px-6 text-sm">{app.timeframe}</td>
-                      <td className="py-4 px-6 text-sm">
-                        <div className="flex flex-col gap-1">
-                          {app.features.map((feature, i) => (
-                            <div key={i} className="flex items-center">
-                              <Check className="w-4 h-4 text-green-400 mr-2" />
-                              <span>{feature}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div
-          className="mt-16 md:mt-24 text-center bg-gray-800/60 backdrop-blur-sm p-6 md:p-10 rounded-2xl border border-gray-700/50 shadow-xl animate-on-scroll"
-          data-animation="animate-zoom-in"
-          data-delay="300"
+        {/* Global Support Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mb-20"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6 md:mb-8">
-            <div className="flex items-center justify-center">
-              <Zap className="w-5 h-5 md:w-6 md:h-6 text-yellow-400 mr-2" />
-              <span className="text-sm md:text-base text-gray-300">Schnelle Entwicklung</span>
-            </div>
-            <div className="flex items-center justify-center">
-              <Code className="w-5 h-5 md:w-6 md:h-6 text-blue-400 mr-2" />
-              <span className="text-sm md:text-base text-gray-300">Qualitätscode</span>
-            </div>
-            <div className="flex items-center justify-center">
-              <Shield className="w-5 h-5 md:w-6 md:h-6 text-green-400 mr-2" />
-              <span className="text-sm md:text-base text-gray-300">Sichere Apps</span>
+          <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-3xl p-8 border border-purple-500/30">
+            <h2 className="text-3xl font-bold text-center mb-4 flex items-center justify-center gap-3">
+              <Globe className="w-8 h-8 text-blue-400" />
+              Globaler Support
+            </h2>
+            <p className="text-center text-gray-300 mb-8 text-balance">
+              Verfügbar in 13 Sprachen - BuyVoice spricht Ihre Sprache!
+            </p>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              {languages.map((lang, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center gap-2 p-3 bg-white/10 rounded-xl backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.6 + index * 0.05 }}
+                >
+                  <span className="text-2xl">{lang.flag}</span>
+                  <div className="text-left">
+                    <div className="text-white text-sm font-medium">{lang.name}</div>
+                    <div className="text-gray-400 text-xs">{lang.code}</div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
+        </motion.div>
 
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Entwicklung</h3>
-          <p className="text-base md:text-lg mb-4 md:mb-6 max-w-3xl mx-auto text-gray-300">
-            Ich bin ein freiberuflicher Entwickler, spezialisiert auf die Erstellung mobiler Anwendungen mit React
-            Native. Dank dieser Technologie sind meine Anwendungen sowohl mit iOS als auch mit Android kompatibel und
-            funktionieren einwandfrei. Ich kann vollständige Anwendungen entwickeln und in den jeweiligen App-Stores
-            veröffentlichen.
+        {/* Price Insights Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mb-20"
+        >
+          <h2 className="text-3xl font-bold text-center mb-4 flex items-center justify-center gap-3">
+            <DollarSign className="w-8 h-8 text-green-400" />
+            Smart Price Insights
+          </h2>
+          <p className="text-center text-gray-300 mb-8 text-balance">
+            Kennen Sie die Preise in Ihrer Stadt - Preisschätzungen zur Budgetplanung
           </p>
-          <p className="text-base md:text-lg mb-4 md:mb-8 max-w-3xl mx-auto text-gray-300">
-            Außerdem biete ich meine Dienstleistungen auch externen Unternehmen an. Wenn Sie interessiert sind, kann ich
-            Ihnen unverbindlich ein Beispiel eines Projekts zusenden, das Ihren Vorstellungen entspricht. Ich werde
-            Ihnen eine kostenlose Testversion einer Anwendung zur Verfügung stellen, damit Sie die Qualität meiner
-            Arbeit beurteilen können.
-          </p>
-        </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {cities.map((city, index) => (
+              <motion.div
+                key={index}
+                className="p-6 bg-gradient-to-b from-green-600/20 to-transparent rounded-2xl border border-green-500/30 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+              >
+                <h3 className="text-2xl font-bold mb-2">{city.name}</h3>
+                <p className="text-green-400 text-sm mb-3">{city.description}</p>
+                <div className="text-3xl font-bold text-green-300 mb-2">{city.price}</div>
+                <p className="text-gray-400 text-sm">Average weekly groceries</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* iOS Widget Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-center"
+        >
+          <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 rounded-3xl p-8 border border-blue-500/30">
+            <h2 className="text-3xl font-bold mb-4 flex items-center justify-center gap-3">
+              <Smartphone className="w-8 h-8 text-blue-400" />
+              iOS Widget
+            </h2>
+            <p className="text-gray-300 mb-6 text-balance">
+              Greifen Sie schnell auf BuyVoice direkt von Ihrem Startbildschirm mit unserem intelligenten Widget zu
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 items-center max-w-4xl mx-auto">
+              <div className="text-left">
+                <h3 className="text-xl font-semibold mb-3 text-blue-300">Schneller Zugriff</h3>
+                <p className="text-gray-300 mb-4">
+                  Erstellen Sie Einkaufslisten mit Sprachbefehlen ohne die App zu öffnen
+                </p>
+                <div className="flex items-center gap-2 text-green-400">
+                  <CheckCircle className="w-4 h-4" />
+                  <span className="text-sm">Widget-Integration</span>
+                </div>
+              </div>
+              <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
+                <div className="text-4xl mb-2">📱</div>
+                <p className="text-sm text-gray-300">BuyVoice iOS Widget</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   )

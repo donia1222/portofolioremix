@@ -79,10 +79,6 @@ export default function BlogIndex() {
 </div>
       
 
-        <Websitecomponent />
- 
-        <CommunityBlock />
-
 
         <Wencompometopen />
 

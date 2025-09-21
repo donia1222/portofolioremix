@@ -123,9 +123,6 @@ animationDuration: `${2 + Math.random() * 3}s`,
 <CorePrinciplesBlock />
 </div>
 
-<div id="onlineShopShowcase" className="w-full relative" data-aos="fade-up" data-aos-delay="1000">
-<OnlineShopShowcase />
-</div>
 
 <div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
 <OpenSourceBlock />
