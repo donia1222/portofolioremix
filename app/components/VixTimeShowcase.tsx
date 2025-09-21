@@ -67,8 +67,8 @@ export default function VixTimeShowcase() {
             VixTime
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Die intelligente Zeiterfassungs-App mit automatischer Geolokalisierung und KI-Integration
+          <p className="text-xl md:text-1xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Die intelligente Zeiterfassungs-App mit automatischer Geolokalisierung
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-8">
