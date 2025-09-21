@@ -19,7 +19,30 @@ interface PortfolioItem {
 
 // Datos de proyectos
 const portfolioItems: PortfolioItem[] = [
+    {
+    id: 8,
+    title: "BuyVoice App",
+    category: "Remix",
+    description:
+      "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
+    imageUrl: "/app-icon.png",
+    icon: "globe",
+    projectUrl: "https://www.speak-list.com",
+    technologies: ["Remix", "React", "TailwindCSS"],
+  },
+
         {
+    id: 13,
+    title: "Vix Time App",
+   category: "Next.js",
+    description:
+      "Intelligente Zeiterfassung",
+    imageUrl: "/calendar.webp",
+    icon: "globe",
+    projectUrl: "https://www.hot-bbq.ch",
+    technologies: ["Next.js", "React", "TailwindCSS"],
+  },
+          {
     id: 12,
     title: "HOT & BBQ",
    category: "Next.js",
@@ -30,6 +53,8 @@ const portfolioItems: PortfolioItem[] = [
     projectUrl: "https://www.hot-bbq.ch",
     technologies: ["Website im Aufbau"],
   },
+
+
       {
     id: 2,
     title: "BeautyStyle",
@@ -139,17 +164,7 @@ const portfolioItems: PortfolioItem[] = [
     technologies: ["HTML", "CSS", "PHP", "JavaScript"],
   },
   
-  {
-    id: 8,
-    title: "VoiceList",
-    category: "Remix",
-    description:
-      "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
-    imageUrl: "/IMG_3145 2.jpg",
-    icon: "globe",
-    projectUrl: "https://www.speak-list.com",
-    technologies: ["Remix", "React", "TailwindCSS"],
-  },
+
     {
     id: 10,
     title: "FoodScan AI",
