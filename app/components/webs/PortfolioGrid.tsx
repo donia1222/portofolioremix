@@ -27,7 +27,7 @@ const portfolioItems: PortfolioItem[] = [
       "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
     imageUrl: "/app-icon.png",
     icon: "globe",
-    projectUrl: "https://www.speak-list.com",
+    projectUrl: "https://www.buyvoice.app",
     technologies: ["Remix", "React", "TailwindCSS"],
   },
 
@@ -39,7 +39,7 @@ const portfolioItems: PortfolioItem[] = [
       "Intelligente Zeiterfassung",
     imageUrl: "/calendar.webp",
     icon: "globe",
-    projectUrl: "https://www.hot-bbq.ch",
+    projectUrl: "https://www.vixtime.com",
     technologies: ["Next.js", "React", "TailwindCSS"],
   },
           {
