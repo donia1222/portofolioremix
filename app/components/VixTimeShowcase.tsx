@@ -49,7 +49,7 @@ export default function VixTimeShowcase() {
   }, [features.length]);
 
   return (
-    <div className="w-full bg-gradient-to-b from-slate-900 via-purple-900 to-slate-900 text-white py-20">
+    <div className="w-full text-white py-20">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <motion.div

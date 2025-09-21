@@ -55,12 +55,22 @@ function PrincipleCard({ principle, index }: { principle: any; index: number }) 
   const y = useTransform(scrollYProgress, [0, 1], [50, -50])
   const rotate = useTransform(scrollYProgress, [0, 1], [-2, 2])
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.05, 0.95])
+  const convergenceX = useTransform(
+    scrollYProgress,
+    [0, 0.3, 0.7, 1],
+    [
+      index % 2 === 0 ? -20 : 20, // Start spread out
+      index % 2 === 0 ? -10 : 10, // Come closer
+      index % 2 === 0 ? 10 : -10, // Cross over
+      index % 2 === 0 ? 20 : -20, // Spread out again
+    ],
+  )
 
   return (
     <motion.div
       ref={ref}
-      style={{ y, rotate, scale }}
-      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/[0.08] shadow-2xl"
+      style={{ y, rotate, scale, x: convergenceX }}
+      className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/[0.08] shadow-2xl"
       initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100, rotateY: 45 }}
       animate={
         isInView
@@ -107,23 +117,44 @@ function PrincipleCard({ principle, index }: { principle: any; index: number }) 
 
       <div className="relative z-10 p-8 h-full flex flex-col items-center text-center">
         <motion.div
-          className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-white/[0.12] to-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
+          className="mb-6 p-6 rounded-full bg-gradient-to-br from-white/[0.15] to-white/[0.06] backdrop-blur-sm border border-white/[0.12] shadow-lg"
           whileHover={{
             rotate: 360,
-            scale: 1.1,
-            boxShadow: "0 0 30px rgba(255,255,255,0.2)",
+            scale: 1.15,
+            boxShadow: "0 0 40px rgba(255,255,255,0.3)",
           }}
           transition={{ duration: 0.6, type: "spring" }}
           animate={
             isInView
               ? {
                   rotate: [0, 360],
-                  transition: { duration: 1.2, delay: (index % 3) * 0.2 },
+                  scale: [1, 1.1, 1],
+                  transition: {
+                    duration: 1.5,
+                    delay: (index % 3) * 0.2,
+                    type: "spring",
+                    stiffness: 100,
+                  },
                 }
               : {}
           }
+          style={{
+            boxShadow: `0 0 20px ${
+              principle.gradient.includes("blue")
+                ? "rgba(59, 130, 246, 0.3)"
+                : principle.gradient.includes("green")
+                  ? "rgba(34, 197, 94, 0.3)"
+                  : principle.gradient.includes("pink")
+                    ? "rgba(236, 72, 153, 0.3)"
+                    : principle.gradient.includes("yellow")
+                      ? "rgba(251, 191, 36, 0.3)"
+                      : principle.gradient.includes("red")
+                        ? "rgba(239, 68, 68, 0.3)"
+                        : "rgba(6, 182, 212, 0.3)"
+            }`,
+          }}
         >
-          <div className="text-3xl text-white">{principle.icon}</div>
+          <div className="text-4xl text-white drop-shadow-lg">{principle.icon}</div>
         </motion.div>
 
         <motion.h3
@@ -192,8 +223,8 @@ function PrincipleCard({ principle, index }: { principle: any; index: number }) 
         </motion.div>
       </div>
 
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/[0.08] to-transparent p-[1px]">
-        <div className="w-full h-full rounded-2xl bg-gray-950/50" />
+      <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/[0.08] to-transparent p-[1px]">
+        <div className="w-full h-full rounded-3xl bg-gray-950/50" />
       </div>
     </motion.div>
   )
@@ -230,7 +261,7 @@ export default function ScrollInteractivePrinciples() {
             viewport={{ once: true }}
           ></motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
             {principles.map((principle, index) => (
               <PrincipleCard key={index} principle={principle} index={index} />
             ))}
