@@ -177,10 +177,7 @@ export default function VixTimeShowcase() {
           className="mb-20"
         >
           <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-3xl p-8 border border-purple-500/30">
-            <h2 className="text-3xl font-bold text-center mb-8 flex items-center justify-center gap-3">
-              <Star className="w-8 h-8 text-yellow-400" />
-              Wettbewerbsvorteile
-            </h2>
+ 
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {competitiveAdvantages.map((advantage, index) => (
