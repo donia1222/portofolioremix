@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Globe, Database, Server, Smartphone, Bitcoin, ArrowUpRight, X, ChevronLeft, ChevronRight } from "lucide-react"
 
 // Tipos
@@ -213,10 +213,11 @@ export default function PortfolioMasonry() {
   const [selectedProject, setSelectedProject] = useState<PortfolioItem | null>(null)
   const [filter, setFilter] = useState<string>("all")
   const [searchQuery, setSearchQuery] = useState<string>("")
-  const [columns, setColumns] = useState(3)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [projectsToShow, setProjectsToShow] = useState(4)
-  const [isMobile, setIsMobile] = useState(false)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+  const [cardWidth, setCardWidth] = useState(380)
   const [progressModal, setProgressModal] = useState<{
     show: boolean
     project: PortfolioItem | null
@@ -227,45 +228,44 @@ export default function PortfolioMasonry() {
     progress: 0,
   })
 
-  // Responsive columns and mobile detection
+  // Set card width based on screen size
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth
-      const mobile = width < 1024 // lg breakpoint
-      setIsMobile(mobile)
-
-      if (width < 640) {
-        setColumns(1)
-      } else if (width < 1024) {
-        setColumns(2)
+    const updateCardWidth = () => {
+      if (window.innerWidth < 768) {
+        // On mobile, make cards almost full width minus padding
+        setCardWidth(window.innerWidth - 48) // 24px padding on each side
       } else {
-        setColumns(3)
+        // Desktop size
+        setCardWidth(380)
       }
     }
 
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
+    updateCardWidth()
+    window.addEventListener('resize', updateCardWidth)
+    return () => window.removeEventListener('resize', updateCardWidth)
   }, [])
+
 
   // Manejar cambio de filtro con animación
   const handleFilterChange = (newFilter: string) => {
     if (filter === newFilter) return
 
     setIsAnimating(true)
-    if (isMobile) {
-      setProjectsToShow(4) // Reset to show only 4 projects on mobile
-    }
     setTimeout(() => {
       setFilter(newFilter)
+      // Reset scroll position when filter changes
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollLeft = 0
+      }
       setTimeout(() => {
         setIsAnimating(false)
+        checkScrollButtons()
       }, 50)
     }, 300)
   }
 
   // Filtrar proyectos
-  const allFilteredProjects = portfolioItems.filter((project) => {
+  const filteredProjects = portfolioItems.filter((project) => {
     // Filtrar por categoría
     const categoryMatch = filter === "all" || project.category.toLowerCase().includes(filter.toLowerCase())
 
@@ -278,23 +278,47 @@ export default function PortfolioMasonry() {
     return categoryMatch && searchMatch
   })
 
-  // En pantallas grandes mostrar todos, en móviles solo los limitados
-  const filteredProjects = isMobile ? allFilteredProjects.slice(0, projectsToShow) : allFilteredProjects
-
-  // Distribuir proyectos en columnas equilibradas
-  const distributeProjects = () => {
-    const result: PortfolioItem[][] = Array.from({ length: columns }, () => [])
-
-    // Distribuir proyectos para equilibrar las columnas
-    filteredProjects.forEach((project, index) => {
-      const columnIndex = index % columns
-      result[columnIndex].push(project)
-    })
-
-    return result
+  // Check scroll button states
+  const checkScrollButtons = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
+      setCanScrollLeft(scrollLeft > 10)
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+    }
   }
 
-  const projectColumns = distributeProjects()
+  // Scroll handlers
+  const scrollToDirection = (direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current) return
+
+    const scrollAmount = cardWidth + 24 // Width of one card plus gap
+    const currentScroll = scrollContainerRef.current.scrollLeft
+    const newScroll = direction === 'left'
+      ? Math.max(0, currentScroll - scrollAmount)
+      : currentScroll + scrollAmount
+
+    scrollContainerRef.current.scrollTo({
+      left: newScroll,
+      behavior: 'smooth'
+    })
+  }
+
+  // Monitor scroll position
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      checkScrollButtons()
+    }
+
+    container.addEventListener('scroll', handleScroll)
+    checkScrollButtons() // Initial check
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll)
+    }
+  }, [filteredProjects])
 
   // Obtener categorías únicas
   const categories = [
@@ -337,9 +361,6 @@ export default function PortfolioMasonry() {
     window.open(project.projectUrl, "_blank", "noopener,noreferrer")
   }
 
-  const handleShowMore = () => {
-    setProjectsToShow((prev) => prev + 4)
-  }
 
   return (
     <div className="w-full">
@@ -373,89 +394,134 @@ export default function PortfolioMasonry() {
         </div>
       </div>
 
-      {/* Grid layout con imágenes de fondo */}
-      <div
-        className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-500 ${
-          isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
-        }`}
-      >
-        {filteredProjects.map((project) => (
-          <div
-            key={project.id}
-            className="relative overflow-hidden rounded-xl border border-zinc-700 cursor-pointer hover:border-purple-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/10 h-[280px] group"
-            onClick={(e) => handleProjectClick(e, project)}
-          >
-            {/* Imagen de fondo */}
-            <div className="absolute inset-0 w-full h-full">
-              <img
-                src={project.imageUrl || "/placeholder.svg"}
-                alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/40 backdrop-blur-[2px]"></div>
-            </div>
+      {/* Horizontal scroll container with navigation buttons */}
+      <div className="relative">
+        {/* Left scroll button */}
+        <button
+          className={`group absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-purple-600/80 backdrop-blur-sm text-white transition-all duration-300 ${
+            canScrollLeft
+              ? 'opacity-100 hover:bg-purple-600 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/40'
+              : 'opacity-0 pointer-events-none'
+          }`}
+          onClick={() => scrollToDirection('left')}
+          aria-label="Scroll left"
+        >
+          <ChevronLeft className="w-6 h-6 transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:scale-110" />
+        </button>
 
-            {/* Contenido */}
-            <div className="relative z-10 flex flex-col h-full p-5">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/30 backdrop-blur-sm">
-                  <ProjectIcon type={project.icon} />
-                </span>
-                <span className="text-sm font-medium text-white/90">{project.category}</span>
+        {/* Right scroll button */}
+        <button
+          className={`group absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-purple-600/80 backdrop-blur-sm text-white transition-all duration-300 ${
+            canScrollRight
+              ? 'opacity-100 hover:bg-purple-600 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/40'
+              : 'opacity-0 pointer-events-none'
+          }`}
+          onClick={() => scrollToDirection('right')}
+          aria-label="Scroll right"
+        >
+          <ChevronRight className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:scale-110" />
+        </button>
+
+        {/* Scrollable container */}
+        <div
+          ref={scrollContainerRef}
+          className={`flex gap-6 overflow-x-auto scroll-smooth pb-4 transition-all duration-500 ${
+            isAnimating ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+          } scrollbar-hide snap-x snap-mandatory`}
+          style={{
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
+          <style>{`
+            .scrollbar-hide::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
+
+          {filteredProjects.map((project) => (
+            <div
+              key={project.id}
+              className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-zinc-900 to-zinc-950 border border-zinc-800/50 cursor-pointer hover:border-purple-500/60 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/30 flex-shrink-0 group hover:scale-[1.02] hover:-translate-y-1 snap-center"
+              style={{
+                width: `${cardWidth}px`,
+                height: '480px'
+              }}
+              onClick={(e) => handleProjectClick(e, project)}
+            >
+              {/* Image section - top */}
+              <div className="relative h-[220px] w-full overflow-hidden bg-gradient-to-br from-purple-900/20 to-pink-900/20">
+                <img
+                  src={project.imageUrl || "/placeholder.svg"}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+
+                {/* Category badge floating */}
+                <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/70 backdrop-blur-lg rounded-full px-3 py-1.5 border border-white/10 shadow-xl">
+                  <span className="flex h-4 w-4 items-center justify-center text-purple-400">
+                    <ProjectIcon type={project.icon} />
+                  </span>
+                  <span className="text-xs font-bold text-white uppercase tracking-wider">{project.category.split(' ')[0]}</span>
+                </div>
+
+                {/* Live status */}
+                <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-green-500/20 backdrop-blur-lg rounded-full px-3 py-1.5 border border-green-400/30">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
+                  <span className="text-xs text-green-400 font-bold">LIVE</span>
+                </div>
               </div>
 
-              <h3 className="text-xl font-bold text-white mt-10">{project.title}</h3>
+              {/* Content section - bottom */}
+              <div className="relative flex flex-col h-[260px] p-6 bg-gradient-to-b from-zinc-900/50 to-zinc-950">
+                {/* Title with gradient effect */}
+                <h3 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-300 mb-3 group-hover:from-purple-300 group-hover:to-pink-300 transition-all duration-500">
+                  {project.title}
+                </h3>
 
-              <div className="mt-auto">
-                <div className="flex flex-wrap gap-1.5 mb-4">
+                {/* Description with better styling */}
+                <p className="text-sm text-gray-400 line-clamp-3 mb-5 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+                  {project.description}
+                </p>
+
+                {/* Modern technology pills */}
+                <div className="flex flex-wrap gap-2 mb-auto">
                   {project.technologies.slice(0, 3).map((tech, index) => (
                     <span
                       key={index}
-                      className="inline-flex rounded-full bg-purple-500/20 border border-purple-500/30 backdrop-blur-sm px-2.5 py-0.5 text-xs text-purple-200"
+                      className="inline-flex items-center rounded-lg bg-gradient-to-r from-purple-500/10 to-pink-500/10 backdrop-blur-sm border border-purple-500/30 px-3 py-1 text-xs font-semibold text-purple-300 group-hover:from-purple-500/20 group-hover:to-pink-500/20 group-hover:border-purple-400/40 transition-all duration-300"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="inline-flex rounded-full bg-zinc-800/70 backdrop-blur-sm px-2.5 py-0.5 text-xs text-white/70">
+                    <span className="inline-flex items-center rounded-lg bg-zinc-800/60 backdrop-blur-sm border border-zinc-700/50 px-3 py-1 text-xs font-semibold text-zinc-400">
                       +{project.technologies.length - 3}
                     </span>
                   )}
                 </div>
 
-                <div className="flex justify-end">
-                  <button
-                    className="flex items-center gap-1 text-sm font-medium text-purple-300 transition-colors hover:text-purple-200 group-hover:underline"
-                    onClick={(e) => handleProjectClick(e, project)}
-                  >
-                    Web besuchen
-                    <ArrowUpRight className="h-4 w-4" />
-                  </button>
-                </div>
+                {/* Modern action button */}
+                <button
+                  className="group/btn w-full mt-4 relative overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-4 py-3 font-bold text-sm text-white shadow-lg transition-all duration-300 hover:shadow-purple-500/50 hover:scale-[1.02] active:scale-[0.98]"
+                  onClick={(e) => handleProjectClick(e, project)}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                  <span className="relative flex items-center justify-center gap-2">
+                    Projekt erkunden
+                    <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                  </span>
+                </button>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      {/* Botón Ver más - Solo en móviles */}
-      {isMobile && projectsToShow < allFilteredProjects.length && !isAnimating && (
-        <div className="mt-12 text-center">
-          <button
-            onClick={handleShowMore}
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-3 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-purple-500/20 hover:scale-105"
-          >
-            Mehr anzeigen
-            <ArrowUpRight className="h-4 w-4" />
-          </button>
-          <p className="mt-3 text-sm text-white/60">
-            {allFilteredProjects.length - projectsToShow} weitere Projekte verfügbar
-          </p>
-        </div>
-      )}
-
       {/* Mensaje si no hay resultados */}
-      {allFilteredProjects.length === 0 && !isAnimating && (
+      {filteredProjects.length === 0 && !isAnimating && (
         <div className="mt-12 text-center">
           <p className="text-lg text-white/70">Keine Projekte gefunden. Versuchen Sie es mit anderen Suchkriterien.</p>
         </div>

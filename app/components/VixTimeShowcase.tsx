@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Clock, MapPin, Smartphone, Brain, Shield, Globe, Star, CheckCircle, ExternalLink } from 'lucide-react';
+import { Clock, MapPin, Smartphone, Brain, Shield, Globe, CheckCircle, ExternalLink, ShoppingCart, Camera, Share2, DollarSign, ChefHat, Scan, BookOpen, Sparkles } from 'lucide-react';
 
 export default function VixTimeShowcase() {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -201,10 +201,10 @@ export default function VixTimeShowcase() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center"
+          className="text-center mb-20"
         >
           <h2 className="text-3xl font-bold mb-8">Technische Highlights</h2>
-          
+
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="p-6 bg-gradient-to-b from-purple-600/20 to-transparent rounded-2xl border border-purple-500/30">
               <Smartphone className="w-8 h-8 text-purple-400 mx-auto mb-4" />
@@ -213,7 +213,7 @@ export default function VixTimeShowcase() {
                 30+ modulare Komponenten mit vollständiger TypeScript-Integration
               </p>
             </div>
-            
+
             <div className="p-6 bg-gradient-to-b from-blue-600/20 to-transparent rounded-2xl border border-blue-500/30">
               <Brain className="w-8 h-8 text-blue-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-3">KI-Integration</h3>
@@ -221,7 +221,7 @@ export default function VixTimeShowcase() {
                 OpenAI GPT-4 Vision und Google Gemini für Dokumentenanalyse
               </p>
             </div>
-            
+
             <div className="p-6 bg-gradient-to-b from-green-600/20 to-transparent rounded-2xl border border-green-500/30">
               <Globe className="w-8 h-8 text-green-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-3">Internationalisierung</h3>
@@ -229,6 +229,174 @@ export default function VixTimeShowcase() {
                 5 Sprachen mit lokalisierter Arbeitsgesetzgebung
               </p>
             </div>
+          </div>
+        </motion.div>
+
+        {/* Other Apps Section - BuyVoice */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+            Weitere innovative Apps
+          </h2>
+
+          {/* BuyVoice App */}
+          <div className="mb-12">
+            <motion.div
+              className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-3xl p-8 border border-emerald-500/30 backdrop-blur-sm"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 bg-emerald-500/20 rounded-2xl">
+                      <ShoppingCart className="w-8 h-8 text-emerald-400" />
+                    </div>
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                      BuyVoice
+                    </h3>
+                  </div>
+
+                  <p className="text-xl text-gray-200 mb-6 font-medium">
+                    Schreibst Du Deine Einkaufslisten noch von Hand?
+                  </p>
+
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    Mit BuyVoice sprichst Du einfach – und die Liste erstellt sich von selbst.
+                  </p>
+
+                  <a
+                    href="https://www.buyvoice.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-full hover:from-emerald-500 hover:to-teal-500 transition-all duration-300 font-medium"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Mehr erfahren
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(52, 211, 153, 0.5)' }}
+                  >
+                    <Smartphone className="w-6 h-6 text-emerald-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Spracherkennung</h4>
+                    <p className="text-xs text-gray-400">KI versteht natürliche Sprache</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(52, 211, 153, 0.5)' }}
+                  >
+                    <Camera className="w-6 h-6 text-emerald-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Foto-Scan</h4>
+                    <p className="text-xs text-gray-400">Digitalisiere Papierlisten</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(52, 211, 153, 0.5)' }}
+                  >
+                    <Share2 className="w-6 h-6 text-emerald-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Teilen</h4>
+                    <p className="text-xs text-gray-400">Mit Familie synchron</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(52, 211, 153, 0.5)' }}
+                  >
+                    <DollarSign className="w-6 h-6 text-emerald-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Preisschätzung</h4>
+                    <p className="text-xs text-gray-400">Budget effektiv planen</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* FoodScan AI App */}
+          <div>
+            <motion.div
+              className="bg-gradient-to-br from-orange-900/30 to-red-900/30 rounded-3xl p-8 border border-orange-500/30 backdrop-blur-sm"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 bg-orange-500/20 rounded-2xl">
+                      <Scan className="w-8 h-8 text-orange-400" />
+                    </div>
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+                      FoodScan AI
+                    </h3>
+                  </div>
+
+                  <p className="text-xl text-gray-200 mb-6 font-medium">
+                    Verwandle deinen Kühlschrank in Rezepte!
+                  </p>
+
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    Dein persönlicher Küchenassistent mit künstlicher Intelligenz. Scanne Zutaten und erhalte sofort personalisierte Rezepte.
+                  </p>
+
+                  <a
+                    href="https://www.foodscan-ai.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 rounded-full hover:from-orange-500 hover:to-red-500 transition-all duration-300 font-medium"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Mehr erfahren
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 146, 60, 0.5)' }}
+                  >
+                    <ChefHat className="w-6 h-6 text-orange-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Personalisiert</h4>
+                    <p className="text-xs text-gray-400">An deinen Geschmack angepasst</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 146, 60, 0.5)' }}
+                  >
+                    <BookOpen className="w-6 h-6 text-orange-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Anleitungen</h4>
+                    <p className="text-xs text-gray-400">Schritt-für-Schritt Rezepte</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 146, 60, 0.5)' }}
+                  >
+                    <Brain className="w-6 h-6 text-orange-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">KI-Power</h4>
+                    <p className="text-xs text-gray-400">Einzigartige Gerichte</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 146, 60, 0.5)' }}
+                  >
+                    <Sparkles className="w-6 h-6 text-orange-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Kreativ</h4>
+                    <p className="text-xs text-gray-400">Neue Geschmackserlebnisse</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
