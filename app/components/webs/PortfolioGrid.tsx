@@ -112,7 +112,7 @@ const portfolioItems: PortfolioItem[] = [
       "/abstract-smoke.png",
     icon: "server",
     projectUrl: "https://www.ushuaia-bar.ch",
-    technologies: ["Next.js", "React", "Framer Motion", "TailwindCSS"],
+    technologies: ["Next.js", "React", "TailwindCSS"],
   },
 
   {
