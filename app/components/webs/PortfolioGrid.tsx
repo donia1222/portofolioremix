@@ -218,6 +218,7 @@ export default function PortfolioMasonry() {
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(true)
   const [cardWidth, setCardWidth] = useState(380)
+  const [activeIndex, setActiveIndex] = useState(0)
   const [progressModal, setProgressModal] = useState<{
     show: boolean
     project: PortfolioItem | null
@@ -303,13 +304,19 @@ export default function PortfolioMasonry() {
     })
   }
 
-  // Monitor scroll position
+  // Monitor scroll position and update dots
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
     const handleScroll = () => {
       checkScrollButtons()
+
+      // Update active dot based on scroll position
+      const scrollLeft = container.scrollLeft
+      const cardWidthWithGap = cardWidth + 24
+      const newIndex = Math.round(scrollLeft / cardWidthWithGap)
+      setActiveIndex(Math.min(Math.max(0, newIndex), filteredProjects.length - 1))
     }
 
     container.addEventListener('scroll', handleScroll)
@@ -318,7 +325,7 @@ export default function PortfolioMasonry() {
     return () => {
       container.removeEventListener('scroll', handleScroll)
     }
-  }, [filteredProjects])
+  }, [filteredProjects, cardWidth])
 
   // Obtener categorías únicas
   const categories = [
@@ -396,9 +403,9 @@ export default function PortfolioMasonry() {
 
       {/* Horizontal scroll container with navigation buttons */}
       <div className="relative">
-        {/* Left scroll button */}
+        {/* Left scroll button - hidden on mobile */}
         <button
-          className={`group absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-purple-600/80 backdrop-blur-sm text-white transition-all duration-300 ${
+          className={`hidden md:flex group absolute left-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-purple-600/80 backdrop-blur-sm text-white transition-all duration-300 items-center justify-center ${
             canScrollLeft
               ? 'opacity-100 hover:bg-purple-600 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/40'
               : 'opacity-0 pointer-events-none'
@@ -409,9 +416,9 @@ export default function PortfolioMasonry() {
           <ChevronLeft className="w-6 h-6 transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:scale-110" />
         </button>
 
-        {/* Right scroll button */}
+        {/* Right scroll button - hidden on mobile */}
         <button
-          className={`group absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-purple-600/80 backdrop-blur-sm text-white transition-all duration-300 ${
+          className={`hidden md:flex group absolute right-0 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-purple-600/80 backdrop-blur-sm text-white transition-all duration-300 items-center justify-center ${
             canScrollRight
               ? 'opacity-100 hover:bg-purple-600 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/40'
               : 'opacity-0 pointer-events-none'
@@ -516,6 +523,30 @@ export default function PortfolioMasonry() {
                 </button>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Dots indicator */}
+        <div className="flex justify-center gap-2 mt-6">
+          {filteredProjects.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                if (scrollContainerRef.current) {
+                  const scrollTo = index * (cardWidth + 24)
+                  scrollContainerRef.current.scrollTo({
+                    left: scrollTo,
+                    behavior: 'smooth'
+                  })
+                }
+              }}
+              className={`transition-all duration-300 rounded-full ${
+                index === activeIndex
+                  ? 'w-8 h-2 bg-purple-500'
+                  : 'w-2 h-2 bg-zinc-600 hover:bg-zinc-500'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
       </div>
