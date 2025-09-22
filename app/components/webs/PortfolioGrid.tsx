@@ -75,7 +75,7 @@ const portfolioItems: PortfolioItem[] = [
     imageUrl: "/woman-getting-her-hair-cut-beauty-salon_23-2149167399.jpg",
     icon: "globe",
     projectUrl: "https://beautystyles.vercel.app",
-    technologies: ["Remix", "React", "Framer Motion", "TailwindCSS"],
+    technologies: ["Remix", "React", "TailwindCSS"],
   },
   
 
