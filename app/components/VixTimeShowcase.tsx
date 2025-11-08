@@ -1,56 +1,8 @@
 "use client";
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Clock, MapPin, Smartphone, Brain, Shield, Globe, CheckCircle, ExternalLink, ShoppingCart, Camera, Share2, DollarSign, ChefHat, Scan, BookOpen, Sparkles } from 'lucide-react';
+import { Clock, MapPin, Brain, Shield, Globe, ExternalLink, ShoppingCart, Camera, Share2, DollarSign, ChefHat, Scan, BookOpen, Sparkles, Dog, Navigation, AlertTriangle, Store, MessageCircle, GraduationCap, Search } from 'lucide-react';
 
 export default function VixTimeShowcase() {
-  const [activeFeature, setActiveFeature] = useState(0);
-
-  const features = [
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Automatisches Geofencing",
-      description: "Intelligente Arbeitszeiterkennung basierend auf Ihrem Standort",
-      details: "Konfigurierbare Bereiche von 50-500m mit verzögerter Aktivierung"
-    },
-    {
-      icon: <Brain className="w-6 h-6" />,
-      title: "KI-Assistent",
-      description: "Analysiert Arbeitsverträge und extrahiert automatisch Arbeitszeiten",
-      details: "Unterstützt PDFs, Bilder und 10+ internationale Arbeitsgesetze"
-    },
-    {
-      icon: <Shield className="w-6 h-6" />,
-      title: "Datenschutz First",
-      description: "Funktioniert komplett offline - Ihre Daten bleiben bei Ihnen",
-      details: "Keine Cloud-Synchronisation erforderlich, lokale Datenspeicherung"
-    },
-    {
-      icon: <Globe className="w-6 h-6" />,
-      title: "Mehrsprachig",
-      description: "Vollständig lokalisiert in 5 Sprachen",
-      details: "Deutsche, englische, spanische, französische und italienische Unterstützung"
-    }
-  ];
-
-  const competitiveAdvantages = [
-    "Einzige App mit KI-Dokumentenanalyse",
-    "Funktioniert ohne GPS-Berechtigung",
-    "Native iOS Widget mit Mini-Kalender",
-    "Live Activities für Dynamic Island",
-     "Push-Benachrichtigungen",
-    "Freemium-Modell vs. teure Konkurrenz",
-  ];
-
-  
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveFeature((prev) => (prev + 1) % features.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [features.length]);
-
   return (
     <div className="w-full text-white py-20">
       <div className="container mx-auto px-4">
@@ -61,190 +13,106 @@ export default function VixTimeShowcase() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-purple-600/20 rounded-full border border-purple-500/30">
-            <Clock className="w-5 h-5 text-purple-400" />
-            <span className="text-purple-200 text-sm font-medium">Freelance-Projekt</span>
-          </div>
-          
           <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            VixTime
+            Meine Apps
           </h1>
-          
-          <p className="text-xl md:text-1xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Die intelligente Zeiterfassungs-App mit automatischer Geolokalisierung
+
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Innovative Mobile Apps entwickelt mit Leidenschaft und modernster Technologie
           </p>
-          
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <div className="flex items-center gap-2 px-4 py-2 bg-green-600/20 rounded-full border border-green-500/30">
-              <CheckCircle className="w-4 h-4 text-green-400" />
-              <span className="text-green-200 text-sm">React Native</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-blue-600/20 rounded-full border border-blue-500/30">
-              <CheckCircle className="w-4 h-4 text-blue-400" />
-              <span className="text-blue-200 text-sm">TypeScript</span>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-orange-600/20 rounded-full border border-orange-500/30">
-              <CheckCircle className="w-4 h-4 text-orange-400" />
-              <span className="text-orange-200 text-sm">OpenAI Integration</span>
-            </div>
-          </div>
         </motion.div>
 
-        {/* App Screenshots Section */}
+        {/* Apps Section */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex justify-center mb-20"
+          className="space-y-12"
         >
-          <div className="relative">
-            <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 p-8 rounded-3xl backdrop-blur-sm border border-white/10">
+          {/* VixTime App */}
+          <div>
+            <motion.div
+              className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 rounded-3xl p-8 border border-purple-500/30 backdrop-blur-sm"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                  <img 
-                    src="/calendar.webp" 
-                    alt="VixTime App Interface"
-                    className="rounded-2xl shadow-2xl w-full max-w-[400px] mx-auto"
-                  />
-                </div>
-                <div className="text-center md:text-left">
-                  <h3 className="text-2xl font-bold mb-4 text-purple-200">
-                    Verfügbar ab  Oktober 2025
-                  </h3>
-                  <p className="text-gray-300 mb-6 leading-relaxed">
-                    Arbeitszeiten mühelos verfolgen. Organisiert bleiben und Produktivität steigern mit automatischer Geofencing-Technologie.
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 bg-purple-500/20 rounded-2xl">
+                      <Clock className="w-8 h-8 text-purple-400" />
+                    </div>
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                      VixTime
+                    </h3>
+                  </div>
+
+                  <p className="text-xl text-gray-200 mb-6 font-medium">
+                    Die intelligente Zeiterfassungs-App mit automatischer Geolokalisierung
                   </p>
-                  <a 
-                    href="https://vixtime.com" 
-                    target="_blank" 
+
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    Arbeitszeiten mühelos verfolgen. Organisiert bleiben und Produktivität steigern mit automatischer Geofencing-Technologie und KI-Assistent.
+                  </p>
+
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-sm text-gray-400">Verfügbar ab Oktober 2025</span>
+                  </div>
+
+                  <a
+                    href="https://vixtime.com"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full hover:from-purple-500 hover:to-blue-500 transition-all duration-300 font-medium"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Website besuchen
+                    Mehr erfahren
                   </a>
                 </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
 
-        {/* Features Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-20"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Innovative Funktionen
-          </h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className={`p-6 rounded-2xl border transition-all duration-300 cursor-pointer ${
-                  activeFeature === index
-                    ? 'bg-gradient-to-br from-purple-600/30 to-blue-600/30 border-purple-400/50 transform scale-105'
-                    : 'bg-white/5 border-white/10 hover:bg-white/10'
-                }`}
-                onClick={() => setActiveFeature(index)}
-                whileHover={{ y: -5 }}
-              >
-                <div className="text-purple-400 mb-4">
-                  {feature.icon}
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(168, 85, 247, 0.5)' }}
+                  >
+                    <MapPin className="w-6 h-6 text-purple-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Geofencing</h4>
+                    <p className="text-xs text-gray-400">Automatische Arbeitszeiterkennung</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(168, 85, 247, 0.5)' }}
+                  >
+                    <Brain className="w-6 h-6 text-purple-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">KI-Assistent</h4>
+                    <p className="text-xs text-gray-400">Analysiert Arbeitsverträge</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(168, 85, 247, 0.5)' }}
+                  >
+                    <Shield className="w-6 h-6 text-purple-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Datenschutz</h4>
+                    <p className="text-xs text-gray-400">Funktioniert komplett offline</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(168, 85, 247, 0.5)' }}
+                  >
+                    <Globe className="w-6 h-6 text-purple-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Mehrsprachig</h4>
+                    <p className="text-xs text-gray-400">5 Sprachen verfügbar</p>
+                  </motion.div>
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-white">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-300 text-sm mb-3">
-                  {feature.description}
-                </p>
-                <p className="text-purple-200 text-xs">
-                  {feature.details}
-                </p>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
-
-        {/* Competitive Advantages */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mb-20"
-        >
-          <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-3xl p-8 border border-purple-500/30">
- 
-            
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {competitiveAdvantages.map((advantage, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center gap-3 p-4 bg-white/10 rounded-xl backdrop-blur-sm"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                >
-                  <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-white text-sm">{advantage}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Technical Specs */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-3xl font-bold mb-8">Technische Highlights</h2>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="p-6 bg-gradient-to-b from-purple-600/20 to-transparent rounded-2xl border border-purple-500/30">
-              <Smartphone className="w-8 h-8 text-purple-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-3">React Native 0.76.9</h3>
-              <p className="text-gray-300 text-sm">
-                30+ modulare Komponenten mit vollständiger TypeScript-Integration
-              </p>
-            </div>
-
-            <div className="p-6 bg-gradient-to-b from-blue-600/20 to-transparent rounded-2xl border border-blue-500/30">
-              <Brain className="w-8 h-8 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-3">KI-Integration</h3>
-              <p className="text-gray-300 text-sm">
-                OpenAI GPT-4 Vision und Google Gemini für Dokumentenanalyse
-              </p>
-            </div>
-
-            <div className="p-6 bg-gradient-to-b from-green-600/20 to-transparent rounded-2xl border border-green-500/30">
-              <Globe className="w-8 h-8 text-green-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Internationalisierung</h3>
-              <p className="text-gray-300 text-sm">
-                5 Sprachen mit lokalisierter Arbeitsgesetzgebung
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Other Apps Section - BuyVoice */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-            Weitere innovative Apps
-          </h2>
 
           {/* BuyVoice App */}
-          <div className="mb-12">
+          <div>
             <motion.div
               className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-3xl p-8 border border-emerald-500/30 backdrop-blur-sm"
               whileHover={{ scale: 1.02 }}
@@ -285,7 +153,7 @@ export default function VixTimeShowcase() {
                     className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
                     whileHover={{ y: -5, borderColor: 'rgba(52, 211, 153, 0.5)' }}
                   >
-                    <Smartphone className="w-6 h-6 text-emerald-400 mb-2" />
+                    <Brain className="w-6 h-6 text-emerald-400 mb-2" />
                     <h4 className="font-semibold mb-1 text-white">Spracherkennung</h4>
                     <p className="text-xs text-gray-400">KI versteht natürliche Sprache</p>
                   </motion.div>
@@ -393,6 +261,174 @@ export default function VixTimeShowcase() {
                     <Sparkles className="w-6 h-6 text-orange-400 mb-2" />
                     <h4 className="font-semibold mb-1 text-white">Kreativ</h4>
                     <p className="text-xs text-gray-400">Neue Geschmackserlebnisse</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Hundezonen App */}
+          <div>
+            <motion.div
+              className="bg-gradient-to-br from-amber-900/30 to-yellow-900/30 rounded-3xl p-8 border border-amber-500/30 backdrop-blur-sm"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 bg-amber-500/20 rounded-2xl">
+                      <Dog className="w-8 h-8 text-amber-400" />
+                    </div>
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-amber-400 to-yellow-400 bg-clip-text text-transparent">
+                      Hundezonen
+                    </h3>
+                  </div>
+
+                  <p className="text-xl text-gray-200 mb-6 font-medium">
+                    Die App für dich und deinen Hund 🐾
+                  </p>
+
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    Entdecke und teile Hunderouten in der Schweiz, Deutschland und Österreich. Mit Warnungen vor Giftködern, Services und KI-Chatbot.
+                  </p>
+
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-sm text-gray-400">Verfügbar für iOS & Android</span>
+                  </div>
+
+                  <a
+                    href="https://www.hundezonen.ch"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-600 to-yellow-600 rounded-full hover:from-amber-500 hover:to-yellow-500 transition-all duration-300 font-medium mb-6"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Mehr erfahren
+                  </a>
+
+                  <p className="text-xs text-amber-200 italic">
+                    Ein Tool mit Liebe ❤️ gemacht für Dich und Deinen Hund von einem hundeliebenden Freelancer.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 191, 36, 0.5)' }}
+                  >
+                    <Navigation className="w-6 h-6 text-amber-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Routen entdecken</h4>
+                    <p className="text-xs text-gray-400">Finde die besten Spaziergänge</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 191, 36, 0.5)' }}
+                  >
+                    <AlertTriangle className="w-6 h-6 text-amber-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Giftköder-Radar</h4>
+                    <p className="text-xs text-gray-400">Warnungen in Echtzeit</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 191, 36, 0.5)' }}
+                  >
+                    <Store className="w-6 h-6 text-amber-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Hunde-Services</h4>
+                    <p className="text-xs text-gray-400">Tierärzte, Trainer & mehr</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 191, 36, 0.5)' }}
+                  >
+                    <MessageCircle className="w-6 h-6 text-amber-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">KI-Chatbot</h4>
+                    <p className="text-xs text-gray-400">Frag alles über deinen Hund</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* DOG-MENTOR App */}
+          <div>
+            <motion.div
+              className="bg-gradient-to-br from-rose-900/30 to-pink-900/30 rounded-3xl p-8 border border-rose-500/30 backdrop-blur-sm"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-3 bg-rose-500/20 rounded-2xl">
+                      <Dog className="w-8 h-8 text-rose-400" />
+                    </div>
+                    <h3 className="text-3xl font-bold bg-gradient-to-r from-rose-400 to-pink-400 bg-clip-text text-transparent">
+                      DOG-MENTOR
+                    </h3>
+                  </div>
+
+                  <p className="text-xl text-gray-200 mb-6 font-medium">
+                    Easy, Good, and Beautiful App
+                  </p>
+
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    Everything you need to know about dogs! Entdecke die Welt deines Hundes mit Rezepten, Clicker Training, Rassenidentifikation und KI-Chat powered by ChatGPT-4.
+                  </p>
+
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-sm text-gray-400">Verfügbar für iOS</span>
+                  </div>
+
+                  <a
+                    href="https://dog-mentor.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-rose-600 to-pink-600 rounded-full hover:from-rose-500 hover:to-pink-500 transition-all duration-300 font-medium"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    Mehr erfahren
+                  </a>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 113, 133, 0.5)' }}
+                  >
+                    <ChefHat className="w-6 h-6 text-rose-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Dog Recipes</h4>
+                    <p className="text-xs text-gray-400">Leckere und nahrhafte Gerichte</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 113, 133, 0.5)' }}
+                  >
+                    <GraduationCap className="w-6 h-6 text-rose-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Clicker Training</h4>
+                    <p className="text-xs text-gray-400">Positives Training lernen</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 113, 133, 0.5)' }}
+                  >
+                    <Search className="w-6 h-6 text-rose-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">Breed Identifier</h4>
+                    <p className="text-xs text-gray-400">Rasse erkennen mit KI</p>
+                  </motion.div>
+
+                  <motion.div
+                    className="p-4 bg-white/5 rounded-xl backdrop-blur-sm border border-white/10"
+                    whileHover={{ y: -5, borderColor: 'rgba(251, 113, 133, 0.5)' }}
+                  >
+                    <MessageCircle className="w-6 h-6 text-rose-400 mb-2" />
+                    <h4 className="font-semibold mb-1 text-white">AI Chat GPT-4</h4>
+                    <p className="text-xs text-gray-400">Sofortige Antworten erhalten</p>
                   </motion.div>
                 </div>
               </div>
