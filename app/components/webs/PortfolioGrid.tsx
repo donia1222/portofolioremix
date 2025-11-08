@@ -24,11 +24,22 @@ const portfolioItems: PortfolioItem[] = [
     title: "BuyVoice App",
     category: "Remix",
     description:
-      "Italienisches Restaurant, das authentische mediterrane Aromen mit frischen Zutaten und traditionellen Rezepten bietet.",
+      "Mit BuyVoice sprichst Du einfach – und die Liste erstellt sich von selbst.",
     imageUrl: "/app-icon.png",
     icon: "globe",
     projectUrl: "https://www.buyvoice.app",
     technologies: ["Remix", "React", "TailwindCSS"],
+  },
+     {
+    id: 15,
+    title: "  Hundezonen App",
+    category: "Next.js",
+    description:
+      "Die App für dich und deinen Hund.",
+    imageUrl: "/hiundezonne.png",
+    icon: "globe",
+    projectUrl: "https://www.hundezonen.ch",
+    technologies: ["Next.js", "React", "TailwindCSS"],
   },
 
         {
