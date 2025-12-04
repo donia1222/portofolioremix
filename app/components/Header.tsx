@@ -4,7 +4,7 @@ import type React from "react"
 
 import { NavLink, useLocation } from "@remix-run/react"
 import { useState, useEffect, useCallback } from "react"
-import { Code, Menu, X, Home, Brain } from "lucide-react"
+import { Code, Menu, X, Home, Brain, Globe } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useLanguage, languageFlags, type Language } from "~/context/LanguageContext"
 import "./header.css"
@@ -429,16 +429,15 @@ export default function Header() {
                       <X className="h-6 w-6 text-white" />
                     </motion.div>
                   ) : (
-                    <motion.span
-                      key="flag"
-                      className="text-2xl"
+                    <motion.div
+                      key="globe"
                       initial={{ rotate: 90, opacity: 0 }}
                       animate={{ rotate: 0, opacity: 1 }}
                       exit={{ rotate: -90, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {languageFlags[language].flag}
-                    </motion.span>
+                      <Globe className="h-6 w-6 text-white" />
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </motion.button>
@@ -559,7 +558,7 @@ export default function Header() {
                 { to: "/", icon: <Home className="h-7 w-7" />, label: t("home"), color: "from-violet-500 to-purple-600", x: -60, y: -120 },
                 { to: "/webs", icon: <Code className="h-7 w-7" />, label: t("projects"), color: "from-sky-500 to-cyan-600", x: 70, y: -80 },
                 { to: "/ki-losungen", icon: <Brain className="h-7 w-7" />, label: t("aiSolutions"), color: "from-emerald-500 to-teal-600", x: -80, y: 40 },
-                { to: "/roberto", icon: <img src="/yo2.png" alt="Avatar" className="w-full h-full rounded-full object-cover" />, label: t("aboutMe"), color: "from-rose-500 to-pink-600", x: 60, y: 100, isAvatar: true },
+                { to: "/roberto", icon: <img src="/yo2.png" alt="Avatar" className="w-full h-full rounded-full object-cover" />, label: t("aboutMe"), color: "from-violet-500 to-fuchsia-600", x: 60, y: 100, isAvatar: true },
               ].map((item, index) => (
                 <motion.div
                   key={item.to}
@@ -605,14 +604,14 @@ export default function Header() {
                           w-20 h-20 rounded-full
                           ${('isAvatar' in item && item.isAvatar) ? '' : `bg-gradient-to-br ${item.color}`}
                           shadow-2xl shadow-black/30
-                          ${('isAvatar' in item && item.isAvatar) ? 'border-[3px] border-red-500' : 'border-2 border-white/20'}
+                          ${('isAvatar' in item && item.isAvatar) ? 'border-[3px] border-violet-500' : 'border-2 border-white/20'}
                           overflow-hidden
                         `}
                         whileHover={{ scale: 1.15 }}
                         whileTap={{ scale: 0.95 }}
                       >
                         {/* Glow ring */}
-                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${('isAvatar' in item && item.isAvatar) ? 'from-red-500 to-rose-600' : item.color} blur-xl opacity-50`} />
+                        <div className={`absolute inset-0 rounded-full bg-gradient-to-br ${('isAvatar' in item && item.isAvatar) ? 'from-violet-500 to-fuchsia-600' : item.color} blur-xl opacity-50`} />
 
                         {/* Icon */}
                         <span className={`relative z-10 text-white ${('isAvatar' in item && item.isAvatar) ? 'w-full h-full' : ''}`}>
