@@ -402,38 +402,76 @@ export default function Header() {
 
             {/* Language selector - Mobile with floating globes */}
             <motion.div
-              className="absolute top-6 left-6 z-50"
+              className="absolute top-6 left-6 z-[70]"
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
               <motion.button
                 onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white"
+                className={`
+                  flex items-center justify-center w-12 h-12 rounded-full
+                  border border-white/20 text-white transition-colors
+                  ${isLangOpen ? 'bg-violet-600/80' : 'bg-white/10'}
+                `}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="text-2xl">{languageFlags[language].flag}</span>
+                <AnimatePresence mode="wait">
+                  {isLangOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X className="h-6 w-6 text-white" />
+                    </motion.div>
+                  ) : (
+                    <motion.span
+                      key="flag"
+                      className="text-2xl"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {languageFlags[language].flag}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </motion.button>
+            </motion.div>
 
-              <AnimatePresence>
-                {isLangOpen && (
+            {/* Language overlay - covers menu when selecting language */}
+            <AnimatePresence>
+              {isLangOpen && (
+                <>
+                  {/* Dark backdrop to hide menu items */}
                   <motion.div
-                    className="absolute top-full left-0 mt-4"
+                    className="absolute inset-0 bg-black/80 backdrop-blur-md z-[55]"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    onClick={() => setIsLangOpen(false)}
+                  />
+
+                  {/* Floating language globes - centered */}
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center z-[60]"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
                     {(Object.keys(languageFlags) as Language[]).map((lang, index) => {
-                      // Position globes in a diagonal cascade
-                      const positions = [
-                        { x: 0, y: 0 },
-                        { x: 50, y: 50 },
-                        { x: 20, y: 110 },
-                        { x: 70, y: 160 },
-                        { x: 30, y: 220 },
-                      ]
-                      const pos = positions[index] || { x: 0, y: index * 60 }
+                      // Position globes in a circle around center
+                      const angle = (index * (360 / 5) - 90) * (Math.PI / 180)
+                      const radius = 100
+                      const pos = {
+                        x: Math.cos(angle) * radius,
+                        y: Math.sin(angle) * radius,
+                      }
 
                       return (
                         <motion.div
@@ -471,10 +509,10 @@ export default function Header() {
                               }}
                               className={`
                                 relative flex items-center justify-center
-                                w-14 h-14 rounded-full
-                                bg-gradient-to-br from-violet-600/80 to-fuchsia-600/80
+                                w-16 h-16 rounded-full
+                                bg-gradient-to-br from-violet-600/90 to-fuchsia-600/90
                                 backdrop-blur-sm
-                                shadow-xl shadow-black/30
+                                shadow-2xl shadow-violet-500/30
                                 border-2 ${language === lang ? 'border-white' : 'border-white/30'}
                                 overflow-hidden
                               `}
@@ -485,7 +523,7 @@ export default function Header() {
                               <div className="absolute inset-0 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 blur-lg opacity-50" />
 
                               {/* Flag */}
-                              <span className="relative z-10 text-2xl">{languageFlags[lang].flag}</span>
+                              <span className="relative z-10 text-3xl">{languageFlags[lang].flag}</span>
 
                               {/* Active indicator */}
                               {language === lang && (
@@ -496,14 +534,24 @@ export default function Header() {
                                 />
                               )}
                             </motion.button>
+
+                            {/* Language name below globe */}
+                            <motion.span
+                              className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-medium text-white whitespace-nowrap"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: 0.2 }}
+                            >
+                              {languageFlags[lang].name}
+                            </motion.span>
                           </motion.div>
                         </motion.div>
                       )
                     })}
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
+                </>
+              )}
+            </AnimatePresence>
 
             {/* Floating bubble menu items */}
             <nav className="relative w-full h-full flex items-center justify-center">
