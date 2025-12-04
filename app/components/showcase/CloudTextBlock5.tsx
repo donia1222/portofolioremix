@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import { useLanguage } from "~/context/LanguageContext"
 
 export default function CloudTextBlock5() {
+  const { t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
-  const digitaleLetters = "DIGITALE".split("")
-  const innovationLetters = "INNOVATION".split("")
+  const word1Letters = t("heroWord1").split("")
+  const word2Letters = t("heroWord2").split("")
 
   useEffect(() => {
     setIsVisible(true)
@@ -90,23 +92,23 @@ export default function CloudTextBlock5() {
       <div className="relative z-10 max-w-6xl mx-auto text-center">
         {/* Main Hero Title */}
         <div className="mb-16">
-          {/* DIGITALE */}
+          {/* Word 1 */}
           <motion.div
             className="mb-4"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">{renderAnimatedWord(digitaleLetters, 0.5)}</h1>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">{renderAnimatedWord(word1Letters, 0.5)}</h1>
           </motion.div>
 
-          {/* INNOVATION */}
+          {/* Word 2 */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">{renderAnimatedWord(innovationLetters, 1.2)}</h1>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">{renderAnimatedWord(word2Letters, 1.2)}</h1>
           </motion.div>
         </div>
       </div>

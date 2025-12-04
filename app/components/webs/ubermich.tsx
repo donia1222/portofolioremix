@@ -1,43 +1,44 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
-import { Smartphone, Globe, Bot, Rocket, Mail, Phone, MapPin, Github, Linkedin, Twitter } from "lucide-react"
+import { Smartphone, Globe, Bot, Rocket, Github, Linkedin, Twitter } from "lucide-react"
+import { useLanguage } from "~/context/LanguageContext"
 
-const services = [
+const serviceData = [
   {
     id: "mobile",
-    title: "Mobile Apps",
-    subtitle: "iOS & Android",
+    titleKey: "mobileApps",
+    subtitleKey: "mobileAppsSubtitle",
     icon: Smartphone,
     gradient: "from-blue-400 via-purple-500 to-pink-500",
-    description: "Entwicklung nativer und plattformübergreifender mobiler Anwendungen mit modernsten Technologien.",
-    features: ["React Native", "Xcode", ],
+    descKey: "mobileAppsDesc",
+    features: ["React Native", "Xcode"],
   },
   {
     id: "web",
-    title: "Web Development",
-    subtitle: "Modern & Responsive",
+    titleKey: "webDevelopment",
+    subtitleKey: "webDevSubtitle",
     icon: Globe,
     gradient: "from-green-400 via-blue-500 to-purple-600",
-    description: "Responsive Webseiten und Web-Apps mit optimaler Performance und SEO.",
-    features: ["Next.js", "React", "TypeScript", ],
+    descKey: "webDevDesc",
+    features: ["Next.js", "React", "TypeScript"],
   },
   {
     id: "ai",
-    title: "AI Integration",
-    subtitle: "ChatGPT & More",
+    titleKey: "aiIntegration",
+    subtitleKey: "aiIntegrationSubtitle",
     icon: Bot,
     gradient: "from-orange-400 via-red-500 to-pink-600",
-    description: "Integration von KI-Technologien zur Automatisierung und Verbesserung von Geschäftsprozessen.",
+    descKey: "aiIntegrationDesc",
     features: ["OpenAI API", "Automation", "Chatbots"],
   },
   {
     id: "consulting",
-    title: "Tech Consulting",
-    subtitle: "Strategic Solutions",
+    titleKey: "techConsulting",
+    subtitleKey: "techConsultingSubtitle",
     icon: Rocket,
     gradient: "from-purple-400 via-pink-500 to-red-500",
-    description: "Strategische Beratung für digitale Transformation und Technologie-Implementierung.",
+    descKey: "techConsultingDesc",
     features: ["Architecture", "Optimization", "Scaling"],
   },
 ]
@@ -68,7 +69,7 @@ const Particle = ({ index }: { index: number }) => {
   )
 }
 
-const ServiceCard = ({ service, index }: { service: (typeof services)[0]; index: number }) => {
+const ServiceCard = ({ service, index, t }: { service: (typeof serviceData)[0]; index: number; t: (key: any) => string }) => {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -103,12 +104,12 @@ const ServiceCard = ({ service, index }: { service: (typeof services)[0]; index:
               <service.icon className="w-8 h-8 text-white" />
             </motion.div>
             <div>
-              <h3 className="text-lg font-bold text-white">{service.title}</h3>
-              <p className="text-white/70 text-sm">{service.subtitle}</p>
+              <h3 className="text-lg font-bold text-white">{t(service.titleKey)}</h3>
+              <p className="text-white/70 text-sm">{t(service.subtitleKey)}</p>
             </div>
           </div>
 
-          <p className="text-white/80 text-sm leading-relaxed mb-4 flex-grow">{service.description}</p>
+          <p className="text-white/80 text-sm leading-relaxed mb-4 flex-grow">{t(service.descKey)}</p>
 
           <motion.div
             className="space-y-1"
@@ -146,6 +147,7 @@ const ServiceCard = ({ service, index }: { service: (typeof services)[0]; index:
 }
 
 export default function Component() {
+  const { t } = useLanguage()
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
@@ -228,7 +230,7 @@ export default function Component() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            Full-Stack Developer & Digital Innovation Specialist
+            {t("aboutRole")}
           </motion.p>
 
           <motion.div
@@ -256,8 +258,8 @@ export default function Component() {
    
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <ServiceCard key={service.id} service={service} index={index} />
+            {serviceData.map((service, index) => (
+              <ServiceCard key={service.id} service={service} index={index} t={t} />
             ))}
           </div>
         </div>

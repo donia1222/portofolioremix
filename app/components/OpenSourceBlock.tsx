@@ -76,7 +76,7 @@ Ich arbeite mit modernen Frameworks wie React Native, Next.js und Remix sowie mi
           className="relative inline-flex items-center text-xl group mb-10"
         >
           <span className="relative z-10 px-5 py-3 font-semibold transition-colors duration-200 ease-in-out bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent group-hover:from-blue-400 group-hover:to-teal-400">
-            Website Entwicklung
+        PORTFOLIO
             <span aria-hidden="true" className="ml-2">↗</span>
           </span>
           <span className="absolute inset-0 w-full h-full transition duration-200 ease-in-out bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-30 group-hover:opacity-100 group-hover:from-blue-400 group-hover:to-teal-400"></span>

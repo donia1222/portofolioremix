@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useEffect, useState, useRef } from "react"
 import { motion } from "framer-motion"
+import { useLanguage } from "~/context/LanguageContext"
 
 const images = [
   "/programming-background-with-person-working-with-codes-computer.jpg",
@@ -11,6 +12,7 @@ const images = [
 ]
 
 export default function DeliverBlock() {
+  const { t } = useLanguage()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -80,7 +82,7 @@ export default function DeliverBlock() {
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
             >
-              <span className="text-pink-400 text-sm font-medium">✨ Pixel Perfect Design</span>
+              <span className="text-pink-400 text-sm font-medium">✨ {t("pixelPerfect")}</span>
             </motion.div>
 
             {/* Main title with gradient and animations */}
@@ -92,7 +94,7 @@ export default function DeliverBlock() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent block">
-                  Modernität in
+                  {t("deliverTitle1")}
                 </span>
                 <motion.span
                   className="bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent block"
@@ -101,7 +103,7 @@ export default function DeliverBlock() {
                   }}
                   transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
                 >
-                  jedem Pixel
+                  {t("deliverTitle2")}
                 </motion.span>
               </motion.h2>
 
@@ -121,16 +123,15 @@ export default function DeliverBlock() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Ich fusioniere modernes Design mit fesselnden Animationen, um Websites zu kreieren, die in jedem Detail
-              herausstechen. Jedes Pixel wird sorgfältig ausgearbeitet, um Interaktivität und Ästhetik zu bieten.
+              {t("deliverDesc")}
             </motion.p>
 
             {/* Interactive stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8">
               {[
-                { number: "100+", label: "Projekte" },
-                { number: "99%", label: "Zufriedenheit" },
-                { number: "24/7", label: "Support" },
+                { number: "100+", label: t("statProjects") },
+                { number: "99%", label: t("statSatisfaction") },
+                { number: "24/7", label: t("statSupport") },
               ].map((stat, index) => (
                 <motion.div
                   key={index}

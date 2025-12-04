@@ -1,270 +1,313 @@
 "use client"
 
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
-import { FiGrid, FiRefreshCw, FiUsers, FiStar, FiCode, FiShield } from "react-icons/fi"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+import {
+  Smartphone,
+  Brain,
+  Globe,
+  Sparkles,
+  Code2,
+  Shield,
+  Zap
+} from "lucide-react"
+import { useLanguage } from "~/context/LanguageContext"
 
 const principles = [
   {
-    icon: <FiGrid className="text-3xl" />,
-    title: "App-Entwicklung",
-    description: "Leistungsstarke mobile Apps.",
-    gradient: "from-blue-400 to-indigo-600",
+    icon: Smartphone,
+    titleKey: "appDev",
+    descKey: "appDevDesc",
+    color: "violet",
   },
   {
-    icon: <FiRefreshCw className="text-3xl" />,
-    title: "KI-Lösungen",
-    description: "Fortschrittliche KI-Automation.",
-    gradient: "from-green-400 to-teal-500",
+    icon: Brain,
+    titleKey: "aiTitle",
+    descKey: "aiDesc",
+    color: "emerald",
   },
   {
-    icon: <FiUsers className="text-3xl" />,
-    title: "Webseiten",
-    description: "Optimale Leistung & Design.",
-    gradient: "from-pink-500 to-purple-600",
+    icon: Globe,
+    titleKey: "webTitle",
+    descKey: "webDesc",
+    color: "sky",
   },
   {
-    icon: <FiStar className="text-3xl" />,
-    title: "Innovation",
-    description: "Neue Chancen für Kunden.",
-    gradient: "from-yellow-400 to-orange-500",
+    icon: Sparkles,
+    titleKey: "innovation",
+    descKey: "innovationDesc",
+    color: "amber",
   },
   {
-    icon: <FiCode className="text-3xl" />,
-    title: "Clean Code",
-    description: "Wartbare Software.",
-    gradient: "from-red-400 to-pink-600",
+    icon: Code2,
+    titleKey: "cleanCode",
+    descKey: "cleanCodeDesc",
+    color: "rose",
   },
   {
-    icon: <FiShield className="text-3xl" />,
-    title: "Sicherheit",
-    description: "Robuste Datenschutz.",
-    gradient: "from-cyan-400 to-blue-600",
+    icon: Shield,
+    titleKey: "security",
+    descKey: "securityDesc",
+    color: "cyan",
   },
 ]
 
-function PrincipleCard({ principle, index }: { principle: any; index: number }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: false, margin: "-100px" })
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  })
-
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
-  const rotate = useTransform(scrollYProgress, [0, 1], [-2, 2])
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.05, 0.95])
-
-  return (
-    <motion.div
-      ref={ref}
-      style={{ y, rotate, scale }}
-      className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-xl border border-white/[0.08] shadow-2xl"
-      initial={{ opacity: 0, x: index % 2 === 0 ? -100 : 100, rotateY: 45 }}
-      animate={
-        isInView
-          ? {
-              opacity: 1,
-              x: 0,
-              rotateY: 0,
-              transition: {
-                duration: 0.8,
-                delay: (index % 3) * 0.15,
-                type: "spring",
-                stiffness: 120,
-                damping: 20,
-              },
-            }
-          : {}
-      }
-      whileHover={{
-        scale: 1.02,
-        rotateY: 5,
-        z: 50,
-        transition: { duration: 0.4, ease: "easeOut" },
-      }}
-    >
-      <div
-        className={`absolute inset-0 bg-gradient-to-br ${principle.gradient} opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500`}
-      />
-
-      <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100"
-        style={{
-          background: `linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)`,
-        }}
-        animate={{
-          x: ["-200%", "200%"],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Number.POSITIVE_INFINITY,
-          repeatDelay: 3,
-          ease: "easeInOut",
-        }}
-      />
-
-      <div className="relative z-10 p-8 h-full flex flex-col items-center text-center">
-        <motion.div
-          className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-white/[0.12] to-white/[0.04] backdrop-blur-sm border border-white/[0.08]"
-          whileHover={{
-            rotate: 360,
-            scale: 1.1,
-            boxShadow: "0 0 30px rgba(255,255,255,0.2)",
-          }}
-          transition={{ duration: 0.6, type: "spring" }}
-          animate={
-            isInView
-              ? {
-                  rotate: [0, 360],
-                  transition: { duration: 1.2, delay: (index % 3) * 0.2 },
-                }
-              : {}
-          }
-        >
-          <div className="text-3xl text-white">{principle.icon}</div>
-        </motion.div>
-
-        <motion.h3
-          className="text-xl font-bold text-white mb-3 tracking-tight"
-          initial={{ opacity: 0, y: 20 }}
-          animate={
-            isInView
-              ? {
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: (index % 3) * 0.15 + 0.3, duration: 0.6 },
-                }
-              : {}
-          }
-        >
-          {principle.title}
-        </motion.h3>
-
-        <motion.p
-          className="text-gray-300/90 text-sm leading-relaxed flex-1"
-          initial={{ opacity: 0, y: 20 }}
-          animate={
-            isInView
-              ? {
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: (index % 3) * 0.15 + 0.5, duration: 0.6 },
-                }
-              : {}
-          }
-        >
-          {principle.description}
-        </motion.p>
-
-        <motion.div
-          className="mt-6 h-0.5 rounded-full overflow-hidden bg-white/[0.08] w-full"
-          initial={{ opacity: 0 }}
-          animate={
-            isInView
-              ? {
-                  opacity: 1,
-                  transition: {
-                    delay: (index % 3) * 0.15 + 0.7,
-                    duration: 0.4,
-                  },
-                }
-              : {}
-          }
-        >
-          <motion.div
-            className={`h-full bg-gradient-to-r ${principle.gradient} rounded-full`}
-            initial={{ width: 0 }}
-            animate={
-              isInView
-                ? {
-                    width: "100%",
-                    transition: {
-                      duration: 1.2,
-                      delay: (index % 3) * 0.15 + 0.8,
-                      ease: "easeOut",
-                    },
-                  }
-                : {}
-            }
-          />
-        </motion.div>
-      </div>
-
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/[0.08] to-transparent p-[1px]">
-        <div className="w-full h-full rounded-2xl bg-gray-950/50" />
-      </div>
-    </motion.div>
-  )
+const colorClasses: Record<string, { bg: string; border: string; text: string; glow: string; shimmer: string }> = {
+  violet: {
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/30 group-hover:border-violet-400/60",
+    text: "text-violet-400",
+    glow: "group-hover:shadow-violet-500/20",
+    shimmer: "via-violet-400/20",
+  },
+  emerald: {
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/30 group-hover:border-emerald-400/60",
+    text: "text-emerald-400",
+    glow: "group-hover:shadow-emerald-500/20",
+    shimmer: "via-emerald-400/20",
+  },
+  sky: {
+    bg: "bg-sky-500/10",
+    border: "border-sky-500/30 group-hover:border-sky-400/60",
+    text: "text-sky-400",
+    glow: "group-hover:shadow-sky-500/20",
+    shimmer: "via-sky-400/20",
+  },
+  amber: {
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/30 group-hover:border-amber-400/60",
+    text: "text-amber-400",
+    glow: "group-hover:shadow-amber-500/20",
+    shimmer: "via-amber-400/20",
+  },
+  rose: {
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/30 group-hover:border-rose-400/60",
+    text: "text-rose-400",
+    glow: "group-hover:shadow-rose-500/20",
+    shimmer: "via-rose-400/20",
+  },
+  cyan: {
+    bg: "bg-cyan-500/10",
+    border: "border-cyan-500/30 group-hover:border-cyan-400/60",
+    text: "text-cyan-400",
+    glow: "group-hover:shadow-cyan-500/20",
+    shimmer: "via-cyan-400/20",
+  },
 }
 
-export default function ScrollInteractivePrinciples() {
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  })
+export default function CorePrinciplesBlock() {
+  const { t } = useLanguage()
+  const [visibleCards, setVisibleCards] = useState<number[]>([])
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"])
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.4, 1, 1, 0.4])
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    cardsRef.current.forEach((card, index) => {
+      if (!card) return
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Delay escalonado: cada card aparece 150ms después de la anterior
+              setTimeout(() => {
+                setVisibleCards((prev) =>
+                  prev.includes(index) ? prev : [...prev, index]
+                )
+              }, index * 150)
+              observer.unobserve(entry.target)
+            }
+          })
+        },
+        { threshold: 0.2 }
+      )
+
+      observer.observe(card)
+      observers.push(observer)
+    })
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect())
+    }
+  }, [])
 
   return (
-    <div className="bg-gray-950 relative overflow-hidden">
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          y: backgroundY,
-          background:
-            "radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(147, 51, 234, 0.1) 0%, transparent 50%)",
-        }}
-      />
+    <section className="relative py-24 overflow-hidden bg-zinc-950">
+      {/* CSS Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(2deg); }
+        }
 
-      <section ref={containerRef} className="px-4 sm:px-6 lg:px-8 py-16 mt-12 mb-40 relative z-10">
-        <motion.div className="max-w-7xl mx-auto" style={{ opacity }}>
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: -50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          ></motion.div>
+        @keyframes shimmer {
+          0% { transform: translateX(-100%) rotate(45deg); }
+          100% { transform: translateX(100%) rotate(45deg); }
+        }
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-            {principles.map((principle, index) => (
-              <PrincipleCard key={index} principle={principle} index={index} />
-            ))}
-          </div>
-        </motion.div>
-      </section>
+        @keyframes pulse-glow {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.05); }
+        }
 
-      {[...Array(15)].map((_, i) => (
-        <motion.div
-          key={i}
-          className={`absolute rounded-full ${
-            i % 3 === 0
-              ? "w-1 h-1 bg-blue-400/30"
-              : i % 3 === 1
-                ? "w-1.5 h-1.5 bg-purple-400/20"
-                : "w-0.5 h-0.5 bg-white/40"
-          }`}
+        @keyframes fade-in-up {
+          0% { opacity: 0; transform: translateY(30px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-float-delayed {
+          animation: float 8s ease-in-out infinite;
+          animation-delay: -2s;
+        }
+
+        .group:hover .shimmer-effect {
+          animation: shimmer 0.8s ease-in-out;
+        }
+
+        .icon-pulse {
+          animation: pulse-glow 2s ease-in-out infinite;
+        }
+      `}</style>
+
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-600/5 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/5 rounded-full blur-3xl animate-float-delayed" />
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-          }}
-          animate={{
-            y: [0, -120, 0],
-            opacity: [0.2, 0.8, 0.2],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 3,
-            repeat: Number.POSITIVE_INFINITY,
-            delay: Math.random() * 3,
-            ease: "easeInOut",
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '60px 60px'
           }}
         />
-      ))}
-    </div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6">
+            <Zap className="w-4 h-4 text-violet-400" />
+            <span className="text-sm font-medium text-zinc-400">Was ich biete</span>
+          </div>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            {t("coreTitle")}
+            <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent"> {t("coreTitleHighlight")}</span>
+          </h2>
+
+          <p className="text-zinc-500 max-w-xl mx-auto">
+            {t("coreSubtitle")}
+          </p>
+        </div>
+
+        {/* Bento Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {principles.map((principle, index) => {
+            const colors = colorClasses[principle.color]
+            const Icon = principle.icon
+
+            return (
+              <div
+                key={index}
+                ref={(el) => { cardsRef.current[index] = el }}
+                className={`
+                  group relative p-6 rounded-2xl cursor-pointer overflow-hidden
+                  bg-zinc-900/50 backdrop-blur-sm
+                  border ${colors.border}
+                  transition-all duration-700 ease-out
+                  hover:bg-zinc-900/80
+                  hover:shadow-2xl ${colors.glow}
+                  hover:-translate-y-2 hover:scale-[1.02]
+                  ${visibleCards.includes(index)
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-12'
+                  }
+                `}
+              >
+                {/* Shimmer effect on hover */}
+                <div className={`
+                  shimmer-effect absolute inset-0
+                  bg-gradient-to-r from-transparent ${colors.shimmer} to-transparent
+                  opacity-0 group-hover:opacity-100
+                  -translate-x-full
+                `} />
+
+                {/* Glow effect */}
+                <div className={`
+                  absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
+                  bg-gradient-to-br from-white/5 to-transparent
+                  transition-opacity duration-500
+                `} />
+
+                {/* Content */}
+                <div className="relative z-10">
+                  {/* Icon */}
+                  <div className={`
+                    inline-flex items-center justify-center
+                    w-14 h-14 rounded-xl mb-5
+                    ${colors.bg} border ${colors.border}
+                    transition-all duration-500
+                    group-hover:scale-110 group-hover:rotate-3
+                  `}>
+                    <Icon className={`w-7 h-7 ${colors.text} transition-transform duration-300 group-hover:scale-110`} />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-white mb-3 transition-all duration-300 group-hover:translate-x-1">
+                    {t(principle.titleKey as any)}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-zinc-400 text-sm leading-relaxed transition-all duration-300 group-hover:text-zinc-300">
+                    {t(principle.descKey as any)}
+                  </p>
+                </div>
+
+                {/* Corner decoration - animated */}
+                <div className={`
+                  absolute top-4 right-4 w-2 h-2 rounded-full
+                  ${colors.bg} ${colors.text}
+                  transition-all duration-300
+                  group-hover:scale-150 group-hover:opacity-100
+                  opacity-50
+                `} />
+
+                {/* Floating particles on hover */}
+                <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+                  {[...Array(3)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={`
+                        absolute w-1 h-1 rounded-full ${colors.bg}
+                        opacity-0 group-hover:opacity-60
+                        transition-all duration-1000
+                      `}
+                      style={{
+                        left: `${20 + i * 30}%`,
+                        bottom: '10%',
+                        transitionDelay: `${i * 100}ms`,
+                        transform: `translateY(${i % 2 === 0 ? '0' : '20px'})`,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                {/* Number badge */}
+                <div className="absolute bottom-4 right-4 text-zinc-800 font-bold text-4xl opacity-20 group-hover:opacity-40 transition-all duration-300 group-hover:scale-110">
+                  0{index + 1}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
   )
 }

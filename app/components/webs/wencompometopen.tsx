@@ -27,7 +27,7 @@ const animateNumbers = (element: HTMLDivElement, start: number, end: number, dur
 export default function FreelancerShowcase() {
   const [typedText, setTypedText] = useState("");
   const [typingIndex, setTypingIndex] = useState(0);
-  const fullText = "Webseiten";
+  const fullText = "einzigartige";
   const numbersRef = useRef<HTMLDivElement>(null);
   const cloudTexts = [
     { text: "Responsive", color: "text-blue-500" },
@@ -81,15 +81,7 @@ export default function FreelancerShowcase() {
 
   return (
     <section className="w-full text-center  relative overflow-hidden mt-20">
-      <div className="container mx-auto px-4 py-10 pb-10 relative mt-8">
-        <h2 className="text-4xl md:text-6xl text-white max-w-4xl mx-auto mb-5 animate-fade-in-up">
-          Moderne, ansprechende <br />
-          und einzigartige <span className="text-pink-400 animate-pulse">{typedText}</span>
-        </h2>
 
-
-
-      </div>
       <main className=" p-4 md:p-8">
       <div className="mx-auto max-w-7xl py-12">
         <PortfolioMasonry />

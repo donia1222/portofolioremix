@@ -124,9 +124,6 @@ animationDuration: `${2 + Math.random() * 3}s`,
 </div>
 
 
-<div id="openSourceBlock" className="w-full relative" data-aos="fade-up" data-aos-delay="400">
-<OpenSourceBlock />
-</div>
 
 <div id="technologyCarousel" className="w-full relative" data-aos="fade-up" data-aos-delay="800">
 <TechnologyCarousel />

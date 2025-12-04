@@ -1,14 +1,17 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { ArrowRight, Bot, Brain, BarChart, Zap, MessageSquare, Cog, ExternalLink } from "lucide-react"
+import { Brain, Zap, Cog } from "lucide-react"
 import Header from "~/components/Header";
 import Chat from "~/components/Chat";
-import ContactModule from "~/components/Contact/contactModuledos"; 
+import ContactModule from "~/components/Contact/contactModuledos";
 import ScrollToTop from "~/components/scroll-to-top"
 import { useNavigate } from 'react-router-dom';
 import LoadingScreen from "~/components/LoadingScreen"
+import { useLanguage } from "~/context/LanguageContext"
+
 export default function AIBusinessSolutions() {
+  const { t } = useLanguage()
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
   const navigate = useNavigate();
   useEffect(() => {
@@ -62,17 +65,16 @@ export default function AIBusinessSolutions() {
           <div className="flex flex-col items-center text-center">
 
             <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500">
-              Stärken Sie Ihr Unternehmen mit KI
+              {t("aiHeroTitle")}
             </h1>
             <p className="text-xl text-gray-300 mb-10 max-w-2xl">
-              Künstliche Intelligenz verändert die Art und Weise, wie Unternehmen arbeiten. Optimieren Sie Prozesse,
-              verbessern Sie den Kundenservice und treffen Sie intelligentere Entscheidungen.
+              {t("aiHeroDesc")}
             </p>
             <button
       className="group relative overflow-hidden rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 text-white font-medium transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transform hover:scale-105"
       onClick={handleClick}
     >
-      <span className="relative z-10 flex items-center">Entdecken Sie die Zukunft</span>
+      <span className="relative z-10 flex items-center">{t("aiDiscoverFuture")}</span>
       <span className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
     </button>
           </div>
@@ -81,11 +83,10 @@ export default function AIBusinessSolutions() {
         {/* Contenido Principal */}
         <div className="mb-24s">
           <h2 className="text-3xl md:text-4xl font-bold text-center  mt-40 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-            Maßgeschneiderte KI Lösungen
+            {t("aiCustomSolutions")}
           </h2>
           <p className="text-xl text-gray-300 text-center max-w-3xl mx-auto mb-16">
-            Jedes Unternehmen ist einzigartig, und die KI, die Sie verwenden, sollte es auch sein. Modelle, die wie Ihr
-            Team reagieren, abgestimmt auf Ihre Unternehmensvision.
+            {t("aiCustomSolutionsDesc")}
           </p>
 
           {/* Cómo funciona */}
@@ -93,20 +94,18 @@ export default function AIBusinessSolutions() {
             {[
               {
                 icon: <Brain className="h-10 w-10" />,
-                title: "Personalisiertes Training",
-                description:
-                  "Entwicklung von KI-Modellen, die die spezifischen Bedürfnisse Ihres Unternehmens verstehen.",
+                title: t("aiPersonalizedTraining"),
+                description: t("aiPersonalizedTrainingDesc"),
               },
               {
                 icon: <Cog className="h-10 w-10" />,
-                title: "Fortschrittliches Fine-Tuning",
-                description:
-                  "Anpassung der Modelle für präzise Antworten, die die Essenz Ihres Unternehmens widerspiegeln.",
+                title: t("aiAdvancedFineTuning"),
+                description: t("aiAdvancedFineTuningDesc"),
               },
               {
                 icon: <Zap className="h-10 w-10" />,
-                title: "Einfache Implementierung",
-                description: "Integration der KI in Ihr digitales Ökosystem ohne technische Komplikationen.",
+                title: t("aiEasyImplementation"),
+                description: t("aiEasyImplementationDesc"),
               },
             ].map((item, index) => (
               <div

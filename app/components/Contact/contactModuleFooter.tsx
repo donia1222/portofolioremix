@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Download, Github, X, Linkedin, MessageSquare, Phone, Mail, MapPin } from "lucide-react"
+import { useLanguage } from "~/context/LanguageContext"
 
 // Modal component with animations
 const Modal = ({
@@ -12,11 +13,13 @@ const Modal = ({
   onClose,
   title,
   content,
+  closeText = "Close",
 }: {
   isOpen: boolean
   onClose: () => void
   title: string
   content: React.ReactNode
+  closeText?: string
 }) => {
   if (!isOpen) return null
 
@@ -54,7 +57,7 @@ const Modal = ({
               onClick={onClose}
               className="mt-6 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md transition-colors"
             >
-              Schließen
+              {closeText}
             </button>
           </motion.div>
         </motion.div>
@@ -147,6 +150,7 @@ const handleDownloadVCard = () => {
 }
 
 export default function ContactModule() {
+  const { t } = useLanguage()
   const [isImpressumOpen, setIsImpressumOpen] = useState(false)
   const [isDatenschutzOpen, setIsDatenschutzOpen] = useState(false)
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -172,9 +176,7 @@ export default function ContactModule() {
 
   const handleWhatsAppClick = () => {
     const phoneNumber = "+41765608645"
-    const message = encodeURIComponent(
-      "Hallo! Ich interessiere mich für Ihre Dienstleistungen im Bereich Webseiten und App-Entwicklung. Können wir darüber sprechen?",
-    )
+    const message = encodeURIComponent(t("whatsappMessage"))
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank")
   }
 
@@ -223,12 +225,12 @@ export default function ContactModule() {
           transition={{ duration: 0.6 }}
         >
           <motion.h2
-            className="text-4xl font-extrabold tracking-tight sm:text-5xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400"
+            className="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-400"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Kontaktieren Sie LWEB Schweiz
+            {t("contactTitle")}
           </motion.h2>
           <motion.p
             className="text-xl text-gray-300 max-w-2xl mx-auto"
@@ -236,7 +238,7 @@ export default function ContactModule() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Lassen Sie uns gemeinsam Ihre digitale Vision verwirklichen
+            {t("contactSubtitle")}
           </motion.p>
         </motion.div>
 
@@ -249,21 +251,21 @@ export default function ContactModule() {
           <div className="p-8 sm:p-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-white mb-6">Kontaktinformationen</h3>
+ 
 
                 <div className="grid gap-4">
-                  <ContactCard icon={<MapPin className="h-5 w-5" />} title="Adresse" value=" 9475 Sevelen, Schweiz🇨🇭" />
+                  <ContactCard icon={<MapPin className="h-5 w-5" />} title={t("address")} value=" 9475 Sevelen, Schweiz🇨🇭" />
 
                   <ContactCard
                     icon={<Phone className="h-5 w-5" />}
-                    title="Telefon"
+                    title={t("phone")}
                     value="0765608645"
                     href="tel:+410765608645"
                   />
 
                   <ContactCard
                     icon={<Mail className="h-5 w-5" />}
-                    title="E-Mail"
+                    title={t("email")}
                     value="info@lweb.ch"
                     href="mailto:info@lweb.ch"
                   />
@@ -288,7 +290,7 @@ export default function ContactModule() {
                     >
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-300">
-                          Name
+                          {t("name")}
                         </label>
                         <input
                           type="text"
@@ -302,7 +304,7 @@ export default function ContactModule() {
                       </div>
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                          E-Mail
+                          {t("email")}
                         </label>
                         <input
                           type="email"
@@ -316,7 +318,7 @@ export default function ContactModule() {
                       </div>
                       <div>
                         <label htmlFor="message" className="block text-sm font-medium text-gray-300">
-                          Nachricht
+                          {t("message")}
                         </label>
                         <textarea
                           id="message"
@@ -329,7 +331,7 @@ export default function ContactModule() {
                         />
                       </div>
                       <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 text-white">
-                        Nachricht senden
+                        {t("sendMessage")}
                       </Button>
                     </motion.form>
                   )}
@@ -337,7 +339,7 @@ export default function ContactModule() {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-white mb-6">Schnellzugriff</h3>
+  
 
                 <Button
                   onClick={handleWhatsAppClick}
@@ -360,7 +362,7 @@ export default function ContactModule() {
                   className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                   icon={<Download className="h-5 w-5" />}
                 >
-                  Visitenkarte
+                  {t("businessCard")}
                 </Button>
 
                 <a
@@ -385,14 +387,14 @@ export default function ContactModule() {
               onClick={() => setIsImpressumOpen(true)}
               className="w-full bg-transparent hover:bg-gray-700/50 text-gray-400 rounded-none py-3"
             >
-              Impressum
+              {t("imprint")}
             </Button>
             <div className="w-px bg-gray-700"></div>
             <Button
               onClick={() => setIsDatenschutzOpen(true)}
               className="w-full bg-transparent hover:bg-gray-700/50 text-gray-400 rounded-none py-3"
             >
-              Datenschutz
+              {t("privacy")}
             </Button>
           </div>
         </motion.div>
@@ -403,14 +405,15 @@ export default function ContactModule() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          <p>&copy; {new Date().getFullYear()} LWEB Schweiz. Alle Rechte vorbehalten.</p>
+          <p>&copy; {new Date().getFullYear()} LWEB Schweiz. {t("allRightsReserved")}.</p>
         </motion.div>
       </div>
 
       <Modal
         isOpen={isImpressumOpen}
         onClose={() => setIsImpressumOpen(false)}
-        title="Impressum"
+        title={t("imprint")}
+        closeText={t("close")}
         content={
           <>
             <p>
@@ -444,7 +447,8 @@ export default function ContactModule() {
       <Modal
         isOpen={isDatenschutzOpen}
         onClose={() => setIsDatenschutzOpen(false)}
-        title="Datenschutz"
+        title={t("privacy")}
+        closeText={t("close")}
         content={
           <>
             <p>
