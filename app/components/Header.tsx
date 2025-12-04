@@ -89,7 +89,7 @@ export default function Header() {
   return (
     <>
       <motion.header
-        className={`w-full py-4 px-18 fixed top-0 left-0 z-[90]`}
+        className={`w-full py-4 px-20 fixed top-0 left-0 z-[90]`}
         initial={{ y: 0 }}
         animate={{ y: isHeaderVisible ? 0 : -100 }}
         transition={{ duration: 0.3 }}
