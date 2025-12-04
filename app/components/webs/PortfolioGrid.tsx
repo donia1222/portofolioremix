@@ -292,8 +292,8 @@ export default function PortfolioGrid() {
       </div>
 
       {/* Category Tabs - Glassmorphism Style */}
-      <div className="flex justify-center mb-12">
-        <div className="inline-flex p-1.5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
+      <div className="flex justify-center mb-12 px-2">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-0 sm:inline-flex p-1.5 sm:p-1.5 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
           {categories.map((category) => {
             const Icon = category.icon
             const isActive = activeCategory === category.id
@@ -306,18 +306,20 @@ export default function PortfolioGrid() {
                 key={category.id}
                 onClick={() => handleCategoryChange(category.id)}
                 className={`
-                  relative flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-sm
+                  relative flex items-center justify-center gap-2
+                  px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl font-medium text-sm
                   transition-all duration-300 ease-out
+                  min-w-[100px] sm:min-w-0
                   ${isActive
                     ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-500/25"
-                    : "text-zinc-400 hover:text-white hover:bg-white/5"
+                    : "text-zinc-400 hover:text-white hover:bg-white/10"
                   }
                 `}
               >
-                <Icon className={`w-4 h-4 ${isActive ? "text-white" : ""}`} />
-                <span>{getCategoryLabel(category.id, t)}</span>
+                <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? "text-white" : ""}`} />
+                <span className="whitespace-nowrap">{getCategoryLabel(category.id, t)}</span>
                 <span className={`
-                  ml-1 px-2 py-0.5 rounded-full text-xs font-semibold
+                  ml-1 px-2 py-0.5 rounded-full text-xs font-semibold flex-shrink-0
                   ${isActive
                     ? "bg-white/20 text-white"
                     : "bg-zinc-800 text-zinc-500"

@@ -4,7 +4,7 @@ import type React from "react"
 
 import { NavLink, useLocation } from "@remix-run/react"
 import { useState, useEffect, useCallback } from "react"
-import { Code, Menu, X, Home, Brain, Globe } from "lucide-react"
+import { Code, Menu, X, Home, Brain } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useLanguage, languageFlags, type Language } from "~/context/LanguageContext"
 import "./header.css"
