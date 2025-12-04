@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Sparkles } from 'lucide-react';
 import { useLanguage } from '~/context/LanguageContext';
 
@@ -20,11 +20,58 @@ const technologies = [
 
 export default function TechnologyCarousel() {
   const [isClient, setIsClient] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !containerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  // Touch drag handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!containerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !containerRef.current) return;
+    const x = e.touches[0].pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
 
   if (!isClient) {
     return (
@@ -63,64 +110,81 @@ export default function TechnologyCarousel() {
       {/* Infinite Scroll Container */}
       <div className="relative">
         {/* Gradient Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-32 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none" />
 
-        {/* Scrolling Track */}
+        {/* Scrolling Track - Draggable */}
         <div
-          className="flex gap-6 animate-scroll"
+          ref={containerRef}
+          className={`
+            overflow-x-auto scrollbar-hide
+            ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}
+          `}
           style={{
-            width: 'max-content',
+            width: '100%',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch',
           }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
-          {duplicatedTech.map((tech, index) => (
-            <div
-              key={`${tech.name}-${index}`}
-              className="group relative"
-            >
-              <div className={`
-                relative flex flex-col items-center justify-center
-                w-36 h-36 rounded-2xl
-                bg-gradient-to-br ${tech.color}
-                border border-white/10 hover:border-white/25
-                backdrop-blur-sm
-                transition-all duration-500 ease-out
-                hover:scale-110 hover:-translate-y-2
-                hover:shadow-2xl hover:shadow-violet-500/20
-                cursor-pointer
-              `}>
-                {/* Glow effect on hover */}
+          <div className={`flex gap-4 md:gap-6 ${isDragging ? '' : 'animate-scroll-inner'}`} style={{ width: 'max-content' }}>
+            {duplicatedTech.map((tech, index) => (
+              <div
+                key={`${tech.name}-${index}`}
+                className="group relative flex-shrink-0"
+              >
                 <div className={`
-                  absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
-                  bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20
-                  transition-opacity duration-500
-                `} />
+                  relative flex flex-col items-center justify-center
+                  w-28 h-28 md:w-36 md:h-36 rounded-2xl
+                  bg-gradient-to-br ${tech.color}
+                  border border-white/10 hover:border-white/25
+                  backdrop-blur-sm
+                  transition-all duration-500 ease-out
+                  hover:scale-105 md:hover:scale-110 hover:-translate-y-2
+                  hover:shadow-2xl hover:shadow-violet-500/20
+                  select-none
+                `}>
+                  {/* Glow effect on hover */}
+                  <div className={`
+                    absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
+                    bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20
+                    transition-opacity duration-500
+                  `} />
 
-                {/* Icon */}
-                <div className="relative z-10 mb-3">
-                  <img
-                    src={tech.icon}
-                    alt={tech.name}
-                    className="w-12 h-12 filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110"
-                  />
+                  {/* Icon */}
+                  <div className="relative z-10 mb-3">
+                    <img
+                      src={tech.icon}
+                      alt={tech.name}
+                      className="w-10 h-10 md:w-12 md:h-12 filter brightness-0 invert opacity-70 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 pointer-events-none"
+                      draggable={false}
+                    />
+                  </div>
+
+                  {/* Name */}
+                  <span className="relative z-10 text-xs md:text-sm font-medium text-zinc-400 group-hover:text-white transition-colors duration-300">
+                    {tech.name}
+                  </span>
+
+                  {/* Corner accent */}
+                  <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-white/20 group-hover:bg-violet-400 transition-colors duration-300" />
                 </div>
-
-                {/* Name */}
-                <span className="relative z-10 text-sm font-medium text-zinc-400 group-hover:text-white transition-colors duration-300">
-                  {tech.name}
-                </span>
-
-                {/* Corner accent */}
-                <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-white/20 group-hover:bg-violet-400 transition-colors duration-300" />
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
       {/* CSS Animation */}
       <style>{`
-        @keyframes scroll {
+        @keyframes scroll-inner {
           0% {
             transform: translateX(0);
           }
@@ -129,12 +193,22 @@ export default function TechnologyCarousel() {
           }
         }
 
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
+        .animate-scroll-inner {
+          animation: scroll-inner 30s linear infinite;
         }
 
-        .animate-scroll:hover {
+        .animate-scroll-inner:hover {
           animation-play-state: paused;
+        }
+
+        /* Hide scrollbar */
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
       `}</style>
     </section>
