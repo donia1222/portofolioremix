@@ -349,13 +349,7 @@ export default function ContactModule() {
                   WhatsApp
                 </Button>
 
-                <Button
-                  onClick={handleLinkedInClick}
-                  className="w-full bg-blue-700 hover:bg-blue-800 text-white"
-                  icon={<Linkedin className="h-5 w-5" />}
-                >
-                  LinkedIn
-                </Button>
+  
 
                 <Button
                   onClick={handleDownloadVCard}

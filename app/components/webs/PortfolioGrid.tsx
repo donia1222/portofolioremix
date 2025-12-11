@@ -40,7 +40,7 @@ const portfolioItems: PortfolioItem[] = [
     description: "Sprich einfach – und die Liste erstellt sich von selbst. KI-gestützte Einkaufsliste.",
     imageUrl: "/app-icon.png",
     projectUrl: "https://www.buyvoice.app",
-    technologies: ["Remix", "React", "TailwindCSS", "AI"],
+    technologies: ["React Native", "OpenAI"],
     featured: true,
     size: "large"
   },
@@ -52,7 +52,7 @@ const portfolioItems: PortfolioItem[] = [
     description: "Die App für dich und deinen Hund. Finde Hundezonen in deiner Nähe.",
     imageUrl: "/hiundezonne.png",
     projectUrl: "https://www.hundezonen.ch",
-    technologies: ["Next.js", "React", "Maps API"],
+    technologies: ["React"],
     featured: true,
     size: "medium"
   },
@@ -64,7 +64,7 @@ const portfolioItems: PortfolioItem[] = [
     description: "Intelligente Zeiterfassung für Teams und Freelancer.",
     imageUrl: "/calendar.webp",
     projectUrl: "https://www.vixtime.com",
-    technologies: ["Next.js", "React", "TailwindCSS"],
+    technologies: ["React"],
     size: "medium"
   },
   {
@@ -75,19 +75,19 @@ const portfolioItems: PortfolioItem[] = [
     description: "Transform Your Fridge into Recipes! KI-gestützte Rezeptvorschläge.",
     imageUrl: "/2149255915.jpg",
     projectUrl: "https://www.foodscan-ai.com",
-    technologies: ["Next.js", "OpenAI", "React"],
+    technologies: ["React Native", "OpenAI"],
     featured: true,
     size: "large"
   },
   {
     id: 5,
-    title: "Rezeptsammlung",
+    title: "DogMentor KI",
     category: "app",
     framework: "React",
-    description: "Scannen oder fotografieren Sie Ihre Rezepte, um sie zu digitalisieren.",
-    imageUrl: "/bueli.png",
-    projectUrl: "https://recipe-digitizer.vercel.app",
-    technologies: ["React", "OCR", "TailwindCSS"],
+    description: "Everything you need to know about dogs!",
+    imageUrl: "/3074147.jpg",
+    projectUrl: "https://dog-mentor.com",
+    technologies: ["React Native", "OpenAI"],
     size: "small"
   },
   // WEBS

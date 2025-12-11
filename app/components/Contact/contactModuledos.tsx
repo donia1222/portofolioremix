@@ -350,14 +350,6 @@ export default function ContactModule() {
                 </Button>
 
                 <Button
-                  onClick={handleLinkedInClick}
-                  className="w-full bg-blue-700 hover:bg-blue-800 text-white"
-                  icon={<Linkedin className="h-5 w-5" />}
-                >
-                  LinkedIn
-                </Button>
-
-                <Button
                   onClick={handleDownloadVCard}
                   className="w-full bg-purple-600 hover:bg-purple-700 text-white"
                   icon={<Download className="h-5 w-5" />}
