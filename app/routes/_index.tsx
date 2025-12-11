@@ -130,7 +130,7 @@ animationDuration: `${2 + Math.random() * 3}s`,
 </div>
 
 
-<FreelanceAvailability />
+
 
 <div id="contactModule2" className="w-full relative" data-aos="fade-up" data-aos-delay="1200">
 <ContactModule />
