@@ -209,9 +209,9 @@ export default function Component() {
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
           >
             <img
-              src="/yo2.png"
+              src="/IMG_6256.jpg"
               alt="Roberto Salvador"
-              className="w-48 h-48  mx-auto mb-6 border-4 border-white/20 shadow-2xl mt-20"
+              className="w-56 h-88  mx-auto mb-6  mt-20"
             />
           </motion.div>
 
